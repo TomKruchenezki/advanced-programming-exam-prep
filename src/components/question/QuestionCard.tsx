@@ -29,12 +29,17 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
           return (
             <button
               key={opt.id}
+              type="button"
+              dir="rtl"
               disabled={revealed}
               onClick={() => onSelect(opt.id)}
-              className={`text-answer block w-full rounded-lg border p-4 text-start transition-colors ${stateClasses} disabled:cursor-default`}
+              aria-label={`${opt.id.toUpperCase()}. ${opt.text}`}
+              className={`text-answer flex w-full items-start gap-2 rounded-lg border p-4 transition-colors ${stateClasses} disabled:cursor-default`}
             >
-              <span className="me-2 font-bold">{opt.id.toUpperCase()}.</span>
-              {opt.text}
+              <span className="shrink-0 font-bold">{opt.id.toUpperCase()}.</span>
+              <bdi dir="auto" className="min-w-0 flex-1 text-start">
+                {opt.text}
+              </bdi>
             </button>
           )
         })}
@@ -49,9 +54,12 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
             {question.options.map((opt) => {
               const originalId = question.displayToOriginal[opt.id] ?? opt.id
               return (
-                <p key={opt.id} className="text-[var(--color-text-muted)]">
-                  <strong>{opt.id.toUpperCase()}:</strong> {question.optionExplanations[originalId] ?? ''}
-                </p>
+                <div key={opt.id} dir="rtl" className="flex items-start gap-2 text-[var(--color-text-muted)]">
+                  <strong className="shrink-0">{opt.id.toUpperCase()}:</strong>
+                  <bdi dir="auto" className="min-w-0 flex-1">
+                    {question.optionExplanations[originalId] ?? ''}
+                  </bdi>
+                </div>
               )
             })}
           </div>

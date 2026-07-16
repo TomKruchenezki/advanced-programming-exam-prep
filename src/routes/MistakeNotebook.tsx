@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { questionsById, topicsById, topicsSorted } from '../lib/dataStore'
 import { useProgress } from '../lib/ProgressContext'
 import { PageContainer } from '../components/layout/PageContainer'
+import { Ltr } from '../components/question/Ltr'
 
 type SortMode = 'date' | 'timesWrong'
 
@@ -91,7 +92,7 @@ export function MistakeNotebook() {
                   </div>
                   <p className="text-body-lg mb-1">{q.stemHe}</p>
                   <p className="text-meta text-[var(--color-text-muted)]">
-                    בחרת: {entry.chosenOptionId.toUpperCase()} · נכון: {entry.correctOptionId.toUpperCase()}
+                    בחרת: <Ltr>{entry.chosenOptionId.toUpperCase()}</Ltr> · נכון: <Ltr>{entry.correctOptionId.toUpperCase()}</Ltr>
                   </p>
                   {entry.possibleReason && <p className="text-meta text-[var(--color-warning)]">סיבה אפשרית: {entry.possibleReason}</p>}
                   <p className="text-body-lg mt-1">{q.explanation}</p>
