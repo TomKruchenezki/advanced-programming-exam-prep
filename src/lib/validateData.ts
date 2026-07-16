@@ -1,0 +1,127 @@
+import type { Flashcard, MockExam, Question, Topic } from '../types/domain'
+
+export interface ValidationIssue {
+  severity: 'error' | 'warning'
+  message: string
+  itemId?: string
+}
+
+const OPTION_IDS = ['a', 'b', 'c', 'd', 'e']
+
+function normalizeStem(text: string): string {
+  return text.trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
+export function validateQuestions(questions: Question[], topics: Topic[]): ValidationIssue[] {
+  const issues: ValidationIssue[] = []
+  const topicIds = new Set(topics.map((t) => t.id))
+  const seenIds = new Set<string>()
+  const stemSeen = new Map<string, string>()
+
+  for (const q of questions) {
+    if (seenIds.has(q.id)) {
+      issues.push({ severity: 'error', message: `Duplicate question id: ${q.id}`, itemId: q.id })
+    }
+    seenIds.add(q.id)
+
+    if (!q.stemHe || !q.stemHe.trim()) {
+      issues.push({ severity: 'error', message: 'Empty question stem', itemId: q.id })
+    }
+
+    if (q.options.length !== 5) {
+      issues.push({ severity: 'error', message: `Expected exactly 5 options, got ${q.options.length}`, itemId: q.id })
+    }
+    const optionIdsPresent = q.options.map((o) => o.id)
+    for (const expected of OPTION_IDS) {
+      if (!optionIdsPresent.includes(expected as Question['options'][number]['id'])) {
+        issues.push({ severity: 'error', message: `Missing option id "${expected}"`, itemId: q.id })
+      }
+    }
+    const optionTexts = q.options.map((o) => o.text.trim().toLowerCase())
+    if (new Set(optionTexts).size !== optionTexts.length) {
+      issues.push({ severity: 'error', message: 'Duplicate option text within question', itemId: q.id })
+    }
+    if (!optionIdsPresent.includes(q.correctOptionId)) {
+      issues.push({ severity: 'error', message: `correctOptionId "${q.correctOptionId}" not among options`, itemId: q.id })
+    }
+
+    if (!q.explanation || !q.explanation.trim()) {
+      issues.push({ severity: 'error', message: 'Missing explanation', itemId: q.id })
+    }
+    for (const optId of optionIdsPresent) {
+      if (!q.optionExplanations[optId] || !q.optionExplanations[optId]?.trim()) {
+        issues.push({ severity: 'error', message: `Missing optionExplanations["${optId}"]`, itemId: q.id })
+      }
+    }
+
+    for (const topicId of q.topicIds) {
+      if (!topicIds.has(topicId)) {
+        issues.push({ severity: 'error', message: `Unknown topicId "${topicId}"`, itemId: q.id })
+      }
+    }
+    if (q.topicIds.length === 0) {
+      issues.push({ severity: 'error', message: 'Question has no topicIds', itemId: q.id })
+    }
+
+    if (q.needsReview && q.active) {
+      issues.push({ severity: 'error', message: 'Question marked needsReview but still active', itemId: q.id })
+    }
+
+    if (q.active && !q.needsReview) {
+      // Include the code snippet in the fingerprint: many code-output questions share a
+      // generic Hebrew prompt ("what does this code print?") but differ entirely in the
+      // actual code, so stem-only comparison produces false-positive duplicates.
+      const norm = normalizeStem(q.stemHe + '\n' + (q.code ?? ''))
+      const existing = stemSeen.get(norm)
+      if (existing) {
+        issues.push({ severity: 'warning', message: `Possible duplicate stem with ${existing}`, itemId: q.id })
+      } else {
+        stemSeen.set(norm, q.id)
+      }
+    }
+  }
+
+  return issues
+}
+
+export function validateFlashcards(cards: Flashcard[], topics: Topic[]): ValidationIssue[] {
+  const issues: ValidationIssue[] = []
+  const topicIds = new Set(topics.map((t) => t.id))
+  const seen = new Set<string>()
+  for (const c of cards) {
+    if (seen.has(c.id)) issues.push({ severity: 'error', message: `Duplicate flashcard id: ${c.id}`, itemId: c.id })
+    seen.add(c.id)
+    if (!c.frontHe?.trim() || !c.backHe?.trim()) {
+      issues.push({ severity: 'error', message: 'Flashcard missing front or back text', itemId: c.id })
+    }
+    if (!topicIds.has(c.topicId)) {
+      issues.push({ severity: 'error', message: `Unknown topicId "${c.topicId}"`, itemId: c.id })
+    }
+  }
+  return issues
+}
+
+export function validateMockExams(exams: MockExam[], questionsById: Map<string, Question>): ValidationIssue[] {
+  const issues: ValidationIssue[] = []
+  for (const exam of exams) {
+    if (exam.questionIds.length !== 20) {
+      issues.push({ severity: 'error', message: `Mock exam must have exactly 20 questions, got ${exam.questionIds.length}`, itemId: exam.id })
+    }
+    if (new Set(exam.questionIds).size !== exam.questionIds.length) {
+      issues.push({ severity: 'error', message: 'Duplicate question ids within mock exam', itemId: exam.id })
+    }
+    let totalPoints = 0
+    for (const qid of exam.questionIds) {
+      const q = questionsById.get(qid)
+      if (!q) {
+        issues.push({ severity: 'error', message: `Mock exam references unknown question id ${qid}`, itemId: exam.id })
+        continue
+      }
+      totalPoints += q.points
+    }
+    if (totalPoints !== exam.totalPoints || totalPoints !== 100) {
+      issues.push({ severity: 'error', message: `Mock exam points sum to ${totalPoints}, expected 100`, itemId: exam.id })
+    }
+  }
+  return issues
+}

@@ -1,0 +1,276 @@
+[
+  {
+    "id": "java-platform-jvm",
+    "order": 1,
+    "titleHe": "פלטפורמת Java: JVM, Bytecode, JIT ו-Heap/Stack",
+    "titleEn": "Java Platform: JVM, Bytecode, JIT, Heap/Stack",
+    "lectureRefs": [
+      1,
+      2
+    ],
+    "examFrequency": "high",
+    "summary": "Java היא שפה מונחית-עצמים שקוד המקור שלה (.java) מתורגם על ידי המהדר javac לשפת ביניים בשם Bytecode (.class), ולא ישירות לשפת מכונה. ה-JVM (Java Virtual Machine) הוא מכונה וירטואלית התלויה במערכת ההפעלה שקוראת את ה-Bytecode ומתרגמת אותו לשפת מכונה. ה-JIT (Just-In-Time Compiler) הוא רכיב בתוך ה-JVM שמזהה קטעי קוד ש'רצים הרבה' (hot code, כמו לולאות) ומקמפל אותם ישירות לשפת מכונה בזמן ריצה כדי לחסוך אינטרפרטציה חוזרת - כך משתפרת היעילות. JDK = JRE + כלי פיתוח (javac, jdb); JRE = JVM + ספריות מחלקה. הזיכרון מתחלק ל-Heap (לאובייקטים, מנוקה על ידי ה-Garbage Collector) ו-Stack (לכל Thread - משתנים מקומיים והפניות, מנוקה LIFO).",
+    "sectionIds": [
+      "sec-java-platform-jvm-01",
+      "sec-java-platform-jvm-02",
+      "sec-java-platform-jvm-03",
+      "sec-java-platform-jvm-04"
+    ]
+  },
+  {
+    "id": "java-basics-oop-memory",
+    "order": 2,
+    "titleHe": "יסודות Java: מחלקות, מודיפיירים, והעברת פרמטרים (Pass-by-Value)",
+    "titleEn": "Java Basics: Classes, Modifiers, Pass-by-Value",
+    "lectureRefs": [
+      1,
+      2
+    ],
+    "examFrequency": "medium",
+    "summary": "כל קוד ב-Java נמצא בתוך מחלקה; קובץ יכול להכיל מחלקה public אחת בלבד ושמה חייב להתאים לשם הקובץ. מודיפיירי גישה: private (המחלקה בלבד), package-default (החבילה), protected (חבילה + יורשים), public (כולם). Java היא תמיד Pass-by-Value - גם כשמעבירים אובייקט, מעבירים העתק של ערך ההפניה (הכתובת), לא את ההפניה עצמה ולא את האובייקט.",
+    "sectionIds": [
+      "sec-java-basics-oop-memory-01",
+      "sec-java-basics-oop-memory-02",
+      "sec-java-basics-oop-memory-03"
+    ]
+  },
+  {
+    "id": "uml-class-diagrams",
+    "order": 3,
+    "titleHe": "תרשימי מחלקות UML וקשרים בין מחלקות",
+    "titleEn": "UML Class Diagrams and Relationships",
+    "lectureRefs": [
+      1,
+      2
+    ],
+    "examFrequency": "medium",
+    "summary": "תרשים מחלקות (Class Diagram) מתאר את הישויות במערכת ואת הקשרים הסטטיים ביניהן: Association (קשר כללי, עם Multiplicity), Aggregation (הכלה חלשה - יהלום ריק, העצם המוכל יכול להתקיים בלי המכיל), Composition/Composite Aggregation (הכלה חזקה - יהלום מלא, העצם המוכל תלוי בקיום המכיל), Generalization (ירושה, חץ משולש ריק), ו-Realization (מימוש ממשק, חץ מקווקו עם משולש ריק).",
+    "sectionIds": [
+      "sec-uml-class-diagrams-01",
+      "sec-uml-class-diagrams-02",
+      "sec-uml-class-diagrams-03"
+    ]
+  },
+  {
+    "id": "oop-pillars-abstraction",
+    "order": 4,
+    "titleHe": "עקרונות OOP: הכלה, ירושה, פולימורפיזם, מחלקות אבסטרקטיות וממשקים",
+    "titleEn": "OOP Pillars: Encapsulation, Inheritance, Polymorphism, Abstract Classes vs Interfaces",
+    "lectureRefs": [
+      1,
+      2,
+      5
+    ],
+    "examFrequency": "medium",
+    "summary": "ארבעת עקרונות ה-OOP: Encapsulation (כימוס - אריזת מצב והתנהגות יחד תוך הסתרת מימוש פנימי), Inheritance (ירושה - מחלקה יורשת שדות/מתודות ממחלקת-אב עם extends, מונע שכפול קוד), Polymorphism (ריבוי-צורות - אובייקט יכול 'ללבוש' זהויות שונות לפי עץ הירושה שלו), ו-Abstraction (תכנות טיפוסים לא מופעים). מחלקה אבסטרקטית (abstract class) לא ניתן ליצור ממנה מופע; יש לה לפחות מתודה אבסטרקטית אחת (ללא מימוש) שמחלקת-בת קונקרטית חייבת לממש. ממשק (interface) הוא חוזה טהור - כל המתודות מופשטות (עד Java 8 שהוסיפה default methods); ב-Java ניתן לממש (implements) מספר ממשקים אך לרשת (extends) רק ממחלקה אחת.",
+    "sectionIds": [
+      "sec-oop-pillars-abstraction-01",
+      "sec-oop-pillars-abstraction-02",
+      "sec-oop-pillars-abstraction-03"
+    ]
+  },
+  {
+    "id": "state-space-decoupling-interfaces",
+    "order": 5,
+    "titleHe": "מסיפור לקוד: בעיות מרחב-מצבים והפרדת אלגוריתם מבעיה (ISearchable/ISearcher)",
+    "titleEn": "From Story to Code: State-Space Problems and Algorithm/Problem Decoupling",
+    "lectureRefs": [
+      3
+    ],
+    "examFrequency": "low",
+    "summary": "תהליך ניתוח מונחה-עצמים (OOA): לאסוף דרישות מהסיפור, לתאר את המערכת, לזהות ישויות (שמות עצם) ומחלקות, לתאר אינטראקציות (פעלים), וליצור תרשים מחלקות - רק לבסוף לפתח. בעיות רבות (מבוך, פאזל-8, תכנון מסלול) הן בפועל בעיות חיפוש במרחב מצבים (State-Space Search): State (תמונת עולם), Start State, Goal Test, ו-Successor Function (מחזירה את השכנים האפשריים ועלותם). כדי לא לצמוד אלגוריתם חיפוש (כמו BFS) לבעיה ספציפית (כמו מבוך), מגדירים שני ממשקים: ISearchable (חוזה מול הבעיה: getInitialState, isGoalState, getAllPossibleStates) ו-ISearcher (חוזה מול האלגוריתם: search, getNumberOfNodesEvaluated). מחלקת BaseSearcher אבסטרקטית משותפת מונעת שכפול קוד (ניהול open/closed lists) בין BFS/DFS/A*.",
+    "sectionIds": [
+      "sec-state-space-decoupling-interfaces-01",
+      "sec-state-space-decoupling-interfaces-02"
+    ]
+  },
+  {
+    "id": "solid-principles",
+    "order": 6,
+    "titleHe": "עקרונות SOLID",
+    "titleEn": "SOLID Design Principles",
+    "lectureRefs": [
+      4
+    ],
+    "examFrequency": "high",
+    "summary": "חמשת עקרונות SOLID (Robert C. Martin, 'Uncle Bob'): S - Single Responsibility Principle (למחלקה צריכה להיות סיבה אחת בלבד להשתנות), O - Open Closed Principle (פתוח להרחבה, סגור לשינוי - דרך ירושה/הכלה), L - Liskov Substitution Principle (ניתן להחליף אובייקט ממחלקת-אב באובייקט ממחלקה יורשת מבלי לשבור את התוכנית), I - Interface Segregation Principle (לקוחות לא צריכים להיות תלויים בממשקים שאינם משתמשים בהם - ממשקים קטנים ולא 'שמנים'), D - Dependency Inversion Principle (מודולים ברמה גבוהה לא תלויים במודולים ברמה נמוכה; שניהם תלויים באבסטרקציות/ממשקים).",
+    "sectionIds": [
+      "sec-solid-principles-01",
+      "sec-solid-principles-02",
+      "sec-solid-principles-03",
+      "sec-solid-principles-04"
+    ]
+  },
+  {
+    "id": "design-patterns-creational",
+    "order": 7,
+    "titleHe": "תבניות עיצוב יצירתיות: Factory ו-Singleton",
+    "titleEn": "Creational Design Patterns: Factory and Singleton",
+    "lectureRefs": [
+      4,
+      5
+    ],
+    "examFrequency": "high",
+    "summary": "תבניות יצירה (Creational) עוסקות ביצירה ואתחול של אובייקטים. Factory Method: מגדיר ממשק ליצירת אובייקט, אך משאיר למחלקה מרכזת (Factory) להחליט איזו מחלקה קונקרטית ליצור בזמן ריצה, כך שהלקוח לא צריך לדעת/לכתוב if-else. Singleton: מבטיח שממחלקה מסוימת ייווצר מופע אחד בלבד לאורך כל חיי התוכנית, ומספק נקודת גישה גלובלית אליו - בנאי private, שדה סטטי פרטי שמחזיק את המופע, ומתודה סטטית ציבורית (בדרך כלל getInstance()) שיוצרת אותו רק בפעם הראשונה (lazy initialization).",
+    "sectionIds": [
+      "sec-design-patterns-creational-01",
+      "sec-design-patterns-creational-02",
+      "sec-design-patterns-creational-03"
+    ]
+  },
+  {
+    "id": "design-patterns-structural",
+    "order": 8,
+    "titleHe": "תבניות עיצוב מבניות: Bridge, Facade, Adapter, Decorator",
+    "titleEn": "Structural Design Patterns: Bridge, Facade, Adapter, Decorator",
+    "lectureRefs": [
+      4,
+      5,
+      10
+    ],
+    "examFrequency": "high",
+    "summary": "תבניות מבניות (Structural) עוסקות בהרכבת מחלקות ואובייקטים. Bridge: מפריד אבסטרקציה (Abstraction) מהמימוש שלה (Implementation) כך ששתיהן יכולות להתפתח באופן עצמאי - פותר בעיית 'התפוצצות מחלקות' כשיש שני צירי שינוי (למשל צורה x צבע). Facade: מחלקה יחידה שמספקת ממשק פשוט המסתיר מורכבות של תת-מערכת שלמה מהלקוח. Adapter: 'מתרגם' ממשק אחד לממשק אחר כדי לאפשר לשני קודים לא-תואמים לעבוד יחד (Class Adapter - יורש; Object Adapter - מכיל/מכליל). Decorator: מוסיף התנהגות לאובייקט בודד באופן דינמי בזמן ריצה, מבלי לשנות את המחלקה המקורית ומבלי להשפיע על מופעים אחרים של אותה מחלקה.",
+    "sectionIds": [
+      "sec-design-patterns-structural-01",
+      "sec-design-patterns-structural-02",
+      "sec-design-patterns-structural-03",
+      "sec-design-patterns-structural-04"
+    ]
+  },
+  {
+    "id": "design-patterns-behavioral",
+    "order": 9,
+    "titleHe": "תבניות עיצוב התנהגותיות: Strategy, Observer, Mediator, Command",
+    "titleEn": "Behavioral Design Patterns: Strategy, Observer, Mediator, Command",
+    "lectureRefs": [
+      5,
+      6,
+      9
+    ],
+    "examFrequency": "high",
+    "summary": "תבניות התנהגותיות (Behavioral) עוסקות בתקשורת בין מחלקות ואובייקטים. Strategy: מגדירה משפחת אלגוריתמים, אורזת כל אחד בנפרד, והופכת אותם לניתנים-להחלפה בזמן ריצה - חלופה לירושה מרובה. Observer (Publish-Subscribe): מגדיר תלות 'אחד-להרבה' - כשאובייקט Subject/Observable משנה מצב, כל ה-Observers הרשומים אליו מקבלים עדכון אוטומטי. Mediator: מרכז תקשורת בין אובייקטים מרובים (Colleagues) דרך מתווך אחד, כדי למנוע צימוד ישיר בין כולם. Command: עוטף בקשה כאובייקט (Command) שמועבר ל-Invoker שמפעיל אותו; מפריד בין מי שמבקש פעולה לבין מי שמבצע אותה.",
+    "sectionIds": [
+      "sec-design-patterns-behavioral-01",
+      "sec-design-patterns-behavioral-02",
+      "sec-design-patterns-behavioral-03",
+      "sec-design-patterns-behavioral-04"
+    ]
+  },
+  {
+    "id": "generics-collections-equals-hashcode",
+    "order": 10,
+    "titleHe": "Generics, אוספים (Collections), ו-equals/hashCode",
+    "titleEn": "Generics, Collections, equals/hashCode",
+    "lectureRefs": [
+      5
+    ],
+    "examFrequency": "high",
+    "summary": "Generics מאפשרים לכתוב קוד גנרי (מחלקות/ממשקים/מתודות) שעובד על טיפוסי נתונים שונים בלי לשכפל קוד. Generics מקבלים רק Object types (לא פרימיטיביים) - Integer/Wrapper classes בלבד, לא int. Type Erasure: בזמן קומפילציה הקומפיילר מבחין בין List<Integer> ל-List<String>, אך בזמן ריצה שניהם הופכים ל-List<Object> - כך שלא ניתן להגדיר שתי מתודות עם אותו שם שנבדלות רק בטיפוס הגנרי (התנגשות חתימות). equals()/hashCode(): equals ברירת מחדל (מ-Object) בודקת זהות הפניה (==); כדי להשוות שוויון לוגי יש לדרוס אותה. חוזה equals: רפלקסיבי, סימטרי, טרנזיטיבי, עקבי, ו-x.equals(null) תמיד false. חוק הברזל: אם דורסים equals() חובה לדרוס גם hashCode() - שני אובייקטים השווים לפי equals() חייבים להחזיר את אותו hashCode (ההפך לא מחייב).",
+    "sectionIds": [
+      "sec-generics-collections-equals-hashcode-01",
+      "sec-generics-collections-equals-hashcode-02",
+      "sec-generics-collections-equals-hashcode-03",
+      "sec-generics-collections-equals-hashcode-04"
+    ]
+  },
+  {
+    "id": "networking-sockets-io-streams",
+    "order": 11,
+    "titleHe": "רשתות: Sockets, TCP/UDP, זרמים (Streams) וסריאליזציה",
+    "titleEn": "Networking: Sockets, TCP/UDP, Streams and Serialization",
+    "lectureRefs": [
+      6
+    ],
+    "examFrequency": "high",
+    "summary": "Socket הוא נקודת קצה (endpoint) לתקשורת בין שני מחשבים, מוגדר על ידי כתובת IP ומספר Port (16-bit, 0-1023 שמורים, >=1024 למשתמש). TCP (Transfer Control Protocol) - מבוסס-חיבור (connection-oriented), אמין, מסודר, ללא הגבלת גודל (Stream). UDP (User Datagram Protocol) - ללא-חיבור (connectionless), לא אמין, מוגבל ל-64KB לחבילה. שרת פותח ServerSocket ומאזין (accept()); לאחר קבלת לקוח מקבל Socket חדש בפורט שונה (כדי שהפורט המקורי ישאר פנוי להאזנה). ארבעת שלבי תכנות שרת/לקוח: פתיחת סוקט, פתיחת זרמי קלט/פלט, קריאה/כתיבה, וניקוי (סגירת זרמים לפני סגירת הסוקט). Serialization: המרת אובייקט לרצף בייטים (ObjectOutputStream.writeObject); Deserialization: שחזור האובייקט מהבייטים (ObjectInputStream.readObject) - זו 'שליפה' של נתונים מה-Stream.",
+    "sectionIds": [
+      "sec-networking-sockets-io-streams-01",
+      "sec-networking-sockets-io-streams-02",
+      "sec-networking-sockets-io-streams-03",
+      "sec-networking-sockets-io-streams-04"
+    ]
+  },
+  {
+    "id": "threads-basics-lifecycle",
+    "order": 12,
+    "titleHe": "יסודות Threads: תהליך מול תהליכון, יצירה ומחזור חיים",
+    "titleEn": "Thread Basics: Process vs Thread, Creation and Lifecycle",
+    "lectureRefs": [
+      7
+    ],
+    "examFrequency": "high",
+    "summary": "Process הוא מופע של תוכנית שנמצאת בריצה (מכיל קוד ופעילות נוכחית, ולו מרחב Data משלו). Thread הוא הרצף הקטן ביותר של פקודות שניתן לנהל באופן עצמאי ע\"י Scheduler; process אחד יכול להכיל threads מרובים החולקים את אותו Heap (data) אך לכל thread יש Stack פרטי משלו. שתי דרכים ליצור Thread ב-Java: (1) extends Thread ודריסת run(), (2) implements Runnable ומעבר לבנאי Thread. חובה לקרוא ל-start() (לא ל-run() ישירות!) כדי שה-thread ירוץ במקביל בפועל - קריאה ל-run() ישירות פשוט מריצה קוד רגיל וסינכרוני על ה-thread הנוכחי. מחזור חיים: Runnable (ready-to-run, ממתין בתור), Running (רץ בפועל), Blocked (ממתין למשאב/IO/lock), Dead (run() הסתיים).",
+    "sectionIds": [
+      "sec-threads-basics-lifecycle-01",
+      "sec-threads-basics-lifecycle-02",
+      "sec-threads-basics-lifecycle-03"
+    ]
+  },
+  {
+    "id": "thread-safety-synchronization",
+    "order": 13,
+    "titleHe": "בטיחות תהליכונים: Race Conditions, synchronized, volatile, Deadlock",
+    "titleEn": "Thread Safety: Race Conditions, synchronized, volatile, Deadlock",
+    "lectureRefs": [
+      8,
+      9
+    ],
+    "examFrequency": "high",
+    "summary": "קוד הוא Thread-Safe אם אפשר להריץ אותו ממספר threads במקביל בלי לשבש נתונים. Race Condition: באג שבו התוצאה תלויה בתזמון/סדר בלתי-צפוי של threads מתחרים (למשל counter++ שאינו אטומי - קריאה, הוספה, כתיבה = 3 פעולות נפרדות). synchronized: מבטיח שרק thread אחד יכול להחזיק את המוניטור (monitor/lock) של אובייקט בזמן נתון - ניתן לסנכרן מתודה שלמה (הנעילה היא this) או בלוק ספציפי (יעילות טובה יותר). volatile: מבטיח נראות (visibility) - קריאה תמיד מה-Main Memory, לא cache מקומי - אך אינו מבטיח אטומיות של פעולות מורכבות. Deadlock: שני threads (או יותר) לא מתקדמים כי כל אחד ממתין למשאב שהשני מחזיק. Thread Pool: מגביל את מספר ה-threads הרצים במקביל; מנוהל ע\"י ExecutorService (shutdown() - מחכה לסיום המשימות הנוכחיות; shutdownNow() - מפסיק הכל מיידית).",
+    "sectionIds": [
+      "sec-thread-safety-synchronization-01",
+      "sec-thread-safety-synchronization-02",
+      "sec-thread-safety-synchronization-03",
+      "sec-thread-safety-synchronization-04"
+    ]
+  },
+  {
+    "id": "concurrency-utilities-callable-future-mediator",
+    "order": 14,
+    "titleHe": "Callable, Future, ExecutorService, Thread Pool כ-Mediator+Command",
+    "titleEn": "Callable, Future, ExecutorService, Thread Pool as Mediator+Command",
+    "lectureRefs": [
+      8,
+      9
+    ],
+    "examFrequency": "high",
+    "summary": "Callable<V> דומה ל-Runnable אך יכול להחזיר ערך (call() throws Exception) ולזרוק חריגות. Future<V> מייצג את התוצאה העתידית של חישוב אסינכרוני; get() חוסם (blocking) עד שהתוצאה מוכנה; ניתן לבטל עם cancel(). ExecutorService מנהל Thread Pool - מספק execute(Runnable) ו-submit(Callable) שמחזיר Future מיידית. Executors היא Factory שיוצרת מופעי ExecutorService (למשל newFixedThreadPool(n)). thread pool מיושם בשילוב תבניות Mediator (מתאם בין המשימות ל-threads) ו-Command (כל משימה עטופה כאובייקט).",
+    "sectionIds": [
+      "sec-concurrency-utilities-callable-future-mediator-01",
+      "sec-concurrency-utilities-callable-future-mediator-02",
+      "sec-concurrency-utilities-callable-future-mediator-03"
+    ]
+  },
+  {
+    "id": "event-driven-javafx-mvc",
+    "order": 15,
+    "titleHe": "תכנות מונחה-אירועים, JavaFX, ו-MVC/MVVM",
+    "titleEn": "Event-Driven Programming, JavaFX, MVC/MVVM",
+    "lectureRefs": [
+      10,
+      11
+    ],
+    "examFrequency": "medium",
+    "summary": "תכנות מונחה-אירועים (Event-Driven): זרימת התוכנית נקבעת על ידי אירועים (לחיצות עכבר, הקלדות, הודעות threads) ולא על ידי סדר קבוע מראש - חיוני ל-GUI ולשרתים. Listener: אובייקט הרשום (subscribes) לקבל עדכונים ממקור אירוע (Source); ממתין לאירוע שיתרחש. Handler: אובייקט שאחראי לטפל בפועל באירוע (מקושר ל-Event). היסטוריית GUI ב-Java: AWT (1995, ספריות native לכל OS) -> Swing (1998, ציור עצמי, look אחיד, כיום dead-end) -> SWT (2001, IBM, Dependency Injection בין JAR-ים) -> JavaFX (2008, הרשמי והמודרני). ארכיטקטורת JavaFX: Application -> Stage (חלון) -> Scene (עץ תוכן) -> Layout/Pane -> Node (אלמנטים). MVC: Model-View-Controller (קונטרולר מתווך בין מודל לתצוגה). MVVM: Model-View-ViewModel (ViewModel מתווך, מבוסס Observer/Observable - Model הוא Observable, ViewModel גם Observer וגם Observable, View הוא Observer).",
+    "sectionIds": [
+      "sec-event-driven-javafx-mvc-01",
+      "sec-event-driven-javafx-mvc-02",
+      "sec-event-driven-javafx-mvc-03"
+    ]
+  },
+  {
+    "id": "blockchain-cryptocurrency",
+    "order": 16,
+    "titleHe": "בלוקצ'יין ומטבעות קריפטוגרפיים",
+    "titleEn": "Blockchain and Cryptocurrency",
+    "lectureRefs": [
+      12
+    ],
+    "examFrequency": "low",
+    "summary": "Blockchain הוא יומן חשבונות דיגיטלי, מבוזר וציבורי, של כל העסקאות במטבע קריפטוגרפי - כל בלוק חדש נוסף כרונולוגית וכל Node (מחשב ברשת) מחזיק עותק. Mining הוא תהליך פתרון בעיות חישוביות (hash) כדי ליצור בלוק חדש ולקבל תמורה (bounty). Proof of Work (Bitcoin): כל הכורים מנסים לפתור חידה בכוח (brute force); הראשון שפותר מקבל פרס; שאר הרשת (>50%) מאמתת. Proof of Stake (Ethereum, Cardano): בוחרים 'validator' יחיד באקראי (משוקלל לפי כמות המטבעות שהופקדו כ-stake) שמאשר את הבלוק, חוסך אנרגיה.",
+    "sectionIds": [
+      "sec-blockchain-cryptocurrency-01",
+      "sec-blockchain-cryptocurrency-02"
+    ]
+  }
+]

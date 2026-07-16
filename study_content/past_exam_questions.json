@@ -1,0 +1,4466 @@
+[
+  {
+    "id": "q-pastexam-2025-001",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "compiler-vs-interpreter",
+    "stemHe": "איזו פקודה מבצעת המרה של הקוד מקור מקבצי java ל-bytecode?",
+    "options": [
+      {
+        "id": "a",
+        "text": "javac"
+      },
+      {
+        "id": "b",
+        "text": "java"
+      },
+      {
+        "id": "c",
+        "text": "javadeb"
+      },
+      {
+        "id": "d",
+        "text": "Tobytecode"
+      },
+      {
+        "id": "e",
+        "text": "javab"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "javac (Java Compiler) הוא הכלי שממיר קובץ מקור .java ל-bytecode (.class). הפקודה java, לעומת זאת, מריצה bytecode קיים דרך ה-JVM ואינה מקמפלת דבר. javadeb, Tobytecode ו-javab אינן פקודות אמיתיות בסביבת הפיתוח של Java - הן מוצגות רק כדי לבחון שהסטודנט מכיר את השם המדויק.",
+    "optionExplanations": {
+      "a": "נכון - javac הוא המהדר של Java שממיר קוד מקור (.java) ל-bytecode (.class); כאן מתגלות שגיאות קומפילציה.",
+      "b": "שגוי - java מריץ bytecode קיים דרך ה-JVM; הוא אינו ממיר קוד מקור, אלא מפעיל קובץ .class שכבר קיים.",
+      "c": "שגוי - javadeb אינה פקודה קיימת בסביבת הפיתוח הרגילה של Java.",
+      "d": "שגוי - Tobytecode אינה פקודה אמיתית; שם מומצא לבחינת ידע מדויק.",
+      "e": "שגוי - javab דומה בצליל ל-javac אך אינה קיימת - מלכודת נפוצה למי שלא זוכר את השם המדויק."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q1, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "javac ממיר .java ל-bytecode; java מריץ bytecode קיים דרך ה-JVM.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-002",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "run-length-encoding-homework",
+    "stemHe": "בעבודת הבית, מה התוצאה של שימוש ב-SimpleCompressorOutputStream עבור הרצף הבא: 0,1,0,1,1,1,1,1,0,0,1,1. הקריאה היא משמאל לימין - הרצף מתחיל בספרה 0.",
+    "options": [
+      {
+        "id": "a",
+        "text": "1,1,1,5,2,2"
+      },
+      {
+        "id": "b",
+        "text": "0,0,0,5,2,2"
+      },
+      {
+        "id": "c",
+        "text": "5,2,2"
+      },
+      {
+        "id": "d",
+        "text": "3,5,2,2"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "פירוק הרצף לריצות (runs) לפי אורך רץ: '0'(1) , '1'(1) , '0'(1) , '1'(5) , '0'(2) , '1'(2) - כלומר 6 ריצות: 1,1,1,5,2,2. הקידוד ברשימת האורכים (run-length encoding) של עבודת הבית שומר את אורך כל ריצה לפי הסדר, החל מהערך ההתחלתי (0), כך שהמספר הראשון תמיד מתאר ריצה של הסיבית 0.",
+    "optionExplanations": {
+      "a": "נכון - פירוק מדויק לריצות: 0(1),1(1),0(1),1(5),0(2),1(2) = 1,1,1,5,2,2.",
+      "b": "שגוי - מחליף את שלוש הריצות הראשונות ב-0 במקום 1, בעוד שרק הריצה הראשונה והשלישית הן של הסיבית 0 (אורך 1 כל אחת) והשנייה היא של הסיבית 1.",
+      "c": "שגוי - מדלג על שלוש הריצות הראשונות (קצרות, אורך 1) ומתחיל ישר מהריצה הרביעית.",
+      "d": "שגוי - ממזג בטעות את שלוש הריצות הראשונות למספר אחד (3) במקום לשמור על שלוש ריצות נפרדות באורך 1 כל אחת.",
+      "e": "שגוי - קיימת תשובה נכונה (א) שתואמת בדיוק את פירוק הרצף."
+    },
+    "difficulty": "hard",
+    "questionType": "homework-code",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q2, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "homework-project-specific"
+    ],
+    "keyLearningPoint": "run-length encoding שומר רשימת אורכי ריצות לפי סדר, החל תמיד מריצת הסיבית 0.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-003",
+    "topicIds": [
+      "solid-principles"
+    ],
+    "subtopic": "dip",
+    "stemHe": "דוד הסתכל על מערכת שעומר כתב ב-java - ולשמחתו ראה שהוא ממש את כל המחלקות שלו כך שהן יכללו מופעים של מחלקות אבסטרקטיות וממשקים ולא מופעים של מחלקות קונקרטיות. דוד אמר לעומר בגאווה שהוא שמר על עקרון מאוד חשוב ב-SOLID. לאיזה עיקרון דוד התכוון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "S"
+      },
+      {
+        "id": "b",
+        "text": "O"
+      },
+      {
+        "id": "c",
+        "text": "L"
+      },
+      {
+        "id": "d",
+        "text": "I"
+      },
+      {
+        "id": "e",
+        "text": "D"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "התלות במופעים של מחלקות אבסטרקטיות/ממשקים ולא במחלקות קונקרטיות היא בדיוק ההגדרה של Dependency Inversion Principle (D): מודולים ברמה גבוהה לא תלויים במודולים ברמה נמוכה - שניהם תלויים באבסטרקציות.",
+    "optionExplanations": {
+      "a": "שגוי - SRP עוסק במספר האחריויות של מחלקה, לא בסוג הטיפוסים שבהם היא משתמשת.",
+      "b": "שגוי - OCP עוסק ביכולת הרחבה בלי שינוי קוד קיים, לא בתלות בממשקים מול מחלקות קונקרטיות.",
+      "c": "שגוי - LSP עוסק בהחלפת מחלקת-אב במחלקה יורשת בלי לשבור התנהגות, לא בבחירת טיפוס התלות.",
+      "d": "שגוי - ISP עוסק בגודל הממשק (לא להכריח מימוש מתודות מיותרות), לא בשאלה אם תלויים בממשק או במימוש קונקרטי.",
+      "e": "נכון - Dependency Inversion Principle: תלות באבסטרקציות (ממשקים/מחלקות אבסטרקטיות) ולא במימושים קונקרטיים, בדיוק כפי שעומר עשה."
+    },
+    "difficulty": "medium",
+    "questionType": "solid-violation",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q3, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "תלות במחלקות אבסטרקטיות/ממשקים במקום במחלקות קונקרטיות = Dependency Inversion Principle.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-004",
+    "topicIds": [
+      "design-patterns-structural",
+      "state-space-decoupling-interfaces"
+    ],
+    "subtopic": "object-adapter-project",
+    "stemHe": "במעבדות נגענו ב-object adapter. היכן השתמשת בו בפרויקט?",
+    "options": [
+      {
+        "id": "a",
+        "text": "חלק א - אדפטציה למבוך כבעיית חיפוש (state)"
+      },
+      {
+        "id": "b",
+        "text": "חלק ב - אדפטציה לשיטת חיפוש כאסטרטגיה"
+      },
+      {
+        "id": "c",
+        "text": "חלק ג - הפיכת המבוך למשחק"
+      },
+      {
+        "id": "d",
+        "text": "חלק ב - התאמת משימה לטרד ספציפי"
+      },
+      {
+        "id": "e",
+        "text": "חלק א - בהתאמת ממשק לאלגוריתם ספציפי ליצירת המבוך"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "בפרויקט הקורס (המבוך), ה-object adapter הראשון שימש בחלק א כדי להתאים את בעיית המבוך הקונקרטית לממשק הגנרי ISearchable/State-Space Search כך שאלגוריתמי חיפוש (BFS/DFS) יוכלו לפעול עליה מבלי לדעת שהיא מבוך ספציפית.",
+    "optionExplanations": {
+      "a": "נכון - זהו השימוש המתועד ב-object adapter בחלק א: התאמת המבוך הקונקרטי לממשק הבעיה הגנרי (ISearchable) כבעיית חיפוש במרחב מצבים.",
+      "b": "שגוי - התאמת שיטת חיפוש לאסטרטגיה (Strategy) שייכת לדפוס אחר ולא לתפקיד ה-object adapter המתועד בחלק א.",
+      "c": "שגוי - הפיכת המבוך למשחק (חלק ג) עוסקת בהרחבת הפונקציונליות, לא באדפטציה של ממשק.",
+      "d": "שגוי - התאמת משימה לתהליכון (thread) שייכת לנושא concurrency בחלק ב, לא לשימוש ב-object adapter בחלק א.",
+      "e": "שגוי - מתאר תפקיד דומה אך משויך לחלק הלא-נכון; המקור המתועד הוא חלק א כפתרון ההתאמה של בעיית המבוך עצמה, לא של אלגוריתם ספציפי."
+    },
+    "difficulty": "medium",
+    "questionType": "homework-code",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q4, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "project-specific"
+    ],
+    "keyLearningPoint": "בפרויקט המבוך, object adapter בחלק א מתאים את המבוך הקונקרטי לממשק הבעיה הגנרי (ISearchable).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-005",
+    "topicIds": [
+      "concurrency-utilities-callable-future-mediator"
+    ],
+    "subtopic": "executorservice-future",
+    "stemHe": "מה היתרון המרכזי בשימוש ב-ExecutorService עם Future על פני יצירת Thread חדש לפני כל משימה חדשה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "הוא מאלץ את המשימות לרוץ באופן סינכרוני"
+      },
+      {
+        "id": "b",
+        "text": "הוא מאפשר הפסקה של משימות מבלי לדעת מתי התחילו"
+      },
+      {
+        "id": "c",
+        "text": "מאפשר ניהול מאגר קבוע של תהליכונים, שליחת משימות אליו, וקבלת תוצאה מהמשימות"
+      },
+      {
+        "id": "d",
+        "text": "הוא יוצר Thread חדש בכל הרצה כדי להבטיח בידוד"
+      },
+      {
+        "id": "e",
+        "text": "הוא מבצע תכנון זמנים (scheduling) של קריאות מערכת"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "ExecutorService מנהל מאגר (pool) קבוע ומוגבל של תהליכונים לשימוש חוזר, מקבל משימות (Runnable/Callable) לביצוע דרכו, ומאפשר קבלת תוצאה אסינכרונית באמצעות Future - כך נחסך העלות היקרה של יצירת/הריגת Thread חדש לכל משימה.",
+    "optionExplanations": {
+      "a": "שגוי - ExecutorService דווקא מאפשר הרצה אסינכרונית (Future מייצג תוצאה עתידית), לא מאלץ סינכרוניות.",
+      "b": "שגוי - Future מאפשר לבטל (cancel) משימה תוך מעקב מדויק אחר מצבה, לא 'בלי לדעת מתי התחילה'.",
+      "c": "נכון - זהו בדיוק היתרון: מאגר קבוע (Thread Pool), שליחת משימות (submit/execute) וקבלת תוצאה (Future.get()).",
+      "d": "שגוי - ההפך הוא הנכון: המטרה היא לשעות שימוש חוזר בתהליכונים קיימים, לא ליצור Thread חדש בכל פעם.",
+      "e": "שגוי - זהו תיאור לא מדויק; ExecutorService מנהל ביצוע משימות מקבילי, לא 'תכנון זמנים של קריאות מערכת'."
+    },
+    "difficulty": "medium",
+    "questionType": "java-api",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q5, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "ExecutorService+Future מספקים מאגר תהליכונים קבוע לשימוש חוזר עם קבלת תוצאה אסינכרונית.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-006",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "socket-bind",
+    "stemHe": "בתכנות socket, מה המטרה של שיטת bind?",
+    "options": [
+      {
+        "id": "a",
+        "text": "לייסד חיבור לשרת"
+      },
+      {
+        "id": "b",
+        "text": "לחבר בין ה-socket לבין כתובת מקומית בו הוא רץ"
+      },
+      {
+        "id": "c",
+        "text": "לקבל דאטה מהשרת"
+      },
+      {
+        "id": "d",
+        "text": "לסגור ולפתוח את ה-socket"
+      },
+      {
+        "id": "e",
+        "text": "לשלוח מידע"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "bind מחברת בין socket לבין כתובת מקומית (כתובת IP + פורט) על המכונה המריצה אותו - זהו השלב שבו ה-socket 'נצמד' לכתובת שממנה הוא יאזין/ישדר, לפני יצירת חיבור בפועל.",
+    "optionExplanations": {
+      "a": "שגוי - יצירת חיבור לשרת נעשית ב-connect (בצד הלקוח), לא ב-bind.",
+      "b": "נכון - bind קושר את ה-socket לכתובת מקומית (IP+port) שעליה הוא פועל.",
+      "c": "שגוי - קבלת דאטה נעשית דרך InputStream של ה-socket, לא דרך bind.",
+      "d": "שגוי - סגירה ופתיחה של socket נעשות דרך close/יצירת אובייקט חדש, לא דרך bind.",
+      "e": "שגוי - שליחת מידע נעשית דרך OutputStream, לא דרך bind."
+    },
+    "difficulty": "easy",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q6, page 8/'3' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "bind קושר socket לכתובת מקומית (IP+port); connect מייסד חיבור לצד השני.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-007",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "equals-hashcode",
+    "code": "public class Person {\n    public String name;\n    public int age;\n    public int hashCode(){ return name.length(); }\n    public boolean equals(Object obj){\n        if(this==obj) return true;\n        Person person=(Person)obj;\n        return age==person.age && name.equals(person.name);\n    }\n}",
+    "stemHe": "מהי הבעיה העיקרית במימוש פונקציית ה-hashCode במחלקה הנתונה Person בהקשר של שימוש במבני נתונים מבוססי Hash למשל HashMap, HashSet?",
+    "options": [
+      {
+        "id": "a",
+        "text": "הפונקציה תחזיר תמיד את אורך השם, ולכן לא תהיה אפשרות להבחין בין אובייקטים שונים"
+      },
+      {
+        "id": "b",
+        "text": "הפונקציה אינה תואמת ל-equals, ולכן עלולה לגרום לכך שאובייקטים שאינם זהים יהיו בעלי אותו קוד גיבוב"
+      },
+      {
+        "id": "c",
+        "text": "הפונקציה תחזיר 0 עבור מחרוזות מסוימות, מה שעלול לשבור את מנגנון ה-hashing"
+      },
+      {
+        "id": "d",
+        "text": "הפונקציה מתחשבת רק באורך השם, ולכן ייתכנו קודים זהים לשמות שונים באותו אורך, מה שיוביל להתנהגות לא צפויה במבני נתונים שעושים שימוש בקוד"
+      },
+      {
+        "id": "e",
+        "text": "הפונקציה לא יכולה להחזיר מספר. כל השימוש לעיל לא אפשרי כלל"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "hashCode מבוסס רק על אורך השם, כך ששמות שונים באורך זהה (למשל 'John' ו-'Jane') מקבלים אותו hashCode אף שאינם שווים לפי equals. זה מותר טכנית (חוזה ה-hashCode לא דורש שאובייקטים שונים יקבלו hash שונה) אך פוגע ביעילות וביכולת ההבחנה בין אובייקטים בטבלת hash - הרבה אובייקטים ייפלו לאותו 'דלי' (bucket) שלא לצורך.",
+    "optionExplanations": {
+      "a": "שגוי - אין בעיה בכך שה-hashCode מבוסס על אורך השם באופן עקבי; הבעיה היא שאורכים זהים לשמות שונים גורמים להתנגשויות מיותרות, לא חוסר יכולת הבחנה מוחלטת.",
+      "b": "שגוי - למעשה hashCode עקבי עם equals כאן במובן הבסיסי (אובייקטים שווים לפי equals תמיד יחזירו אותו hashCode כי שם זהה => אורך זהה); הבעיה היא ההפך - התנגשויות מיותרות בין אובייקטים לא-שווים.",
+      "c": "שגוי - החזרת 0 לשמות ריקים אינה הבעיה המרכזית שהודגשה; הבעיה הכללית היא ההסתמכות הבלעדית על אורך השם.",
+      "d": "נכון - התחשבות רק באורך השם יוצרת התנגשויות מיותרות בין אובייקטים שונים (שמות שונים, אורך זהה), מה שפוגע ביעילות ובהתנהגות הצפויה של מבני נתונים מבוססי hash.",
+      "e": "שגוי - הקוד תקין קומפילטיבית ורץ ללא שגיאה; הבעיה היא איכות המימוש הלוגי, לא חוקיות השימוש."
+    },
+    "difficulty": "medium",
+    "questionType": "code-analysis",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q7, page 10/'4' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "hashCode המבוסס רק על תכונה חלקית (כמו אורך שם) יוצר התנגשויות מיותרות בין אובייקטים שונים.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-008",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "observer-pattern-choice",
+    "stemHe": "הנך מפתח אפליקציה שהדרישה המרכזית בה היא שכל משתמש יקבל התראה מיידית בכל פעם שמתפרסמת כתבה חדשה. הפיתוח אמור לאפשר הוספה והסרה דינמית של משתמשים הרשומים להתראות. איזו מבין תבניות העיצוב הבאות היא המתאימה ביותר למימוש דרישה זו?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Observer"
+      },
+      {
+        "id": "b",
+        "text": "Singleton"
+      },
+      {
+        "id": "c",
+        "text": "Factory"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      },
+      {
+        "id": "e",
+        "text": "Bridge"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Observer בדיוק בנוי עבור תרחיש כזה: אובייקט 'נושא' (Subject/Observable) שומר רשימה דינמית של 'צופים' (Observers) שניתן להוסיף ולהסיר בזמן ריצה, ומעדכן את כולם אוטומטית כאשר מתרחש אירוע (פרסום כתבה חדשה).",
+    "optionExplanations": {
+      "a": "נכון - Observer מספק בדיוק את מנגנון ההרשמה הדינמית (addObserver/removeObserver) והעדכון האוטומטי של כולם.",
+      "b": "שגוי - Singleton מבטיח מופע יחיד של מחלקה; אינו קשור לניהול רשימת מנויים להתראות.",
+      "c": "שגוי - Factory עוסק ביצירת אובייקטים בזמן ריצה, לא בהפצת עדכונים למספר צרכנים.",
+      "d": "שגוי - Strategy עוסק בהחלפת אלגוריתם בזמן ריצה, לא בהודעה למספר מנויים.",
+      "e": "שגוי - Bridge מפריד היררכיית אבסטרקציה ממימוש; אינו פותר בעיית הפצת עדכונים."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q8, page 10/'4' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "התראות מרובות-מנויים עם הוספה/הסרה דינמית = Observer.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-009",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "jvm-jre-jdk",
+    "stemHe": "חבר אמר לי על java 'אתה כותב פעם אחת ומריץ אותה בכל מקום'. למה הוא התכוון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אתה כותב קוד פעם אחת והוא ירוץ בכל העולם"
+      },
+      {
+        "id": "b",
+        "text": "אתה כותב קוד פעם אחת והוא מתאים גם למחשב וגם למובייל"
+      },
+      {
+        "id": "c",
+        "text": "אתה כותב קוד פעם אחת ומריץ אותו תחת כל מערכת הפעלה, כי ה-JVM תרגם אותו לשפת מכונה מתאימה"
+      },
+      {
+        "id": "d",
+        "text": "אתה כותב קוד פעם אחת ולא צריך יותר לשנותו"
+      },
+      {
+        "id": "e",
+        "text": "שהקובץ exe של התכנית ירוץ בכל מחשב"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "'Write Once, Run Anywhere' מתייחס לכך שאותו bytecode (שנוצר פעם אחת מקוד המקור) יכול לרוץ על כל מערכת הפעלה שיש בה JVM מתאים - ה-JVM (לא JavaFX ולא הקוד עצמו) הוא זה שמתרגם את ה-bytecode האחיד לשפת המכונה הספציפית של כל מערכת הפעלה.",
+    "optionExplanations": {
+      "a": "שגוי - הביטוי אינו מתאר תפוצה גיאוגרפית אלא יכולת הרצה על פלטפורמות/מערכות הפעלה שונות.",
+      "b": "שגוי - אינו מתייחס ספציפית להבדל מחשב/מובייל אלא לעצם אי-התלות במערכת ההפעלה.",
+      "c": "נכון - ה-JVM התלוי-פלטפורמה מתרגם את אותו bytecode אחיד לשפת מכונה מתאימה לכל מערכת הפעלה - זה בדיוק מה שמאפשר 'להריץ בכל מקום'.",
+      "d": "שגוי - אינו קשור לצורך בשינוי קוד עתידי, אלא ליכולת הרצה חוצת-פלטפורמות.",
+      "e": "שגוי - קובץ exe הוא ספציפי ל-Windows ואינו הדרך שבה Java מריצה קוד; Java רצה כ-bytecode דרך JVM, לא כקובץ הרצה טבעי של מערכת הפעלה."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q9, page 10/'4' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "'Write once, run anywhere' = ה-JVM מתרגם bytecode אחיד לשפת מכונה מתאימה לכל מערכת הפעלה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-010",
+    "topicIds": [
+      "design-patterns-creational"
+    ],
+    "subtopic": "singleton-config-loading",
+    "stemHe": "באיזו תבנית עיצוב נשתמש בשביל לטעון קובץ קונפיגורציה כפי שנעשה בעבודת הבית?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Singleton"
+      },
+      {
+        "id": "b",
+        "text": "Factory"
+      },
+      {
+        "id": "c",
+        "text": "Strategy"
+      },
+      {
+        "id": "d",
+        "text": "Thread Pool"
+      },
+      {
+        "id": "e",
+        "text": "Command"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "טעינת קובץ קונפיגורציה היא פעולה שרוצים לבצע פעם אחת בלבד ולשתף את התוצאה (המידע שנטען) בכל האפליקציה - זהו בדיוק תפקידו של Singleton: מופע יחיד עם נקודת גישה גלובלית, כך שלא טוענים את הקובץ שוב ושוב מבזבוז משאבים או יוצרים חוסר עקביות.",
+    "optionExplanations": {
+      "a": "נכון - Singleton מבטיח שהקונפיגורציה נטענת פעם אחת ומשותפת מכל מקום בתוכנית דרך getInstance().",
+      "b": "שגוי - Factory עוסק ביצירת אובייקטים ממחלקות שונות בזמן ריצה, לא בשמירת מופע יחיד משותף.",
+      "c": "שגוי - Strategy עוסק בבחירת אלגוריתם בזמן ריצה, לא בטעינת קובץ הגדרות יחיד.",
+      "d": "שגוי - Thread Pool עוסק בניהול תהליכונים מקביליים, לא קשור לטעינת קונפיגורציה.",
+      "e": "שגוי - Command עוסק בעטיפת פעולה כאובייקט לביצוע מאוחר, לא בטעינת קובץ הגדרות."
+    },
+    "difficulty": "medium",
+    "questionType": "homework-code",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q10, page 10/'4' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "homework-project-specific"
+    ],
+    "keyLearningPoint": "טעינת קונפיגורציה חד-פעמית ומשותפת = Singleton.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-011",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "serialization-transient",
+    "code": "class CreditCard implements Serializable {\n    private String cardNumber;\n    private String expiryDate;\n    private String cvv;\n}\nclass User implements Serializable {\n    private String username;\n    public String password;\n    transient CreditCard creditCard;\n    volatile int age;\n    transient String city;\n}",
+    "stemHe": "נתונות המחלקות User, CreditCard. כאשר נוצר אובייקט באמצעות המחלקה User הוא נשמר לקובץ באמצעות סריאליזציה של האובייקט. כאשר יש באובייקט צורך הוא נטען חזרה מהקובץ. בטענה מהקובץ - מהם שדות האובייקט שישוחזרו?",
+    "options": [
+      {
+        "id": "a",
+        "text": "username, password, cardNumber, ExpiryDate, cvv"
+      },
+      {
+        "id": "b",
+        "text": "username, cardNumber, ExpiryDate, cvv"
+      },
+      {
+        "id": "c",
+        "text": "username, password, age"
+      },
+      {
+        "id": "d",
+        "text": "username, password"
+      },
+      {
+        "id": "e",
+        "text": "username, password, creditCard"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "שדה שמוגדר transient אינו נכלל בתהליך הסריאליזציה כלל - לכן creditCard ו-city לא נשמרים ולא משוחזרים. שדה volatile (כמו age) כן נשמר כרגיל (volatile משפיע רק על נראות בין threads, לא על סריאליזציה). לכן השדות המשוחזרים הם username, password, age.",
+    "optionExplanations": {
+      "a": "שגוי - cardNumber, expiryDate, cvv הם שדות פנימיים של creditCard, ו-creditCard עצמו מוגדר transient ב-User ולכן לא נשמר/נטען כלל.",
+      "b": "שגוי - אותה טעות: creditCard (וכל תתי-שדותיו) transient ולכן אינו משוחזר בכלל.",
+      "c": "נכון - transient (creditCard, city) לא נשמרים; volatile (age) כן נשמר; username ו-password הם שדות רגילים שנשמרים כברירת מחדל.",
+      "d": "שגוי - מחסיר את age, שאינו transient (הוא volatile בלבד) ולכן כן משוחזר עם הסריאליזציה.",
+      "e": "שגוי - כולל את creditCard בטעות, למרות שהוא מוגדר transient ולכן לא נשמר בקובץ הסריאליזציה."
+    },
+    "difficulty": "medium",
+    "questionType": "code-analysis",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q11, page 12/'5' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "שדה transient לא נשמר/משוחזר בסריאליזציה; volatile אינו משפיע על סריאליזציה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-012",
+    "topicIds": [
+      "design-patterns-creational",
+      "concurrency-utilities-callable-future-mediator"
+    ],
+    "subtopic": "executors-factory",
+    "stemHe": "מחלקת Executors מספקת ממשק ליצירת thread pools ולניהול משימות אסינכרוניות. באיזו תבנית עיצוב משתמשת מחלקת Executors כדי לספק מופעים של ExecutorService?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Factory"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "Singleton"
+      },
+      {
+        "id": "d",
+        "text": "Builder"
+      },
+      {
+        "id": "e",
+        "text": "Command"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "מתודות כמו Executors.newFixedThreadPool(n) הן מתודות factory סטטיות שמחזירות מופעים קונקרטיים שונים של ExecutorService (למשל ThreadPoolExecutor) מבלי שהלקוח יצטרך לדעת/לבנות את המימוש הקונקרטי בעצמו - זהו שימוש קלאסי בתבנית Factory.",
+    "optionExplanations": {
+      "a": "נכון - Executors מספקת מתודות factory סטטיות (newFixedThreadPool וכו') שמחזירות מופעי ExecutorService מבלי לחשוף את המימוש הקונקרטי.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים למנויים, לא ביצירת מופעים.",
+      "c": "שגוי - Singleton מבטיח מופע יחיד; Executors יכולה ליצור מספר מאגרי תהליכונים שונים, לא מופע יחיד.",
+      "d": "שגוי - Builder בונה אובייקט מורכב שלב-אחר-שלב; Executors פשוט מחזירה מופע מוכן ממתודה אחת.",
+      "e": "שגוי - Command עוטף פעולה כאובייקט; אינו קשור ליצירת מופעי thread pool."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q12, page 12/'5' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "Executors מספקת ExecutorService דרך מתודות Factory סטטיות.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-013",
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "synchronized-keyword",
+    "stemHe": "באיזו מילת מפתח או שיטה נשתמש בכדי למנוע מתהליכונים מרובים לגשת לקטע קוד בו זמנית?",
+    "options": [
+      {
+        "id": "a",
+        "text": "join"
+      },
+      {
+        "id": "b",
+        "text": "synchronized"
+      },
+      {
+        "id": "c",
+        "text": "lock"
+      },
+      {
+        "id": "d",
+        "text": "volatile"
+      },
+      {
+        "id": "e",
+        "text": "yield"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "synchronized היא מילת המפתח הבסיסית ב-Java למניעת גישה מקבילית לקטע קוד קריטי - היא נועלת מוניטור (monitor) כך שרק thread אחד יכול להיות בתוך הבלוק/מתודה בו-זמנית.",
+    "optionExplanations": {
+      "a": "שגוי - join גורמת ל-thread אחד להמתין לסיום thread אחר; אינה מונעת גישה בו-זמנית לקטע קוד.",
+      "b": "נכון - synchronized נועלת מוניטור ומבטיחה גישה סדרתית (mutual exclusion) לקטע קוד.",
+      "c": "שגוי - 'lock' אינה מילת מפתח ב-Java (יש ממשק Lock ב-java.util.concurrent.locks, אך זו אינה מילת מפתח שפתית); synchronized היא הכלי הבסיסי המבוקש כאן.",
+      "d": "שגוי - volatile מבטיח נראות (visibility) של ערך משתנה בין threads, אך אינו מונע גישה בו-זמנית (אינו אטומי לגבי read-modify-write).",
+      "e": "שגוי - yield רק מרמז ל-scheduler לוותר על זמן ריצה; אינה מנגנון סנכרון."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q13, page 12/'5' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "synchronized מונע גישה מקבילית לקטע קוד קריטי באמצעות נעילת מוניטור.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-014",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "inputstream-outputstream-sockets",
+    "stemHe": "מה התפקיד של המחלקות InputStream ו-OutputStream בתקשורת sockets?",
+    "options": [
+      {
+        "id": "a",
+        "text": "הם משמשים לייצוג חיבורי sockets"
+      },
+      {
+        "id": "b",
+        "text": "הם ממסדים את החיבור בין הלקוח לשרת"
+      },
+      {
+        "id": "c",
+        "text": "הם מייצרים את ה-sockets"
+      },
+      {
+        "id": "d",
+        "text": "הם מספקים שיטות לקריאה וכתיבת נתונים מעל גבי ה-sockets"
+      },
+      {
+        "id": "e",
+        "text": "הם מספקים שיטות לאבטחת הכניסה והיציאה מזרם המידע"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "לאחר שחיבור ה-socket כבר קיים, InputStream ו-OutputStream (המתקבלים דרך getInputStream()/getOutputStream()) הם אלו שמספקים את המתודות בפועל לקריאת נתונים נכנסים וכתיבת נתונים יוצאים דרך אותו חיבור.",
+    "optionExplanations": {
+      "a": "שגוי - ה-Socket עצמו מייצג את החיבור; ה-Stream-ים משמשים לקריאה/כתיבה מעליו, לא לייצוג החיבור עצמו.",
+      "b": "שגוי - יסוד החיבור נעשה על ידי connect (בלקוח) ו-accept (בשרת), לא על ידי ה-Stream-ים.",
+      "c": "שגוי - ה-sockets נוצרים על ידי הבנאים של Socket/ServerSocket, לא על ידי ה-Stream-ים.",
+      "d": "נכון - InputStream/OutputStream מספקים את מתודות הקריאה והכתיבה בפועל של הנתונים העוברים דרך ה-socket.",
+      "e": "שגוי - אינם אחראים על 'אבטחה'; תפקידם הוא העברת נתונים (byte-level I/O), לא אבטחה."
+    },
+    "difficulty": "easy",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q14, page 12/'5' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "InputStream/OutputStream מספקים את פעולות הקריאה/כתיבה בפועל מעל חיבור socket קיים.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-015",
+    "topicIds": [
+      "solid-principles"
+    ],
+    "subtopic": "dip",
+    "code": "class MySQLDatabase {\n    public void saveOrder(String order){ System.out.println(\"Saving order to MySQL database: \"+order); }\n}\nclass OrderService {\n    private MySQLDatabase database;\n    public OrderService(){ this.database=new MySQLDatabase(); }\n    public void placeOrder(String order){ database.saveOrder(order); System.out.println(\"Order placed: \"+order); }\n}",
+    "stemHe": "נתון קטע קוד המתאר שמירת נתוני הזמנות במספר סוגים של מסדי נתונים. אילו מעקרונות ה-SOLID הופרו בקטע הקוד לדעתכם? בחרו בתשובה המדויקת ביותר.",
+    "options": [
+      {
+        "id": "a",
+        "text": "הקוד תקין, ואין כאן הפרת עקרונות SOLID, כיוון שכל מחלקה מבצעת פעולה אחת בברורה"
+      },
+      {
+        "id": "b",
+        "text": "הקוד מפר את עקרון ה-I, כי לא ניתן לשנות את ההדפסות למסדי נתונים שונים מבלי לשנות את OrderService. יש להוסיף מחלקה עבור כל מסד נתונים חדש"
+      },
+      {
+        "id": "c",
+        "text": "הקוד מפר את עקרון ה-D, כיוון ש-OrderService תלוי במחלקה קונקרטית MySQLDatabase במקום בממשק"
+      },
+      {
+        "id": "d",
+        "text": "הקוד מפר את עקרון ה-S בלבד, כיוון שבמחלקת OrderService יש יותר משיטה אחת ולכן יש לה יותר מאחריות אחת"
+      },
+      {
+        "id": "e",
+        "text": "הקוד מפר ארבע מתוך חמש עקרונות SOLID"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "OrderService יוצר ומחזיק ישירות מופע קונקרטי של MySQLDatabase (this.database = new MySQLDatabase()) במקום להיות תלוי בממשק מופשט (למשל IDatabase) שדרכו יוזרק (Dependency Injection) כל מימוש קונקרטי - זו הפרה מדויקת של Dependency Inversion Principle.",
+    "optionExplanations": {
+      "a": "שגוי - יש הפרת SOLID ברורה: תלות ישירה במימוש קונקרטי במקום בממשק.",
+      "b": "שגוי - התיאור אינו מתאים ל-ISP (שעניינו ממשקים 'שמנים'); הבעיה כאן היא תלות במימוש קונקרטי, שזו הפרת D.",
+      "c": "נכון - OrderService תלוי ישירות ב-MySQLDatabase הקונקרטית במקום בממשק מופשט - זו הפרת Dependency Inversion Principle.",
+      "d": "שגוי - יש ל-OrderService רק מתודה עסקית אחת (placeOrder) שקוראת לשמירה; הבעיה אינה ריבוי אחריות (SRP) אלא סוג התלות (D).",
+      "e": "שגוי - אין הפרה של ארבעה עקרונות; הקוד הקצר הזה מפגין הפרה ממוקדת אחת (D)."
+    },
+    "difficulty": "medium",
+    "questionType": "solid-violation",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q15, page 14/'6' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent",
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "יצירת מופע קונקרטי ישירות בבנאי (new ConcreteClass()) במקום תלות בממשק = הפרת Dependency Inversion Principle.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-016",
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "deadlock",
+    "stemHe": "מהו deadlock בהקשר של תהליכונים?",
+    "options": [
+      {
+        "id": "a",
+        "text": "כאשר תהליכון מסיים את הביצוע ונעל"
+      },
+      {
+        "id": "b",
+        "text": "כאשר שני תהליכונים או יותר מתקדמים לא יותר כי הם ממתינים זה לזה לשחרור משאב"
+      },
+      {
+        "id": "c",
+        "text": "שיטה שמשתמשים בה כאשר רוצים לנעול תהליכון"
+      },
+      {
+        "id": "d",
+        "text": "כאשר תהליכון מושהה"
+      },
+      {
+        "id": "e",
+        "text": "מצב בו תהליכון סיים את נעילתו ומת"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Deadlock הוא מצב שבו שני (או יותר) תהליכונים תקועים לצמיתות, כל אחד ממתין למשאב שנעול בידי האחר - כתוצאה מכך אף אחד מהם אינו יכול להתקדם.",
+    "optionExplanations": {
+      "a": "שגוי - סיום ביצוע רגיל של thread אינו deadlock; אין כאן המתנה הדדית.",
+      "b": "נכון - deadlock הוא בדיוק מצב של המתנה מעגלית הדדית בין תהליכונים לשחרור משאבים, שגורמת לקיפאון מוחלט.",
+      "c": "שגוי - deadlock אינו שיטה שמשתמשים בה בכוונה; הוא באג/מצב בלתי-רצוי שיש להימנע ממנו.",
+      "d": "שגוי - השהיה זמנית (sleep/wait) אינה בהכרח deadlock; deadlock דורש המתנה הדדית קבועה שלא מסתיימת.",
+      "e": "שגוי - deadlock אינו קשור לסיום/מוות של thread; ה-threads התקועים עדיין 'חיים' אך אינם מתקדמים."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q16, page 14/'6' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "Deadlock = המתנה מעגלית הדדית בין תהליכונים לשחרור משאבים, ואף אחד לא מתקדם.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-017",
+    "topicIds": [
+      "event-driven-javafx-mvc"
+    ],
+    "subtopic": "javafx-vs-swing",
+    "stemHe": "מהו היתרון העיקרי בשימוש ב-JavaFX על פני Swing לבניית יישומי GUI ב-Java?",
+    "options": [
+      {
+        "id": "a",
+        "text": "JavaFX מספקת תמיכה טובה יותר לפיתוח אתרים"
+      },
+      {
+        "id": "b",
+        "text": "JavaFX מציע יכולות גרפיות תלת מימד מתקדמות יותר"
+      },
+      {
+        "id": "c",
+        "text": "JavaFX מציעה ממשק מודרני משתמש יותר, רחב יותר ונוח יותר לעיצוב"
+      },
+      {
+        "id": "d",
+        "text": "Swing תוכנן אך ורק לפיתוח אפליקציות לנייד"
+      },
+      {
+        "id": "e",
+        "text": "הטכנולוגיות נורא דומות. אין הבדל מהותי"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "JavaFX פותחה כתחליף מודרני יותר ל-Swing, עם תמיכה טובה יותר ב-CSS לעיצוב, FXML להפרדת מבנה-לוגיקה (המאפשרת MVC נוח), ואפקטים/פריסות עשירים יותר - מה שהופך אותה לנוחה ורחבה יותר לעיצוב ממשקי משתמש מודרניים.",
+    "optionExplanations": {
+      "a": "שגוי - JavaFX היא טכנולוגיית desktop GUI, לא כלי לפיתוח אתרים.",
+      "b": "שגוי - למרות שיש ל-JavaFX תמיכה גרפית טובה, זה אינו היתרון המרכזי המודגש בהשוואה ל-Swing בהקשר הכללי.",
+      "c": "נכון - JavaFX מציעה ממשק עיצוב מודרני, נוח וגמיש יותר (תמיכת CSS, FXML) בהשוואה ל-Swing המיושנת יותר.",
+      "d": "שגוי - לא Swing ולא JavaFX תוכננו 'אך ורק' לנייד; שתיהן טכנולוגיות desktop בעיקרן.",
+      "e": "שגוי - קיימים הבדלים מהותיים בגישת העיצוב והטכנולוגיה בין השתיים."
+    },
+    "difficulty": "easy",
+    "questionType": "javafx-mvc",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q17, page 14/'6' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "JavaFX מציעה ממשק מודרני, גמיש ונוח יותר לעיצוב מ-Swing (תמיכת CSS/FXML).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-018",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "maven-dependencies",
+    "stemHe": "ברצונך להוסיף ספריית צד שלישי (כמו Timer) לפרויקט Java שלך שמנוהל על ידי Maven, כך שהיא תהיה זמינה גם בשלב הקומפילציה וגם בהרצה. היכן ובאיזה אופן יש להגדיר את התלות?",
+    "options": [
+      {
+        "id": "a",
+        "text": "בתוך הקובץ pom.xml, תחת <build><plugins>"
+      },
+      {
+        "id": "b",
+        "text": "בקובץ settings.xml, ע\"י הוספת הנתיב של הספריה לסעיף <classpath>"
+      },
+      {
+        "id": "c",
+        "text": "בקובץ pom.xml, תוך <dependencies>"
+      },
+      {
+        "id": "d",
+        "text": "בתיקיית target/lib/ ולהגדיר ידנית את classpath במשתנה סביבה"
+      },
+      {
+        "id": "e",
+        "text": "יש להוריד את קובץ ה-JAR, להניח אותו ב-src/main/resources וליבא אותו ב-Java עם import"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "ב-Maven, תלויות חיצוניות (ספריות) מוגדרות בתוך תג <dependencies> בקובץ pom.xml; Maven מוריד את הספריה אוטומטית ומוסיף אותה ל-classpath הן בשלב הקומפילציה והן בשלב ההרצה, בהתאם ל-scope שהוגדר.",
+    "optionExplanations": {
+      "a": "שגוי - <build><plugins> משמש להגדרת plugins של תהליך הבנייה (build), לא תלויות ספריה לשימוש בקוד.",
+      "b": "שגוי - settings.xml משמש להגדרות גלובליות של Maven (כמו repositories/proxies), לא להוספת תלות פרויקט ספציפית.",
+      "c": "נכון - <dependencies> ב-pom.xml הוא המקום הנכון להגדרת תלות חיצונית שתהיה זמינה בקומפילציה ובהרצה.",
+      "d": "שגוי - זהו תהליך ידני ומיושן שלא מנצל את מנגנון ניהול התלויות האוטומטי של Maven.",
+      "e": "שגוי - ייבוא ידני של JAR ל-resources אינו הדרך הנכונה לנהל תלות ב-Maven ואינו מוסיף אותו כראוי ל-classpath של הקומפילציה."
+    },
+    "difficulty": "medium",
+    "questionType": "java-api",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q18, page 14/'6' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "תלויות Maven מוגדרות תחת <dependencies> ב-pom.xml.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-019",
+    "topicIds": [
+      "threads-basics-lifecycle",
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "shared-static-counter-race",
+    "code": "class MyThread extends Thread {\n    private static int counter = 0;\n    public void run(){\n        for(int i=0;i<5;i++){\n            counter++;\n            System.out.println(counter);\n            try { Thread.sleep(100); } catch(InterruptedException e){}\n        }\n    }\n}\npublic class ThreadDemo {\n    public static void main(String[] args){\n        MyThread thread1=new MyThread();\n        MyThread thread2=new MyThread();\n        thread1.start();\n        thread2.start();\n    }\n}",
+    "stemHe": "מה מהבאים מתאר הכי במדויק את תוצר הרצת התכנית לעיל?",
+    "options": [
+      {
+        "id": "a",
+        "text": "חמש שורות ראשונות המספרים 1 עד 5 בהתאמה. בחמש השורות השניות גם יהיו המספרים 1 עד 5 בהתאמה"
+      },
+      {
+        "id": "b",
+        "text": "התכנית תדפיס את הספרות 1 עד 10. ספרה אחת בכל שורה"
+      },
+      {
+        "id": "c",
+        "text": "מספר השורות שיודפסו עלול להשתנות מהרצה להרצה. תמיד יודפסו מספרים מהקטן לגדול. יודפסו עשר שורות. יתכנו שורות עם אותו מספר"
+      },
+      {
+        "id": "d",
+        "text": "התכנית תדפיס חמש שורות עם המונה 1 עד 5 עבור כל תהליכון. לא ניתן לצפות מראש את סדר ההדפסות בין שני התהליכונים"
+      },
+      {
+        "id": "e",
+        "text": "כל תהליכון ידפיס בדיוק 5 מספרים משלו במקביל לשני, ובסך הכול יודפסו 10 מספרים ייחודיים מ-1 עד 10 ללא כל חזרה"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "counter הוא שדה static המשותף לשני מופעי MyThread. הלולאה בכל thread תמיד מתבצעת בדיוק 5 פעמים ולכן תמיד יודפסו בסך הכול 10 שורות. מכיוון שההגדלה (counter++) וההדפסה אינן אטומיות ומבוצעות ללא סנכרון, יתכנו מרוצי-תחרות (race conditions) שגורמים לכפילויות בערכים המודפסים או לדילוג על ערכים - אך תמיד יודפסו בדיוק 10 שורות במספרים עולים (לא בהכרח רצף שלם וייחודי של 1 עד 10).",
+    "optionExplanations": {
+      "a": "שגוי - counter הוא שדה static משותף, לא נפרד לכל thread; לכן לא כל thread ידפיס עצמאית 1 עד 5.",
+      "b": "נכון - בסך הכול תמיד יודפסו 10 שורות (5 איטרציות לכל אחד משני ה-threads), אך בגלל שיתוף counter ללא סנכרון האינטרלוק ביניהם והערכים המדויקים אינם ניתנים לחיזוי מלא (יתכנו כפילויות עקב מרוץ תחרות).",
+      "c": "שגוי - מספר השורות תמיד יהיה 10 בדיוק (הלולאה קבועה ל-5 איטרציות לכל thread ללא תלות בערך counter), לא 'עלול להשתנות'.",
+      "d": "שגוי - counter משותף (static) ולא נפרד לכל thread, כך שלא כל אחד ידפיס בדיוק 1 עד 5 עצמאית.",
+      "e": "שגוי - counter משותף (static) בין שני ה-threads, כך שאין 'שתי סדרות עצמאיות' של מספרים ייחודיים; יתכנו כפילויות בערכים המודפסים בגלל מרוץ תחרות."
+    },
+    "difficulty": "hard",
+    "questionType": "threads-scheduling",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q19, page 16/'7' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "adapted",
+    "tags": [
+      "confirmed-100-percent",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "שדה static משותף בין threads + הגדלה לא-אטומית = מספר שורות קבוע אך ערכים לא-חזויים במלואם (אפשריות כפילויות).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2025-020",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "observer-notify-timing",
+    "code": "interface Observer { void update(String message); }\nclass ConcreteObserver implements Observer {\n    private String name;\n    public ConcreteObserver(String name){ this.name=name; }\n    public void update(String message){ System.out.println(name+\" received message: \"+message); }\n}\nclass Subject {\n    private List<Observer> observers=new ArrayList<>();\n    private String message;\n    public void addObserver(Observer o){ observers.add(o); }\n    public void removeObserver(Observer o){ observers.remove(o); }\n    public void setMessage(String message){ this.message=message; notifyObservers(); }\n    public void notifyObservers(){ for(Observer o: observers){ o.update(message); } }\n}\npublic class ObserverPatternExample {\n    public static void main(String[] args){\n        Subject subject=new Subject();\n        Observer o1=new ConcreteObserver(\"Observer 1\");\n        Observer o2=new ConcreteObserver(\"Observer 2\");\n        subject.addObserver(o1);\n        subject.addObserver(o2);\n        subject.setMessage(\"Hello, Observers\");\n        subject.removeObserver(o1);\n        subject.setMessage(\"Observer 1 is no longer receiving updates.\");\n    }\n}",
+    "stemHe": "מה קורה בשורת הקוד subject.setMessage(\"Hello, Observers\") בקוד שלהלן?",
+    "options": [
+      {
+        "id": "a",
+        "text": "רק observer1 מקבל את ההודעה Hello, Observers"
+      },
+      {
+        "id": "b",
+        "text": "רק observer2 מקבל את ההודעה Hello, Observers"
+      },
+      {
+        "id": "c",
+        "text": "אף אחד מה-observers לא מקבל את ההודעה Hello, Observers"
+      },
+      {
+        "id": "d",
+        "text": "גם observer1 וגם observer2 מקבלים את ההודעה Hello, Observers"
+      },
+      {
+        "id": "e",
+        "text": "לא ניתן לקבוע בוודאות"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "בשלב הקריאה ל-setMessage(\"Hello, Observers\"), שני ה-observers (o1 ו-o2) עדיין רשומים ברשימת ה-observers (ההסרה של o1 מתבצעת רק בשורה הבאה, אחרי קריאה זו). לכן שניהם מקבלים את ההודעה הראשונה; רק בקריאה השנייה ל-setMessage (אחרי removeObserver(o1)) רק observer2 יקבל את ההודעה.",
+    "optionExplanations": {
+      "a": "שגוי - observer2 עדיין רשום בשלב זה ולכן גם הוא מקבל את ההודעה, לא רק observer1.",
+      "b": "שגוי - observer1 עדיין רשום בשלב זה (ההסרה מתבצעת רק אחרי קריאה זו) ולכן גם הוא מקבל את ההודעה.",
+      "c": "שגוי - שני ה-observers עדיין רשומים בשלב זה ולכן שניהם מקבלים את ההודעה.",
+      "d": "נכון - ברגע קריאה זו שני ה-observers עדיין רשומים ברשימה (ההסרה מתבצעת רק אחר כך), ולכן שניהם מקבלים את 'Hello, Observers'.",
+      "e": "שגוי - ההתנהגות כאן דטרמיניסטית וחד-משמעית (קוד סינכרוני ללא threads), ניתן לקבוע בוודאות מי מקבל את ההודעה."
+    },
+    "difficulty": "medium",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "grade_100_term_a",
+        "fileName": "Grade 100, Term A.pdf",
+        "locator": "Q20, page 18/'8' - 2025 exam, confirmed 100/100"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2025,
+    "origin": "reconstruction",
+    "tags": [
+      "confirmed-100-percent"
+    ],
+    "keyLearningPoint": "הסרת observer משפיעה רק על הודעות עתידיות; observer שעדיין רשום בזמן הקריאה מקבל את ההודעה הנוכחית.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-001",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "thread-join",
+    "code": "public class ThreadTest {\n    public static void main(String[] args) throws InterruptedException {\n        Thread t1 = new Thread(() -> { System.out.println(\"Thread 1\"); });\n        Thread t2 = new Thread(() -> { System.out.println(\"Thread 2\"); });\n        t1.start();\n        t1.join();\n        t2.start();\n    }\n}",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Thread 1\\nThread 2"
+      },
+      {
+        "id": "b",
+        "text": "Thread 2\\nThread 1"
+      },
+      {
+        "id": "c",
+        "text": "ההדפסה תהיה אקראית פעם כמו תשובה א ופעם כמו תשובה ב"
+      },
+      {
+        "id": "d",
+        "text": "לתכנית יש שגיאת קומפילציה. לא תהיה הדפסה"
+      },
+      {
+        "id": "e",
+        "text": "יודפס Thread1 וזהו"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "t1.join() גורם ל-thread הראשי (main) להמתין עד ש-t1 מסיים לחלוטין את הרצתו (כולל ההדפסה 'Thread 1') לפני שהוא ממשיך לשורה הבאה. רק אחרי סיום t1, מתבצעת קריאה ל-t2.start(). לכן הסדר מובטח וקבוע: 'Thread 1' תמיד מודפס לפני 'Thread 2'.",
+    "optionExplanations": {
+      "a": "נכון - join() מבטיח ש-t1 יסתיים (ויסיים להדפיס) לפני ש-t2 בכלל מתחיל לרוץ, ולכן הסדר תמיד קבוע.",
+      "b": "שגוי - t2 כלל לא מתחיל לרוץ לפני ש-t1 מסיים (בגלל join), כך שההדפסה שלו לעולם לא יכולה לקדום את זו של t1.",
+      "c": "שגוי - בלי join הסדר היה אכן אקראי, אך כאן t1.join() הופך את הסדר לדטרמיניסטי - זו בדיוק המטרה של השאלה.",
+      "d": "שגוי - הקוד תקין לחלוטין תחבירית וסמנטית; אין שגיאת קומפילציה.",
+      "e": "שגוי - t2.start() אכן נקרא (אחרי ש-t1 מסתיים) ולכן גם 'Thread 2' יודפס."
+    },
+    "difficulty": "medium",
+    "questionType": "threads-scheduling",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q1, page 8/'3' - 2024 exam; student answered wrong (ג), correct answer determined independently from join() semantics"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "reasoned-not-grader-confirmed"
+    ],
+    "keyLearningPoint": "t.join() חוסם את ה-thread הקורא עד לסיום t - משנה סדר הרצה אקראי לסדר דטרמיניסטי.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-002",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "serversocket-port-in-use",
+    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
+      },
+      {
+        "id": "b",
+        "text": "התוכנית תמתין עד שהפורט יתפנה"
+      },
+      {
+        "id": "c",
+        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
+      },
+      {
+        "id": "d",
+        "text": "תיזרק שגיאה שהפורט תפוס"
+      },
+      {
+        "id": "e",
+        "text": "במצב שכזה יוקצה פורט אחר שפנוי לטובת התוכנית באופן אוטומטי"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "נסיון ליצור ServerSocket על פורט שכבר תפוס גורם לזריקת חריגה (BindException, תת-מחלקה של IOException) המציינת שהכתובת/הפורט כבר בשימוש - אין המתנה אוטומטית, שיתוף פורט או הקצאה אוטומטית של פורט חלופי.",
+    "optionExplanations": {
+      "a": "שגוי - התוכנית לא יוצאת 'בצורה מסודרת עם הודעה יפה' מעצמה; נזרקת חריגה שיש לתפוס אותה במפורש (אחרת התוכנית תיפול עם stack trace).",
+      "b": "שגוי - אין מנגנון המתנה אוטומטי לשחרור הפורט; החריגה נזרקת מיידית.",
+      "c": "שגוי - שני תהליכים לא יכולים לחלוק את אותו פורט להאזנה בו-זמנית באותה כתובת.",
+      "d": "נכון - תיזרק BindException (Address already in use) בעת ניסיון הבנייה של ServerSocket על פורט תפוס.",
+      "e": "שגוי - Java אינה מקצה אוטומטית פורט חלופי; יש לציין פורט = 0 מפורשות כדי לקבל פורט פנוי אוטומטית, לא באופן דיפולטיבי כשפורט קבוע תפוס."
+    },
+    "difficulty": "easy",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q2, page 8/'3' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "ServerSocket על פורט תפוס זורק BindException מיידית - אין המתנה או שיתוף אוטומטי.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-003",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "server-client-no-threads",
+    "stemHe": "יש לי תכנית main אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אם יצרתי את ה-ServerSocket ראשון וקראתי ל-accept לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה במתנה בהמתנה ללקוחות"
+      },
+      {
+        "id": "b",
+        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
+      },
+      {
+        "id": "c",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
+      },
+      {
+        "id": "d",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א + ב"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "בלי Threads, שתי הבעיות אמיתיות: (1) אם יוצרים ServerSocket וקוראים ל-accept() ראשון, ה-thread היחיד (main) נחסם שם לצמיתות וממתין לחיבור, כך שקוד יצירת ה-Socket לקוח לעולם לא ירוץ; (2) אם מנסים ליצור Socket לקוח ראשון בזמן שאין עדיין שרת שמאזין על אותו פורט, החיבור ייכשל עם חריגה (ConnectException). לכן שתי הטענות א ו-ב נכונות יחד.",
+    "optionExplanations": {
+      "a": "לבד - נכונה כשלעצמה (accept חוסם), אך חסרה את הבעיה השנייה (יצירת סוקט לקוח בלי שרת מאזין).",
+      "b": "לבד - נכונה כשלעצמה (חיבור לקוח ללא שרת מאזין נכשל), אך חסרה את בעיית ה-accept החוסם.",
+      "c": "שגוי - גם אם השרת נוצר ראשון, קריאת accept חוסמת את אותו thread יחיד ולעולם לא מגיעים ליצירת הלקוח (שתי הפעולות באותו main בלי threads).",
+      "d": "שגוי - אם הלקוח נוצר ראשון (לפני שהשרת מאזין), החיבור ייכשל עם שגיאה.",
+      "e": "נכון - שתי הבעיות (א ו-ב) נכונות בו-זמנית: זהו תרגיל קלאסי המדגים מדוע צריך Threads נפרדים לשרת וללקוח."
+    },
+    "difficulty": "medium",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q3, page 8/'3' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "combined-answer"
+    ],
+    "keyLearningPoint": "ללא Threads נפרדים: accept() חוסם לצמיתות, וחיבור לקוח לפני שהשרת מאזין נכשל - שתי הבעיות אמיתיות יחד.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-004",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "compiler-vs-interpreter",
+    "stemHe": "איזה רכיב אחראי להמרת הקוד מקור בקבצי java ל-bytecode?",
+    "options": [
+      {
+        "id": "a",
+        "text": "javac"
+      },
+      {
+        "id": "b",
+        "text": "JRE"
+      },
+      {
+        "id": "c",
+        "text": "JVM"
+      },
+      {
+        "id": "d",
+        "text": "JIT"
+      },
+      {
+        "id": "e",
+        "text": "profiler"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "javac הוא המהדר (compiler) שממיר קובץ מקור .java ל-bytecode (.class). ה-JVM לעומת זאת מריץ/מפרש bytecode קיים; JRE הוא הסביבה שכוללת את ה-JVM וספריות; JIT מקמפל חלקים חמים של bytecode כבר-קיים למכונה בזמן ריצה; profiler הוא כלי ניתוח ביצועים ואינו קשור לקומפילציה.",
+    "optionExplanations": {
+      "a": "נכון - javac הוא המהדר שממיר .java ל-bytecode; זהו התהליך היחיד שמייצר bytecode מקוד מקור.",
+      "b": "שגוי - JRE הוא הסביבה הכוללת (JVM+ספריות) שמריצה bytecode קיים; אינו ממיר קוד מקור.",
+      "c": "שגוי - JVM מריץ/מפרש bytecode קיים; אינו הרכיב שממיר קוד מקור ל-bytecode.",
+      "d": "שגוי - JIT מקמפל חלק מה-bytecode הקיים (שכבר נוצר על ידי javac) למכונה בזמן ריצה - הוא לא ממיר Java source ל-bytecode.",
+      "e": "שגוי - profiler הוא כלי לניתוח ביצועי תוכנית; אינו קשור כלל לקומפילציה."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q4, page 10/'4' - 2024 exam; student answered wrong (JVM), correct answer (javac) cross-referenced with 2025 exam Q1 confirmed answer and course material"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "cross-year-confirmed"
+    ],
+    "keyLearningPoint": "javac ממיר .java ל-bytecode; JVM מריץ bytecode; אל תבלבלו ביניהם.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-005",
+    "topicIds": [
+      "java-platform-jvm",
+      "event-driven-javafx-mvc"
+    ],
+    "subtopic": "jvm-cross-platform",
+    "stemHe": "מה מאפשר לג'אווה FX להיות cross-platform?",
+    "options": [
+      {
+        "id": "a",
+        "text": "JavaFX"
+      },
+      {
+        "id": "b",
+        "text": "JVM"
+      },
+      {
+        "id": "c",
+        "text": "Observer"
+      },
+      {
+        "id": "d",
+        "text": "MVVM"
+      },
+      {
+        "id": "e",
+        "text": "ג'אווה FX אינה cross platform"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "JavaFX, ככל אפליקציית Java, רצה כ-bytecode על גבי ה-JVM. ה-JVM (התלוי-פלטפורמה, מתורגם לכל מערכת הפעלה) הוא זה שמעניק ל-JavaFX (וכל קוד Java) את יכולת ה-cross-platform, לא JavaFX עצמה או דפוסי עיצוב כמו Observer/MVVM.",
+    "optionExplanations": {
+      "a": "שגוי - זו תשובת מלכודת נפוצה; JavaFX היא ספריית GUI שרצה מעל Java, אך היא-עצמה אינה הגורם ל-cross-platform.",
+      "b": "נכון - ה-JVM הוא זה שמתרגם bytecode אחיד לשפת מכונה מתאימה לכל מערכת הפעלה, מה שמעניק את יכולת ה-cross-platform.",
+      "c": "שגוי - Observer הוא דפוס עיצוב להפצת עדכונים; אין לו קשר ליכולת ריצה חוצת-פלטפורמות.",
+      "d": "שגוי - MVVM הוא דפוס ארכיטקטוני להפרדת שכבות; אינו קשור ליכולת cross-platform.",
+      "e": "שגוי - JavaFX היא בהחלט cross-platform (רצה על Windows/Mac/Linux) בזכות ה-JVM."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q5, page 10/'4' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "JVM (לא JavaFX) הוא מה שמאפשר cross-platform - שאלה חוזרת כמעט בכל מבחן.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-006",
+    "topicIds": [
+      "solid-principles"
+    ],
+    "subtopic": "isp",
+    "stemHe": "יונתן השתבח לדוד בזה שהוא כתב ממשק ב-Java שהוא ממש בו כמו מקצוען. דוד הסתכל על הממשק של יונתן וראה שיונתן מימש ממשק בו יש פונקציות שונות בתכלית כגון: בדיקת מבחן, חישוב זמן בישול, נגינה ועוד. דוד אמר ליונתן שלדעתו הוא מפר עקרון חשוב מאוד בעקרונות SOLID. לאיזה מהעקרונות הבאים התכוון דוד?",
+    "options": [
+      {
+        "id": "a",
+        "text": "L"
+      },
+      {
+        "id": "b",
+        "text": "S"
+      },
+      {
+        "id": "c",
+        "text": "D"
+      },
+      {
+        "id": "d",
+        "text": "O"
+      },
+      {
+        "id": "e",
+        "text": "I"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "ממשק אחד שמאגד מתודות לא-קשורות לחלוטין (בדיקת מבחן, חישוב זמן בישול, נגינה) מכריח כל מחלקה שמממשת אותו לספק מימוש גם למתודות שאינן רלוונטיות לה - זוהי הפרה קלאסית של Interface Segregation Principle, שדוגל בממשקים קטנים וממוקדים במקום ממשק 'שמן' אחד.",
+    "optionExplanations": {
+      "a": "שגוי - LSP עוסק בהחלפת מחלקת-אב במחלקה יורשת בלי לשבור התנהגות, לא בגודל/רלוונטיות מתודות ממשק.",
+      "b": "שגוי - SRP עוסק במספר האחריויות של מחלקה בודדת, לא בממשק המשותף למחלקות רבות ולא-קשורות.",
+      "c": "שגוי - DIP עוסק בתלות באבסטרקציות מול מימושים קונקרטיים, לא בגודל הממשק עצמו.",
+      "d": "שגוי - OCP עוסק ביכולת הרחבה בלי שינוי קוד קיים, לא ברלוונטיות המתודות בממשק.",
+      "e": "נכון - Interface Segregation Principle: ממשק המאגד מתודות לא-קשורות מכריח מחלקות לממש מתודות מיותרות עבורן."
+    },
+    "difficulty": "medium",
+    "questionType": "solid-violation",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q6, page 10/'4' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "ממשק אחד עם מתודות לא-קשורות מרובות = הפרת Interface Segregation Principle (I).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-007",
+    "topicIds": [
+      "java-basics-oop-memory"
+    ],
+    "subtopic": "autoboxing-unboxing",
+    "code": "Integer integerObject = 10;\nint primitiveInt = integerObject;",
+    "stemHe": "שורות הקוד הבאות לקוחות מתוכנית גדולה. איזה תהליך מתבצע בשורות אלו?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unboxing"
+      },
+      {
+        "id": "b",
+        "text": "AutoBoxing"
+      },
+      {
+        "id": "c",
+        "text": "א + ב"
+      },
+      {
+        "id": "d",
+        "text": "אחת משורות אלו יצרו שגיאת קומפילציה"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "בשורה הראשונה מתבצע Autoboxing - הליטרל הפרימיטיבי 10 (int) מומר אוטומטית לאובייקט Integer. בשורה השנייה מתבצע Unboxing - האובייקט Integer מומר אוטומטית בחזרה לפרימיטיב int. שני התהליכים קורים יחד בקטע הקוד, ולכן התשובה המדויקת היא השילוב של שניהם.",
+    "optionExplanations": {
+      "a": "לבד - נכונה רק לגבי השורה השנייה (Integer -> int); מחסירה את ה-Autoboxing שמתרחש בשורה הראשונה.",
+      "b": "לבד - נכונה רק לגבי השורה הראשונה (int -> Integer); מחסירה את ה-Unboxing שמתרחש בשורה השנייה.",
+      "c": "נכון - שורה 1 = Autoboxing (int->Integer), שורה 2 = Unboxing (Integer->int); שני התהליכים מתרחשים יחד.",
+      "d": "שגוי - שתי השורות תקינות קומפילטיבית לגמרי; Autoboxing/Unboxing אוטומטיים הם תכונה סטנדרטית בשפה מאז Java 5.",
+      "e": "שגוי - קיימת תשובה נכונה (ג) המתארת במדויק את שני התהליכים המשולבים."
+    },
+    "difficulty": "medium",
+    "questionType": "code-analysis",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q7, page 10/'4' - 2024 exam; student answered wrong (Unboxing alone), correct answer determined by Java autoboxing/unboxing semantics"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "combined-answer"
+    ],
+    "keyLearningPoint": "int->Integer הוא Autoboxing; Integer->int הוא Unboxing - קטע קוד קצר יכול להדגים את שניהם יחד.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-008",
+    "topicIds": [
+      "concurrency-utilities-callable-future-mediator"
+    ],
+    "subtopic": "submit-vs-execute",
+    "stemHe": "מה ההבדל בין המתודות submit ו-execute ב-ExecutorService?",
+    "options": [
+      {
+        "id": "a",
+        "text": "execute מחזירה Future ו-submit אינה מחזירה ערך"
+      },
+      {
+        "id": "b",
+        "text": "execute אינה מחזירה ערך ו-submit מחזירה Future"
+      },
+      {
+        "id": "c",
+        "text": "execute מאפשרת הרצת runnable ו-submit מאפשרת הרצת callable"
+      },
+      {
+        "id": "d",
+        "text": "execute מאפשרת הגדרת זמן ריצת תהליכון ו-submit לא מאפשרת"
+      },
+      {
+        "id": "e",
+        "text": "אלו שני מימושים להגשת משימות לבריכת התהליכונים. הבחירה ביניהן שרירותית"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "execute(Runnable) היא מתודה מ-Executor הבסיסי שמריצה משימה ללא ערך החזרה (void). submit (מ-ExecutorService) מקבלת Runnable או Callable ומחזירה אובייקט Future שמייצג את תוצאת המשימה בעתיד, ומאפשרת גם לתפוס חריגות ולבטל את המשימה.",
+    "optionExplanations": {
+      "a": "שגוי - הפוך מהאמת: execute היא זו שלא מחזירה ערך, ו-submit היא זו שמחזירה Future.",
+      "b": "נכון - execute מריצה משימה בלי החזרת ערך; submit מחזירה Future שמייצג את תוצאת המשימה.",
+      "c": "שגוי - submit מקבלת גם Runnable וגם Callable (לא רק callable); execute מקבלת רק Runnable.",
+      "d": "שגוי - אף לא אחת מהמתודות מגדירה 'זמן ריצת thread'; זה אינו הבדל אמיתי בין השתיים.",
+      "e": "שגוי - הבחירה אינה שרירותית - יש הבדל פונקציונלי מהותי: קבלת תוצאה/מעקב אחרי המשימה אפשרית רק דרך submit."
+    },
+    "difficulty": "medium",
+    "questionType": "java-api",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q8, page 10/'4' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [],
+    "keyLearningPoint": "execute() לא מחזיר ערך; submit() מחזיר Future - הבדל מרכזי ב-ExecutorService.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-009",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "strategy-runtime-algorithm",
+    "stemHe": "רוצים לבחור אלגוריתם מסוים מתוך מספר אלגוריתמים בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Memento"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "Adapter או Mediator"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      },
+      {
+        "id": "e",
+        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "Strategy מגדירה משפחת אלגוריתמים ניתנים-להחלפה מאחורי ממשק משותף, כך שניתן לבחור ולהחליף איזה אלגוריתם קונקרטי יופעל בזמן ריצה - זהו בדיוק התיאור בשאלה.",
+    "optionExplanations": {
+      "a": "שגוי - Memento עוסק בשמירה/שחזור מצב פנימי של אובייקט, לא בבחירת אלגוריתם.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים למנויים, לא בבחירת אלגוריתם מבין כמה חלופות.",
+      "c": "שגוי - Adapter מתאים ממשקים לא-תואמים, ו-Mediator מתאם תקשורת בין אובייקטים - אף אחד מהם לא עוסק בבחירת אלגוריתם.",
+      "d": "נכון - Strategy מיועדת בדיוק לבחירת/החלפת אלגוריתם קונקרטי בזמן ריצה מאחורי ממשק אחיד.",
+      "e": "שגוי - השאלה מספקת מספיק מידע כדי לזהות בבירור את Strategy כתשובה המתאימה."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q9, page 12/'5' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "בחירת אלגוריתם בזמן ריצה מבין כמה חלופות = Strategy - שאלה חוזרת בכל שנה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-010",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "equals-without-hashcode",
+    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals וממשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
+      },
+      {
+        "id": "b",
+        "text": "הכל תקין. אין קשר בין השתיים"
+      },
+      {
+        "id": "c",
+        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
+      },
+      {
+        "id": "d",
+        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
+      },
+      {
+        "id": "e",
+        "text": "לא מומלץ לממש hashcode בעצמנו, שכן היא ממומשת באופן גנרי ע\"י Java"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "דריסת equals בלי hashCode היא חוקית קומפילטיבית (אין שגיאת הידור), אך שוברת את החוזה: אובייקטים 'שווים' לפי equals לא בהכרח יקבלו אותו hashCode ברירת-מחדל (מבוסס זהות זיכרון), ולכן ייכנסו לדליים (buckets) שונים במבני נתונים מבוססי-hash כמו HashMap/HashSet - מה שיוצר כניסות כפולות עבור אובייקטים שהמתכנת רואה כזהים.",
+    "optionExplanations": {
+      "a": "נכון - זהו בדיוק הסיכון: אובייקטים השווים לפי equals אך עם hashCode ברירת מחדל שונה ייתפסו כשונים באוספים מבוססי-hash.",
+      "b": "שגוי - יש קשר הדוק: חוזה ה-equals/hashCode דורש עקביות ביניהם, במיוחד לשימוש נכון באוספי hash.",
+      "c": "שגוי - זו מלכודת נפוצה; אין שגיאת הידור - זהו באג לוגי שקט, לא שגיאת קומפילציה.",
+      "d": "שגוי - לעיתים קרובות מומלץ ואף הכרחי לדרוס את שתי השיטות יחד כדי לקבל שוויון לוגי תקין.",
+      "e": "שגוי - המימוש הגנרי (מבוסס זהות) לא תמיד מתאים; לעיתים יש צורך לממש hashCode בהתאמה ל-equals הלוגי שהוגדר."
+    },
+    "difficulty": "medium",
+    "questionType": "code-analysis",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q10, page 12/'5' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "דריסת equals בלי hashCode אינה שגיאת קומפילציה, אלא באג לוגי שקוט הפוגע באוספים מבוססי-hash.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-011",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "generic-stack-output",
+    "code": "public class Genericstack<E> {\n    Stack<E> stk = new Stack<E>();\n    public void push(E obj){ stk.push(obj); }\n    public E pop(){ E obj = stk.pop(); return obj; }\n}\nclass Output {\n    public static void main(String args[]){\n        Genericstack<String> gs = new Genericstack<String>();\n        gs.push(\"Germany\");\n        System.out.print(gs.pop() + \" \");\n        Genericstack<Integer> gs2 = new Genericstack<Integer>();\n        gs2.push(2024);\n        System.out.println(gs2.pop());\n    }\n}",
+    "stemHe": "מהו הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "שגיאת הידור"
+      },
+      {
+        "id": "c",
+        "text": "Germany 2024"
+      },
+      {
+        "id": "d",
+        "text": "2024"
+      },
+      {
+        "id": "e",
+        "text": "Germany"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "gs ו-gs2 הם שני מופעים גנריים נפרדים לחלוטין של Genericstack<E> - האחד עם E=String והשני עם E=Integer. אין כאן שום קונפליקט טיפוסים: gs.pop() מחזיר \"Germany\", ו-gs2.pop() מחזיר 2024. print ללא שורה חדשה ואז println מדפיסים יחד 'Germany 2024'.",
+    "optionExplanations": {
+      "a": "שגוי - אין שום פעולה שגורמת לחריגה בזמן ריצה; שני ה-Stack-ים תקינים ומכילים בדיוק איבר אחד כל אחד.",
+      "b": "שגוי - זו מלכודת קלאסית; הקוד תקין לחלוטין קומפילטיבית מכיוון שמדובר בשני מופעים גנריים נפרדים (Genericstack<String> ו-Genericstack<Integer>).",
+      "c": "נכון - gs.pop() מחזיר 'Germany' (מודפס עם רווח), gs2.pop() מחזיר 2024 - יחד: 'Germany 2024'.",
+      "d": "שגוי - מדלג על ההדפסה הראשונה (Germany); שתי ההדפסות מתבצעות בפועל.",
+      "e": "שגוי - מדלג על ההדפסה השנייה (2024); שתי ההדפסות מתבצעות בפועל."
+    },
+    "difficulty": "easy",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q11, page 12/'5' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "שני מופעים גנריים נפרדים (GenericStack<String> ו-GenericStack<Integer>) אינם מתנגשים - שאלה שחוזרת כמעט בכל מבחן.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-012",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "observer-what-is-not-correct",
+    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
+      },
+      {
+        "id": "b",
+        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
+      },
+      {
+        "id": "c",
+        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
+      },
+      {
+        "id": "d",
+        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
+      },
+      {
+        "id": "e",
+        "text": "זו תבנית עיצוב שניתן לראות מימוש שלה במספר רב של אפליקציות כגון פייסבוק, צאט ועוד"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "ב-Observer, ה-Observable מחזיק רשימה של Observers דרך הממשק/הטיפוס האבסטרקטי (Observer) בלבד - הוא אינו צריך ולא אמור להכיר את המחלקות הקונקרטיות שמממשות אותו. זהו בדיוק העיקרון של צימוד רופף (loose coupling) שהדפוס מספק. הטענה ההפוכה (ד) היא הטענה השגויה.",
+    "optionExplanations": {
+      "a": "נכון כטענה (ולכן לא זו התשובה) - ה-Observers אכן אינם מודעים זה לזה; זו עובדה נכונה על הדפוס.",
+      "b": "נכון כטענה - Observable אכן מחזיק רשימה ומודע לכל ה-Observers הרשומים אליו (דרך הממשק המשותף).",
+      "c": "נכון כטענה - זהו בדיוק תיאור מקרה השימוש הקלאסי ב-Observer.",
+      "d": "זו התשובה הנכונה לשאלה (הטענה השגויה) - ה-Observable מחזיק את ה-Observers דרך טיפוס אבסטרקטי (ממשק Observer) ואינו צריך להכיר את המחלקות הקונקרטיות שלהם; זה בדיוק מה שמאפשר צימוד רופף.",
+      "e": "נכון כטענה - Observer אכן נפוץ מאוד באפליקציות מבוססות-אירועים כמו רשתות חברתיות וצ'אטים."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q12, page 14/'6' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "ב-Observer, ה-Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי (ממשק) - לא דרך המחלקות הקונקרטיות שלהם.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-013",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "thread-implements-runnable",
+    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Callable"
+      },
+      {
+        "id": "b",
+        "text": "Runnable"
+      },
+      {
+        "id": "c",
+        "text": "Throwable"
+      },
+      {
+        "id": "d",
+        "text": "Serializable"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "מחלקת java.lang.Thread מממשת את הממשק Runnable - זו הסיבה שגם run() וגם start() קיימים בה, ומדוע ניתן להעביר גם מופע Thread וגם כל מחלקה שמממשת Runnable לבנאי של Thread אחר.",
+    "optionExplanations": {
+      "a": "שגוי - Callable הוא ממשק נפרד (מחזיר ערך וזורק חריגות) המשמש עם ExecutorService, אך Thread אינו מממש אותו ישירות.",
+      "b": "נכון - Thread מממשת את Runnable ב-JDK; זו הבסיס לכל מנגנון ה-run()/start().",
+      "c": "שגוי - Throwable הוא מחלקת האב של כל השגיאות/חריגות; אין לה קשר ל-Thread.",
+      "d": "שגוי - Thread אינה Serializable; לא ניתן (ואין טעם) לסריאליזציה ישירה של thread חי.",
+      "e": "שגוי - Runnable כן ממומש על ידי Thread - זו עובדה מתועדת ב-JDK."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q13, page 14/'6' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "Thread מממשת את Runnable - שאלה חוזרת כמעט בכל מבחן.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-014",
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "synchronization-definition",
+    "stemHe": "מהו synchronization בהתייחסות ל-threads?",
+    "options": [
+      {
+        "id": "a",
+        "text": "היכולת של כל thread לגשת לכל קטע קוד כשהוא צריך"
+      },
+      {
+        "id": "b",
+        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
+      },
+      {
+        "id": "c",
+        "text": "אילוץ שגורם למספר threads לגשת לקטע קוד בצורה סדרתית"
+      },
+      {
+        "id": "d",
+        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
+      },
+      {
+        "id": "e",
+        "text": "מנגנון שמעניק ל-thread מסוים עדיפות (priority) קבועה על פני threads אחרים"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Synchronization הוא מנגנון (כמו מילת המפתח synchronized) שמכריח threads מרובים לגשת לקטע קוד קריטי אחד-אחרי-השני (סדרתית), במקום בו-זמנית, כדי למנוע מרוצי-תחרות (race conditions) על משאבים משותפים.",
+    "optionExplanations": {
+      "a": "שגוי - זה תיאור של גישה חופשית ללא הגבלה, שזה בדיוק ההפך ממטרת הסנכרון (למנוע גישה חופשית לא-מבוקרת).",
+      "b": "שגוי - אין קשר בין 'תוכנית אחת שניגשת לשני threads' לבין המושג synchronization.",
+      "c": "נכון - סנכרון אוכף גישה סדרתית (אחד בכל פעם) לקטע קוד קריטי בין מספר threads.",
+      "d": "שגוי - זהו התיאור ההפוך; סנכרון נועד למנוע גישה בו-זמנית, לא לאפשר אותה.",
+      "e": "שגוי - סדר עדיפויות (thread priority) הוא מנגנון תזמון נפרד מה-scheduler, ואינו מה שמכונה synchronization."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q14, page 14/'6' - 2024 exam, confirmed correct (only 4 native options; 5th distractor added)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Synchronization אוכף גישה סדרתית (לא בו-זמנית) לקטע קוד קריטי בין threads.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-015",
+    "topicIds": [
+      "event-driven-javafx-mvc"
+    ],
+    "subtopic": "mvc-pattern",
+    "stemHe": "התבנית עיצוב MVC:",
+    "options": [
+      {
+        "id": "a",
+        "text": "עוסקת בהפרדה בין המודל לאספקטים הקשורים בתקשורת עם המשתמש"
+      },
+      {
+        "id": "b",
+        "text": "ממומשת גם בתבנית עיצוב bridge"
+      },
+      {
+        "id": "c",
+        "text": "ממומשת כשיוצרים פרויקט של JavaFX"
+      },
+      {
+        "id": "d",
+        "text": "תשובות א+ב+ג"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א+ג"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "MVC (Model-View-Controller) אכן מפריד את המודל (הנתונים/הלוגיקה העסקית) מהיבטי התקשורת עם המשתמש (View+Controller) - טענה א נכונה. יצירת פרויקט JavaFX (עם FXML+Controller) אכן ממשת מבנה דמוי-MVC - טענה ג נכונה. הטענה שהיא 'ממומשת גם בתבנית Bridge' (ב) אינה נכונה - MVC ו-Bridge הן תבניות שונות ונפרדות לחלוטין שאינן מיישמות זו את זו.",
+    "optionExplanations": {
+      "a": "לבד - נכונה כשלעצמה, אך אינה כוללת את טענה ג הנכונה גם היא.",
+      "b": "שגוי - MVC ו-Bridge הן תבניות עיצוב שונות לחלוטין (הפרדת אחריות בממשק-משתמש לעומת הפרדת אבסטרקציה ממימוש); MVC אינה 'ממומשת' על ידי Bridge.",
+      "c": "לבד - נכונה כשלעצמה, אך אינה כוללת את טענה א הנכונה גם היא.",
+      "d": "שגוי - כולל את טענה ב השגויה (הקשר ל-Bridge), ולכן אינו התשובה המדויקת ביותר.",
+      "e": "נכון - א ו-ג נכונות יחד: MVC מפריד מודל מתקשורת-משתמש, וזה בדיוק המימוש הטבעי בפרויקט JavaFX (FXML+Controller+Model)."
+    },
+    "difficulty": "medium",
+    "questionType": "javafx-mvc",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q15, page 14/'6' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "combined-answer"
+    ],
+    "keyLearningPoint": "MVC מפריד מודל מהיבטי תקשורת-משתמש, וממומש טבעית בפרויקטי JavaFX; אינו קשור ל-Bridge.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-016",
+    "topicIds": [
+      "networking-sockets-io-streams",
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "server-thread-per-client",
+    "code": "public class Server {\n    public static void main(String[] args) throws IOException {\n        ServerSocket serverSocket = new ServerSocket(12345);\n        while (true) {\n            Socket clientSocket = serverSocket.accept();\n            new Thread(() -> {\n                try {\n                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);\n                    out.println(\"Connected to Server\");\n                    clientSocket.close();\n                } catch (IOException e) { e.printStackTrace(); }\n            }).start();\n        }\n    }\n}",
+    "stemHe": "מה יהיה פלט התוכנית הבאה אם השרת יקבל מספר רב של חיבורים מלקוחות?",
+    "options": [
+      {
+        "id": "a",
+        "text": "כל הלקוחות יתחברו בהצלחה"
+      },
+      {
+        "id": "b",
+        "text": "לא ניתן לדעת בוודאות מה תהיה תוצאת התוכנית"
+      },
+      {
+        "id": "c",
+        "text": "רק הלקוח הראשון יתחבר בהצלחה"
+      },
+      {
+        "id": "d",
+        "text": "רק הלקוח האחרון יתחבר בהצלחה"
+      },
+      {
+        "id": "e",
+        "text": "השרת יזרוק שגיאה אחרי החיבור של הלקוח הראשון"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "השרת רץ בלולאת while(true) שקוראת שוב ושוב ל-accept(), וכל חיבור נכנס מטופל ב-Thread חדש ונפרד. זהו דפוס 'thread-per-connection' הסטנדרטי המאפשר לשרת לקבל ולשרת לקוחות רבים ברצף (ואף במקביל), כל עוד למחשב יש מספיק משאבים.",
+    "optionExplanations": {
+      "a": "נכון - הלולאה האינסופית עם accept() וטיפול בכל חיבור ב-Thread נפרד מאפשרת חיבור מוצלח לכל לקוח, ברצף או במקביל.",
+      "b": "שגוי - ההתנהגות כאן דטרמיניסטית וברורה מהמבנה של הקוד (thread-per-connection); אין כאן חוסר-ודאות מהותי.",
+      "c": "שגוי - הלולאה while(true) ממשיכה לקרוא ל-accept() אחרי כל חיבור, כך שלקוחות נוספים גם הם יתקבלו.",
+      "d": "שגוי - אין שום מנגנון שדוחה לקוחות מוקדמים לטובת האחרון; כל חיבור מטופל בנפרד ובאופן שווה.",
+      "e": "שגוי - אין דבר בקוד שגורם לשגיאה אחרי הלקוח הראשון; הלולאה נועדה בדיוק לטפל בלקוחות מרובים ברצף."
+    },
+    "difficulty": "medium",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q16, page 16/'7' - 2024 exam; student answered wrong (ב), correct answer determined from thread-per-connection code pattern"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "reasoned-not-grader-confirmed"
+    ],
+    "keyLearningPoint": "לולאת accept() אינסופית עם Thread חדש לכל חיבור = דפוס thread-per-connection שמשרת לקוחות מרובים בהצלחה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-017",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "server-echo-client-read",
+    "code": "// Server: reads lines from client, echoes back \"Server: \" + inputLine\n// Client: sends \"Hello Server\", reads one response line, prints it",
+    "stemHe": "מה יהיה פלט התכנית הבאה אם הפעלתי קודם את השרת ואחר כך את הלקוח?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Client: Hello Server :בצד השרת יודפס"
+      },
+      {
+        "id": "b",
+        "text": "Hello Server :בצד השרת יודפס"
+      },
+      {
+        "id": "c",
+        "text": "Server: Hello Server : בצד הלקוח יודפס"
+      },
+      {
+        "id": "d",
+        "text": "Hello Server :בצד הלקוח יודפס"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "הלקוח שולח 'Hello Server' לשרת. השרת קורא את השורה ומחזיר echo עם קידומת: 'Server: Hello Server'. הלקוח קורא את התשובה הזו ומדפיס אותה אצלו. לכן בצד הלקוח יודפס 'Server: Hello Server'.",
+    "optionExplanations": {
+      "a": "שגוי - השרת אינו מדפיס דבר בקונסולה שלו בקוד הנתון; הוא רק כותב תשובה חזרה ל-stream של הלקוח.",
+      "b": "שגוי - השרת לא מדפיס את התשובה בעצמו; הוא רק שולח אותה בחזרה ללקוח דרך ה-stream.",
+      "c": "נכון - הלקוח מקבל ומדפיס בדיוק את מה שהשרת שלח בחזרה: 'Server: Hello Server'.",
+      "d": "שגוי - חסר את הקידומת 'Server: ' שהשרת מוסיף בפועל להודעה לפני שליחתה חזרה.",
+      "e": "שגוי - קיימת תשובה נכונה (ג) התואמת בדיוק את זרימת הקוד."
+    },
+    "difficulty": "medium",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q17, page 18/'8' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [],
+    "keyLearningPoint": "בתקשורת echo, יש לעקוב במדויק מי שולח/מקבל וכיצד ה-stream מעביר את הטקסט (כולל קידומות שהשרת מוסיף).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-018",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "run-vs-start",
+    "code": "public class Test extends Thread implements Runnable {\n    public void run(){ System.out.print(\"GFG \"); }\n    public static void main(String[] args) throws InterruptedException {\n        Test obj = new Test();\n        obj.run();\n        obj.start();\n    }\n}",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "c",
+        "text": "GFG"
+      },
+      {
+        "id": "d",
+        "text": "GFG GFG"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "obj.run() קוראת ל-run() ישירות כמו כל מתודה רגילה, ומדפיסה 'GFG ' באופן סינכרוני על ה-thread הראשי. לאחר מכן obj.start() יוצרת ומפעילה thread חדש שגם הוא קורא ל-run() ומדפיס 'GFG ' פעם נוספת. סך הכול: 'GFG GFG'.",
+    "optionExplanations": {
+      "a": "שגוי - אין חריגת ריצה; שתי הקריאות (run ואז start) תקינות ומתבצעות כרגיל.",
+      "b": "שגוי - הקוד תקין קומפילטיבית; מותר גם לרשת מ-Thread וגם לממש Runnable (אם כי מיותר) וגם לקרוא ל-run()/start() ישירות.",
+      "c": "שגוי - מחסיר את ההדפסה הנוספת שמגיעה מ-obj.start(), שגם הוא קורא ל-run() בפועל דרך thread חדש.",
+      "d": "נכון - obj.run() מדפיס 'GFG ' פעם אחת (סינכרוני), ו-obj.start() מפעיל thread חדש שקורא ל-run() שוב, מדפיס 'GFG ' פעם נוספת.",
+      "e": "שגוי - קיימת תשובה נכונה (ד) המתאימה בדיוק להתנהגות הקוד."
+    },
+    "difficulty": "medium",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q18, page 20/'9' - 2024 exam, confirmed correct"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "obj.run() מריץ סינכרונית ללא thread חדש; obj.start() מפעיל thread חדש שקורא ל-run() - קריאה לשתיהן מדפיסה את ההודעה פעמיים.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2024-020",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "bridge-thread-scheduler",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין בו בעיות כלל"
+      },
+      {
+        "id": "b",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "התרשים מציג שני צירי שינוי בלתי-תלויים: מדיניות תזמון (Preemptive/TimeSliced) ומערכת הפעלה (Unix/Windows). ירושה ישירה בין השניים תגרום לפיצוץ קומבינטורי של מחלקות (מכפלה של כל שילוב). Bridge פותרת זאת בדיוק - מפרידה בין היררכיית האבסטרקציה (מדיניות התזמון) לבין היררכיית המימוש (מערכת ההפעלה), כך שכל צד יכול להתפתח בנפרד.",
+    "optionExplanations": {
+      "a": "שגוי - יש בעיה ברורה: פיצוץ קומבינטורי של תת-מחלקות עבור כל שילוב אפשרי של מדיניות ומערכת הפעלה.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים למנויים; אינו קשור לבעיית ריבוי צירי שינוי בירושה.",
+      "c": "שגוי - Factory עוסק ביצירת אובייקטים; אינו פותר את בעיית הפיצוץ הקומבינטורי בין שני צירי שינוי.",
+      "d": "נכון - Bridge מפרידה בין שתי היררכיות עצמאיות (מדיניות תזמון x מערכת הפעלה) כך שכל אחת מתפתחת בנפרד בלי כפל מחלקות.",
+      "e": "שגוי - Strategy עוסקת בהחלפת אלגוריתם יחיד בזמן ריצה, לא בהפרדת שני צירי שינוי עצמאיים."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q20, page 22/'10' - 2024 exam, confirmed correct; also appears in 2018 exam Q5 (previously uncertain, now resolved by this cross-year confirmation)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2024,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "cross-year-confirmed"
+    ],
+    "keyLearningPoint": "שני צירי שינוי עצמאיים (למשל מדיניות x מערכת הפעלה) = Bridge Design Pattern - זהו תרשים שחוזר ב-2018 וב-2024.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-001",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "jvm-cross-platform",
+    "stemHe": "מה מאפשר לג'אווה להיות cross-platform?",
+    "options": [
+      {
+        "id": "a",
+        "text": "JavaFX"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "MVVM"
+      },
+      {
+        "id": "d",
+        "text": "ג'אווה אינה cross platform"
+      },
+      {
+        "id": "e",
+        "text": "JVM"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "ה-JVM (Java Virtual Machine) הוא זה שמתרגם bytecode אחיד לשפת מכונה מתאימה לכל מערכת הפעלה - זהו הגורם היחיד המאפשר ל-Java (ולא רק ל-JavaFX) להיות cross-platform.",
+    "optionExplanations": {
+      "a": "שגוי - זו תשובת מלכודת נפוצה; JavaFX היא ספריית GUI שרצה מעל Java, אך אינה-עצמה הגורם ל-cross-platform.",
+      "b": "שגוי - Observer הוא דפוס עיצוב להפצת עדכונים; אין לו קשר ליכולת ריצה חוצת-פלטפורמות.",
+      "c": "שגוי - MVVM הוא דפוס ארכיטקטוני; אינו קשור ליכולת cross-platform.",
+      "d": "שגוי - Java היא בהחלט cross-platform (רצה על Windows/Mac/Linux) בזכות ה-JVM.",
+      "e": "נכון - ה-JVM התלוי-פלטפורמה מתרגם bytecode אחיד לשפת מכונה מתאימה לכל מערכת הפעלה - זה בדיוק מה שמעניק ל-Java (ול-JavaFX הרצה מעליה) יכולת cross-platform."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q1, page 5 - 2018 exam, confirmed correct (JVM)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q1, page 1 - clean question text"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "JVM (לא JavaFX) הוא מה שמאפשר cross-platform.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-002",
+    "topicIds": [
+      "solid-principles"
+    ],
+    "subtopic": "lsp",
+    "code": "interface Rectangle {\n    int getHeight();\n    void setHeight(int value);\n    int getWidth();\n    void setWidth(int value);\n    double area();\n}\n// Square is defined to extend/implement Rectangle as a special case",
+    "stemHe": "אתה נדרש לממש מחלקות של ממש מלבן ושל ריבוע (מקרה פרטי של מלבן). הגדרת את הממשק מלבן כדלעיל. החלטת שריבוע יירש את מלבן. איזה עקרון ב-SOLID אתה מפר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "S"
+      },
+      {
+        "id": "b",
+        "text": "O"
+      },
+      {
+        "id": "c",
+        "text": "L"
+      },
+      {
+        "id": "d",
+        "text": "I"
+      },
+      {
+        "id": "e",
+        "text": "D"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "אם Square יורש/מממש את Rectangle, וקוד לקוח שמצפה להתנהגות Rectangle קורא setWidth(5) ואז setHeight(10) ומצפה לשטח 50, אבל בפועל מקבל אובייקט Square (ששינוי רוחב/גובה בו משנה את שני הצדדים יחד ולכן השטח יהיה 100) - זו בדיוק הפרה של Liskov Substitution Principle: לא ניתן להחליף מחלקת-אב באובייקט ממחלקה יורשת מבלי לשבור את הנחות התוכנית.",
+    "optionExplanations": {
+      "a": "שגוי - SRP עוסק במספר האחריויות של מחלקה בודדת, לא בהתנהגות שגויה של יורש בהחלפה.",
+      "b": "שגוי - OCP עוסק ביכולת הרחבה בלי שינוי קוד קיים; אין קשר ישיר לבעיית ההחלפה כאן.",
+      "c": "נכון - זהו הדוגמה הקלאסית ביותר להפרת Liskov Substitution Principle: Square כיורש של Rectangle שובר ציפיות התנהגותיות בסיסיות.",
+      "d": "שגוי - ISP עוסק בגודל ורלוונטיות מתודות בממשק, לא בהתנהגות שגויה של יורש.",
+      "e": "שגוי - DIP עוסק בתלות באבסטרקציות מול מימושים קונקרטיים, לא בבעיית ההחלפה בין אב ליורש."
+    },
+    "difficulty": "medium",
+    "questionType": "solid-violation",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution_2",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution 2.pdf",
+        "locator": "Q2 - Square/Rectangle LSP violation, 2018 exam"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q2, page 1 - clean question text"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "cross-reference-resolved"
+    ],
+    "keyLearningPoint": "'ריבוע יורש ממלבן' הוא תמיד שאלת Liskov Substitution Principle (L), למרות שנראה תקין גיאומטרית.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-003",
+    "topicIds": [
+      "java-platform-jvm"
+    ],
+    "subtopic": "jit-compiler",
+    "stemHe": "מהו תפקידו של ה-JIT?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אינטרפרטציה של פקודות bytecode"
+      },
+      {
+        "id": "b",
+        "text": "להפוך קוד Java ל-Bytecode"
+      },
+      {
+        "id": "c",
+        "text": "הוא מבצע מספר מגוון של פעולות. אין לו ממש תפקיד מוגדר"
+      },
+      {
+        "id": "d",
+        "text": "תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה"
+      },
+      {
+        "id": "e",
+        "text": "אחראי לניהול הזיכרון (Heap/Stack) ופינוי אובייקטים לא בשימוש"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "ה-JIT (Just-In-Time Compiler) מזהה קטע bytecode 'חם' (שרץ הרבה פעמים) ומקמפל אותו ישירות לשפת מכונה נייטיבית בזמן ריצה, כדי לחסוך אינטרפרטציה חוזרת ולשפר ביצועים - זה תפקידו המדויק והממוקד.",
+    "optionExplanations": {
+      "a": "שגוי - אינטרפרטציה רגילה של bytecode היא תפקיד ה-JVM הבסיסי, לא של ה-JIT; ה-JIT דווקא מחליף אינטרפרטציה בקומפילציה ישירה לקטעים חמים.",
+      "b": "שגוי - הפיכת קוד Java ל-Bytecode היא תפקיד javac (בזמן קומפילציה מוקדם), לא ה-JIT (שפועל בזמן ריצה על bytecode שכבר קיים).",
+      "c": "שגוי - ל-JIT יש תפקיד מוגדר וממוקד היטב, לא 'פעולות מגוונות ללא הגדרה'.",
+      "d": "נכון - זהו התיאור המדויק: תרגום חלקי, בזמן ריצה, של bytecode חם להוראות מעבד ישירות.",
+      "e": "שגוי - ניהול הזיכרון ופינוי אובייקטים הוא תפקיד ה-Garbage Collector, לא ה-JIT."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q3, page 5 - 2018 exam, confirmed correct (ד)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q3, page 1 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "JIT מתרגם חלק מה-bytecode (קוד 'חם') להוראות מעבד בזמן ריצה - אינו הופך Java ל-bytecode ואינו אחראי לניהול זיכרון.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-004",
+    "topicIds": [
+      "solid-principles",
+      "uml-class-diagrams"
+    ],
+    "subtopic": "srp",
+    "stemHe": "איזה עיקרון עיצובי מפר התרשים הבא: מחלקת 'Computational Geometry' וגם מחלקת 'GUI' תלויות במחלקה 'Rectangle' שמכילה את שתי המתודות area():double ו-draw()?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין עם התרשים שום בעיה"
+      },
+      {
+        "id": "b",
+        "text": "Interface Segregation Principle - עיקרון הפרדת הממשקים"
+      },
+      {
+        "id": "c",
+        "text": "Single Responsibility Principle - עיקרון האחריות היחידה"
+      },
+      {
+        "id": "d",
+        "text": "Liskov Substitution Principle - עיקרון ההחלפה של ליסקוב"
+      },
+      {
+        "id": "e",
+        "text": "תשובות ג + ד"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "מחלקת Rectangle אחת משרתת שני 'לקוחות' שונים בתכלית: לוגיקה גיאומטרית (area) וממשק גרפי (draw) - שני תחומי אחריות נפרדים (חישוב מתמטי מול ציור גרפי) שאמורים להיות בשתי מחלקות נפרדות. זו הפרה קלאסית של Single Responsibility Principle: 'למחלקה צריכה להיות סיבה אחת בלבד להשתנות' - כאן יש שתי סיבות אפשריות לשינוי (שינוי בחישוב השטח, ושינוי באופן הציור).",
+    "optionExplanations": {
+      "a": "שגוי - יש בעיה ברורה: מחלקה אחת עם שתי אחריויות שונות בתכלית (חישוב גיאומטרי וציור גרפי).",
+      "b": "שגוי - ISP עוסק בממשקים 'שמנים' המכריחים מימוש מתודות לא-רלוונטיות; כאן הבעיה היא ריבוי אחריות במחלקה אחת (SRP), לא ממשק.",
+      "c": "נכון - Rectangle מרכזת שתי אחריויות שונות (חישוב שטח + ציור גרפי) - הפרת Single Responsibility Principle.",
+      "d": "שגוי - LSP עוסק בהחלפת מחלקת-אב ביורש; אין כאן כלל היררכיית ירושה בתיאור התרשים.",
+      "e": "שגוי - LSP אינו רלוונטי לתרשים זה (אין ירושה); ההפרה הממוקדת היא SRP בלבד."
+    },
+    "difficulty": "medium",
+    "questionType": "solid-violation",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q4, page 5 - 2018 exam, confirmed correct (ג, SRP)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q4, page 1 - clean question text"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "מחלקה אחת המשרתת שני תחומי אחריות שונים (למשל חישוב + ציור) מפרה SRP - אל תבלבלו עם ISP (שעוסק בממשקים).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-005",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "bridge-thread-scheduler",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין בו בעיות כלל"
+      },
+      {
+        "id": "b",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "התרשים מציג שני צירי שינוי בלתי-תלויים (מדיניות תזמון ומערכת הפעלה), מה שיוצר פיצוץ קומבינטורי של תת-מחלקות בירושה ישירה. Bridge מפרידה בין היררכיית האבסטרקציה למימוש כך שכל צד מתפתח בנפרד - זהו בדיוק הפתרון הנדרש כאן, כפי שאושר סופית במבחן 2024 עם אותו תרשים בדיוק.",
+    "optionExplanations": {
+      "a": "שגוי - יש בעיה ברורה של פיצוץ קומבינטורי של מחלקות בין שני צירי שינוי.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים; אינו קשור לבעיית ריבוי צירי שינוי בירושה.",
+      "c": "שגוי - Factory עוסק ביצירת אובייקטים; אינו פותר את בעיית הפיצוץ הקומבינטורי בין שני צירי שינוי.",
+      "d": "נכון - Bridge מפרידה בין שתי היררכיות עצמאיות (מדיניות x מערכת הפעלה) כך שכל אחת מתפתחת בנפרד.",
+      "e": "שגוי - Strategy עוסקת בהחלפת אלגוריתם יחיד בזמן ריצה, לא בהפרדת שני צירי שינוי עצמאיים בירושה."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q5, page 7 - 2018 exam; student answered wrong; correct answer (Bridge) resolved via cross-year confirmation with student_solution_2024_first_term_score_75 Q20 (identical diagram, confirmed correct)"
+      },
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q20 - identical diagram, confirmed correct (Bridge)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "cross-year-confirmed"
+    ],
+    "keyLearningPoint": "שני צירי שינוי עצמאיים (מדיניות x מערכת הפעלה) = Bridge - שאלה זהה חוזרת ב-2018 וב-2024.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-006",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "strategy-runtime-algorithm",
+    "stemHe": "רוצים לבחור אלגוריתם בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Memento"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "Strategy"
+      },
+      {
+        "id": "d",
+        "text": "Adapter או Mediator"
+      },
+      {
+        "id": "e",
+        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Strategy מגדירה משפחת אלגוריתמים ניתנים-להחלפה מאחורי ממשק משותף, כך שניתן לבחור ולהחליף איזה אלגוריתם קונקרטי יופעל בזמן ריצה.",
+    "optionExplanations": {
+      "a": "שגוי - Memento עוסק בשמירה/שחזור מצב פנימי, לא בבחירת אלגוריתם.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים למנויים, לא בבחירת אלגוריתם.",
+      "c": "נכון - Strategy מיועדת בדיוק לבחירת/החלפת אלגוריתם קונקרטי בזמן ריצה.",
+      "d": "שגוי - Adapter מתאים ממשקים לא-תואמים, ו-Mediator מתאם תקשורת בין אובייקטים; אף אחד אינו עוסק בבחירת אלגוריתם.",
+      "e": "שגוי - השאלה מספקת מספיק מידע כדי לזהות בבירור את Strategy."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q6, page 7 - 2018 exam, confirmed correct (ג)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "בחירת אלגוריתם בזמן ריצה = Strategy - שאלה חוזרת בכל שנה שנבדקה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-007",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "equals-without-hashcode",
+    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals ומימשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "הכל תקין. אין קשר בין השתיים"
+      },
+      {
+        "id": "b",
+        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
+      },
+      {
+        "id": "c",
+        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
+      },
+      {
+        "id": "d",
+        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
+      },
+      {
+        "id": "e",
+        "text": "לא מומלץ בכלל לממש hashcode, שכן היא ממומשת באופן גנרי ע\"י Java"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "דריסת equals בלי hashCode היא חוקית קומפילטיבית, אך שוברת את החוזה: אובייקטים 'שווים' לפי equals לא בהכרח יקבלו אותו hashCode ברירת-מחדל, ולכן ייכנסו לדליים שונים במבני נתונים מבוססי-hash - מה שיוצר כניסות כפולות עבור אובייקטים שנחשבים זהים.",
+    "optionExplanations": {
+      "a": "שגוי - יש קשר הדוק: חוזה ה-equals/hashCode דורש עקביות ביניהם לשימוש נכון באוספי hash.",
+      "b": "נכון - זהו הסיכון המדויק: אובייקטים שווים לפי equals אך עם hashCode שונה ייתפסו כשונים באוספים מבוססי-hash.",
+      "c": "שגוי - זו מלכודת נפוצה; אין שגיאת הידור - זהו באג לוגי שקט, לא שגיאת קומפילציה.",
+      "d": "שגוי - לעיתים קרובות מומלץ ואף הכרחי לדרוס את שתי השיטות יחד.",
+      "e": "שגוי - המימוש הגנרי (מבוסס זהות) לא תמיד מתאים לשוויון הלוגי שהוגדר ב-equals."
+    },
+    "difficulty": "medium",
+    "questionType": "code-analysis",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q7, page 7 - 2018 exam, confirmed correct (ב)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "דריסת equals בלי hashCode אינה שגיאת קומפילציה - זהו באג לוגי שקוט הפוגע באוספים מבוססי-hash.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-008",
+    "topicIds": [
+      "thread-safety-synchronization",
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "thread-safe-collections",
+    "stemHe": "אילו מהמחלקות הבאות אינה Thread Safe?",
+    "options": [
+      {
+        "id": "a",
+        "text": "TreeMap"
+      },
+      {
+        "id": "b",
+        "text": "AtomicInteger"
+      },
+      {
+        "id": "c",
+        "text": "ConcurrentHashMap"
+      },
+      {
+        "id": "d",
+        "text": "Properties"
+      },
+      {
+        "id": "e",
+        "text": "Vector"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "TreeMap אינה מסונכרנת ואינה Thread Safe - שימוש בה ממספר threads בו-זמנית עלול לגרום להתנהגות בלתי-צפויה. לעומתה, AtomicInteger (אטומי מטבעו), ConcurrentHashMap (מתוכננת לגישה מקבילית), Properties (יורשת מ-Hashtable המסונכרנת) ו-Vector (מסונכרנת historically) כולן Thread Safe.",
+    "optionExplanations": {
+      "a": "נכון - TreeMap אינה מסונכרנת כלל; היא Thread Safe רק אם עוטפים אותה ידנית ב-Collections.synchronizedMap.",
+      "b": "שגוי - AtomicInteger תוכנן במיוחד לפעולות אטומיות בטוחות ל-threads.",
+      "c": "שגוי - ConcurrentHashMap מתוכננת במפורש לגישה מקבילית יעילה ובטוחה.",
+      "d": "שגוי - Properties יורשת מ-Hashtable, שהיא מסונכרנת (Thread Safe), אף שאיטית יחסית.",
+      "e": "שגוי - Vector הוא מבנה נתונים legacy מסונכרן (כל המתודות שלו synchronized) - Thread Safe אך פחות יעיל מ-ArrayList."
+    },
+    "difficulty": "medium",
+    "questionType": "java-api",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q8, page 7 - 2018 exam, confirmed correct (א, TreeMap)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q8, page 2 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "TreeMap אינה Thread Safe; ConcurrentHashMap, AtomicInteger, Properties ו-Vector כולן כן.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-009",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "generic-stack-output",
+    "code": "public class Genericstack<E> {\n    Stack<E> stk = new Stack<E>();\n    public void push(E obj){ stk.push(obj); }\n    public E pop(){ E obj = stk.pop(); return obj; }\n}\nclass Output {\n    public static void main(String args[]){\n        Genericstack<String> gs = new Genericstack<String>();\n        gs.push(\"Rusia\");\n        System.out.print(gs.pop() + \" \");\n        Genericstack<Integer> gs2 = new Genericstack<Integer>();\n        gs2.push(2018);\n        System.out.println(gs2.pop());\n    }\n}",
+    "stemHe": "מהו הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאת הידור"
+      },
+      {
+        "id": "b",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "c",
+        "text": "2018"
+      },
+      {
+        "id": "d",
+        "text": "Rusia"
+      },
+      {
+        "id": "e",
+        "text": "Rusia 2018"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "gs ו-gs2 הם שני מופעים גנריים נפרדים לחלוטין (String ו-Integer). אין קונפליקט טיפוסים; ההדפסה משלבת 'Rusia ' ואז '2018' יחד לשורה אחת: 'Rusia 2018'.",
+    "optionExplanations": {
+      "a": "שגוי - זו מלכודת קלאסית; הקוד תקין קומפילטיבית כי מדובר בשני מופעים גנריים נפרדים.",
+      "b": "שגוי - אין שום פעולה שגורמת לחריגה בזמן ריצה.",
+      "c": "שגוי - מדלג על ההדפסה הראשונה (Rusia).",
+      "d": "שגוי - מדלג על ההדפסה השנייה (2018).",
+      "e": "נכון - gs.pop() מחזיר 'Rusia' (עם רווח), gs2.pop() מחזיר 2018 - יחד: 'Rusia 2018'."
+    },
+    "difficulty": "easy",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q9, page 9 - 2018 exam, confirmed correct (ה)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question"
+    ],
+    "keyLearningPoint": "שני מופעים גנריים נפרדים אינם מתנגשים - שאלה שחוזרת כמעט בכל מבחן (2018/2019/2024/2025).",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-010",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "observer-what-is-not-correct",
+    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
+      },
+      {
+        "id": "b",
+        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
+      },
+      {
+        "id": "c",
+        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
+      },
+      {
+        "id": "d",
+        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
+      },
+      {
+        "id": "e",
+        "text": "ניתן לממש את הדפוס כך שה-Observable מעביר את עצמו (this) כפרמטר למתודת update, כדי שה-Observer יוכל לשלוף ממנו מידע נוסף (מודל ה-pull)"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "ב-Observer, ה-Observable מחזיק את רשימת ה-Observers דרך הטיפוס האבסטרקטי (ממשק Observer) בלבד - הוא אינו צריך להכיר את המחלקות הקונקרטיות. הטענה ההפוכה (ד) היא הטענה השגויה, ולכן היא התשובה הנכונה לשאלה 'מה אינו נכון'.",
+    "optionExplanations": {
+      "a": "נכון כטענה (ולכן אינה התשובה) - Observers אכן אינם מודעים זה לזה.",
+      "b": "נכון כטענה - Observable אכן מחזיק רשימה ומודע לכל ה-Observers הרשומים (דרך הממשק).",
+      "c": "נכון כטענה - זהו תיאור מקרה השימוש הקלאסי ב-Observer.",
+      "d": "זו התשובה הנכונה לשאלה (הטענה השגויה) - Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי, לא דרך המחלקות הקונקרטיות - זה בדיוק מה שמאפשר צימוד רופף.",
+      "e": "נכון כטענה - מודל ה-pull (העברת this כדי שה-Observer ישלוף מידע נוסף) הוא אכן וריאציה תקנית של מימוש Observer."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q10, page 9 - 2018 exam, confirmed correct (ד)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q10, page 3 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "ב-Observer, ה-Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי - לא דרך המחלקות הקונקרטיות שלהם.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-011",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "serversocket-port-in-use",
+    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "תיזרק שגיאה שהפורט תפוס"
+      },
+      {
+        "id": "b",
+        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
+      },
+      {
+        "id": "c",
+        "text": "התוכנית תמתין עד שהפורט יתפנה"
+      },
+      {
+        "id": "d",
+        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
+      },
+      {
+        "id": "e",
+        "text": "יוקצה אוטומטית פורט אחר שפנוי לטובת התוכנית"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "נסיון ליצור ServerSocket על פורט תפוס גורם לזריקת חריגה (BindException) מיידית - אין המתנה, שיתוף פורט או הקצאה אוטומטית של פורט חלופי.",
+    "optionExplanations": {
+      "a": "נכון - תיזרק BindException (Address already in use) מיידית.",
+      "b": "שגוי - אין יציאה מסודרת אוטומטית; נזרקת חריגה שיש לתפוס אותה במפורש.",
+      "c": "שגוי - אין מנגנון המתנה אוטומטי לשחרור הפורט.",
+      "d": "שגוי - שני תהליכים לא יכולים לחלוק את אותו פורט להאזנה בו-זמנית.",
+      "e": "שגוי - אין הקצאה אוטומטית של פורט חלופי כשמציינים פורט קבוע שתפוס."
+    },
+    "difficulty": "easy",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q11, page 9 - 2018 exam, confirmed correct (א)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q11, page 3 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "ServerSocket על פורט תפוס זורק BindException מיידית.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-012",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "server-client-no-threads",
+    "stemHe": "יש לי תוכנית אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אם יצרתי את ה-ServerSocket ראשון לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה של השרת ללקוחות"
+      },
+      {
+        "id": "b",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
+      },
+      {
+        "id": "c",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
+      },
+      {
+        "id": "d",
+        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א+ד"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "בלי Threads, שתי הבעיות אמיתיות: (1) ServerSocket עם accept() חוסם את ה-thread היחיד לצמיתות, כך שקוד יצירת הלקוח לעולם לא ירוץ; (2) יצירת Socket לקוח לפני שיש שרת מאזין נכשלת עם שגיאה. לכן שתי הטענות א ו-ד נכונות יחד.",
+    "optionExplanations": {
+      "a": "לבד - נכונה כשלעצמה, אך חסרה את הבעיה השנייה (יצירת סוקט לקוח בלי שרת מאזין).",
+      "b": "שגוי - גם אם השרת נוצר ראשון, accept חוסם ולעולם לא מגיעים ליצירת הלקוח באותו main.",
+      "c": "שגוי - אם הלקוח נוצר ראשון בלי שרת מאזין, החיבור נכשל עם שגיאה.",
+      "d": "לבד - נכונה כשלעצמה, אך חסרה את בעיית ה-accept החוסם.",
+      "e": "נכון - שתי הבעיות (א ו-ד) נכונות בו-זמנית - זהו תרגיל קלאסי המדגים למה צריך Threads נפרדים."
+    },
+    "difficulty": "medium",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q12, page 11 - 2018 exam, confirmed correct (ה)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "combined-answer"
+    ],
+    "keyLearningPoint": "ללא Threads נפרדים: accept() חוסם לצמיתות, וחיבור לקוח לפני שהשרת מאזין נכשל - שתי הבעיות אמיתיות יחד.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-013",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "deserialization-stream-retrieval",
+    "stemHe": "מי מהפעולות הבאות היא שליפה של נתונים מה-Stream?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Serialization"
+      },
+      {
+        "id": "b",
+        "text": "Deserialization"
+      },
+      {
+        "id": "c",
+        "text": "File Filtering"
+      },
+      {
+        "id": "d",
+        "text": "Data Extraction"
+      },
+      {
+        "id": "e",
+        "text": "Buffering"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Deserialization היא הפעולה שבה קוראים stream של בתים ומשחזרים ממנו אובייקט - זוהי בדיוק 'שליפת נתונים' מה-stream לצורת אובייקט שמיש. Serialization היא הפעולה ההפוכה (כתיבת אובייקט ל-stream).",
+    "optionExplanations": {
+      "a": "שגוי - Serialization היא כתיבת אובייקט אל תוך ה-stream, לא שליפה ממנו.",
+      "b": "נכון - Deserialization קוראת stream של בתים והופכת אותו בחזרה לאובייקט - זו שליפת הנתונים.",
+      "c": "שגוי - 'File Filtering' אינו מונח סטנדרטי לתיאור שליפת נתונים מ-stream בהקשר זה.",
+      "d": "שגוי - 'Data Extraction' הוא מונח כללי מדי ואינו המונח הטכני הנכון (Java) לפעולה זו.",
+      "e": "שגוי - Buffering עוסק באגירת נתונים לביצועים טובים יותר, לא בהמרת stream לאובייקט."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q13, page 11 - 2018 exam, confirmed correct (ב)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q13, page 4 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Deserialization = שליפת אובייקט מ-stream; Serialization = כתיבת אובייקט אל תוך stream.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-014",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "thread-implements-runnable",
+    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Throwable"
+      },
+      {
+        "id": "b",
+        "text": "Serializable"
+      },
+      {
+        "id": "c",
+        "text": "Runnable"
+      },
+      {
+        "id": "d",
+        "text": "Callable"
+      },
+      {
+        "id": "e",
+        "text": "Cloneable"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "מחלקת java.lang.Thread מממשת את הממשק Runnable - זו הסיבה שקיימות בה גם run() וגם start(), ומדוע ניתן להעביר Thread או כל מימוש Runnable אחר לבנאי של Thread.",
+    "optionExplanations": {
+      "a": "שגוי - Throwable הוא מחלקת האב של שגיאות/חריגות; אין לה קשר ל-Thread.",
+      "b": "שגוי - Thread אינה Serializable; לא ניתן לסריאליזציה ישירה של thread חי.",
+      "c": "נכון - Thread מממשת את Runnable ב-JDK - זו הבסיס למנגנון run()/start().",
+      "d": "שגוי - Callable הוא ממשק נפרד (מחזיר ערך) המשמש עם ExecutorService; Thread אינה מממשת אותו ישירות.",
+      "e": "שגוי - Thread אינה מממשת Cloneable כברירת מחדל; שיבוט thread אינו פעולה משמעותית."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q15, page 11 - 2018 exam; student answered wrong (ב), correct answer (ג, Runnable) confirmed via cross-reference with student_solution_2 (circle+checkmark coincide on ג)"
+      },
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution_2",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution 2.pdf",
+        "locator": "Q15 - circle+checkmark both on ג (Runnable), coincide, confirmed correct"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q15, page 4 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "cross-reference-resolved",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Thread מממשת את Runnable - שאלה חוזרת כמעט בכל מבחן.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-015",
+    "topicIds": [
+      "threads-basics-lifecycle",
+      "java-basics-oop-memory"
+    ],
+    "subtopic": "constructor-name-case-mismatch",
+    "code": "class Newthread implements Runnable {\n    Thread t;\n    public newthread(){\n        t = new Thread(this,\"My Thread\");\n        t.start();\n    }\n}\nclass Multithreaded_programing {\n    public static void main(String args[]){\n        System.out.println(new Newthread());\n    }\n}",
+    "stemHe": "מה יהיה פלט התוכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "My Thread"
+      },
+      {
+        "id": "b",
+        "text": "this"
+      },
+      {
+        "id": "c",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "d",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "e",
+        "text": "NullPointerException בזמן ריצה"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "שם המחלקה הוא Newthread (עם N גדולה), אך המתודה שנכתבה בכוונת בנאי נקראת newthread (עם n קטנה) - ב-Java שם הבנאי חייב להתאים בדיוק (case-sensitive) לשם המחלקה. מכיוון שהשמות אינם תואמים, זו אינה נחשבת בנאי תקין, וגם אין לה טיפוס החזרה מוצהר - התוצאה היא שגיאת קומפילציה.",
+    "optionExplanations": {
+      "a": "שגוי - הקוד כלל לא מגיע לשלב ההרצה בגלל שגיאת הקומפילציה.",
+      "b": "שגוי - גם אם הקוד היה מתקמפל, System.out.println על אובייקט מדפיס תוצאה של toString(), לא את המילה 'this'.",
+      "c": "נכון - שם המתודה newthread (n קטנה) אינו תואם לשם המחלקה Newthread (N גדולה); Java רגישה לאותיות גדולות/קטנות, ולכן זו אינה מזוהה כבנאי חוקי - וללא טיפוס החזרה מוצהר, מתקבלת שגיאת קומפילציה.",
+      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה.",
+      "e": "שגוי - אין כאן הפניה null כלשהי; הבעיה היא תחבירית (שם מתודה לא-תקין כבנאי), לא שגיאת ריצה."
+    },
+    "difficulty": "hard",
+    "questionType": "compilation-error",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q16, page 11 - 2018 exam, confirmed correct (ג); code shown here uses the lowercase 'newthread()' constructor spelling as transcribed"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q16, page 4 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "שם בנאי ב-Java חייב להתאים בדיוק (רגיש לאותיות גדולות/קטנות) לשם המחלקה, אחרת מתקבלת שגיאת קומפילציה.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-016",
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "synchronization-definition",
+    "stemHe": "synchronization בהתייחס ל-threads הוא:",
+    "options": [
+      {
+        "id": "a",
+        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
+      },
+      {
+        "id": "b",
+        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
+      },
+      {
+        "id": "c",
+        "text": "היכולת של מספר threads לגשת לקטע קוד בצורה סדרתית"
+      },
+      {
+        "id": "d",
+        "text": "היכולת שכל thread יוכל לגשת לכל קטע קוד שהוא חפץ בו"
+      },
+      {
+        "id": "e",
+        "text": "מנגנון המבטיח ש-thread אחד ירוץ תמיד לפני אחרים לפי סדר עדיפויות (priority)"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Synchronization מכריח threads מרובים לגשת לקטע קוד קריטי אחד-אחרי-השני (סדרתית) כדי למנוע מרוצי-תחרות על משאבים משותפים.",
+    "optionExplanations": {
+      "a": "שגוי - אין קשר בין 'תוכנית אחת שניגשת לשני threads' לבין המושג synchronization.",
+      "b": "שגוי - זהו התיאור ההפוך; סנכרון נועד למנוע גישה בו-זמנית, לא לאפשר אותה.",
+      "c": "נכון - סנכרון אוכף גישה סדרתית (אחד בכל פעם) לקטע קוד קריטי בין מספר threads.",
+      "d": "שגוי - זה תיאור של גישה חופשית ללא הגבלה - בדיוק ההפך ממטרת הסנכרון.",
+      "e": "שגוי - סדר עדיפויות (thread priority) הוא מנגנון תזמון נפרד ולא מה שמכונה synchronization."
+    },
+    "difficulty": "easy",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q17, page 13 - 2018 exam, confirmed correct (ג)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q17, page 4 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Synchronization אוכף גישה סדרתית (לא בו-זמנית) לקטע קוד קריטי בין threads.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-017",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "run-vs-start",
+    "code": "public class Test extends Thread implements Runnable {\n    public void run(){ System.out.print(\"GFG \"); }\n    public static void main(String[] args) throws InterruptedException {\n        Test obj = new Test();\n        obj.run();\n        obj.start();\n    }\n}",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "GFG GFG"
+      },
+      {
+        "id": "c",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "d",
+        "text": "אף תשובה אינה נכונה"
+      },
+      {
+        "id": "e",
+        "text": "GFG"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "obj.run() קוראת ל-run() ישירות (סינכרוני, לא יוצרת thread חדש) ומדפיסה 'GFG ' פעם אחת. לאחר מכן obj.start() יוצרת ומפעילה thread חדש שגם הוא קורא ל-run() ומדפיס 'GFG ' פעם נוספת. סך הכול: 'GFG GFG'.",
+    "optionExplanations": {
+      "a": "שגוי - אין חריגת ריצה; שתי הקריאות תקינות ומתבצעות כרגיל.",
+      "b": "נכון - obj.run() מדפיס 'GFG ' פעם אחת (סינכרוני), ו-obj.start() מפעיל thread חדש שקורא ל-run() שוב.",
+      "c": "שגוי - הקוד תקין קומפילטיבית; מותר גם לרשת מ-Thread וגם לממש Runnable וגם לקרוא ל-run()/start() ישירות.",
+      "d": "שגוי - קיימת תשובה נכונה (ב) המתאימה בדיוק להתנהגות הקוד.",
+      "e": "שגוי - מחסיר את ההדפסה הנוספת שמגיעה מ-obj.start()."
+    },
+    "difficulty": "medium",
+    "questionType": "code-output",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q19, page 13 - 2018 exam, confirmed correct (ב)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q19, page 5 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "obj.run() מריץ סינכרונית ללא thread חדש; obj.start() מפעיל thread חדש שקורא ל-run() - קריאה לשתיהן מדפיסה את ההודעה פעמיים.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2018-018",
+    "topicIds": [
+      "event-driven-javafx-mvc"
+    ],
+    "subtopic": "data-binding-javafx",
+    "stemHe": "למה משמש Data Binding בפלטפורמת JavaFX?",
+    "options": [
+      {
+        "id": "a",
+        "text": "מאפשר לקשור בין ערך של שדה גרפי לתכונה של מחלקה אחרת"
+      },
+      {
+        "id": "b",
+        "text": "מתוך מחלקה קיימת, מאפשר להתחבר למידע הקיים במחלקות אחרות"
+      },
+      {
+        "id": "c",
+        "text": "מאפשר לעשות העברה של ערכים בין פקדים גרפיים שונים"
+      },
+      {
+        "id": "d",
+        "text": "מאפשר קבלה אוטומטית של ערכים לפקד גרפי"
+      },
+      {
+        "id": "e",
+        "text": "מאפשר להצפין את הנתונים המוצגים בממשק המשתמש"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Data Binding ב-JavaFX מאפשר לקשור (bind) בין ערך של property של פקד גרפי (למשל טקסט של Label) לבין property של אובייקט אחר (למשל שדה במודל) - כך שכל שינוי באחד מתעדכן אוטומטית בשני, ללא צורך בקוד עדכון ידני.",
+    "optionExplanations": {
+      "a": "נכון - זהו התיאור המדויק של Data Binding: קשירת ערך פקד גרפי לתכונה של מחלקה/אובייקט אחר.",
+      "b": "שגוי - זהו תיאור כללי מדי שאינו מתאר את מנגנון הקשירה הדו-כיווני/חד-כיווני הספציפי של Data Binding.",
+      "c": "שגוי - Data Binding אינו עוסק ב'העברת ערכים בין פקדים' כפעולה חד-פעמית, אלא בקשר מתמשך ומעודכן אוטומטית בין property לproperty.",
+      "d": "שגוי - התיאור חלקי ולא מדויק; Data Binding עוסק בקשר דו-צדדי מוגדר בין תכונות, לא סתם 'קבלה אוטומטית'.",
+      "e": "שגוי - Data Binding אינו קשור להצפנה כלל; הוא מנגנון עדכון-אוטומטי בין תכונות."
+    },
+    "difficulty": "easy",
+    "questionType": "javafx-mvc",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_part_a_student_solution",
+        "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf",
+        "locator": "Q20, page 13 - 2018 exam, confirmed correct (א)"
+      },
+      {
+        "fileId": "date_2018_without_answers",
+        "fileName": "Date 2018 without answers.pdf",
+        "locator": "Q20, page 5 - clean question text (only 4 original options)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2018,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Data Binding ב-JavaFX קושר ערך פקד גרפי לתכונה במחלקה אחרת, עם עדכון אוטומטי הדדי.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-001",
+    "topicIds": [
+      "threads-basics-lifecycle",
+      "concurrency-utilities-callable-future-mediator"
+    ],
+    "subtopic": "thread-creation-callable",
+    "stemHe": "Thread אינו יכול להיווצר במידה והוא -",
+    "options": [
+      {
+        "id": "a",
+        "text": "מרחיב מחלקה קיימת של Thread"
+      },
+      {
+        "id": "b",
+        "text": "מממש רק את ממשק Callable (ללא עטיפה ב-Future/FutureTask)"
+      },
+      {
+        "id": "c",
+        "text": "מממש את ממשק Runnable"
+      },
+      {
+        "id": "d",
+        "text": "מממש ממשק בשם 'Threadable'"
+      },
+      {
+        "id": "e",
+        "text": "מקבל מופע מוכן דרך new Thread(runnableObj) ללא הרחבה או מימוש נוסף"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "בנאי Thread מקבל אובייקט מטיפוס Runnable (או הרחבה של Thread עצמה) - לא Callable. Callable מיועד לשימוש דרך ExecutorService (או עטיפה ב-FutureTask שהיא-עצמה Runnable) ולא ניתן להעביר אותו ישירות לבנאי של Thread. לכן מחלקה שמממשת רק Callable, בלי לעטוף אותה ב-FutureTask, אינה יכולה לשמש ישירות ליצירת Thread.",
+    "optionExplanations": {
+      "a": "שגוי - הרחבת Thread היא אחת משתי הדרכים הסטנדרטיות והתקינות ליצירת thread.",
+      "b": "נכון - Callable אינו תואם את חתימת הבנאי הרגילה של Thread (המצפה ל-Runnable); יש לעטוף אותו ב-FutureTask כדי שיהיה ניתן להעברה.",
+      "c": "שגוי - מימוש Runnable הוא בדיוק אחת משתי הדרכים הסטנדרטיות ליצירת thread (Thread מקבל Runnable בבנאי).",
+      "d": "שגוי - 'Threadable' אינו ממשק קיים ב-Java כלל, כך שהשאלה אינה עוסקת במקרה זה באמת; מדובר באופציית הסחת-דעת.",
+      "e": "שגוי - זוהי בדיוק הדרך התקינה והנפוצה ביותר ליצירת thread מאובייקט Runnable קיים."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q1, page 1 - 2019 exam reconstruction; no explicit answer key in source, correct answer determined from Java Thread/Callable API semantics, cross-checked with restoration_2023_version_a's related Callable+Future question"
+      },
+      {
+        "fileId": "restoration_2023_version_a",
+        "fileName": "Restoration 2023 Version A.docx",
+        "locator": "related question confirming that creating a value-returning thread requires implementing Callable AND linking it to a Future/FutureTask wrapper"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Thread מקבל Runnable בבנאי, לא Callable ישירות - Callable דורש עטיפה ב-FutureTask או שימוש דרך ExecutorService.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-002",
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
+    "subtopic": "start-vs-run-cpu-time",
+    "stemHe": "לאיזו פעולה צריך לקרוא בכדי שתהליך (thread) יקבל זמן ב-CPU?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Run"
+      },
+      {
+        "id": "b",
+        "text": "Wait"
+      },
+      {
+        "id": "c",
+        "text": "אף אחת מהשיטות"
+      },
+      {
+        "id": "d",
+        "text": "sleep"
+      },
+      {
+        "id": "e",
+        "text": "Start"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "רק start() יוצרת בפועל thread חדש (call stack חדש) ומבקשת מה-scheduler של מערכת ההפעלה/JVM זמן CPU עבורו. קריאה ל-run() ישירות היא סתם קריאת מתודה רגילה על ה-thread הנוכחי, ואינה יוצרת concurrency אמיתי או מבקשת זמן CPU נפרד.",
+    "optionExplanations": {
+      "a": "שגוי - run() היא רק מתודה רגילה; קריאה ישירה אליה רצה על ה-thread הקיים ואינה מבקשת זמן CPU נפרד.",
+      "b": "שגוי - wait() גורמת ל-thread להשתחרר מהמוניטור ולהמתין; היא אינה מקבלת זמן CPU אלא מוותרת עליו.",
+      "c": "שגוי - קיימת שיטה (start) שאכן עושה זאת.",
+      "d": "שגוי - sleep() גורמת ל-thread הנוכחי להשהות את עצמו; אינה יוצרת thread חדש ואינה מבקשת עבורו זמן CPU.",
+      "e": "נכון - start() היא היחידה שיוצרת call stack חדש ומבקשת מה-scheduler להקצות זמן CPU ל-thread החדש."
+    },
+    "difficulty": "easy",
+    "questionType": "threads-scheduling",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q2, page 1 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Thread API semantics (start vs run), reinforced by the recurring run/start GFG-GFG question pattern across all confirmed years"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "recurring-topic",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "רק start() (לא run()) יוצרת thread חדש ומבקשת זמן CPU עבורו מה-scheduler.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-003",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "decorator-dynamic-functionality",
+    "stemHe": "אם ארצה להוסיף פונקציונליות בצורה דינמית באיזה דיזיין אשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Decorator"
+      },
+      {
+        "id": "b",
+        "text": "Composite"
+      },
+      {
+        "id": "c",
+        "text": "Adapter"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      },
+      {
+        "id": "e",
+        "text": "Proxy"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Decorator עוטף אובייקט קיים באובייקט 'עוטף' נוסף שמוסיף התנהגות חדשה בזמן ריצה, מבלי לשנות את מחלקת האובייקט המקורי ומבלי להשפיע על מופעים אחרים שלו - זהו בדיוק המנגנון הנדרש להוספת פונקציונליות דינמית.",
+    "optionExplanations": {
+      "a": "נכון - Decorator עוטף אובייקט קיים ומוסיף לו התנהגות חדשה בזמן ריצה, באופן דינמי ולפי הצורך.",
+      "b": "שגוי - Composite עוסק בייצוג היררכיות 'חלק-שלם' (עץ אובייקטים) בממשק אחיד, לא בהוספת פונקציונליות דינמית.",
+      "c": "שגוי - Adapter מתאים ממשק לא-תואם לממשק צפוי; אינו מיועד להוספת פונקציונליות חדשה.",
+      "d": "שגוי - Strategy מחליפה אלגוריתם שלם מאחורי ממשק אחיד; אינה מוסיפה שכבת התנהגות נוספת מעל אובייקט קיים.",
+      "e": "שגוי - Proxy שולט בגישה לאובייקט (למשל דחיית טעינה, הרשאות); אינו מיועד להוספת פונקציונליות חדשה."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q3, page 1 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Decorator pattern definition in course material"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "הוספת פונקציונליות דינמית לאובייקט קיים בלי לשנות את מחלקתו = Decorator.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-004",
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
+    "subtopic": "generics-purpose",
+    "stemHe": "מה נכון בנוגע ל-java generics?",
+    "options": [
+      {
+        "id": "a",
+        "text": "גורם לקוד לרוץ מהר יותר"
+      },
+      {
+        "id": "b",
+        "text": "מקל בזיהוי באגים בזמן קומפילציה"
+      },
+      {
+        "id": "c",
+        "text": "מקל בזיהוי שגיאות בזמן ריצה"
+      },
+      {
+        "id": "d",
+        "text": "מאפשר באמצעות אותו קטע קוד ליצור מבני נתונים בעלי פרמטרים שונים"
+      },
+      {
+        "id": "e",
+        "text": "מבטל את הצורך בהמרות טיפוסים (casting) לחלוטין בכל מצב אפשרי"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "ההגדרה הבסיסית והמדויקת ביותר של Generics היא היכולת לכתוב קוד גנרי אחד (מחלקה/ממשק/מתודה) שעובד עם טיפוסי נתונים שונים בלי לשכפל את הקוד עבור כל טיפוס בנפרד - זהו התיאור המדויק בחומר הקורס.",
+    "optionExplanations": {
+      "a": "שגוי - Generics אינם משפרים ביצועי ריצה; בגלל Type Erasure אין הבדל בביצועים בזמן ריצה בין קוד גנרי לקוד לא-גנרי מקביל.",
+      "b": "שגוי (כתשובה המדויקת ביותר) - זו תועלת אמיתית אך משנית; ההגדרה המרכזית והמדויקת ביותר היא היכולת ליצור מבני נתונים גנריים לטיפוסים שונים באותו קוד.",
+      "c": "שגוי - ההפך הוא הנכון: Generics מיועדים בדיוק למנוע שגיאות טיפוס בזמן ריצה על ידי גילוין מוקדם יותר בזמן קומפילציה.",
+      "d": "נכון - זוהי ההגדרה הבסיסית: אותו קטע קוד (מחלקה/מתודה גנרית) יכול לשמש ליצירת מבני נתונים עם פרמטרים (טיפוסים) שונים.",
+      "e": "שגוי - Generics מצמצמים משמעותית את הצורך בהמרות טיפוסים, אך לא מבטלים אותו 'לחלוטין בכל מצב' (למשל שימוש בטיפוסים גולמיים legacy עדיין עשוי לדרוש casting)."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q4, page 1 - 2019 exam reconstruction; no explicit answer key, correct answer determined from course definition of Generics (topic_map.json generics-collections-equals-hashcode definitionHe)"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "Generics מאפשרים לכתוב קוד גנרי אחד שעובד על טיפוסים שונים בלי לשכפל קוד - זו ההגדרה המרכזית, לא שיפור ביצועים.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-005",
+    "topicIds": [
+      "oop-pillars-abstraction"
+    ],
+    "subtopic": "coupling-definition",
+    "stemHe": "ב-java, צימוד (coupling) בין 2 אובייקטים מבוצע כאשר -",
+    "options": [
+      {
+        "id": "a",
+        "text": "אובייקט אחד קורא לפונקציות של האובייקט השני"
+      },
+      {
+        "id": "b",
+        "text": "כל התשובות הנ\"ל נכונות - צימוד (coupling) יכול להתבצע בכל אחת מהדרכים הללו"
+      },
+      {
+        "id": "c",
+        "text": "אובייקט אחד מצביע על האובייקט השני"
+      },
+      {
+        "id": "d",
+        "text": "אובייקט אחד מקבל כפרמטר את האובייקט השני"
+      },
+      {
+        "id": "e",
+        "text": "רק כאשר מחלקה אחת יורשת מהשנייה"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "צימוד (coupling) בין שני אובייקטים/מחלקות נוצר בכל מצב שבו אחד תלוי או מכיר את השני - בין אם דרך קריאת מתודות, החזקת הפניה (שדה), או קבלתו כפרמטר. כל אלו הן צורות לגיטימיות של תלות/צימוד, ולכן התשובה המדויקת ביותר משלבת את כולן.",
+    "optionExplanations": {
+      "a": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים ליצירת צימוד.",
+      "b": "נכון - קריאת מתודות, החזקת הפניה, וקבלה כפרמטר הן כולן דרכים ליצירת צימוד בין אובייקטים - כל התשובות נכונות יחד.",
+      "c": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים.",
+      "d": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים.",
+      "e": "שגוי - צימוד אינו מוגבל רק לירושה; הוא יכול להיווצר גם ללא כל קשר ירושה, למשל דרך שדה/פרמטר/קריאת מתודה."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q5, page 1 - 2019 exam reconstruction; no explicit answer key, correct answer determined from general coupling/OOP definitions"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "combined-answer"
+    ],
+    "keyLearningPoint": "Coupling בין אובייקטים נוצר בכל דרך של תלות/הכרות - קריאת מתודות, החזקת הפניה, או קבלה כפרמטר.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-006",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "decorator-extend-without-modifying",
+    "stemHe": "במידה ואנחנו מעוניינים להרחיב אובייקט מבלי לפגוע באובייקט קיים, באיזה תבנית עיצוב נרצה להשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "d",
+        "text": "אף תשובה אינה נכונה"
+      },
+      {
+        "id": "e",
+        "text": "Decorator design pattern"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "Decorator מאפשר לעטוף אובייקט ספציפי ולהוסיף לו התנהגות חדשה, מבלי לשנות את המחלקה המקורית ומבלי להשפיע על מופעים אחרים (לא-עטופים) של אותה מחלקה - זהו בדיוק התיאור בשאלה.",
+    "optionExplanations": {
+      "a": "שגוי - Facade מספקת ממשק פשוט מעל מערכת מורכבת; אינה עוסקת בהרחבת אובייקט ספציפי.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים; אינו קשור להרחבת אובייקט.",
+      "c": "שגוי - Factory עוסק ביצירת אובייקטים; אינו עוסק בהרחבת אובייקט קיים.",
+      "d": "שגוי - קיימת תשובה נכונה (Decorator).",
+      "e": "נכון - Decorator עוטף אובייקט קיים ומוסיף לו התנהגות בלי לפגוע במחלקה המקורית או במופעים אחרים שלה."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q7, page 2 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Decorator pattern definition"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "reconstruction",
+    "tags": [],
+    "keyLearningPoint": "הרחבת אובייקט ספציפי מבלי לפגוע באובייקט המקורי או במופעים אחרים = Decorator.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-007",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "facade-hide-subsystems",
+    "stemHe": "מערכת להזמנת חופשות, המקושרת למערכות מפורטות יותר של הזמנת מלון, הזמנת טיסה והזמנת שירותי העברות. רוצים למנוע מהמשתמשים להגיע למערכות המפורטות. באיזו תבנית עיצוב נשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Decorator design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "Facade מספקת ממשק פשוט ומאוחד מעל מערכת (או קבוצת תת-מערכות) מורכבת, ומסתירה מהמשתמש את המורכבות והפרטים הפנימיים - בדיוק כפי שמערכת הזמנת החופשות מסתירה את תת-המערכות המפורטות (מלון/טיסה/העברות).",
+    "optionExplanations": {
+      "a": "נכון - Facade מספקת נקודת כניסה פשוטה אחת שמסתירה את מורכבות תת-המערכות מהמשתמש.",
+      "b": "שגוי - Observer עוסק בהפצת עדכונים; אינו קשור להסתרת תת-מערכות.",
+      "c": "שגוי - Decorator מוסיף התנהגות לאובייקט קיים; אינו מספק ממשק מאוחד מעל מערכת שלמה.",
+      "d": "שגוי - Factory עוסק ביצירת אובייקטים; אינו קשור להסתרת מורכבות תת-מערכות.",
+      "e": "שגוי - קיימת תשובה נכונה (Facade) המתאימה בדיוק לתיאור."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q10, page 2 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Facade pattern definition"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "reconstruction",
+    "tags": [],
+    "keyLearningPoint": "הסתרת מורכבות של כמה תת-מערכות מאחורי ממשק פשוט אחד = Facade.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-008",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "observer-auto-update",
+    "stemHe": "כאשר נרצה שאובייקט יתעדכן באופן אוטומטי לאחר שינוי של אובייקט אחר נשתמש בתבנית העיצוב -",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Decorator design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "זהו התיאור המדויק והבסיסי של Observer: אובייקט 'צופה' (Observer) מתעדכן אוטומטית כאשר האובייקט ה'נצפה' (Observable/Subject) משתנה, בזכות מנגנון הרשמה והודעה (notify).",
+    "optionExplanations": {
+      "a": "שגוי - Facade עוסקת בהסתרת מורכבות מערכת; אינה קשורה לעדכון אוטומטי בין אובייקטים.",
+      "b": "נכון - זהו בדיוק תיאור מנגנון ה-Observer: עדכון אוטומטי של צופה כתוצאה משינוי באובייקט הנצפה.",
+      "c": "שגוי - Decorator מוסיף התנהגות לאובייקט; אינו עוסק בעדכון אוטומטי בין אובייקטים.",
+      "d": "שגוי - Factory עוסק ביצירת אובייקטים; אינו קשור לעדכון אוטומטי.",
+      "e": "שגוי - קיימת תשובה נכונה (Observer)."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q12, page 4 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Observer pattern definition"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "עדכון אוטומטי של אובייקט בעקבות שינוי באובייקט אחר = Observer.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-009",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "client-socket-requirements",
+    "stemHe": "בסוקט לקוח, מה עלי לספק כדי ליצור את החיבור?",
+    "options": [
+      {
+        "id": "a",
+        "text": "כתובת שרת בלבד"
+      },
+      {
+        "id": "b",
+        "text": "פורט בלבד"
+      },
+      {
+        "id": "c",
+        "text": "אף אחת מהתשובות"
+      },
+      {
+        "id": "d",
+        "text": "רק את שם השרת ואת סוג הפרוטוקול (TCP/UDP)"
+      },
+      {
+        "id": "e",
+        "text": "צריך לספק גם כתובת שרת וגם פורט"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "בנאי Socket הסטנדרטי (למשל new Socket(host, port)) דורש הן כתובת/שם שרת והן מספר פורט - שני הפרטים נחוצים יחד כדי לזהות במדויק את השירות שאליו רוצים להתחבר.",
+    "optionExplanations": {
+      "a": "שגוי - כתובת שרת בלבד אינה מספיקה; יש צורך גם בפורט הספציפי שהשרת מאזין עליו.",
+      "b": "שגוי - פורט בלבד אינו מספיק; יש צורך גם בכתובת/שם השרת שאליו מתחברים.",
+      "c": "שגוי - קיימת תשובה נכונה (יש צורך בשניהם יחד).",
+      "d": "שגוי - סוג הפרוטוקול אינו נדרש כפרמטר מפורש לבנאי Socket הרגיל (הוא נקבע מראש על ידי בחירת המחלקה, Socket עבור TCP למשל); הפרמטרים הנדרשים בפועל הם כתובת ופורט.",
+      "e": "נכון - בנאי Socket הרגיל דורש הן כתובת/שם שרת והן מספר פורט יחד."
+    },
+    "difficulty": "easy",
+    "questionType": "client-server-sockets",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q13, page 4 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard java.net.Socket constructor API"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed"
+    ],
+    "keyLearningPoint": "יצירת Socket לקוח דורשת גם כתובת/שם שרת וגם מספר פורט יחד.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-010",
+    "topicIds": [
+      "java-basics-oop-memory"
+    ],
+    "subtopic": "this-in-static-context",
+    "code": "public class threadTry implements Runnable {\n    public static void main (String args[]){\n        Thread myT = new Thread(this);\n        myT.start();\n    }\n    @Override\n    public void run() {\n        System.out.println(\"test\");\n    }\n}",
+    "stemHe": "מה הפלט של קטע הקוד הבא?",
+    "options": [
+      {
+        "id": "a",
+        "text": "תהיה שגיאת קומפילציה כי לא יכול להיות this בשיטה סטאטית"
+      },
+      {
+        "id": "b",
+        "text": "הקוד ירוץ באופן תקין ותודפס המילה test"
+      },
+      {
+        "id": "c",
+        "text": "הקוד ירוץ באופן תקין אך לא יודפס כלום"
+      },
+      {
+        "id": "d",
+        "text": "תהיה שגיאה בזמן ריצה"
+      },
+      {
+        "id": "e",
+        "text": "הקוד מקמפל אך תלוי בסדר האתחול הסטטי של המחלקה"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "this מתייחס למופע הנוכחי של המחלקה, אך main היא מתודה static - היא רצה בלי שקיים מופע (instance) של המחלקה כלל. שימוש ב-this בתוך הקשר סטטי הוא שגיאת קומפילציה (\"non-static variable this cannot be referenced from a static context\").",
+    "optionExplanations": {
+      "a": "נכון - לא ניתן להשתמש ב-this בתוך מתודה static, כי אין מופע קונקרטי שאליו this יכול להתייחס.",
+      "b": "שגוי - הקוד כלל לא מתקמפל בגלל השימוש השגוי ב-this בהקשר סטטי; לא מגיעים לשלב ההרצה.",
+      "c": "שגוי - הבעיה אינה 'ריצה שקטה' אלא שגיאת קומפילציה מוחלטת שמונעת בנייה.",
+      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה.",
+      "e": "שגוי - אין קשר לסדר אתחול סטטי; הבעיה היא שימוש לא-חוקי ב-this בתוך הקשר סטטי, שגיאה תחבירית ברורה."
+    },
+    "difficulty": "medium",
+    "questionType": "compilation-error",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q14, page 4 - 2019 exam reconstruction; no explicit answer key, correct answer determined from fundamental Java rule (this cannot appear in a static context)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "this אינו יכול לשמש בתוך מתודה/הקשר static - שגיאת קומפילציה מיידית.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-011",
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
+    "subtopic": "volatile-semantics",
+    "stemHe": "כאשר משתנה מוגדר volatile ב-java -",
+    "options": [
+      {
+        "id": "a",
+        "text": "המשתנה תמיד יהיה ב-stack"
+      },
+      {
+        "id": "b",
+        "text": "מאוחסן בזיכרון ה-cache של כל thread"
+      },
+      {
+        "id": "c",
+        "text": "המשתנה הופך לבלתי-ניתן-לשינוי (immutable)"
+      },
+      {
+        "id": "d",
+        "text": "כלל התהליכונים שיפנו אליו יגיעו לאותו משתנה בזיכרון הראשי"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "d",
+    "explanation": "volatile מבטיח נראות (visibility): כל קריאה וכתיבה למשתנה מתבצעת ישירות מול הזיכרון הראשי (main memory) ולא מ-cache מקומי של thread ספציפי - כך שכל ה-threads תמיד רואים את הערך המעודכן ביותר. שים לב: volatile אינו מבטיח אטומיות של פעולות מורכבות (כמו i++).",
+    "optionExplanations": {
+      "a": "שגוי - volatile הוא מודיפייר על שדה (field), שממוקם ב-Heap כחלק מהאובייקט, לא ב-Stack.",
+      "b": "שגוי - זו בדיוק הטענה ההפוכה מהאמת; volatile מונע דווקא cache מקומי פרטי לכל thread, ומכריח קריאה מהזיכרון הראשי המשותף.",
+      "c": "שגוי - volatile אינו הופך משתנה ל-immutable; ניתן עדיין לשנות את ערכו, רק שכל שינוי מיד גלוי לכל ה-threads.",
+      "d": "נכון - volatile מבטיח שכל ה-threads קוראים/כותבים לאותו עותק בזיכרון הראשי, ולא ל-cache מקומי נפרד.",
+      "e": "שגוי - קיימת תשובה נכונה (ד)."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q15, page 4 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard volatile semantics, cross-checked with exam_structure_reference.json commonDistractorPatterns note about the 'volatile keeps private copy per thread' trap"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "volatile מבטיח שכל ה-threads רואים את אותו ערך מהזיכרון הראשי - הוא מונע cache מקומי, לא יוצר אותו.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-012",
+    "topicIds": [
+      "design-patterns-behavioral"
+    ],
+    "subtopic": "strategy-sorting-runtime",
+    "stemHe": "שאלה על מיונים שצריכים להיבחר בזמן ריצה: מחלקה שמטרתה למיין דברים, ואז מתבקשים להוסיף גם פונקציונליות של תיעדוף משימות המיון. איזה תבנית עיצוב הכי תתאים למימוש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adapter design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Strategy design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "היכולת לבחור אלגוריתם מיון שונה בזמן ריצה (ואף להחליף אותו/להוסיף וריאציות תיעדוף) היא בדיוק מקרה השימוש הקלאסי של Strategy: משפחת אלגוריתמים ניתנים-להחלפה מאחורי ממשק אחיד.",
+    "optionExplanations": {
+      "a": "שגוי - Adapter מתאים ממשק לא-תואם; אינו עוסק בבחירת אלגוריתם מיון בזמן ריצה.",
+      "b": "נכון - Strategy מאפשרת להחליף בין אלגוריתמי מיון (כולל וריאציות תיעדוף) בזמן ריצה מאחורי ממשק אחיד.",
+      "c": "שגוי - Observer עוסק בהפצת עדכונים; אינו קשור לבחירת אלגוריתם.",
+      "d": "שגוי - Factory עוסק ביצירת אובייקטים; אינו עוסק בהחלפת אלגוריתם מיון.",
+      "e": "שגוי - קיימת תשובה נכונה (Strategy)."
+    },
+    "difficulty": "easy",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q16, page 4 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard Strategy pattern definition, consistent with recurring 'choose algorithm at runtime = Strategy' pattern in all confirmed years"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic"
+    ],
+    "keyLearningPoint": "בחירת/החלפת אלגוריתם מיון בזמן ריצה = Strategy.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-013",
+    "topicIds": [
+      "blockchain-cryptocurrency"
+    ],
+    "subtopic": "blockchain-hashcode-basis",
+    "stemHe": "ב-blockchain, על מה מתבסס ה-hashCode של כל בלוק?",
+    "options": [
+      {
+        "id": "a",
+        "text": "רק במספר הבלוק"
+      },
+      {
+        "id": "b",
+        "text": "רק בהעברות ובחתימות של כלל המשתמשים המרכיבים את הבלוק"
+      },
+      {
+        "id": "c",
+        "text": "רק במספר/hash הבלוק הקודם"
+      },
+      {
+        "id": "d",
+        "text": "אקראית בלבד (nonce) שנבחר על ידי הכורה"
+      },
+      {
+        "id": "e",
+        "text": "בכולם יחד - גם בנתוני הבלוק (העברות/חתימות), גם ב-hash של הבלוק הקודם וגם בפרטים מזהים נוספים כמו nonce/מספר הבלוק"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "ה-hash של בלוק ב-blockchain מחושב על בסיס שילוב של: תוכן הבלוק עצמו (העברות/חתימות המשתמשים), ה-hash של הבלוק הקודם (זה מה שיוצר את ה'שרשרת' ומבטיח שאי אפשר לשנות בלוק ישן בלי לשבור את כל השרשרת), ולרוב גם ערך nonce/מספר בלוק - כל הרכיבים יחד, לא אחד מהם בלבד.",
+    "optionExplanations": {
+      "a": "שגוי - מספר הבלוק לבדו אינו מספיק ליצירת hash ייחודי ובטוח; חסרים נתוני התוכן וה-hash הקודם.",
+      "b": "שגוי - תוכן הבלוק לבדו (בלי hash הבלוק הקודם) לא היה יוצר את מנגנון השרשור/האבטחה הייחודי ל-blockchain.",
+      "c": "שגוי - hash הבלוק הקודם לבדו אינו משקף את תוכן הבלוק הנוכחי עצמו.",
+      "d": "שגוי - nonce הוא רכיב אחד בתהליך (בעיקר ב-proof-of-work), אך אינו הבסיס היחיד לחישוב ה-hash.",
+      "e": "נכון - חישוב ה-hash של בלוק משלב את תוכן הבלוק (העברות/חתימות), את ה-hash של הבלוק הקודם, ולרוב גם nonce/מספר בלוק - זו שרשרת האבטחה של blockchain."
+    },
+    "difficulty": "medium",
+    "questionType": "blockchain",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q17, page 5 - 2019 exam reconstruction; no explicit answer key, correct answer determined from general blockchain hashing concepts (low-frequency topic in this course - never confirmed in other exam years)"
+      }
+    ],
+    "confidence": "medium",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "reasoned-not-grader-confirmed",
+      "adapted-to-5-options",
+      "low-frequency-topic"
+    ],
+    "keyLearningPoint": "hash של בלוק ב-blockchain משלב תוכן הבלוק + hash הבלוק הקודם (+ nonce) יחד - לא רכיב בודד.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-014",
+    "topicIds": [
+      "design-patterns-structural"
+    ],
+    "subtopic": "bridge-thread-scheduler",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש כדי להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - מדיניות תזמון (Preemptive/TimeSliced) כפול מערכת הפעלה (Unix/Windows)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "b",
+        "text": "אין בו בעיות בכלל"
+      },
+      {
+        "id": "c",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "שני צירי שינוי בלתי-תלויים (מדיניות תזמון ומערכת הפעלה) יוצרים פיצוץ קומבינטורי בירושה ישירה. Bridge מפרידה בין היררכיית האבסטרקציה למימוש כך שכל צד מתפתח בנפרד - זהו הפתרון שאושר סופית במבחן 2024 עם אותו תרשים בדיוק.",
+    "optionExplanations": {
+      "a": "נכון - Bridge מפרידה בין שתי היררכיות עצמאיות (מדיניות x מערכת הפעלה) כך שכל אחת מתפתחת בנפרד.",
+      "b": "שגוי - יש בעיה ברורה של פיצוץ קומבינטורי של מחלקות בין שני צירי שינוי.",
+      "c": "שגוי - Observer עוסק בהפצת עדכונים; אינו קשור לבעיית ריבוי צירי שינוי בירושה.",
+      "d": "שגוי - Factory עוסק ביצירת אובייקטים; אינו פותר פיצוץ קומבינטורי בין שני צירי שינוי.",
+      "e": "שגוי - Strategy עוסקת בהחלפת אלגוריתם יחיד, לא בהפרדת שני צירי שינוי עצמאיים."
+    },
+    "difficulty": "medium",
+    "questionType": "design-pattern-choice",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q18, page 5 - 2019 exam reconstruction; no explicit answer key in this source, but identical diagram confirmed correct as Bridge in student_solution_2024_first_term_score_75 Q20"
+      },
+      {
+        "fileId": "student_solution_2024_first_term_score_75",
+        "fileName": "Student Solution 2024 First Term Score 75.pdf",
+        "locator": "Q20 - identical diagram, confirmed correct (Bridge)"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "reconstruction",
+    "tags": [
+      "recurring-topic",
+      "recurring-exact-question",
+      "cross-year-confirmed"
+    ],
+    "keyLearningPoint": "שני צירי שינוי עצמאיים (מדיניות x מערכת הפעלה) = Bridge - שאלה זהה חוזרת ב-2018, 2019 וב-2024.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-015",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "serialization-deserialization-true-false",
+    "stemHe": "במידה ושלחתי מידע תוך שימוש ב-serialization, המקבל יצטרך לבצע deserialization ל-stream שהתקבל בשביל להפוך אותו לאובייקט.",
+    "options": [
+      {
+        "id": "a",
+        "text": "לא נכון"
+      },
+      {
+        "id": "b",
+        "text": "נכון"
+      },
+      {
+        "id": "c",
+        "text": "נכון, אולם המקבל חייב לבצע גם serialization לאובייקט המתקבל"
+      },
+      {
+        "id": "d",
+        "text": "נכון, אולם השולח חייב לבצע deserialization"
+      },
+      {
+        "id": "e",
+        "text": "נכון, אך רק אם שני הצדדים משתמשים באותה גרסת Java בדיוק"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "זהו תיאור נכון ופשוט של תהליך התקשורת: השולח מבצע serialization (הופך אובייקט ל-stream של בתים), והמקבל מבצע deserialization (הופך את ה-stream בחזרה לאובייקט). אין צורך בהסתייגות נוספת - הטענה נכונה כפי שהיא.",
+    "optionExplanations": {
+      "a": "שגוי - הטענה בשאלה נכונה בדיוק כפי שנוסחה.",
+      "b": "נכון - המקבל אכן צריך לבצע deserialization על ה-stream שקיבל כדי לשחזר את האובייקט - זהו בדיוק ההפך/המשלים לפעולת serialization שביצע השולח.",
+      "c": "שגוי - אין צורך שהמקבל יבצע גם serialization לאובייקט המתקבל; זו הוספה מיותרת ולא נכונה לתהליך.",
+      "d": "שגוי - השולח מבצע serialization (לא deserialization); deserialization היא פעולת המקבל בלבד.",
+      "e": "שגוי - serialization/deserialization סטנדרטיים בג'אווה (java.io.Serializable) אינם דורשים גרסת Java זהה בדיוק בין הצדדים, כל עוד מבנה המחלקה (serialVersionUID) תואם."
+    },
+    "difficulty": "easy",
+    "questionType": "true-false",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q19, page 5 - 2019 exam reconstruction; no explicit answer key, correct answer determined from basic serialization/deserialization semantics"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "adapted-to-5-options"
+    ],
+    "keyLearningPoint": "המקבל מבצע deserialization כדי להפוך stream שהתקבל בחזרה לאובייקט - זהו התיאור הבסיסי הנכון של התהליך.",
+    "points": 5,
+    "active": true
+  },
+  {
+    "id": "q-pastexam-2019-016",
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
+    "subtopic": "tcp-vs-udp",
+    "stemHe": "מה ההבדל בין TCP ל-UDP?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין ביניהם הבדל"
+      },
+      {
+        "id": "b",
+        "text": "TCP מעביר את המידע באופן אמין בין שני מחשבים או יותר"
+      },
+      {
+        "id": "c",
+        "text": "נשתמש ב-UDP כאשר נרצה להעביר מידע לרשימת תפוצה ולא יהיה חשוב לנו לדעת האם המידע הגיע ליעד"
+      },
+      {
+        "id": "d",
+        "text": "UDP מבטיח סדר הגעה של החבילות בעוד TCP אינו מבטיח זאת"
+      },
+      {
+        "id": "e",
+        "text": "TCP אכן מעביר מידע באופן אמין, ו-UDP משמש כאשר לא חשוב לוודא הגעת המידע (כגון שידור לרשימת תפוצה)"
+      }
+    ],
+    "correctOptionId": "e",
+    "explanation": "TCP מבטיח העברת מידע אמינה (עם אישורי קבלה, סדר נכון, וטיפול באובדן חבילות), בעוד UDP הוא פרוטוקול 'ירה ושכח' מהיר יותר אך ללא הבטחת הגעה או סדר - ולכן מתאים לתרחישים כמו שידור לרשימת תפוצה שבהם לא קריטי שכל חבילה תגיע. שתי התכונות (אמינות TCP + התאמת UDP לשידור-בלי-חשיבות-להגעה) נכונות יחד ומשלימות זו את זו.",
+    "optionExplanations": {
+      "a": "שגוי - יש הבדל מהותי וברור בין השניים באמינות ההעברה.",
+      "b": "לבד - נכונה כשלעצמה, אך חלקית; אינה כוללת גם את התכונה המקבילה של UDP.",
+      "c": "לבד - נכונה כשלעצמה, אך חלקית; אינה כוללת גם את התכונה המקבילה של TCP.",
+      "d": "שגוי - זו טענה הפוכה מהאמת: TCP, לא UDP, הוא זה שמבטיח סדר הגעה נכון של החבילות (ואילו UDP אינו מבטיח זאת כלל).",
+      "e": "נכון - משלב את שתי התכונות הנכונות יחד: TCP אמין, ו-UDP מתאים לשידור שבו הגעה מובטחת אינה קריטית."
+    },
+    "difficulty": "medium",
+    "questionType": "definition",
+    "source": "past-exam",
+    "sourceReferences": [
+      {
+        "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers",
+        "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf",
+        "locator": "Q20, page 5 - 2019 exam reconstruction; no explicit answer key, correct answer determined from standard TCP/UDP definitions"
+      }
+    ],
+    "confidence": "high",
+    "basedOnPastExam": true,
+    "pastExamYear": 2019,
+    "origin": "adapted",
+    "tags": [
+      "combined-answer"
+    ],
+    "keyLearningPoint": "TCP = אמין ומסודר; UDP = מהיר אך ללא הבטחת הגעה - מתאים לשידור לרשימת תפוצה שבו הגעה מלאה אינה קריטית.",
+    "points": 5,
+    "active": true
+  }
+]

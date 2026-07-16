@@ -1,0 +1,112 @@
+[
+  {
+    "id": "q-rejected-2024-019",
+    "pastExamYear": 2024,
+    "stemHe": "מה יהיה הפלט של התכנית הבאה? (שני Runnable נפרדים, שדה count סטטי משותף, ללא sleep) - class ThreadTest { private static class MyRunnable implements Runnable { private static int count = 0; public void run(){ for (int i=0;i<5;i++){ count++; System.out.println(Thread.currentThread().getName() + \": \" + count); } } } ... t1.start(); t2.start(); }",
+    "options": [
+      "כל תהליכון מדפיס את המספרים 1 עד 5",
+      "הם ידפיסו יחד 1 עד 10 כשכל אחד בתורו מדפיס מספר",
+      "לא ניתן לצפות מה בדיוק יודפס",
+      "תהליך אחד ידפיס 1 עד 5 והשני 6 עד 10",
+      "לא ניתן לצפות את הסדר אולם בהכרח יודפסו המספרים 1 עד 10"
+    ],
+    "reason": "Grader-confirmed WRONG for the student (studentChoice ה, marked incorrect in student_solution_2024_first_term_score_75), so the true correct option is one of a/b/c/d - but none of the remaining four options precisely and unambiguously describes the actual behavior. The static 'count' field is shared but incremented/printed non-atomically with no sleep() to reduce race likelihood, unlike the confirmed-analogous 2025 exam Q19 (which included Thread.sleep(100) and a 4-way option set with an option explicitly allowing for duplicate values). None of this question's 5 options explicitly allows for duplicate/skipped values the way the 2025 confirmed answer does, so mapping this question onto that pattern would require inventing a nuance the actual options don't cover. The vision transcription source itself flags: 'the exact intended correct option among ב/c/ה is not determinable from this scan alone.'",
+    "sourceReferences": [
+      {"fileId": "student_solution_2024_first_term_score_75", "fileName": "Student Solution 2024 First Term Score 75.pdf", "locator": "Q19, page 20/'9' - 2024 exam; confirmed WRONG for student (studentChoice ה), true correct answer undetermined"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2018-014",
+    "pastExamYear": 2018,
+    "stemHe": "בהקשר של Streams, מי מהפעולות הבאות מתבצע אוטומטית על ידי ה-JVM? א.Serialization ב.Memory allocation ג.Deserialization ד.כל התשובות נכונות",
+    "options": ["Serialization", "Memory allocation", "Deserialization", "כל התשובות נכונות"],
+    "reason": "Both independent 2018 student-copy scans mark this question WRONG for their respective students (one circled א/Serialization with a red X drawn through ג/Deserialization; the other circled א/Serialization with an X mark on ב/Memory allocation). Neither scan's grading marks unambiguously point to a single confirmed-correct option - the X marks sit on different, non-corresponding options across the two copies, and no other exam year repeats this exact question for cross-year confirmation. Guessing between 'Memory allocation' and 'Deserialization' as the intended 'automatic JVM action' would not meet the reasonable-confidence bar.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_part_a_student_solution", "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf", "locator": "Q14 - confirmed WRONG (red X near ג), true correct answer undetermined"},
+      {"fileId": "advanced_topics_in_programming_part_a_student_solution_2", "fileName": "Advanced Topics in Programming - Part A - Student Solution 2.pdf", "locator": "Q14 - circled א, X mark on ב (non-coinciding), uncertain"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2018-018",
+    "pastExamYear": 2018,
+    "stemHe": "תבנית עיצוב MVC: א. ממומשת גם בתבנית עיצוב bridge / ב. עוסקת בהפרדה בין המודל לאספקטים הקשורים בתקשורת עם המשתמש / ג. ממומשת כשיוצרים פרויקט של JavaFX / ד. תשובות א+ב+ג / ה. תשובות ב+ג",
+    "options": [
+      "ממומשת גם בתבנית עיצוב bridge",
+      "עוסקת בהפרדה בין המודל לאספקטים הקשורים בתקשורת עם המשתמש",
+      "ממומשת כשיוצרים פרויקט של JavaFX",
+      "תשובות א+ב+ג",
+      "תשובות ב+ג"
+    ],
+    "reason": "Genuine conflict between the two independent 2018 student copies: one student circled ה (ב+ג combined) and was marked CORRECT (no red grading mark in that file's red-ink-means-wrong convention); the other student circled ב alone and was ALSO marked CORRECT (circle+checkmark coincide in that file's convention). Both cannot simultaneously be the single official key answer in a strict single-best-answer exam. Cross-referencing did not resolve which of ב-alone or ב+ג is the true key, so per instructions this was not guessed.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_part_a_student_solution", "fileName": "Advanced Topics in Programming - Part A - Student Solution.pdf", "locator": "Q18 - student circled ה (ב+ג), marked correct"},
+      {"fileId": "advanced_topics_in_programming_part_a_student_solution_2", "fileName": "Advanced Topics in Programming - Part A - Student Solution 2.pdf", "locator": "Q18 - student circled ב alone, marked correct (circle+checkmark coincide)"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2019-006",
+    "pastExamYear": 2019,
+    "stemHe": "איזה עקרון עיצובי מופר בתרשים הבא: [class diagram image, not transcribed - text extraction only recovered garbled/mistranslated option labels] א. אין בעיה בתרשים / ב-ה: combination referencing SRP/ISP/LSP with apparently swapped Hebrew-English label pairings, plus a ג+ד combined option.",
+    "options": ["אין בעיה בתרשים", "(mislabeled SRP/ISP text)", "(mislabeled ISP/LSP text)", "(mislabeled LSP/ISP text)", "ג+ד"],
+    "reason": "The question depends entirely on a class diagram image that was not transcribed in the text-extraction source (advanced_topics_in_programming_reconstruction_of_part_a_including_answers.json only captured OCR text, and the option labels themselves show internal Hebrew/English mismatches consistent with bidi text-extraction corruption, e.g. 'עיקרון ההחלפה - Interface Segregation Principle' pairs a Liskov-Substitution-sounding Hebrew phrase with an ISP English label). Without seeing the actual diagram, the specific principle(s) violated cannot be determined with any confidence - could be SRP, ISP, or a combination.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers", "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf", "locator": "Q6, page 1 - 2019 exam reconstruction; diagram image not available/transcribed"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2019-008",
+    "pastExamYear": 2019,
+    "stemHe": "מה אינו נכון בנוגע ל-jit compiler? a. משפר את זמן הריצה של התוכנית b. מבצע inlining c. מקטין את זמן הקומפילציה לאחר השלב שבו המתכנת כותב את הקוד ב-java",
+    "options": ["משפר את זמן הריצה", "מבצע inlining", "מקטין את זמן הקומפילציה..."],
+    "reason": "The source text extraction only recovered 3 options (a/b/c) for this question with no 4th or 5th option visible - the reconstruction document itself appears incomplete at this point (the very next question, numbered 9, is entirely blank/garbled ('9?? .') in the same source, suggesting a transcription gap spanning this area of the document). Fabricating a plausible 4th/5th option here is riskier than usual since the true full option set (and therefore which specific statement was the intended 'not true' one) is unknown.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers", "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf", "locator": "Q8, page 2 - 2019 exam reconstruction; only 3 options recovered, incomplete"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2019-009",
+    "pastExamYear": 2019,
+    "stemHe": "(no content recovered - source shows only '9?? .')",
+    "options": [],
+    "reason": "No question text, options, or diagram content was recovered for this question number in the source reconstruction document - it appears as a blank/garbled placeholder ('9?? .') between Q8 and Q10. Nothing to verify or transcribe.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers", "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf", "locator": "Q9, page 2 - 2019 exam reconstruction; blank/unrecovered"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-2019-011",
+    "pastExamYear": 2019,
+    "stemHe": "מה פלט התוכנית הבאה: public class GenericStack<E>{ Stack<E> stk= new Stack<E>(); ... } class Output{ public static void main(String[] args) { GenericStack<String> gs= new GenericStack<String>(); gs.push(\"Rusia\"); System.out.print(gs.pop()+\" \"); gs.push(2018); System.out.print(gs.pop()); } }",
+    "options": ["שגיאת הידור", "שגיאה בזמן ריצה", "Rusia 2018", "2018", "Rusia"],
+    "reason": "This 2019 reconstruction transcribes the classic GenericStack joke question but, unlike every confirmed version of this question in 2018/2024/2025 (which always use TWO separate generic instances - one GenericStack<String> and one GenericStack<Integer>), this text shows only ONE instance 'gs' being reused, with gs.push(2018) called directly on the GenericStack<String> instance. Taken literally, this would actually be a genuine compile-time type-mismatch error (cannot push an int/Integer onto a Stack<String>) rather than the usual 'no error, prints both values' punchline - a materially different (and much harder to verify) answer. It is unclear whether this reflects (a) an intentional twist unique to the 2019 version, or (b) a memory/transcription slip by whoever wrote the reconstruction (dropping the second GenericStack<Integer> instance declaration). Given this genuine ambiguity about the actual source code, and that guessing wrongly here would actively mislead the student on a recurring exam classic, this instance was excluded rather than resolved either way.",
+    "sourceReferences": [
+      {"fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers", "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf", "locator": "Q11, page 3 - 2019 exam reconstruction; code shows single reused generic instance, inconsistent with all other confirmed years"}
+    ],
+    "confidence": "low",
+    "needsReview": true
+  },
+  {
+    "id": "q-rejected-source-sample-test",
+    "pastExamYear": null,
+    "stemHe": "N/A - entire source excluded, not a per-question rejection",
+    "options": [],
+    "reason": "The file 'Sample test.pdf' (extracted_materials/manual_vision/sample_test.json) is explicitly a student's own HANDWRITTEN PERSONAL PRACTICE sheet (20 questions on design patterns/Java/networking basics), not an official BGU past exam. It uses only 4 options per question (not the standard 5), and its own answer-key page is described by the vision transcription itself as 'LOW confidence due to handwriting ambiguity' with letters 'frequently ambiguous between kaf/bet/gimel/dalet forms.' Per task scope (only include questions that trace back to a REAL past exam), this entire source was excluded from the verified question bank rather than mined question-by-question.",
+    "sourceReferences": [
+      {"fileId": "sample_test", "fileName": "Sample test.pdf", "locator": "entire document - tier-7 student practice sheet, not an official exam, low-confidence handwritten answer key"}
+    ],
+    "confidence": "low",
+    "needsReview": false
+  }
+]

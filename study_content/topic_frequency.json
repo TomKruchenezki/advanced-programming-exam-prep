@@ -1,0 +1,132 @@
+[
+  {
+    "topicId": "networking-sockets-io-streams",
+    "occurrenceCount": 14,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["client-server-sockets", "definition", "code-output", "code-analysis"]
+  },
+  {
+    "topicId": "threads-basics-lifecycle",
+    "occurrenceCount": 10,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["threads-scheduling", "definition", "code-output", "compilation-error"]
+  },
+  {
+    "topicId": "design-patterns-behavioral",
+    "occurrenceCount": 8,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["design-pattern-choice", "code-output"]
+  },
+  {
+    "topicId": "java-platform-jvm",
+    "occurrenceCount": 7,
+    "percentOfExams": 75,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["definition", "java-api"]
+  },
+  {
+    "topicId": "design-patterns-structural",
+    "occurrenceCount": 7,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["design-pattern-choice", "homework-code"]
+  },
+  {
+    "topicId": "generics-collections-equals-hashcode",
+    "occurrenceCount": 7,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["code-analysis", "code-output", "java-api", "definition"]
+  },
+  {
+    "topicId": "thread-safety-synchronization",
+    "occurrenceCount": 7,
+    "percentOfExams": 100,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["definition", "threads-scheduling", "java-api"]
+  },
+  {
+    "topicId": "solid-principles",
+    "occurrenceCount": 5,
+    "percentOfExams": 75,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["solid-violation"]
+  },
+  {
+    "topicId": "design-patterns-creational",
+    "occurrenceCount": 2,
+    "percentOfExams": 25,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "very-high",
+    "commonQuestionTypes": ["design-pattern-choice", "homework-code"],
+    "note": "Low occurrenceCount in this verified bank (only 2025's Singleton/Factory-Executors questions could be fully verified with high confidence), but Factory and Singleton concepts recur throughout the broader source material (lecture slides, labs, multiple exam mentions of Executors-as-Factory and config-loading-as-Singleton) - treat as very-high priority despite the modest count here."
+  },
+  {
+    "topicId": "concurrency-utilities-callable-future-mediator",
+    "occurrenceCount": 4,
+    "percentOfExams": 75,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "high",
+    "commonQuestionTypes": ["java-api", "design-pattern-choice", "definition"]
+  },
+  {
+    "topicId": "event-driven-javafx-mvc",
+    "occurrenceCount": 4,
+    "percentOfExams": 75,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "medium-high",
+    "commonQuestionTypes": ["javafx-mvc", "definition"]
+  },
+  {
+    "topicId": "java-basics-oop-memory",
+    "occurrenceCount": 3,
+    "percentOfExams": 75,
+    "lastYearSeen": 2024,
+    "importanceForNextExam": "medium",
+    "commonQuestionTypes": ["compilation-error", "code-analysis"]
+  },
+  {
+    "topicId": "uml-class-diagrams",
+    "occurrenceCount": 1,
+    "percentOfExams": 25,
+    "lastYearSeen": 2018,
+    "importanceForNextExam": "medium",
+    "commonQuestionTypes": ["solid-violation"]
+  },
+  {
+    "topicId": "oop-pillars-abstraction",
+    "occurrenceCount": 1,
+    "percentOfExams": 25,
+    "lastYearSeen": 2019,
+    "importanceForNextExam": "medium",
+    "commonQuestionTypes": ["definition"]
+  },
+  {
+    "topicId": "state-space-decoupling-interfaces",
+    "occurrenceCount": 1,
+    "percentOfExams": 25,
+    "lastYearSeen": 2025,
+    "importanceForNextExam": "low-medium",
+    "commonQuestionTypes": ["homework-code"]
+  },
+  {
+    "topicId": "blockchain-cryptocurrency",
+    "occurrenceCount": 1,
+    "percentOfExams": 25,
+    "lastYearSeen": 2019,
+    "importanceForNextExam": "low",
+    "commonQuestionTypes": ["blockchain"],
+    "note": "Only appeared once (2019 reconstruction, unconfirmed answer key); never seen in the three grader-confirmed exams (2018, 2024, 2025). Lowest priority for study time."
+  }
+]

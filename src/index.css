@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "@fontsource/assistant/400.css";
+@import "@fontsource/assistant/500.css";
+@import "@fontsource/assistant/600.css";
+@import "@fontsource/assistant/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/600.css";
+
+:root {
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f6f5f8;
+  --color-text: #1c1a22;
+  --color-text-muted: #635f6d;
+  --color-border: #e3e1e8;
+  --color-accent: #6d28d9;
+  --color-accent-contrast: #ffffff;
+  --color-success: #15803d;
+  --color-danger: #b91c1c;
+  --color-warning: #b45309;
+  --color-code-bg: #f4f3ec;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #14131a;
+  --color-bg-subtle: #1c1b24;
+  --color-text: #f1f0f5;
+  --color-text-muted: #a5a1b0;
+  --color-border: #322f3d;
+  --color-accent: #a78bfa;
+  --color-accent-contrast: #14131a;
+  --color-success: #4ade80;
+  --color-danger: #f87171;
+  --color-warning: #fbbf24;
+  --color-code-bg: #1f1e29;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #14131a;
+    --color-bg-subtle: #1c1b24;
+    --color-text: #f1f0f5;
+    --color-text-muted: #a5a1b0;
+    --color-border: #322f3d;
+    --color-accent: #a78bfa;
+    --color-accent-contrast: #14131a;
+    --color-success: #4ade80;
+    --color-danger: #f87171;
+    --color-warning: #fbbf24;
+    --color-code-bg: #1f1e29;
+    color-scheme: dark;
+  }
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Assistant', system-ui, sans-serif;
+}
+
+/* Code and standalone technical terms always render LTR, even inside an RTL page */
+.ltr-code {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+
+.ltr-inline {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+/* Visible keyboard focus indicator app-wide (never fires on mouse click, only keyboard nav) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}

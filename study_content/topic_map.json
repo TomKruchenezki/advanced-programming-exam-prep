@@ -1,0 +1,908 @@
+[
+  {
+    "id": "java-platform-jvm",
+    "order": 1,
+    "titleHe": "פלטפורמת Java: JVM, Bytecode, JIT ו-Heap/Stack",
+    "titleEn": "Java Platform: JVM, Bytecode, JIT, Heap/Stack",
+    "lectureRefs": [1, 2],
+    "labRefs": ["lab_1"],
+    "examFrequency": "high",
+    "definitionHe": "Java היא שפה מונחית-עצמים שקוד המקור שלה (.java) מתורגם על ידי המהדר javac לשפת ביניים בשם Bytecode (.class), ולא ישירות לשפת מכונה. ה-JVM (Java Virtual Machine) הוא מכונה וירטואלית התלויה במערכת ההפעלה שקוראת את ה-Bytecode ומתרגמת אותו לשפת מכונה. ה-JIT (Just-In-Time Compiler) הוא רכיב בתוך ה-JVM שמזהה קטעי קוד ש'רצים הרבה' (hot code, כמו לולאות) ומקמפל אותם ישירות לשפת מכונה בזמן ריצה כדי לחסוך אינטרפרטציה חוזרת - כך משתפרת היעילות. JDK = JRE + כלי פיתוח (javac, jdb); JRE = JVM + ספריות מחלקה. הזיכרון מתחלק ל-Heap (לאובייקטים, מנוקה על ידי ה-Garbage Collector) ו-Stack (לכל Thread - משתנים מקומיים והפניות, מנוקה LIFO).",
+    "intuitiveExplanationHe": "תחשוב על Bytecode כתסריט אוניברסלי שכל 'שחקן' (JVM) בכל 'תיאטרון' (מערכת הפעלה) יודע לקרוא - כך אותו קוד רץ בכל מקום (Write Once, Run Anywhere). ה-JIT הוא כמו מתורגם שמתחיל לתרגם ריאלית רק את המשפטים שחוזרים על עצמם הרבה, כדי לחסוך זמן בפעם הבאה. ה-Heap הוא מחסן משותף גדול לכל האובייקטים, וה-Stack הוא פנקס אישי קטן לכל Thread שמתעדכן בסדר 'אחרון נכנס ראשון יוצא'.",
+    "examAccurateExplanationHe": "javac (מהדר) ממיר קוד מקור .java ל-Bytecode (.class) - שגיאת קומפילציה נתפסת כאן. ה-JVM מפרש (interpret) את ה-Bytecode שורה-שורה ומתרגם למחלקת מכונה ספציפית של מערכת ההפעלה - זה מה שהופך את Java ל-cross-platform (התשובה הנכונה לשאלה 'מה מאפשר ל-Java להיות cross-platform' היא תמיד JVM, לא JavaFX). ה-JIT אינו מבצע אינטרפרטציה של bytecode ואינו הופך קוד Java ל-Bytecode (זה תפקיד ה-javac) - תפקידו המדויק הוא 'תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה', תוך שימוש במידע דינמי מזמן ריצה כדי לבצע אופטימיזציות (כמו inlining). Java היא גם קומפיילר וגם אינטרפרטר. Heap מלא -> java.lang.OutOfMemoryError (מוגדל ב- -Xms/-Xmx); Stack מלא (רקורסיה אינסופית) -> java.lang.StackOverflowError (מוגדל ב- -Xss). ה-GC מנקה אובייקטים ללא הפניות מה-Heap; ניתן להזמינו (לא לאלץ) עם System.gc(); כל מחלקה יכולה לדרוס finalize() שנקראת כשה-GC משחרר אובייקט.",
+    "examplesHe": [
+      "javac Hello.java יוצר Hello.class; java Hello מריץ אותו דרך ה-JVM",
+      "לולאה שרצה 1000 פעם עם build()/split()/test() בפנים - ה-JIT יזהה שכדאי לקמפל אותה ישירות במקום לפרש אותה כל פעם מחדש",
+      "אם רקורסיה אינסופית -> StackOverflowError; אם יוצרים אובייקטים בלי סוף בלי לשחרר הפניות -> OutOfMemoryError"
+    ],
+    "codeSnippets": [
+      {
+        "language": "text",
+        "code": "Hello.java --(javac)--> Hello.class (bytecode)\nHello.class --(java, JVM)--> מתורגם ע\"י ה-JVM למכונה, וה-JIT מקמפל 'hot spots' ישירות",
+        "captionHe": "זרימת הקומפילציה וההרצה של Java לפי lec_1_2 סליידים 12, 15-22"
+      }
+    ],
+    "comparisons": [
+      "Compiler (מהדר, כמו C) - מקבל את כל התוכנית בבת אחת, מייצר קוד ביניים, מהיר בביצוע תנאים, זקוק ליותר זיכרון, לא חייבים לקמפל כל הרצה, שגיאות מתגלות רק בסוף. Interpreter (כמו Python) - קורא פקודה בודדת בכל פעם, לא מייצר קוד ביניים, איטי יותר בתנאים, זקוק לפחות זיכרון, כל הרצה מחדש מתורגמת, שגיאות מתגלות מיד. Java היא שילוב: javac הוא מהדר (source->bytecode), וה-JVM הוא אינטרפרטר (bytecode->machine code) עם JIT שמוסיף קומפילציה חלקית.",
+      "JVM (מפרש bytecode, תלוי-פלטפורמה) לעומת JIT (מקמפל בזמן ריצה חלקים חמים מה-bytecode למכונה) לעומת javac (מהדר סטטי, source->bytecode, פלטפורמה-אגנוסטי).",
+      "JDK (כלי פיתוח + JRE) לעומת JRE (JVM + ספריות ריצה) לעומת JVM (מנוע ההרצה בלבד).",
+      "Heap (גדול, לאובייקטים, מנוקה ע\"י GC, OutOfMemoryError) לעומת Stack (קטן, לכל Thread, LIFO, StackOverflowError)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-JIT הוא זה שממיר קוד Java ל-Bytecode - זו טעות נפוצה במבחן; זהו תפקידו של javac. ה-JIT ממיר חלק מה-Bytecode הקיים למכונה בזמן ריצה.",
+      "לחשוב ש-Java היא רק אינטרפרטר או רק מהדר - היא משתמשת בשניהם.",
+      "לבלבל בין JVM ל-JRE ל-JDK - JDK הוא הכי רחב (כולל כלי פיתוח), JVM הוא הכי צר (מנוע הרצה בלבד).",
+      "לשכוח שה-JVM עצמו תלוי-פלטפורמה (יש JVM שונה לכל מערכת הפעלה) בעוד ה-Bytecode עצמו הוא אוניברסלי - זה מה שמאפשר cross-platform, לא ההפך."
+    ],
+    "americanTrapPatternsHe": [
+      "אופציה מסיחת דעת נפוצה: 'JIT מבצע אינטרפרטציה של bytecode' - זה תיאור של ה-JVM הרגיל, לא של ה-JIT (הבדל עדין ומכוון).",
+      "אופציה מסיחת דעת: 'JavaFX מאפשרת ל-Java להיות cross-platform' - התשובה הנכונה תמיד JVM, לא JavaFX (מופיע כמעט בכל מבחן).",
+      "'מה מגיע אל ה-JVM?' - אופציות מסיחות כמו 'תוצר של Interpreter' או 'קוד java' - התשובה הנכונה היא Bytecode (תוצר הקומפיילר javac)."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "JIT Compiler: רכיב ב-JVM שבמקום לפרש bytecode מחדש בכל קריאה למתודה, מקמפל אותו לקוד מכונה נייטיבי ומריץ אותו במקום - תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה.",
+      "מדוע Java היא cross-platform: כי ה-Bytecode יכול לרוץ על כל מכונה שיש בה JVM; ה-JVM תלוי-פלטפורמה, המהדר (javac) אינו תלוי.",
+      "OutOfMemoryError - שגיאת Heap מלא. StackOverflowError - שגיאת Stack מלא (רקורסיה אינסופית)."
+    ],
+    "relatedTopicIds": ["java-basics-oop-memory", "generics-collections-equals-hashcode"],
+    "sourceRefs": [
+      { "fileId": "lec_1_2", "fileName": "Lec_1_2.pptx", "locator": "slides 12-27 (Compiler vs Interpreter, JVM, JIT, JVM/JRE/JDK, Garbage Collector)" },
+      { "fileId": "lec_1_2", "fileName": "Lec_1_2.pptx", "locator": "slides 36-38 (Heap vs Stack)" },
+      { "fileId": "lab_1", "fileName": "Lab 1.pptx", "locator": "slides 7-15 (JDK/JRE/JVM, JIT, Java files, GC)" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q1 (javac), Q3 (D principle), page 8/'3' - 2025 exam, confirmed 100/100" },
+      { "fileId": "date_2018_without_answers", "fileName": "Date 2018 without answers.pdf", "locator": "Q1, Q3 (cross-platform, JIT role)" }
+    ],
+    "subtopics": [
+      { "id": "compiler-vs-interpreter", "titleHe": "מהדר מול מפרש", "titleEn": "Compiler vs Interpreter" },
+      { "id": "jvm-jre-jdk", "titleHe": "JVM מול JRE מול JDK", "titleEn": "JVM vs JRE vs JDK" },
+      { "id": "jit-compiler", "titleHe": "מהדר JIT", "titleEn": "JIT Compiler" },
+      { "id": "heap-vs-stack", "titleHe": "Heap מול Stack", "titleEn": "Heap vs Stack" },
+      { "id": "garbage-collector", "titleHe": "אספן הזבל (GC)", "titleEn": "Garbage Collector" }
+    ]
+  },
+  {
+    "id": "java-basics-oop-memory",
+    "order": 2,
+    "titleHe": "יסודות Java: מחלקות, מודיפיירים, והעברת פרמטרים (Pass-by-Value)",
+    "titleEn": "Java Basics: Classes, Modifiers, Pass-by-Value",
+    "lectureRefs": [1, 2],
+    "labRefs": ["lab_1", "lab_2"],
+    "examFrequency": "medium",
+    "definitionHe": "כל קוד ב-Java נמצא בתוך מחלקה; קובץ יכול להכיל מחלקה public אחת בלבד ושמה חייב להתאים לשם הקובץ. מודיפיירי גישה: private (המחלקה בלבד), package-default (החבילה), protected (חבילה + יורשים), public (כולם). Java היא תמיד Pass-by-Value - גם כשמעבירים אובייקט, מעבירים העתק של ערך ההפניה (הכתובת), לא את ההפניה עצמה ולא את האובייקט.",
+    "intuitiveExplanationHe": "כשמעבירים אובייקט לפונקציה, זה כמו להעביר פתק עם כתובת בית (לא את הבית עצמו ולא את מחזיק הפתק המקורי) - שינוי בכתובת על הפתק החדש (d = new Dog()) לא משפיע על הפתק המקורי, אבל אם הולכים לפי הכתובת ומשנים משהו בתוך הבית עצמו (d.setName()) - זה כן משפיע, כי שני הפתקים מצביעים לאותו בית.",
+    "examAccurateExplanationHe": "'Pass-by-value, ולא Pass-by-reference'. עבור טיפוס פרימיטיבי - מועבר עותק של הערך עצמו. עבור אובייקט - מועבר עותק של ערך ההפניה (הכתובת בזיכרון). לכן: קריאה למתודה שמשנה שדה בתוך האובייקט (d.setName(\"Fifi\")) תשפיע על האובייקט המקורי (שני המשתנים מצביעים לאותו Heap object). לעומת זאת החלפת ההפניה עצמה בתוך המתודה (d = new Dog(\"Fifi\")) לא תשפיע על המשתנה החיצוני - רק העותק המקומי של ההפניה השתנה.",
+    "examplesHe": [
+      "foo(Dog d) { d.setName(\"Fifi\"); } -> משנה את השם של הכלב המקורי (אותו אובייקט ב-Heap)",
+      "foo(Dog d) { d = new Dog(\"Fifi\"); } -> לא משנה כלום בחוץ (רק ההפניה המקומית d הוחלפה)",
+      "public int setValue(Integer y){ y=10; ...} עם int ראשי y=5 בחוץ - הערך בחוץ נשאר 5 כי y פרימיטיבי מועתק"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public static void main(String[] args) {\n    Dog aDog = new Dog(\"Max\");\n    foo(aDog);\n    aDog.getName().equals(\"Fifi\"); // true - name changed inside the object\n}\npublic static void foo(Dog d) {\n    d.setName(\"Fifi\"); // changes the SAME object's field\n}",
+        "captionHe": "דוגמת Pass-by-Value עם שינוי שדה (lec_1_2 סליידים 51-52)"
+      }
+    ],
+    "comparisons": [
+      "Pass-by-value (Java, תמיד) לעומת Pass-by-reference (שפות אחרות כמו C++ עם &) - ב-Java לעולם לא מעבירים את המשתנה עצמו, רק עותק של ערכו (כולל עבור הפניות לאובייקטים).",
+      "Access modifiers: private < default (package) < protected < public מבחינת היקף הנגישות."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-Java היא Pass-by-reference כי מעבירים אובייקטים - זו טעות. Java היא תמיד Pass-by-value; מה שמועבר הוא עותק של ערך ההפניה.",
+      "לבלבל בין שינוי שדה בתוך אובייקט (משפיע על המקור) לבין החלפת ההפניה עצמה בתוך הפונקציה (לא משפיע על המקור)."
+    ],
+    "americanTrapPatternsHe": [
+      "שאלה קלאסית: 'Is Java pass-by-reference or pass-by-value?' - עם תשובת מלכודת 'pass-by-reference' (כי מעבירים אובייקטים) - התשובה הנכונה תמיד pass-by-value.",
+      "קוד שמראה d.setName() לעומת d = new Dog() - שאלת מבחן קלאסית שבודקת האם מבינים את ההבדל בין שינוי אובייקט קיים להחלפת הפניה מקומית."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Java תמיד Pass-by-Value: כשמעבירים אובייקט כפרמטר, מועבר עותק (copy) של ערך ההפניה (bits של הכתובת), לא ההפניה עצמה ולא האובייקט."
+    ],
+    "relatedTopicIds": ["java-platform-jvm", "oop-pillars-abstraction"],
+    "sourceRefs": [
+      { "fileId": "lec_1_2", "fileName": "Lec_1_2.pptx", "locator": "slides 30-53 (Basic Definitions, Modifiers, Parameter Passing)" },
+      { "fileId": "lab_1", "fileName": "Lab 1.pptx", "locator": "slides 16-22 (Parameters Passing, Variables, Functions, Enums)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture_1_2/ByValue.java, Main.java" }
+    ],
+    "subtopics": [
+      { "id": "class-structure", "titleHe": "מבנה מחלקה וקובץ", "titleEn": "Class and File Structure" },
+      { "id": "access-modifiers", "titleHe": "מודיפיירי גישה", "titleEn": "Access Modifiers" },
+      { "id": "pass-by-value", "titleHe": "העברת פרמטרים", "titleEn": "Parameter Passing" }
+    ]
+  },
+  {
+    "id": "uml-class-diagrams",
+    "order": 3,
+    "titleHe": "תרשימי מחלקות UML וקשרים בין מחלקות",
+    "titleEn": "UML Class Diagrams and Relationships",
+    "lectureRefs": [1, 2],
+    "labRefs": ["lab_2"],
+    "examFrequency": "medium",
+    "definitionHe": "תרשים מחלקות (Class Diagram) מתאר את הישויות במערכת ואת הקשרים הסטטיים ביניהן: Association (קשר כללי, עם Multiplicity), Aggregation (הכלה חלשה - יהלום ריק, העצם המוכל יכול להתקיים בלי המכיל), Composition/Composite Aggregation (הכלה חזקה - יהלום מלא, העצם המוכל תלוי בקיום המכיל), Generalization (ירושה, חץ משולש ריק), ו-Realization (מימוש ממשק, חץ מקווקו עם משולש ריק).",
+    "intuitiveExplanationHe": "Aggregation זה כמו 'מכונית ודלת שאפשר להוריד ולהרכיב במכונית אחרת' - הדלת יכולה להתקיים בלי המכונית הספציפית. Composition זה כמו 'מצולע ונקודות הקודקוד שלו' - הנקודות לא קיימות בלי המצולע הספציפי; אם המצולע נהרס, גם הנקודות נהרסות.",
+    "examAccurateExplanationHe": "Multiplicity מציינת טווח כמויות: 1 (בדיוק אחד), * או 0..* (אפס או יותר), 1..* (אחד או יותר), 0..1 (אפס או אחד), 2..4 (טווח מוגדר). Composition: ריבוי הצד המכיל (Whole) חייב להיות 0 או 1, ומחזור החיים של החלק תלוי לחלוטין במכיל - המכיל אחראי ליצירה והשמדה של החלקים. Generalization מאפשרת לתת-מחלקה להוסיף שדות/מתודות/קשרים ולדרוס (Override) מתודות בירושה, אך לא ניתן להשתמש בה כדי לדגמן מימוש ממשק (Realization היא לכך).",
+    "examplesHe": [
+      "Car (Whole) 1..* -- Door (Part) : Aggregation - הדלת יכולה להתקיים גם בלי המכונית",
+      "Polygon (Whole) 1 -- Point (Part) 3..* : Composition - הנקודות נמחקות כשהמצולע נמחק",
+      "Circle --|> Shape --|> Object : Generalization (ירושה)",
+      "LinkedList ..|> <<interface>> List : Realization (מימוש ממשק)"
+    ],
+    "codeSnippets": [],
+    "comparisons": [
+      "Aggregation (יהלום ריק, קשר חלש - 'has-a' עם קיום עצמאי) לעומת Composition (יהלום מלא, קשר חזק - 'owns-a' עם תלות מלאה בקיום).",
+      "Generalization (ירושה בין מחלקות, extends) לעומת Realization (מימוש ממשק, implements) - שניהם מצוירים כחץ עם משולש ריק, אך Generalization ברציף ו-Realization מקווקו."
+    ],
+    "commonMistakesHe": [
+      "לבלבל בין Aggregation ל-Composition - ההבדל הקריטי הוא: האם החלק יכול להתקיים ללא המכיל (Aggregation) או לא (Composition).",
+      "לחשוב שניתן להשתמש ב-Generalization כדי לדגמן מימוש ממשק - זה שגוי, לכך משמש Realization."
+    ],
+    "americanTrapPatternsHe": [
+      "בשאלות המציגות תרשים UML ושואלות 'איזה עיקרון עיצובי מופר' - יש לשים לב אם מדובר בשתי מתודות לא קשורות תחת מחלקה אחת (SRP) או בממשק 'שמן' (ISP) - אלו שני עקרונות שונים שקל לבלבל ביניהם כשמסתכלים באופן שטחי על אותו תרשים."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Aggregation: יחס הכלה חלש - מחלקה מכילה מצביע לעצם, כאשר העצם המוצבע יכול להתקיים ללא המחלקה המכילה.",
+      "Composite Aggregation (Composition): יחס הכלה חזק - מחלקה מכילה עצם, כאשר העצם המוכל מתקיים רק עם העצם המכיל; המכיל חייב לנהל את יצירת/השמדת החלקים."
+    ],
+    "relatedTopicIds": ["oop-pillars-abstraction", "solid-principles"],
+    "sourceRefs": [
+      { "fileId": "lec_1_2", "fileName": "Lec_1_2.pptx", "locator": "slides 54-70 (Class Diagram, Associations, Multiplicity, Aggregation, Composition, Generalization, Realization)" },
+      { "fileId": "lab_2", "fileName": "Lab 2.pptx", "locator": "slides 16-24 (UML classification, class diagram signs, association, generalization)" }
+    ],
+    "subtopics": [
+      { "id": "association-multiplicity", "titleHe": "קשר ו-Multiplicity", "titleEn": "Association and Multiplicity" },
+      { "id": "aggregation-composition", "titleHe": "Aggregation מול Composition", "titleEn": "Aggregation vs Composition" },
+      { "id": "generalization-realization", "titleHe": "Generalization מול Realization", "titleEn": "Generalization vs Realization" }
+    ]
+  },
+  {
+    "id": "oop-pillars-abstraction",
+    "order": 4,
+    "titleHe": "עקרונות OOP: הכלה, ירושה, פולימורפיזם, מחלקות אבסטרקטיות וממשקים",
+    "titleEn": "OOP Pillars: Encapsulation, Inheritance, Polymorphism, Abstract Classes vs Interfaces",
+    "lectureRefs": [1, 2, 5],
+    "labRefs": ["lab_2"],
+    "examFrequency": "medium",
+    "definitionHe": "ארבעת עקרונות ה-OOP: Encapsulation (כימוס - אריזת מצב והתנהגות יחד תוך הסתרת מימוש פנימי), Inheritance (ירושה - מחלקה יורשת שדות/מתודות ממחלקת-אב עם extends, מונע שכפול קוד), Polymorphism (ריבוי-צורות - אובייקט יכול 'ללבוש' זהויות שונות לפי עץ הירושה שלו), ו-Abstraction (תכנות טיפוסים לא מופעים). מחלקה אבסטרקטית (abstract class) לא ניתן ליצור ממנה מופע; יש לה לפחות מתודה אבסטרקטית אחת (ללא מימוש) שמחלקת-בת קונקרטית חייבת לממש. ממשק (interface) הוא חוזה טהור - כל המתודות מופשטות (עד Java 8 שהוסיפה default methods); ב-Java ניתן לממש (implements) מספר ממשקים אך לרשת (extends) רק ממחלקה אחת.",
+    "intuitiveExplanationHe": "Encapsulation זה כמו קופסה שחורה - את יודע מה נכנס ומה יוצא, לא איך זה עובד בפנים. Polymorphism זה כש-Circle הוא גם Shape וגם Object בו-זמנית - אפשר להתייחס אליו בכל אחת מהצורות. מחלקה אבסטרקטית היא כמו 'טופס עם שדות חובה חלקית ממולאים' - חלק מהמידע כבר שם (שדות ומתודות ממומשות), אבל חייבים למלא את החלקים החסרים (מתודות אבסטרקטיות) לפני שאפשר 'להגיש' (ליצור מופע).",
+    "examAccurateExplanationHe": "כאשר מחלקה מכריזה על מתודה כ-abstract, כל המחלקה הופכת אבסטרקטית ולא ניתן ליצור ממנה מופע ישירות עם new. רק מחלקת-בת קונקרטית שמימשה את כל המתודות האבסטרקטיות ניתנת ליצירה. שימוש במחלקה אבסטרקטית עדיף כאשר: המחלקות קשורות זו לזו (הדוק), רוצים לשתף קוד/שדות לא-סטטיים בין יורשים, וצריך גישה שאינה public (protected/private). שימוש בממשק עדיף כאשר: המחלקות המממשות לא קשורות זו לזו (כמו Comparable ו-Cloneable), רוצים 'ריבוי ירושה' של טיפוס (multiple inheritance of type), או רוצים להגדיר התנהגות בלי לדעת מי ימש אותה. מ-Java 8: אפשר להוסיף מימוש ברירת מחדל לממשק בעזרת המילה default (למשל isEmpty() ב-Stack שפשוט מחזירה size()==0).",
+    "examplesHe": [
+      "Shape (abstract, {abstract}) --> Rectangle, Circle, Triangle (subclasses מממשות computeArea())",
+      "interface List<E> { ... default boolean isEmpty(){ return size()==0; } }",
+      "מחלקה A עם ממשק Hello ומחלקה B אבסטרקטית יורשת ממנה - B יכולה להשאיר את hello() לא ממומשת (אבסטרקטית) והמחלקות שיורשות מ-B חייבות לממש אותה"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public class Person {\n    private String name;\n    protected java.util.Date birthDate;\n    String id; // default accessibility = package\n    public Person() {}\n}",
+        "captionHe": "דוגמת מודיפיירי גישה (lec_1_2 סליידים 43-44)"
+      }
+    ],
+    "comparisons": [
+      "Abstract Class (למחלקות קשורות, שיתוף קוד, שדות לא-סטטיים, protected/private) לעומת Interface (למחלקות לא קשורות, 'ריבוי ירושה' של טיפוס, חוזה טהור בלי state).",
+      "Overriding (פולימורפיזם בזמן ריצה - dynamic binding, מתודה עם אותה חתימה במחלקת-בת) לעומת Overloading (פולימורפיזם בזמן קומפילציה - static binding, אותו שם מתודה עם פרמטרים שונים)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב שאפשר ליצור מופע (new) של מחלקה אבסטרקטית - אסור, גם אם רק מתודה אחת מוגדרת abstract.",
+      "לשכוח שמחלקת-בת קונקרטית חייבת לממש את כל המתודות האבסטרקטיות של האב, אחרת היא עצמה נותרת אבסטרקטית.",
+      "לבלבל בין Overriding (runtime polymorphism) ל-Overloading (compile-time polymorphism) - זו שאלת מלכודת נפוצה."
+    ],
+    "americanTrapPatternsHe": [
+      "שאלה: 'איזו מ-Overloading/Overriding אינה polymorphism בזמן קומפילציה' - התשובה שמפילה סטודנטים היא Overriding (זה runtime, לא compile-time).",
+      "שאלה על ממשק A עם hello() ומחלקה אבסטרקטית B היורשת ממנו - B אינה חייבת לממש את hello() (מותר להשאיר אבסטרקטי), אבל מחלקה קונקרטית שיורשת מ-B חייבת."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Abstract Class: מחלקה שלא ניתן ליצור ממנה מופע (new); ברגע שלפחות מתודה אחת מסומנת abstract, כל המחלקה הופכת מופשטת; מחלקה יורשת קונקרטית חייבת לממש את כל המתודות האבסטרקטיות.",
+      "Interface: חוזה המגדיר אילו מתודות מחלקה צריכה לממש (implements); ב-Java ניתן לממש מספר ממשקים במקביל; מ-Java 8 ניתן לספק default implementation."
+    ],
+    "relatedTopicIds": ["uml-class-diagrams", "design-patterns-behavioral", "solid-principles"],
+    "sourceRefs": [
+      { "fileId": "lec_1_2", "fileName": "Lec_1_2.pptx", "locator": "slides 71-87 (OOP principles, abstract classes, interfaces)" },
+      { "fileId": "lec_5", "fileName": "Lec_5.pptx", "locator": "slides 33-36 (default methods, Abstract vs Interface)" },
+      { "fileId": "lab_2", "fileName": "Lab 2.pptx", "locator": "slides 9-13 (Inheritance, Abstract classes, Interfaces)" },
+      { "fileId": "restoration_2023_version_a", "fileName": "Restoration 2023 Version A.docx", "locator": "Q9 (interface A with hello(), abstract class B)" }
+    ],
+    "subtopics": [
+      { "id": "encapsulation-inheritance", "titleHe": "כימוס וירושה", "titleEn": "Encapsulation and Inheritance" },
+      { "id": "polymorphism", "titleHe": "פולימורפיזם", "titleEn": "Polymorphism" },
+      { "id": "abstract-vs-interface", "titleHe": "מחלקה אבסטרקטית מול ממשק", "titleEn": "Abstract Class vs Interface" }
+    ]
+  },
+  {
+    "id": "state-space-decoupling-interfaces",
+    "order": 5,
+    "titleHe": "מסיפור לקוד: בעיות מרחב-מצבים והפרדת אלגוריתם מבעיה (ISearchable/ISearcher)",
+    "titleEn": "From Story to Code: State-Space Problems and Algorithm/Problem Decoupling",
+    "lectureRefs": [3],
+    "labRefs": ["lab_2", "atp2026_lab2"],
+    "examFrequency": "low",
+    "definitionHe": "תהליך ניתוח מונחה-עצמים (OOA): לאסוף דרישות מהסיפור, לתאר את המערכת, לזהות ישויות (שמות עצם) ומחלקות, לתאר אינטראקציות (פעלים), וליצור תרשים מחלקות - רק לבסוף לפתח. בעיות רבות (מבוך, פאזל-8, תכנון מסלול) הן בפועל בעיות חיפוש במרחב מצבים (State-Space Search): State (תמונת עולם), Start State, Goal Test, ו-Successor Function (מחזירה את השכנים האפשריים ועלותם). כדי לא לצמוד אלגוריתם חיפוש (כמו BFS) לבעיה ספציפית (כמו מבוך), מגדירים שני ממשקים: ISearchable (חוזה מול הבעיה: getInitialState, isGoalState, getAllPossibleStates) ו-ISearcher (חוזה מול האלגוריתם: search, getNumberOfNodesEvaluated). מחלקת BaseSearcher אבסטרקטית משותפת מונעת שכפול קוד (ניהול open/closed lists) בין BFS/DFS/A*.",
+    "intuitiveExplanationHe": "דמיין שאתה בונה 'שקע' אוניברסלי (ISearchable) שכל בעיה חדשה (מבוך, פאזל) צריכה להתאים אליו, ו'תקע' אוניברסלי (ISearcher) שכל אלגוריתם חיפוש חדש (BFS, DFS, A*) מתאים אליו - כך אפשר לחבר כל תקע לכל שקע בלי לשנות קוד קיים.",
+    "examAccurateExplanationHe": "הארכיטקטורה הזו (שני היררכיות עצמאיות המחוברות דרך ממשקים) היא בעצם תבנית Bridge במימוש טבעי: היררכיית הבעיות (ISearchable -> Maze, EightPuzzle) לעומת היררכיית האלגוריתמים (ISearcher -> BaseSearcher -> BFS, DFS, A-Star), כשניתן להריץ כל אלגוריתם על כל בעיה ללא שינוי קוד (test(maze, bfs) ואז test(eightPuzzle, bfs) ללא שינוי ה-bfs עצמו).",
+    "examplesHe": [
+      "state = [node, parent_node, cost] - ייצוג מצב עם הפניה להורה ולעלות ההגעה",
+      "IProblem/ISearchable ממומש ע\"י Maze ו-EightPuzzle",
+      "IAlgorithm/ISearcher ממומש ע\"י BFS, DFS, A-Star דרך BaseSearcher אבסטרקטי"
+    ],
+    "codeSnippets": [],
+    "comparisons": [
+      "מודל זה (הפרדת בעיה מאלגוריתם דרך שני ממשקים) שקול רעיונית לתבנית Bridge, ומדגים כיצד Dependency Injection ו-Interfaces עובדים יחד למניעת צימוד (Coupling)."
+    ],
+    "commonMistakesHe": [
+      "לדלג על שלב תרשים המחלקות ולקפוץ ישר לפיתוח - מוביל ל'קוד ספגטי'.",
+      "לשכוח לדרוס equals()/hashCode() במחלקת State כדי שהשוואה בין מצבים (למשל מציאת אם הגענו ליעד) תעבוד נכון."
+    ],
+    "americanTrapPatternsHe": [
+      "בשאלות פרויקט-ספציפיות (למשל 'היכן השתמשת ב-object adapter בפרויקט'), התשובה תלויה בהקשר של המבוך/החלק הספציפי בעבודת הבית - יש לשנן את ההקשר המדויק של כל שימוש בדפוס בפרויקט הקורס (חלק א/ב/ג)."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "State-Space Search Problem מוגדר על ידי: State Space, Successor Function, Start State, ו-Goal Test."
+    ],
+    "relatedTopicIds": ["design-patterns-structural", "solid-principles"],
+    "sourceRefs": [
+      { "fileId": "lec_3", "fileName": "lec_3.pptx", "locator": "כל המצגת - slides 1-22 (State Space, ISearchable, ISearcher, BaseSearcher)" },
+      { "fileId": "atp2026_lab2", "fileName": "ATP2026_Lab2.zip", "locator": "Classes/AShape.java, IShape.java, IDrawable.java - shapes hierarchy example" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q4 (object adapter usage in project, 2025 exam)" }
+    ],
+    "subtopics": [
+      { "id": "ooa-steps", "titleHe": "שלבי ניתוח מונחה-עצמים", "titleEn": "OOA Steps" },
+      { "id": "state-space-search", "titleHe": "בעיות חיפוש במרחב מצבים", "titleEn": "State-Space Search Problems" },
+      { "id": "isearchable-isearcher", "titleHe": "ISearchable ו-ISearcher", "titleEn": "ISearchable and ISearcher" }
+    ]
+  },
+  {
+    "id": "solid-principles",
+    "order": 6,
+    "titleHe": "עקרונות SOLID",
+    "titleEn": "SOLID Design Principles",
+    "lectureRefs": [4],
+    "labRefs": ["lab3_upd", "lab_4_prod"],
+    "examFrequency": "high",
+    "definitionHe": "חמשת עקרונות SOLID (Robert C. Martin, 'Uncle Bob'): S - Single Responsibility Principle (למחלקה צריכה להיות סיבה אחת בלבד להשתנות), O - Open Closed Principle (פתוח להרחבה, סגור לשינוי - דרך ירושה/הכלה), L - Liskov Substitution Principle (ניתן להחליף אובייקט ממחלקת-אב באובייקט ממחלקה יורשת מבלי לשבור את התוכנית), I - Interface Segregation Principle (לקוחות לא צריכים להיות תלויים בממשקים שאינם משתמשים בהם - ממשקים קטנים ולא 'שמנים'), D - Dependency Inversion Principle (מודולים ברמה גבוהה לא תלויים במודולים ברמה נמוכה; שניהם תלויים באבסטרקציות/ממשקים).",
+    "intuitiveExplanationHe": "S: 'עשה דבר אחד טוב, לא הכל'. O: 'הוסף - אל תשנה קוד קיים'. L: 'אם זה נראה כמו ברווז אבל לא מתנהג כמו ברווז - זו לא ירושה תקינה'. I: 'אל תכריח לקוח לממש מתודות שלא רלוונטיות לו'. D: 'תלוי בממשק, לא במימוש הקונקרטי - כדי שיהיה קל להחליף'.",
+    "examAccurateExplanationHe": "S - דוגמה קלאסית למבחן: ממשק Modem שגם מנהל חיבור (connect/disconnect) וגם מנהל תקשורת נתונים (send/receive) - הפתרון: לפצל לשני ממשקים DataChannel ו-Connection. O - דוגמה: GraphicEditor עם if-else לפי סוג צורה (Circle/Square/Rectangle) - כל הוספת צורה מחייבת לשנות את GraphicEditor; הפתרון - ממשק Shape עם draw() שכל צורה מממשת בעצמה. L - הדוגמה הקלאסית ביותר למבחן: Square יורש מ-Rectangle. אם למתכנת יש אובייקט שהוא חושב שהוא Rectangle ומבצע setWidth(5) ואז setHeight(10), הוא מצפה לשטח 50, אך אם בפועל זה Square, השטח יהיה 100 - התנהגות בלתי-צפויה = הפרת LSP. הפתרון: שני מחלקות נפרדות היורשות ממחלקה אבסטרקטית משותפת (Shape). I - ממשק Mammal עם eat() ו-walkOnLand(); מחלקה Whale (לוויתן, יונק) לא יכולה 'ללכת על אדמה' - הפתרון: לפצל לשני ממשקים. D - EmployeeService תלוי ישירות ב-DBEmployeeFinder הקונקרטי; הפתרון - EmployeeService יהיה תלוי בממשק IEmployeeFinder ונזריק (Dependency Injection) כל מימוש שנרצה (DB, XML, קובץ שטוח, Mock).",
+    "examplesHe": [
+      "S מופר: OrderService יוצר MySQLDatabase ישירות בבנאי שלו ומטפל גם בלוגיקה עסקית וגם בגישה ישירה למסד נתונים (זה בעצם גם הפרת D)",
+      "L מופר: Square extends Rectangle עם setWidth/setHeight שמשנים את שני הצדדים יחד בריבוע",
+      "I מופר: ממשק Worker עם work() ו-eat(); RobotWorker חייב לממש eat() חסר-משמעות",
+      "D מופר: OrderService עם private MySQLDatabase database = new MySQLDatabase(); (תלות ישירה במימוש קונקרטי במקום בממשק)"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "// הפרת D - תלות ישירה במחלקה קונקרטית\nclass MySQLDatabase {\n    public void saveOrder(String order){ ... }\n}\nclass OrderService {\n    private MySQLDatabase database = new MySQLDatabase(); // תלות במימוש, לא בממשק\n    public void placeOrder(String order){ database.saveOrder(order); }\n}",
+        "captionHe": "דוגמה שהופיעה במבחן אמיתי (grade_100_term_a Q15, 2025) - הפרת Dependency Inversion Principle"
+      }
+    ],
+    "comparisons": [
+      "SRP (מחלקה עם יותר מדי אחריות בעצמה) לעומת ISP (ממשק עם יותר מדי מתודות לא-קשורות שהמחלקות המממשות נאלצות לספק) - שני עקרונות שקל לבלבל: SRP הוא על מחלקה, ISP הוא על ממשק.",
+      "LSP (התנהגות של יורש לא תואמת ציפיות מהאב) לעומת OCP (קושי להרחיב בלי לשנות קוד קיים) - LSP עוסק בנכונות ההחלפה, OCP עוסק בקלות ההרחבה."
+    ],
+    "commonMistakesHe": [
+      "לבלבל בין SRP ל-ISP כאשר רואים תרשים מחלקה עם כמה מתודות לא קשורות - אם זו מחלקה אחת עם כמה אחריות = SRP; אם זה ממשק שמכריח מחלקות מיותרות לממש מתודות לא רלוונטיות = ISP.",
+      "לחשוב ש-Factory Design Pattern תמיד פוגע ב-SOLID - למעשה הוא תומך ב-OCP (Factory לא פוגע אלא תומך; ראה 'reconstruction' exam Q2 בו התשובה היא ש-Factory אינו פוגע בשום עיקרון).",
+      "בזיהוי LSP: להתבלבל בין ריבוע-יורש-ממלבן (LSP) לבין מחלקה עם שתי אחריות (SRP) - הבחנה קריטית היא אם ההתנהגות של היורש 'שוברת' ציפיות מהאב (LSP) לעומת אם למחלקה יש יותר מדי אחריות (SRP)."
+    ],
+    "americanTrapPatternsHe": [
+      "'ריבוע יורש ממלבן' - זו תמיד שאלת LSP (Liskov), למרות שיש דעה אינטואיטיבית מוטעית ש'זה נראה כמו IS-A geometrically'. תשובה קבועה: ד (L).",
+      "תרשים UML עם GraphicEditor שמכיר את כל הצורות (Rectangle, Circle) ומכיל if-else לציור - יכול להיראות כמו SRP (יותר מדי אחריות) אבל בהקשר של הרחבה (הוספת צורה חדשה) זו יכולה להיות שאלה על OCP - יש לקרוא בעיון את השאלה: 'איזה עיקרון מופר בתרשים' לעיתים מנוסח כתשובה משולבת (למשל 'ג+ד').",
+      "תשובות מורכבות כמו 'ג+ד' (שילוב שני עקרונות) מופיעות במבחנים אמיתיים - אל תניחו שרק תשובה אחת 'טהורה' נכונה."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "S - Single Responsibility Principle: 'There should never be more than one reason for a class to change' - מחלקה מתמקדת בדבר אחד בלבד.",
+      "O - Open Closed Principle: 'Classes should be open for extension, but closed for modification' - שינוי התנהגות דרך ירושה/הכלה, לא דרך שינוי הקוד הקיים.",
+      "L - Liskov Substitution Principle: 'Functions that use pointers to base classes must be able to use objects of derived classes without knowing it' - תת-מחלקה חייבת להתנהג באופן תקין במקום מחלקת-האב.",
+      "I - Interface Segregation Principle: 'Clients should not be forced to depend upon interfaces that they do not use' - ממשקים קטנים וממוקדים.",
+      "D - Dependency Inversion Principle: 'High level modules should not depend upon low level modules. Both should depend upon abstractions' - תלות בממשקים, לא במימושים קונקרטיים."
+    ],
+    "relatedTopicIds": ["design-patterns-creational", "design-patterns-structural", "oop-pillars-abstraction"],
+    "sourceRefs": [
+      { "fileId": "lec_4", "fileName": "Lec_4.pptx", "locator": "slides 3-20 (SOLID - S,O,L,I,D with examples)" },
+      { "fileId": "lab3_upd", "fileName": "Lab3_Upd.pptx", "locator": "slides 3-19 (SOLID examples: Rectangle SRP, Shape OCP, Square/Rectangle LSP, Mammal/Whale ISP, WebUser/Google DIP)" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q3 (D - dependency inversion), Q15 (D - OrderService/MySQLDatabase) - confirmed correct, 2025 exam" },
+      { "fileId": "advanced_topics_in_programming_part_a_student_solution_2", "fileName": "Advanced Topics in Programming - Part A - Student Solution 2.pdf", "locator": "Q2 (Square/Rectangle LSP violation), 2018 exam" },
+      { "fileId": "restoration_2023_version_a", "fileName": "Restoration 2023 Version A.docx", "locator": "Q2 (Factory DP does not violate any SOLID principle)" }
+    ],
+    "subtopics": [
+      { "id": "srp", "titleHe": "עקרון האחריות היחידה (S)", "titleEn": "Single Responsibility Principle" },
+      { "id": "ocp", "titleHe": "עקרון הפתיחות-סגירות (O)", "titleEn": "Open Closed Principle" },
+      { "id": "lsp", "titleHe": "עקרון ההחלפה של ליסקוב (L)", "titleEn": "Liskov Substitution Principle" },
+      { "id": "isp", "titleHe": "עקרון הפרדת ממשקים (I)", "titleEn": "Interface Segregation Principle" },
+      { "id": "dip", "titleHe": "עקרון היפוך התלויות (D)", "titleEn": "Dependency Inversion Principle" }
+    ]
+  },
+  {
+    "id": "design-patterns-creational",
+    "order": 7,
+    "titleHe": "תבניות עיצוב יצירתיות: Factory ו-Singleton",
+    "titleEn": "Creational Design Patterns: Factory and Singleton",
+    "lectureRefs": [4, 5],
+    "labRefs": ["lab3_upd", "lab_4_prod", "atp2021_lab3"],
+    "examFrequency": "high",
+    "definitionHe": "תבניות יצירה (Creational) עוסקות ביצירה ואתחול של אובייקטים. Factory Method: מגדיר ממשק ליצירת אובייקט, אך משאיר למחלקה מרכזת (Factory) להחליט איזו מחלקה קונקרטית ליצור בזמן ריצה, כך שהלקוח לא צריך לדעת/לכתוב if-else. Singleton: מבטיח שממחלקה מסוימת ייווצר מופע אחד בלבד לאורך כל חיי התוכנית, ומספק נקודת גישה גלובלית אליו - בנאי private, שדה סטטי פרטי שמחזיק את המופע, ומתודה סטטית ציבורית (בדרך כלל getInstance()) שיוצרת אותו רק בפעם הראשונה (lazy initialization).",
+    "intuitiveExplanationHe": "Factory זה כמו מלצר שמקבל הזמנה (מחרוזת כמו 'CIRCLE') ומחזיר את המנה המתאימה בלי שהלקוח צריך לדעת איך מכינים אותה. Singleton זה כמו מנהל אחד בכל בניין - כל מי שצריך לדבר עם ההנהלה מדבר עם אותו מנהל, אי אפשר ליצור מנהל נוסף.",
+    "examAccurateExplanationHe": "Factory: פותר את הבעיה של if-else מרובה ליצירת אובייקטים בזמן ריצה (כשלא יודעים את הטיפוס המדויק בזמן קומפילציה); תומך ב-Open/Closed Principle - הוספת סוג חדש לא דורשת שינוי בקוד הלקוח, רק הוספה ל-Factory. Singleton: אסור להשתמש במשתנה גלובלי כי הוא מאפשר גישה אך לא מונע יצירת מופעים נוספים עם new; אין ב-Java דבר כזה משתנה גלובלי אמיתי. Executors (java.util.concurrent) הוא בעצמו Factory שמספק מופעים של ExecutorService (שאלת מבחן ישירה: 'Executors מספקת ממשק ליצירת thread pools... באיזו תבנית עיצוב היא משתמשת?' - Factory).",
+    "examplesHe": [
+      "ShapeFactory.getShape(\"CIRCLE\") מחזיר אובייקט Circle - Factory Method קלאסי",
+      "TaskManager.getInstance() - Singleton (בנאי private, מופע סטטי, שיטת גישה סטטית) - מהמעבדה atp2021_lab3",
+      "Executors.newFixedThreadPool(n) - Factory שמייצר ExecutorService (2025 exam Q12: 'Executors uses Factory pattern')"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public class TaskManager {\n    private static TaskManager instance = null;\n    private Queue<ITask> waitingTasks;\n    private TaskManager() { waitingTasks = new LinkedList<>(); } // private!\n    public static TaskManager getInstance(){\n        if(instance == null){ instance = new TaskManager(); }\n        return instance;\n    }\n}",
+        "captionHe": "מימוש Singleton אמיתי מ-atp2021_lab3 (TaskManager.java) - שים לב: לא Thread-safe (בעיית race condition אם שני threads קוראים ל-getInstance בו-זמנית)"
+      }
+    ],
+    "comparisons": [
+      "Factory (יצירת אובייקטים - מפתרת בעיית 'אילו מחלקה ליצור בזמן ריצה') לעומת Singleton (הבטחת מופע יחיד - מפתרת בעיית 'מניעת יצירת יותר ממופע אחד').",
+      "Singleton לעומת משתנה גלובלי סטטי פשוט - Singleton מונע יצירת מופעים נוספים (בנאי private), משתנה גלובלי לא."
+    ],
+    "commonMistakesHe": [
+      "מימוש Singleton נאיבי (if(instance==null) instance=new X()) אינו Thread-safe - שני threads יכולים לעבור את הבדיקה if בו-זמנית לפני שהראשון סיים ליצור מופע, וכך נוצרים שני מופעים (race condition) - זה בדיוק מה שמוצג ב-lec_8 slide 14.",
+      "לחשוב שהוספת מודיפייר synchronized לכל המתודה getInstance() היא הפתרון האידיאלי - זה פוגע בביצועים (double-checked locking או Bill Pugh Singleton עם static holder class הם פתרונות יעילים יותר, מוזכרים בסיכומי סטודנטים כתוספת)."
+    ],
+    "americanTrapPatternsHe": [
+      "שאלה: 'Executors מספקת ממשק ליצירת thread pools... באיזו תבנית עיצוב היא משתמשת?' - תשובה: Factory (לא Singleton, לא Builder) - מופיע ב-grade_100_term_a Q12 (2025, מאושר נכון).",
+      "שאלה: 'איזה עיקרון סוליד נפגע ב-factory DP' - תשובת מלכודת: Factory אינו פוגע בשום עיקרון SOLID; הוא דווקא תומך ב-OCP (restoration_2023 Q2)."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Factory Method Pattern: מגדיר ממשק ליצירת אובייקט, אך מאפשר למחלקות-בת (או למחלקת factory) להחליט איזו מחלקה קונקרטית ליצור.",
+      "Singleton Pattern: מבטיח שמחלקה תיווצר ממנה מופע אחד בלבד ומספק נקודת גישה גלובלית אליו; מומש עם בנאי private, שדה instance סטטי, ומתודת getInstance() סטטית."
+    ],
+    "relatedTopicIds": ["solid-principles", "design-patterns-structural", "concurrency-utilities-callable-future-mediator"],
+    "sourceRefs": [
+      { "fileId": "lec_4", "fileName": "Lec_4.pptx", "locator": "slides 35-40 (Factory Design Pattern - problem, solution, code, benefits)" },
+      { "fileId": "lec_5", "fileName": "Lec_5.pptx", "locator": "slides 18-22 (Singleton Design Pattern)" },
+      { "fileId": "lab3_upd", "fileName": "Lab3_Upd.pptx", "locator": "slides 40-43 (Singleton lab exercise)" },
+      { "fileId": "lab_4_prod", "fileName": "Lab 4-prod.pptx", "locator": "slides 13-20 (Factory Design Pattern - code, improved version)" },
+      { "fileId": "atp2021_lab3", "fileName": "ATP2021_Lab3.zip", "locator": "src/Tasks/TaskManager.java (real Singleton implementation)" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q10 (Singleton for config file loading), Q12 (Executors uses Factory) - 2025 exam confirmed" }
+    ],
+    "subtopics": [
+      { "id": "factory-method", "titleHe": "Factory Method", "titleEn": "Factory Method" },
+      { "id": "singleton", "titleHe": "Singleton", "titleEn": "Singleton" }
+    ]
+  },
+  {
+    "id": "design-patterns-structural",
+    "order": 8,
+    "titleHe": "תבניות עיצוב מבניות: Bridge, Facade, Adapter, Decorator",
+    "titleEn": "Structural Design Patterns: Bridge, Facade, Adapter, Decorator",
+    "lectureRefs": [4, 5, 10],
+    "labRefs": ["lab3_upd", "lab_10", "presentation8"],
+    "examFrequency": "high",
+    "definitionHe": "תבניות מבניות (Structural) עוסקות בהרכבת מחלקות ואובייקטים. Bridge: מפריד אבסטרקציה (Abstraction) מהמימוש שלה (Implementation) כך ששתיהן יכולות להתפתח באופן עצמאי - פותר בעיית 'התפוצצות מחלקות' כשיש שני צירי שינוי (למשל צורה x צבע). Facade: מחלקה יחידה שמספקת ממשק פשוט המסתיר מורכבות של תת-מערכת שלמה מהלקוח. Adapter: 'מתרגם' ממשק אחד לממשק אחר כדי לאפשר לשני קודים לא-תואמים לעבוד יחד (Class Adapter - יורש; Object Adapter - מכיל/מכליל). Decorator: מוסיף התנהגות לאובייקט בודד באופן דינמי בזמן ריצה, מבלי לשנות את המחלקה המקורית ומבלי להשפיע על מופעים אחרים של אותה מחלקה.",
+    "intuitiveExplanationHe": "Bridge: מקרן מחשב (Abstraction) יכול לעבוד עם כל סוג כבל/ריזולוציה (Implementation) בלי ליצור מקרן נפרד לכל שילוב. Facade: כפתור 'הפעל סרט' בפולט אחד שמפעיל ברקע גם את הטלוויזיה, גם את הרסיבר וגם את מנגן הבלוריי. Adapter: מתאם חשמל בין שקע אירופאי לאמריקאי. Decorator: תוספות לגלידה (אגוזים, דבש) - כל תוספת עוטפת את הגלידה ומוסיפה משהו בלי לשנות את מחלקת הגלידה הבסיסית.",
+    "examAccurateExplanationHe": "Bridge לעומת Strategy (מלכודת נפוצה): Bridge היא תבנית מבנית (Structural) שמטרתה להפריד אבסטרקציה ממימוש כך ששניהם יכולים להתרחב באופן עצמאי (למשל Shape hierarchy נפרד מ-Color/DrawingAPI hierarchy) - הלקוח פעמים רבות לא מודע לבחירת המימוש. Strategy היא תבנית התנהגותית (Behavioral) שמטרתה לבחור אלגוריתם/התנהגות בזמן ריצה - הלקוח כן מודע ובוחר את ה-Strategy במפורש. דוגמה קלאסית שחוזרת בין מבחנים: תרשים עם ThreadScheduler -> {PreemptiveThreadScheduler -> UnixPTS/WindowsPTS} ו-{TimeSlicedThreadScheduler -> UnixTSTS/WindowsTSTS} - שני צירי שינוי (מדיניות תזמון x מערכת הפעלה) - זו דוגמה קלאסית ל-Bridge (אושרה כתשובה נכונה במבחן 2024, ד-Bridge). Adapter: Class Adapter משתמש בירושה מרובה (יורש גם מהמחלקה שרוצים להתאים וגם מהממשק היעד); Object Adapter משתמש בהכלה (Composition) - מחזיק מופע של המחלקה שרוצים להתאים אליה. Object Adapter גמיש יותר כי עובד ברמה גבוהה יותר (מתאים לכל תת-מחלקה של הטיפוס המקורי), בעוד Class Adapter מוגבל למחלקה ספציפית אחת.",
+    "examplesHe": [
+      "Bridge: Calculator (abstraction) עם CalculatorEngine (implementation) - CasioEngine/TexasInstrumentsEngine נפרדים מ-BasicCalculator/GraphicCalculator (lab_10 קוד מלא)",
+      "Facade: ATM שמסתיר welcome message, accountNumberChecker, SecurityCodeChecker, fundsChecker מאחורי מחלקת חזית אחת",
+      "Adapter: BubbleWorkerSorterTask (Class Adapter - יורש מ-BubbleWorkerSorter וגם ITask) לעומת WorkerSorterTask (Object Adapter - מכיל IWorkerSorter כתלות)",
+      "Decorator: IcecreamDecorator עם NuttyDecorator ו-HoneyDecorator שעוטפים SimpleIcecream (presentation8, קוד מלא)"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public abstract class IcecreamDecorator implements Icecream {\n    protected Icecream specialIcecream;\n    public IcecreamDecorator(Icecream specialIcecream) { this.specialIcecream = specialIcecream; }\n    public String makeIcecream() { return specialIcecream.makeIcecream(); }\n}\npublic class NuttyDecorator extends IcecreamDecorator {\n    public NuttyDecorator(Icecream specialIcecream) { super(specialIcecream); }\n    public String makeIcecream() { return specialIcecream.makeIcecream() + \" + crunchy nuts\"; }\n}\n// usage: new HoneyDecorator(new NuttyDecorator(new SimpleIcecream())).makeIcecream()",
+        "captionHe": "מימוש Decorator מלא מתוך presentation8 (Lab 8) - דוגמת הגלידה"
+      },
+      {
+        "language": "java",
+        "code": "// Object Adapter - עדיף כי עובד ברמה גבוהה יותר ומתאים לכל sorter\npublic class WorkerSorterTask implements ITask{\n    private IWorkerSorter mySorter;\n    private Worker[] workers;\n    public WorkerSorterTask(IWorkerSorter mySorter, Worker[] workers) {\n        this.mySorter = mySorter; this.workers = workers;\n    }\n    public void doTask() { mySorter.sort(workers); }\n}",
+        "captionHe": "Object Adapter אמיתי מ-atp2021_lab3 (WorkerSorterTask.java) - מתאים כל IWorkerSorter ל-ITask"
+      }
+    ],
+    "comparisons": [
+      "Bridge (Structural, מפריד אבסטרקציה ממימוש, שניהם מתפתחים עצמאית, הלקוח לרוב לא בוחר במפורש) לעומת Strategy (Behavioral, בוחר אלגוריתם בזמן ריצה, הלקוח מודע ובוחר Strategy במפורש). שתי התבניות דומות מבנית (שתיהן משתמשות ב-Composition) אבל שונות בכוונה.",
+      "Facade (מסתיר מורכבות של תת-מערכת שלמה, ממשק חדש ומפושט) לעומת Adapter (מתאים בין שני ממשקים קיימים כדי שיעבדו יחד, בלי לפשט בהכרח).",
+      "Adapter (מטרה: מבנה קוד ישן שלא ניתן לשנות; פותר תאימות אחורה) לעומת Mediator (מטרה: מרכז תקשורת בזמן עיצוב חדש/ריפקטורינג; מפחית צימוד בין רכיבים מרובים).",
+      "Class Adapter (יורש - ירושה מרובה) לעומת Object Adapter (מכיל - Composition, גמיש יותר, מתאים גם לתת-מחלקות)."
+    ],
+    "commonMistakesHe": [
+      "לבלבל בין Bridge ל-Facade - Bridge מפריד שתי היררכיות עצמאיות לצורך הרחבה, Facade פשוט מסתיר מורכבות מהלקוח בלי בהכרח שתי היררכיות מתפתחות.",
+      "לבלבל בין Bridge ל-Strategy - שניהם נראים דומים בקוד (Composition + Interface) אך הכוונה שונה (מבני מול התנהגותי).",
+      "לחשוב ש-Decorator זהה לירושה - הבדל מהותי: ירושה קובעת התנהגות בזמן קומפילציה לכל המחלקה, Decorator משנה התנהגות בזמן ריצה למופע ספציפי בלבד."
+    ],
+    "americanTrapPatternsHe": [
+      "תרשים ThreadScheduler עם שני צירי הרחבה (מדיניות x OS) - נבדק בשלוש שנות מבחנים שונות (2018, 2019, 2024) עם תשובות לא-עקביות בסריקות הישנות; המקור המהימן ביותר (student_solution_2024, מאושר 100% נכון) קובע: Bridge Design Pattern (ד) הוא הפתרון הנכון.",
+      "'איזו תבנית עיצוב הכי מאפיינת Adapter מול Decorator' - שתיהן 'עוטפות' אובייקט, אך Adapter משנה ממשק (compatibility), Decorator מוסיף התנהגות (extension) תוך שמירה על אותו ממשק.",
+      "'מדוע לא לממש גם ITask וגם IWorkerSorter על אותה מחלקה' - תשובה נכונה: זה יפר SRP ('A BubbleWorkerSorter is not a Task! it should stay a pure sorter'), ולכן נדרש Adapter נפרד."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Bridge Pattern: מפריד אבסטרקציה מהמימוש שלה כך ששתיהן יכולות להשתנות ולהתרחב באופן בלתי-תלוי; מונע שכפול קוד/היררכיות מקבילות.",
+      "Facade Pattern: מחלקה אחת שמספקת ממשק פשוט המאחד/מסתיר מספר תת-מערכות מורכבות.",
+      "Adapter Pattern: מאפשר לממשקים לא-תואמים לעבוד יחד; Object Adapter (Composition) לעומת Class Adapter (ירושה מרובה).",
+      "Decorator Pattern: מוסיף אחריות (responsibility) לאובייקט בודד בזמן ריצה, ללא שינוי המחלקה המקורית וללא השפעה על מופעים אחרים."
+    ],
+    "relatedTopicIds": ["design-patterns-behavioral", "design-patterns-creational", "state-space-decoupling-interfaces"],
+    "sourceRefs": [
+      { "fileId": "lec_4", "fileName": "Lec_4.pptx", "locator": "slides 41-47 (Bridge Design Pattern - reasons, problem, solution, code, benefits)" },
+      { "fileId": "lec_5", "fileName": "Lec_5.pptx", "locator": "slides 14-17 (Facade Design Pattern with ATM example)" },
+      { "fileId": "lab3_upd", "fileName": "Lab3_Upd.pptx", "locator": "slides 30-39 (Adapter DP - Class Adapter vs Object Adapter, worker sorter example)" },
+      { "fileId": "lab_10", "fileName": "Lab 10.pptx", "locator": "slides 3-12 (Bridge DP full code, Bridge vs Strategy comparison table)" },
+      { "fileId": "presentation8", "fileName": "Presentation8.pptx", "locator": "slides 16-33 (Decorator DP full code - icecream example)" },
+      { "fileId": "atp2021_lab3", "fileName": "ATP2021_Lab3.zip", "locator": "src/Tasks/WorkerSorterTask.java (Object Adapter real code)" },
+      { "fileId": "student_solution_2024_first_term_score_75", "fileName": "Student Solution 2024 First Term Score 75.pdf", "locator": "Q20 (ThreadScheduler diagram = Bridge, confirmed correct, 75/100 exam)" }
+    ],
+    "subtopics": [
+      { "id": "bridge", "titleHe": "Bridge", "titleEn": "Bridge" },
+      { "id": "facade", "titleHe": "Facade", "titleEn": "Facade" },
+      { "id": "adapter", "titleHe": "Adapter (Class/Object)", "titleEn": "Adapter (Class/Object)" },
+      { "id": "decorator", "titleHe": "Decorator", "titleEn": "Decorator" }
+    ]
+  },
+  {
+    "id": "design-patterns-behavioral",
+    "order": 9,
+    "titleHe": "תבניות עיצוב התנהגותיות: Strategy, Observer, Mediator, Command",
+    "titleEn": "Behavioral Design Patterns: Strategy, Observer, Mediator, Command",
+    "lectureRefs": [5, 6, 9],
+    "labRefs": ["lab3_upd", "lab_4_prod", "presentation8", "atp2021_lab3", "atp2021_lab12"],
+    "examFrequency": "high",
+    "definitionHe": "תבניות התנהגותיות (Behavioral) עוסקות בתקשורת בין מחלקות ואובייקטים. Strategy: מגדירה משפחת אלגוריתמים, אורזת כל אחד בנפרד, והופכת אותם לניתנים-להחלפה בזמן ריצה - חלופה לירושה מרובה. Observer (Publish-Subscribe): מגדיר תלות 'אחד-להרבה' - כשאובייקט Subject/Observable משנה מצב, כל ה-Observers הרשומים אליו מקבלים עדכון אוטומטי. Mediator: מרכז תקשורת בין אובייקטים מרובים (Colleagues) דרך מתווך אחד, כדי למנוע צימוד ישיר בין כולם. Command: עוטף בקשה כאובייקט (Command) שמועבר ל-Invoker שמפעיל אותו; מפריד בין מי שמבקש פעולה לבין מי שמבצע אותה.",
+    "intuitiveExplanationHe": "Strategy: כמו לבחור אמצעי תחבורה (הליכה/אוטובוס/מונית) לפי מצב הרוח - כל אמצעי הוא אלגוריתם נפרד להגעה ליעד. Observer: כמו ערוץ יוטיוב - כשמעלים סרטון חדש (Subject משתנה), כל המנויים (Observers) מקבלים התראה אוטומטית. Mediator: כמו מגדל פיקוח טיסות - המטוסים לא מדברים ישירות זה עם זה, כולם מדברים רק עם המגדל. Command: כמו שלט טלוויזיה - לוחצים על כפתור (Invoker) שמפעיל פקודה (Command) שמבצעת פעולה על הטלוויזיה (Receiver) בלי שהשלט צריך לדעת איך הטלוויזיה עובדת.",
+    "examAccurateExplanationHe": "Strategy: משמש כאשר יש קוד עם הרבה אלגוריתמים שרוצים להשתמש בהם בזמנים שונים, או כשיש אלגוריתם שמשתמש בנתונים שהלקוח לא צריך להכיר. חסרונות: הלקוח חייב להכיר את כל האסטרטגיות כדי לבחור נכון; overhead של מספר אובייקטים נוסף. Observer: java.util.Observable הוא class (לא interface!) - מגבלה כי Java לא תומכת בירושה מרובה, אז מחלקה שכבר יורשת ממשהו אחר לא יכולה גם להרחיב Observable (זו הסיבה שרוב הפרויקטים מגדירים ממשקי Observer/Observable משלהם). כללי Observer: ה-Observers השונים לא מודעים לקיומם זה של זה; ה-Observable מחזיק רשימה ומודע לכל ה-Observers; ה-Observable אינו חייב להיות מודע למחלקות הקונקרטיות של ה-Observers (זה בדיוק מה שהופך את הקשר לאבסטרקטי - האמירה ההפוכה שגויה בכל מבחן שנבדק). Mediator לעומת Adapter: Adapter שימושי כשכבר יש שני בסיסי קוד קיימים שצריך לחבר (טרנספורמציית ממשק); Mediator שימושי בזמן תכנון ארכיטקטורה חדשה או ריפקטורינג, למניעת צימוד בין מרכיבים מרובים מההתחלה. Thread Pool (ExecutorService) ממומש בעזרת שילוב של Mediator (מתאם בין המשימות לתהליכונים) יחד עם Command (כל משימה עטופה כ-Runnable/Callable שמועבר לביצוע).",
+    "examplesHe": [
+      "Strategy: OperationAdd/OperationSubtract/OperationMultiply מוזרקים ל-Context שמפעיל doOperation() - בחירת אסטרטגיה בזמן ריצה",
+      "Strategy אמיתי מהמעבדה: BubbleWorkerSorter(IWorkerComparator) עם WorkerAgeComparator/WorkerNameComparator/WorkerSalaryComparator",
+      "Observer: WeatherData (Subject) מעדכן CurrentConditionsDisplay/StatisticsDisplay/ForecastDisplay (Observers) - כל תצוגה נרשמת/מוסרת דינמית",
+      "Observer מהמבוך (MVVM): Model extends Observable, ViewModel implements Observer + extends Observable, View implements Observer - שרשרת עדכונים",
+      "Mediator: ChatMediator מנתב הודעות בין ChatUser מרובים בלי שהם ידברו ישירות",
+      "Command: TurnOnCommand/TurnOffCommand מבצעים פעולה על Television (Receiver) דרך RemoteControl (Invoker)"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "// Strategy אמיתי מ-atp2021_lab3\npublic abstract class ACommonWorkerSorter implements IWorkerSorter {\n    protected IWorkerComparator workerComparator;\n    public ACommonWorkerSorter(IWorkerComparator workerComparator) { this.workerComparator = workerComparator; }\n}\npublic class BubbleWorkerSorter extends ACommonWorkerSorter {\n    public void sort(Worker[] workers) { /* uses workerComparator.compare(...) */ }\n}",
+        "captionHe": "מימוש Strategy אמיתי מהמעבדה - מיון עובדים לפי שם/גיל/משכורת"
+      },
+      {
+        "language": "java",
+        "code": "// MVVM עם Observer/Observable אמיתי - מ-atp2021_lab12\npublic class Model extends Observable implements IModel {\n    public void generateMaze(int rows, int cols) {\n        maze = generator.generateRandomMaze(rows, cols);\n        setChanged();\n        notifyObservers(\"maze generated\");\n    }\n}\npublic class ViewModel extends Observable implements Observer {\n    public void update(Observable o, Object arg) { setChanged(); notifyObservers(arg); }\n}",
+        "captionHe": "Observer/Observable אמיתי בתוך ארכיטקטורת MVVM - Model הוא Observable, ViewModel הוא גם Observer (של Model) וגם Observable (עבור View)"
+      }
+    ],
+    "comparisons": [
+      "Strategy (בחירת אלגוריתם החלפי בזמן ריצה, הלקוח בוחר במפורש) לעומת Bridge (הפרדת אבסטרקציה ממימוש, הלקוח פחות מודע).",
+      "Observer (תקשורת 'אחד להרבה' דרך רשימת מנויים, ללא מרכז) לעומת Mediator (תקשורת 'הרבה להרבה' דרך מתווך מרכזי יחיד) - שני התבניות מזכירות זו את זו אך Observer הוא 'push' חד-כיווני בעוד Mediator הוא ניתוב דו-כיווני מרכזי.",
+      "Mediator (מרכז לוגיקת תקשורת בזמן עיצוב חדש) לעומת Adapter (מתרגם ממשק קיים אחד לאחר, בדרך כלל post-hoc)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-java.util.Observable הוא interface - זו טעות; הוא class, מה שמגביל שימוש בו כי Java לא תומכת בירושה מרובה (מוזכר במפורש בלקטורה 5 ולקטורה 8/9 כ'be aware').",
+      "לחשוב שה-Observable חייב להכיר את המחלקות הקונקרטיות של ה-Observers - זו טעות; הקשר ביניהם אבסטרקטי (דרך ממשק Observer בלבד) - וזו בדיוק שאלת המבחן החוזרת בכל שנה.",
+      "לבלבל Strategy עם Factory - Strategy בוחרת התנהגות/אלגוריתם, Factory בוחרת איזה אובייקט ליצור."
+    ],
+    "americanTrapPatternsHe": [
+      "שאלת Observer קבועה כמעט בכל מבחן: 'מה מהבאים אינו נכון בתבנית Observer?' - התשובה השגויה (הנכונה לשאלה) היא תמיד הטענה ש'ה-Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers' - זה שגוי, הקשר אבסטרקטי.",
+      "קוד Observer עם Subject.setMessage() שקורא ל-notifyObservers() - יש לשים לב לסדר הרישום/הסרה של Observers ביחס לקריאות ל-setMessage; אם Observer מוסר אחרי הקריאה הראשונה, הוא כן מקבל את ההודעה הראשונה (grade_100_term_a Q20, מאושר).",
+      "'רוצים לבחור אלגוריתם בזמן ריצה' - התשובה תמיד Strategy, גם אם מוצעות אופציות מבלבלות כמו 'Adapter או Mediator' באותה שורה."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Strategy Pattern: מגדיר משפחת אלגוריתמים, אורז כל אחד, והופך אותם לניתנים-להחלפה בזמן ריצה.",
+      "Observer Pattern: תלות 'אחד-להרבה' בין אובייקטים - כאשר ה-Subject משנה מצב, כל ה-Observers התלויים בו מקבלים עדכון אוטומטי (Publish-Subscribe).",
+      "Mediator Pattern: מגדיר אובייקט שמכיל את הלוגיקה שמתאמת אינטראקציה בין קבוצת אובייקטים, ומאפשר להם לא להכיר זה את זה ישירות (loose coupling).",
+      "Command Pattern: בקשה נעטפת כאובייקט (Command) שמועבר ל-Invoker שמבצע אותה על ה-Receiver."
+    ],
+    "relatedTopicIds": ["design-patterns-structural", "concurrency-utilities-callable-future-mediator", "event-driven-javafx-mvc"],
+    "sourceRefs": [
+      { "fileId": "lec_5", "fileName": "Lec_5.pptx", "locator": "slides 23-32 (Observer - WeatherData example, java.util.Observable warning)" },
+      { "fileId": "lec_6", "fileName": "Lec_6.pptx", "locator": "slides 30-41 (Strategy Design Pattern - motivation, example, benefits/drawbacks)" },
+      { "fileId": "lec_9", "fileName": "Lec_9.pptx", "locator": "slides 22-31 (Mediator DP, Mediator vs Adapter, Chatroom example)" },
+      { "fileId": "lab3_upd", "fileName": "Lab3_Upd.pptx", "locator": "slides 23-29 (Strategy DP - bubble sort worker example)" },
+      { "fileId": "lab_4_prod", "fileName": "Lab 4-prod.pptx", "locator": "slides 21-25 (Command Design Pattern)" },
+      { "fileId": "presentation8", "fileName": "Presentation8.pptx", "locator": "slides 5-15 (Observer DP full code - cats example, java.util.Observable version)" },
+      { "fileId": "atp2021_lab3", "fileName": "ATP2021_Lab3.zip", "locator": "src/WorkerSorting/*.java (real Strategy implementation)" },
+      { "fileId": "atp2021_lab12", "fileName": "ATP2021_Lab12.zip", "locator": "src/Model/Model.java, src/ViewModel/ViewModel.java (Observer/Observable in MVVM)" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q8 (Observer for notifications), Q20 (Observer code trace) - 2025 exam confirmed" },
+      { "fileId": "date_2018_without_answers", "fileName": "Date 2018 without answers.pdf", "locator": "Q10 (Observer - what is NOT true)" }
+    ],
+    "subtopics": [
+      { "id": "strategy", "titleHe": "Strategy", "titleEn": "Strategy" },
+      { "id": "observer", "titleHe": "Observer", "titleEn": "Observer" },
+      { "id": "mediator", "titleHe": "Mediator", "titleEn": "Mediator" },
+      { "id": "command", "titleHe": "Command", "titleEn": "Command" }
+    ]
+  },
+  {
+    "id": "generics-collections-equals-hashcode",
+    "order": 10,
+    "titleHe": "Generics, אוספים (Collections), ו-equals/hashCode",
+    "titleEn": "Generics, Collections, equals/hashCode",
+    "lectureRefs": [5],
+    "labRefs": ["lab_4_prod", "lab5_exercise3"],
+    "examFrequency": "high",
+    "definitionHe": "Generics מאפשרים לכתוב קוד גנרי (מחלקות/ממשקים/מתודות) שעובד על טיפוסי נתונים שונים בלי לשכפל קוד. Generics מקבלים רק Object types (לא פרימיטיביים) - Integer/Wrapper classes בלבד, לא int. Type Erasure: בזמן קומפילציה הקומפיילר מבחין בין List<Integer> ל-List<String>, אך בזמן ריצה שניהם הופכים ל-List<Object> - כך שלא ניתן להגדיר שתי מתודות עם אותו שם שנבדלות רק בטיפוס הגנרי (התנגשות חתימות). equals()/hashCode(): equals ברירת מחדל (מ-Object) בודקת זהות הפניה (==); כדי להשוות שוויון לוגי יש לדרוס אותה. חוזה equals: רפלקסיבי, סימטרי, טרנזיטיבי, עקבי, ו-x.equals(null) תמיד false. חוק הברזל: אם דורסים equals() חובה לדרוס גם hashCode() - שני אובייקטים השווים לפי equals() חייבים להחזיר את אותו hashCode (ההפך לא מחייב).",
+    "intuitiveExplanationHe": "Generics זה כמו תבנית עוגה אוניברסלית שמתאימה לכל 'מילוי' (טיפוס) בלי לאפות עוגה חדשה מאפס לכל טעם. Type Erasure זה כמו לכתוב על שני קופסאות שקופות 'קופסת מספרים' ו'קופסת מילים' בזמן אריזה (קומפילציה), אבל ברגע שהן מגיעות למחסן (זמן ריצה) שתיהן נראות בדיוק אותו דבר - סתם 'קופסה'. equals/hashCode זה כמו שני ספרים עם אותו ISBN שנחשבים 'אותו ספר' (equals) - צריך שגם 'המספר קטלוגי בספרייה' (hashCode) שלהם יהיה זהה, אחרת המחשב לא ימצא אותם באותו מקום במדף.",
+    "examAccurateExplanationHe": "מגבלות Generics: לא ניתן ליצור Pair<int,int> - חייבים wrapper (Pair<Integer,Integer>); Java מבצעת Autoboxing/Unboxing אוטומטית אך זו פעולה יקרה. חסם תחתון: <T extends Comparable<T>>. Type Erasure יוצר בעיית התנגשות: void take(X x) ו-void take(Y y) יהיו זהות בחתימה בזמן ריצה - שגיאת קומפילציה. השאלה הקלאסית שחוזרת כמעט בכל מבחן (2018, 2019, 2024, 2025): GenericStack<E> עם push/pop; דוחפים מחרוזת ('Russia'/'Rusia'/'Germany') ל-Stack<String>, ואז דוחפים מספר (2018/2024) ל-Stack<Integer> נפרד - שני מופעים שונים לגמרי, בלי שגיאה - הפלט הוא הדפסת שתיהן יחד (למשל 'Rusia 2018'). לגבי equals/hashCode: HashMap/HashSet מסתמכים על hashCode כדי לדעת ל'דלי' (bucket) איזה להכניס - אם hashCode לא תואם ל-equals, אובייקטים 'זהים לוגית' עלולים להיכנס לדליים שונים ולא להיחשב כפילות; זו הבעיה המדויקת שנבדקת ב-2025 exam Q7 (hashCode מבוסס רק על אורך השם - קודים זהים לשמות שונים).",
+    "examplesHe": [
+      "GenericStack<String> gs = new GenericStack<>(); gs.push(\"Rusia\"); gs.push(2018) על GenericStack<Integer> נפרד -> הפלט הוא 'Rusia 2018' (שני stacks נפרדים, אין שגיאת קומפילציה או ריצה)",
+      "hashCode() { return name.length(); } - פגום כי אינו תואם equals; 'John' ו-'Jane' (אותו אורך) יקבלו אותו hashCode אבל אינם שווים - collision תקין (מותר), אך שני אנשים שונים בשם ובגיל אך אותו אורך שם ייחשבו 'קרובים' ב-hash table שלא לצורך; הבעיה החמורה יותר: אם name.equals אינו תואם - עלול לשבור התנהגות HashMap/HashSet",
+      "List<Integer> ו-List<String> - בקומפילציה שונים, בזמן ריצה שניהם List<Object> (Type Erasure)"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public class GenericStack<E>{\n    Stack<E> stk = new Stack<E>();\n    public void push(E obj){ stk.push(obj); }\n    public E pop(){ return stk.pop(); }\n}\n// usage:\nGenericStack<String> gs = new GenericStack<>();\ngs.push(\"Rusia\");\nSystem.out.print(gs.pop() + \" \"); // Rusia\nGenericStack<Integer> gs2 = new GenericStack<>();\ngs2.push(2018);\nSystem.out.print(gs2.pop()); // 2018\n// Output: Rusia 2018 (no error!)",
+        "captionHe": "שאלת ה-Generic Stack הקלאסית שחוזרת כמעט בכל מבחן (2018/2019/2024/2025) - 'הבדיחה' על מיון מדינה+שנה"
+      },
+      {
+        "language": "java",
+        "code": "@Override\npublic boolean equals(Object obj) {\n    if (obj == this) return true;\n    if (!(obj instanceof Employee)) return false;\n    Employee employee = (Employee) obj;\n    return employee.getAge() == this.getAge() && employee.getName() == this.getName();\n}\n@Override\npublic int hashCode() {\n    int result = 17;\n    result = 31*result + age;\n    result = 31*result + (name != null ? name.hashCode() : 0);\n    return result;\n}",
+        "captionHe": "מימוש נכון ותואם של equals/hashCode יחד (advancedprogramming/lecture_5_1/Employee.java) - שים לב לבאג הנסתר: name==this.getName() משווה הפניות ולא תוכן (צריך equals())"
+      }
+    ],
+    "comparisons": [
+      "Generics (בטיחות טיפוסים בזמן קומפילציה, Type Erasure בזמן ריצה) לעומת פולימורפיזם רגיל (בטיחות טיפוסים גם בזמן ריצה, ללא מחיקה).",
+      "equals() (בודק שוויון לוגי, ניתן לדרוס) לעומת == (בודק זהות הפניה בזיכרון, לא ניתן לדרוס עבור אובייקטים).",
+      "ArrayList (מבוסס מערך, גישה אקראית O(1), הוספה/מחיקה מהאמצע O(n)) לעומת LinkedList (מבוסס רשימה מקושרת, גישה אקראית O(n), הוספה/מחיקה מהקצוות O(1)).",
+      "HashMap/HashSet (מבוסס טבלת גיבוב, O(1) ממוצע, לא ממוין) לעומת TreeMap/TreeSet (מבוסס עץ אדום-שחור מאוזן, O(log n), ממוין) לעומת LinkedHashMap (שומר סדר הכנסה)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב שדחיפת String ואז int לאותו GenericStack<E> תגרום לשגיאה - זו טעות אם הם בשני מופעים נפרדים של המחלקה הגנרית (GenericStack<String> נפרד מ-GenericStack<Integer>) - כל מופע 'זוכר' רק טיפוס אחד.",
+      "לדרוס equals() בלי לדרוס hashCode() - זה לא שגיאת קומפילציה (בניגוד לתפיסה שגויה נפוצה!) אלא באג לוגי שקט שישבור אוספים מבוססי-hash.",
+      "להשתמש ב-== במקום equals() להשוואת תוכן String/אובייקטים - == משווה הפניות."
+    ],
+    "americanTrapPatternsHe": [
+      "שאלת Generic Stack: מלכודת נפוצה היא לחשוב שהקוד יזרוק שגיאת קומפילציה/ריצה - בפועל זה קוד תקין לחלוטין (שני מופעים גנריים נפרדים).",
+      "שאלה: 'עשיתי override ל-equals ולא דרסתי hashcode - מה נכון?' - תשובת המלכודת 'זה בכלל לא אפשרי / שגיאת הידור' שגויה; התשובה הנכונה: זה מותר קומפילטיבית, אך יגרום לבעיות באוספים מבוססי-hash (HashMap/HashSet) - זה נבדק ב-4 מבחנים שונים בעקביות.",
+      "String literal pool trap: String s1=\"moshe\"; String s3=\"moshe\"; s1==s3 -> false אם s1 נוצר עם new String(\"moshe\") (הפניה חדשה ב-Heap) לעומת s3==s4 (שני literals) -> true (משותפים מ-String Pool). קוד זה מופיע ב-advancedprogramming/lecture_1_2/Main.java.",
+      "Integer caching trap: Integer a1=5; Integer a2=5; a1==a2 -> true בגלל Integer cache (-128 עד 127), אך זה שביר אם הערכים מחוץ לטווח - חשוב להכיר שכתוב equals() תמיד בטוח יותר מ-== להשוואת Wrapper objects."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Type Erasure: בזמן קומפילציה List<Integer> ו-List<String> נבדלים; בזמן ריצה שניהם List<Object> - הגנריקה 'נמחקת'.",
+      "חוזה equals(): רפלקסיבי (x.equals(x)), סימטרי (x.equals(y) <=> y.equals(x)), טרנזיטיבי, עקבי, ו-x.equals(null)==false.",
+      "כלל hashCode: אם שני אובייקטים שווים לפי equals(), הם חייבים להחזיר את אותו hashCode(); ההפך אינו נדרש (התנגשויות מותרות אך פוגעות ביעילות)."
+    ],
+    "relatedTopicIds": ["java-platform-jvm", "thread-safety-synchronization"],
+    "sourceRefs": [
+      { "fileId": "lec_5", "fileName": "Lec_5.pptx", "locator": "slides 4-10 (Generics - class, method, comments, limitations/type erasure), slides 37-44 (equals/hashCode contract)" },
+      { "fileId": "lab_4_prod", "fileName": "Lab 4-prod.pptx", "locator": "slides 7-12 (Java Containers - Lists/Sets/Maps, equals/hashCode example)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture_5_1/Employee.java (equals+hashCode), lecture_1_2/Main.java (String pool, Integer caching)" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q7 (hashCode based only on name.length - confirmed correct answer ד, 2025 exam)" },
+      { "fileId": "advanced_topics_in_programming_reconstruction_of_part_a_including_answers", "fileName": "Advanced topics in programming - Reconstruction of Part A - including answers.pdf", "locator": "Q11 (GenericStack Rusia/2018 output question)" },
+      { "fileId": "student_solution_2024_first_term_score_75", "fileName": "Student Solution 2024 First Term Score 75.pdf", "locator": "Q11 (GenericStack Germany/2024 - confirmed correct)" }
+    ],
+    "subtopics": [
+      { "id": "generics-basics", "titleHe": "יסודות Generics", "titleEn": "Generics Basics" },
+      { "id": "type-erasure", "titleHe": "Type Erasure", "titleEn": "Type Erasure" },
+      { "id": "collections-overview", "titleHe": "אוספי Java (List/Set/Map)", "titleEn": "Java Collections (List/Set/Map)" },
+      { "id": "equals-hashcode", "titleHe": "equals ו-hashCode", "titleEn": "equals and hashCode" }
+    ]
+  },
+  {
+    "id": "networking-sockets-io-streams",
+    "order": 11,
+    "titleHe": "רשתות: Sockets, TCP/UDP, זרמים (Streams) וסריאליזציה",
+    "titleEn": "Networking: Sockets, TCP/UDP, Streams and Serialization",
+    "lectureRefs": [6],
+    "labRefs": ["lab_5", "lab6n"],
+    "examFrequency": "high",
+    "definitionHe": "Socket הוא נקודת קצה (endpoint) לתקשורת בין שני מחשבים, מוגדר על ידי כתובת IP ומספר Port (16-bit, 0-1023 שמורים, >=1024 למשתמש). TCP (Transfer Control Protocol) - מבוסס-חיבור (connection-oriented), אמין, מסודר, ללא הגבלת גודל (Stream). UDP (User Datagram Protocol) - ללא-חיבור (connectionless), לא אמין, מוגבל ל-64KB לחבילה. שרת פותח ServerSocket ומאזין (accept()); לאחר קבלת לקוח מקבל Socket חדש בפורט שונה (כדי שהפורט המקורי ישאר פנוי להאזנה). ארבעת שלבי תכנות שרת/לקוח: פתיחת סוקט, פתיחת זרמי קלט/פלט, קריאה/כתיבה, וניקוי (סגירת זרמים לפני סגירת הסוקט). Serialization: המרת אובייקט לרצף בייטים (ObjectOutputStream.writeObject); Deserialization: שחזור האובייקט מהבייטים (ObjectInputStream.readObject) - זו 'שליפה' של נתונים מה-Stream.",
+    "intuitiveExplanationHe": "IP הוא כתובת הבניין, Port הוא מספר הדירה הספציפית בבניין. TCP הוא כמו שיחת טלפון - מוודאים חיבור לפני שמדברים, וההודעה מובטחת להגיע בסדר הנכון. UDP הוא כמו דואר רגיל - שולחים ולא בודקים אם הגיע, ואין הבטחה על הסדר. Serialization היא כמו לצלם רנטגן לאובייקט ולשלוח את התמונה ברשת - Deserialization היא לשחזר את האובייקט מהתמונה בצד השני.",
+    "examAccurateExplanationHe": "אם ServerSocket מקבל פורט שכבר תפוס אצל תהליך אחר - תיזרק שגיאה שהפורט תפוס (BindException), התוכנית לא תמתין ולא תעבוד בהרמוניה. אם יוצרים ServerSocket ו-Socket לקוח באותו main בלי Threads - קריאה ל-accept() חוסמת (blocking) עד שמגיע לקוח, כך שאם יוצרים את ה-ServerSocket ראשון (וקוראים ל-accept), לעולם לא מגיעים ליצירת ה-Socket לקוח (התוכנית נתקעת ב-accept); זה גם נכון גם אם יוצרים את ה-Socket לקוח קודם - הוא ינסה להתחבר לשרת שעדיין לא מאזין ותהיה שגיאת חיבור (connection refused) - שתי התשובות ('א' ו-'ד'/'ב' לפי הניסוח) נכונות יחד. InputStream/OutputStream מספקים שיטות לקריאה וכתיבה של נתונים מעל ה-sockets (לא מייצרים סוקטים ולא ממסדים חיבור). bind() מחבר את הסוקט לכתובת מקומית שהוא רץ עליה (לא מייסד חיבור לשרת - זה תפקיד connect()).",
+    "examplesHe": [
+      "Socket client = new Socket(\"hostname\", port); - יצירת סוקט לקוח",
+      "ServerSocket server = new ServerSocket(port); Socket clientSocket = server.accept(); - שרת ממתין ומקבל לקוח",
+      "ObjectOutputStream.writeObject(obj) בצד אחד, ObjectInputStream.readObject() בצד השני - סריאליזציה/דה-סריאליזציה",
+      "FTP=21, TELNET=23, SMTP=25, HTTP=80 - פורטים שמורים ידועים"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "// שרת - Lab5/Server.java (אמיתי)\nServerSocket serverSocket = new ServerSocket(port);\nserverSocket.setSoTimeout(listeningIntervalMS);\nwhile (!stop) {\n    Socket clientSocket = serverSocket.accept();\n    strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());\n    clientSocket.close();\n}",
+        "captionHe": "שרת אמיתי מהמעבדה (Lab5.zip) המשלב Sockets עם Strategy Design Pattern"
+      },
+      {
+        "language": "java",
+        "code": "// סריאליזציה עם שדה transient - לא נשמר ולא משוחזר\nclass User implements Serializable {\n    private String username;\n    public String password;\n    transient CreditCard creditCard; // NOT restored on deserialization\n    volatile int age;\n    transient String city; // NOT restored\n}",
+        "captionHe": "דוגמה אמיתית ממבחן 2025 (Q11) - שדות transient לא משוחזרים אחרי deserialization"
+      }
+    ],
+    "comparisons": [
+      "TCP (connection-oriented, אמין, מסודר, ללא הגבלת גודל, 'שיחת טלפון') לעומת UDP (connectionless, לא אמין, לא מסודר, מוגבל ל-64KB, 'דואר רגיל').",
+      "Serialization (המרת אובייקט לזרם בייטים - כתיבה) לעומת Deserialization (שחזור אובייקט מזרם בייטים - קריאה/שליפה).",
+      "InputStream (קריאת נתונים ממקור) לעומת OutputStream (כתיבת נתונים ליעד)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-Deserialization היא 'כתיבה' לזרם - זו טעות; Deserialization היא שליפת/קריאת נתונים מה-Stream כדי לשחזר אובייקט (Serialization היא ה'כתיבה'/ה'שליחה').",
+      "לחשוב ש-bind() מייסד חיבור לשרת - bind() מחבר את הסוקט לכתובת מקומית; connect/accept הם אלו שמייסדים את החיבור בפועל.",
+      "לשכוח שסגירת הזרמים (streams) חייבת לקדום לסגירת הסוקט עצמו (סדר הניקוי קריטי).",
+      "לחשוב ש-transient מונע רק כתיבה אך משמר קריאה - בפועל שדה transient מקבל את ערך ברירת המחדל (null/0/false) אחרי deserialization, לא את הערך המקורי."
+    ],
+    "americanTrapPatternsHe": [
+      "'מה קורה אם ServerSocket קיבל פורט שכבר תפוס?' - תשובה קבועה בכל מבחן: תיזרק שגיאה שהפורט תפוס (לא ימתין, לא יעבוד בהרמוניה, לא ייצא בשקט).",
+      "'שרת ולקוח על אותו main בלי threads' - תשובה משולבת נפוצה: 'א+ד' (גם אם השרת ראשון וגם אם הלקוח ראשון תהיה בעיה) - חשוב לזכור ששתי הבעיות קיימות בו-זמנית, לא רק אחת.",
+      "InputStream/OutputStream role: תשובת מלכודת נפוצה 'הם מייצרים את הסוקטים' (שגוי - זה תפקיד ה-constructor של Socket/ServerSocket עצמם) - התשובה הנכונה: מספקים שיטות קריאה/כתיבה."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Socket: נקודת קצה לתקשורת בין שני מחשבים, מוגדר ע\"י IP+Port, ברמת Transport level.",
+      "TCP: פרוטוקול מבוסס-חיבור, אמין, שומר סדר (stream). UDP: פרוטוקול ללא-חיבור, לא אמין, ללא סדר מובטח, מוגבל ל-64KB.",
+      "Deserialization: שליפה/קריאה של נתונים מה-Stream כדי לשחזר אובייקט; Serialization: המרת אובייקט לרצף בייטים לכתיבה/שליחה."
+    ],
+    "relatedTopicIds": ["threads-basics-lifecycle", "concurrency-utilities-callable-future-mediator"],
+    "sourceRefs": [
+      { "fileId": "lec_6", "fileName": "Lec_6.pptx", "locator": "slides 3-29 (OSI, Sockets, TCP/UDP, Ports, Java IO, Serialization steps summary)" },
+      { "fileId": "lab_5", "fileName": "Lab-5.pptx", "locator": "slides 3-20 (Sockets, Server/Client class code, Serialization/Deserialization)" },
+      { "fileId": "lab6n", "fileName": "Lab6n.pptx", "locator": "slides 3-9 (Client-Server recap, sockets+threads for multiple clients)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture6/DateClient.java, DateServer.java (real socket code)" },
+      { "fileId": "date_2025_without_answers", "fileName": "Date 2025 without answers.pdf", "locator": "Q6 (bind purpose), Q11 (transient fields not restored), Q14 (InputStream/OutputStream role) - 2025 exam" },
+      { "fileId": "date_2018_without_answers", "fileName": "Date 2018 without answers.pdf", "locator": "Q11 (ServerSocket port in use), Q12 (server+client no threads), Q13/Q14 (stream ops)" }
+    ],
+    "subtopics": [
+      { "id": "sockets-basics", "titleHe": "יסודות Sockets ופורטים", "titleEn": "Sockets and Ports Basics" },
+      { "id": "tcp-vs-udp", "titleHe": "TCP מול UDP", "titleEn": "TCP vs UDP" },
+      { "id": "streams-serialization", "titleHe": "זרמים וסריאליזציה", "titleEn": "Streams and Serialization" }
+    ]
+  },
+  {
+    "id": "threads-basics-lifecycle",
+    "order": 12,
+    "titleHe": "יסודות Threads: תהליך מול תהליכון, יצירה ומחזור חיים",
+    "titleEn": "Thread Basics: Process vs Thread, Creation and Lifecycle",
+    "lectureRefs": [7],
+    "labRefs": ["lab6n", "lab_7"],
+    "examFrequency": "high",
+    "definitionHe": "Process הוא מופע של תוכנית שנמצאת בריצה (מכיל קוד ופעילות נוכחית, ולו מרחב Data משלו). Thread הוא הרצף הקטן ביותר של פקודות שניתן לנהל באופן עצמאי ע\"י Scheduler; process אחד יכול להכיל threads מרובים החולקים את אותו Heap (data) אך לכל thread יש Stack פרטי משלו. שתי דרכים ליצור Thread ב-Java: (1) extends Thread ודריסת run(), (2) implements Runnable ומעבר לבנאי Thread. חובה לקרוא ל-start() (לא ל-run() ישירות!) כדי שה-thread ירוץ במקביל בפועל - קריאה ל-run() ישירות פשוט מריצה קוד רגיל וסינכרוני על ה-thread הנוכחי. מחזור חיים: Runnable (ready-to-run, ממתין בתור), Running (רץ בפועל), Blocked (ממתין למשאב/IO/lock), Dead (run() הסתיים).",
+    "intuitiveExplanationHe": "Process הוא כמו לפתוח אפליקציה שלמה (למשל Word), ו-Threads הם כמו כמה עובדים בתוך אותו משרד (Process) שחולקים אותם קבצים (Heap) אבל לכל אחד יש שולחן עבודה (Stack) פרטי משלו. קריאה ל-start() היא כמו לגייס עובד חדש שיתחיל לעבוד במקביל; קריאה ישירה ל-run() היא כמו לבקש מהעובד הנוכחי לעצור את מה שהוא עושה ולבצע את המשימה בעצמו - אין 'עובד חדש', רק המשך סינכרוני.",
+    "examAccurateExplanationHe": "דוגמת מבחן קלאסית: מעבד תמלילים = process אחד עם שני threads - אחד לקליטת קלט משתמש, שני לגיבוי אוטומטי ברקע. Context Switch: שמירת מצב thread נוכחי כדי לשחזרו מאוחר יותר - מאפשר למעבד יחיד להריץ 'במקביל' (Time Slicing - חלוקת פרוסות זמן קצרות). Scheduling הוא Preemptive ומבוסס עדיפות (1-10, ברירת מחדל 5) - אך תלוי במערכת ההפעלה, לכן אסור לבסס נכונות אלגוריתם על סמך תזמון/עדיפויות. Daemon threads (כמו GC) מול non-daemon threads (כמו main) - ה-JVM ייצא כשרק daemon threads נשארו. חשוב: Thread שהסתיים (Dead) לא ניתן להפעיל מחדש (start() שוב יזרוק IllegalThreadStateException) - יש ליצור מופע Thread חדש.",
+    "examplesHe": [
+      "class MyThread extends Thread { public void run(){...} } ... new MyThread().start();",
+      "class MyTask implements Runnable { public void run(){...} } ... new Thread(new MyTask()).start();",
+      "new Thread(() -> { handleClient(clientSocket); }).start(); - יצירת thread עם Lambda"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public class Test extends Thread implements Runnable {\n    public void run() { System.out.print(\"GFG \"); }\n    public static void main(String[] args) throws InterruptedException {\n        Test obj = new Test();\n        obj.run();   // synchronous call - just runs code, NOT a new thread\n        obj.start(); // starts a NEW thread that also calls run()\n    }\n}\n// Output: GFG GFG",
+        "captionHe": "שאלת מבחן חוזרת (2018/2019/2024) - הפלט הוא 'GFG GFG' כי run() רץ סינכרונית ו-start() מפעיל thread חדש שגם קורא ל-run()"
+      }
+    ],
+    "comparisons": [
+      "Process (יחידת ריצה עצמאית עם Data משלו) לעומת Thread (יחידת ריצה תוך-תהליכית, חולק Heap, Stack פרטי - 'קל משקל').",
+      "extends Thread (יורש מ-Thread, לא ניתן לרשת ממחלקה אחרת) לעומת implements Runnable (מממש ממשק, ניתן עדיין לרשת ממחלקה אחרת - גמיש יותר).",
+      "run() (קריאה רגילה, סינכרונית, לא יוצרת thread חדש) לעומת start() (יוצרת thread חדש בפועל שמריץ את run() במקביל)."
+    ],
+    "commonMistakesHe": [
+      "לקרוא ל-run() ישירות במקום ל-start() - זו טעות נפוצה שגורמת לקוד לרוץ סינכרונית ולא במקביל (אין שגיאת קומפילציה/ריצה, רק התנהגות שגויה).",
+      "לבסס את נכונות האלגוריתם על סדר תזמון threads (עדיפויות) - תזמון תלוי-מערכת הפעלה ולא מובטח.",
+      "לנסות להפעיל מחדש thread שכבר סיים (Dead) - יזרוק IllegalThreadStateException."
+    ],
+    "americanTrapPatternsHe": [
+      "'obj.run(); obj.start();' - הפלט הוא GFG פעמיים (לא פעם אחת!), כי run() ו-start() שניהם קוראים בפועל ל-run() - הראשון סינכרוני, השני על thread חדש.",
+      "'שני threads מדפיסים 1 עד 5 עם counter משותף (static)' - הפלט: בדיוק 10 שורות יודפסו (5 מכל thread), הערכים לא יורדים (non-decreasing) אך הסדר בין ה-threads אינו צפוי מראש - זו לא 'שגיאה' וגם לא סדר קבוע."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Thread: הרצף הקטן ביותר של פקודות מתוכנתות שניתן לנהל באופן עצמאי ע\"י Scheduler. Process: מופע של תוכנית מחשב שנמצא כרגע בריצה, עשוי להכיל מספר Threads.",
+      "חוק ברזל: לעולם אל תקראו ל-run() ישירות אם רוצים ריצה מקבילה אמיתית - תמיד start()."
+    ],
+    "relatedTopicIds": ["thread-safety-synchronization", "concurrency-utilities-callable-future-mediator", "networking-sockets-io-streams"],
+    "sourceRefs": [
+      { "fileId": "lec_7", "fileName": "Lec_7.pptx", "locator": "כל המצגת - slides 3-22 (Process vs Thread, creation via Thread/Runnable, life cycle)" },
+      { "fileId": "lab6n", "fileName": "Lab6n.pptx", "locator": "slides 6-15 (Threads, scheduler, approaches for creating threads)" },
+      { "fileId": "lab_7", "fileName": "Lab 7.pptx", "locator": "slides 4-5 (approaches for creating threads recap)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture7/MyThreadTest.java, TestThread1.java" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q19 (static counter shared between two threads, output trace) - confirmed correct" },
+      { "fileId": "date_2018_without_answers", "fileName": "Date 2018 without answers.pdf", "locator": "Q19 (Test extends Thread implements Runnable - GFG GFG output)" }
+    ],
+    "subtopics": [
+      { "id": "process-vs-thread", "titleHe": "Process מול Thread", "titleEn": "Process vs Thread" },
+      { "id": "thread-creation", "titleHe": "יצירת Thread (Runnable/extends Thread)", "titleEn": "Thread Creation" },
+      { "id": "thread-lifecycle", "titleHe": "מחזור חיי Thread", "titleEn": "Thread Life Cycle" }
+    ]
+  },
+  {
+    "id": "thread-safety-synchronization",
+    "order": 13,
+    "titleHe": "בטיחות תהליכונים: Race Conditions, synchronized, volatile, Deadlock",
+    "titleEn": "Thread Safety: Race Conditions, synchronized, volatile, Deadlock",
+    "lectureRefs": [8, 9],
+    "labRefs": ["lab_7"],
+    "examFrequency": "high",
+    "definitionHe": "קוד הוא Thread-Safe אם אפשר להריץ אותו ממספר threads במקביל בלי לשבש נתונים. Race Condition: באג שבו התוצאה תלויה בתזמון/סדר בלתי-צפוי של threads מתחרים (למשל counter++ שאינו אטומי - קריאה, הוספה, כתיבה = 3 פעולות נפרדות). synchronized: מבטיח שרק thread אחד יכול להחזיק את המוניטור (monitor/lock) של אובייקט בזמן נתון - ניתן לסנכרן מתודה שלמה (הנעילה היא this) או בלוק ספציפי (יעילות טובה יותר). volatile: מבטיח נראות (visibility) - קריאה תמיד מה-Main Memory, לא cache מקומי - אך אינו מבטיח אטומיות של פעולות מורכבות. Deadlock: שני threads (או יותר) לא מתקדמים כי כל אחד ממתין למשאב שהשני מחזיק. Thread Pool: מגביל את מספר ה-threads הרצים במקביל; מנוהל ע\"י ExecutorService (shutdown() - מחכה לסיום המשימות הנוכחיות; shutdownNow() - מפסיק הכל מיידית).",
+    "intuitiveExplanationHe": "Race Condition זה כמו שני אנשים שקוראים 'יש 3 כרטיסים אחרונים' בו-זמנית ושניהם קונים - מישהו נשאר בלי כרטיס אבל המערכת לא ידעה. synchronized זה כמו תור לשירותים - רק אדם אחד יכול להיכנס בכל פעם, כל השאר ממתינים בחוץ. volatile זה כמו שלט שאומר 'תמיד תבדוק את הלוח המרכזי, אל תסתמך על מה שזכרת מקודם' - מבטיח שכולם רואים את אותו מידע עדכני, אבל לא מונע משני אנשים לעדכן את הלוח בו-זמנית וליצור בלגן. Deadlock זה כמו שני מכוניות בגשר צר חד-מסלולי שכל אחת מחכה שהשנייה תזוז ראשונה.",
+    "examAccurateExplanationHe": "למה counter++ אינו Thread-Safe: זו למעשה שלוש פעולות (קריאת ערך, הוספת 1, כתיבת ערך) - לא אטומיות. פתרון: synchronized method/block, או java.util.concurrent.atomic.AtomicInteger (עם incrementAndGet()) שמבצע פעולות אטומיות בלי נעילה מפורשת (יעיל יותר מ-synchronized). Lock Starvation: אם עוטפים לולאת while(true) שלמה ב-synchronized(lock), ה-thread שרץ בלולאה מחזיק את המנעול לנצח ופונקציית stop() לא תוכל לגשת אליו לעולם - הפתרון (כלל הברזל): להחזיק מנעולים לזמן הקצר ביותר האפשרי - להכניס רק את הבדיקה if(done) break; לתוך הבלוק המסונכרן, בתוך הלולאה. volatile Boolean (עם אות גדולה, Wrapper) כ-lock עלול ליצור בעיה נוספת (autoboxed Boolean עלול להיות משותף/cache-ed מ-Boolean.valueOf, ולא להיות אובייקט ייחודי לנעילה) - עדיף Object רגיל כ-lock ייעודי. Atomic actions: קריאה/כתיבה של רוב הטיפוסים הפרימיטיביים והפניות היא אטומית מטבעה, חוץ מ-long ו-double (64-bit, מטופלים כשני חצאים של 32-bit). Deadlock: שני threads ממתינים זה לזה לשחרור משאב - לא קשור ל'נעילה עצמה' או ל'סיום ריצה'. אוספים מסונכרנים (Collections.synchronizedList וכו') - אזהרת מבחן: גם כשמשתמשים בעטיפה מסונכרנת, מעבר עם Iterator על האוסף חייב עדיין להיות עטוף ידנית ב-synchronized כדי להיות בטוח.",
+    "examplesHe": [
+      "public class MyThing { static int count=0; public MyThing(){ serialNum=count; count++; } } - race condition קלאסי אם נקרא משני threads",
+      "AtomicInteger counter = new AtomicInteger(0); counter.incrementAndGet(); - פתרון יעיל יותר מ-synchronized",
+      "Lock Starvation: synchronized(done){ while(!done){...} } - התיקון: להעביר את הבדיקה if(done) break; לתוך הלולאה עם synchronized קצר יותר"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "// לא Thread-Safe: race condition בבנאי\npublic class MyThing {\n    static int count = 0;\n    private int serialNum;\n    public MyThing() { serialNum = count; count++; } // 2 threads יכולים לקרוא אותו count\n}\n// תיקון:\nprivate static synchronized int getSN() {\n    int serialNum = count;\n    count++;\n    return serialNum;\n}",
+        "captionHe": "דוגמת race condition ותיקון עם synchronized (lec_8, סליידים 16-26)"
+      },
+      {
+        "language": "java",
+        "code": "// Lock Starvation - שגוי\nsynchronized(done) {\n    while (!done) { /* do stuff */ } // מחזיק מנעול לנצח!\n}\n// תיקון - כלל הברזל: החזק מנעולים לזמן הקצר ביותר\nwhile (true) {\n    synchronized(done) { if (done) break; }\n    // do regular loop stuff...\n}",
+        "captionHe": "Lock Starvation ותיקונו (lec_8/lec_9, סליידים 37-38) - כלל ברזל למבחן"
+      }
+    ],
+    "comparisons": [
+      "synchronized (מבטיח גם atomicity וגם visibility, אך יקר יותר ביצועית) לעומת volatile (מבטיח רק visibility, לא atomicity - אינו תחליף לסנכרון עבור פעולות מורכבות כמו ++).",
+      "synchronized method/block (locking מפורש, blocking) לעומת AtomicInteger/atomic classes (lock-free, מהיר יותר לפעולות פשוטות כמו increment).",
+      "Deadlock (שני threads תקועים, ממתינים זה לזה לנצח) לעומת Race Condition (התוצאה נכונה-לפעמים תלוי בתזמון, לא בהכרח תקיעה מוחלטת) לעומת Lock Starvation (thread אחד לעולם לא מקבל את המנעול כי אחר מחזיק אותו תמיד)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-volatile מבטיח אטומיות (atomicity) - זו הטעות הכי נפוצה במבחנים; volatile מבטיח רק נראות (visibility), לא אטומיות של פעולות מורכבות (counter++ עדיין לא בטוח גם אם counter הוא volatile).",
+      "לחשוב ש-synchronized כל המתודה תמיד עדיף - לפעמים מסנכרן רק בלוק ספציפי יעיל יותר.",
+      "לשכוח שגם באוסף 'מסונכרן' (synchronizedList) חובה לעטוף מעבר עם Iterator ב-synchronized ידני נוסף."
+    ],
+    "americanTrapPatternsHe": [
+      "'מה NOT true על volatile' - תשובת המלכודת: 'volatile ensures visibility of changes across threads immediately' (זו אמירה נכונה בפועל!) לעומת 'volatile keeps a private copy per thread' (זו האמירה השגויה - ההפך הוא הנכון, volatile מונע עותק פרטי).",
+      "'מהו deadlock' - תשובות מסיחות: 'thread מסיים ונעל' / 'thread מושהה' - התשובה הנכונה תמיד: שני threads (או יותר) לא מתקדמים כי ממתינים זה לזה לשחרור משאב.",
+      "'מה קורה עם double-checked Singleton בלי synchronized' - שני threads יכולים לעבור את הבדיקה if(instance==null) בו-זמנית ולייצר שני מופעים - מוצג במפורש כ-'non thread-safe example' בהרצאה 8."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Race Condition: באג שבו הפלט תלוי באופן בלתי-צפוי בתזמון/סדר הפעולות של threads מתחרים.",
+      "volatile: מבטיח שקריאה/כתיבה של המשתנה תמיד תתבצע מה-Main Memory (לא מ-cache מקומי של thread) - נראות (visibility) בלבד, לא אטומיות.",
+      "Deadlock: מצב בו שני threads (או יותר) אינם מתקדמים כי כל אחד ממתין לשחרור משאב שמוחזק ע\"י האחר.",
+      "Atomic Action: פעולה שלא ניתן לקטוע/לחלק - לא ניתנת להפרעה מ-thread אחר באמצע ביצועה."
+    ],
+    "relatedTopicIds": ["threads-basics-lifecycle", "concurrency-utilities-callable-future-mediator", "generics-collections-equals-hashcode"],
+    "sourceRefs": [
+      { "fileId": "lec_8", "fileName": "Lec_8.pptx", "locator": "slides 9-38 (Concurrency challenge, Race Conditions, Synchronization, Lock Starvation, Atomic Actions, Thread Pool)" },
+      { "fileId": "lec_9", "fileName": "Lec_9.pptx", "locator": "slides 5-15 (Atomic Actions, Synchronized Collections, Lock Starvation, volatile/transient)" },
+      { "fileId": "lab_7", "fileName": "Lab 7.pptx", "locator": "slides 13-25 (Synchronized vs Locks, atomic variables performance, Thread Pools)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture_8/Counter.java, ThreadsExample.java (race condition + synchronized fix); lecture_9/VolatileExample.java" },
+      { "fileId": "date_2025_without_answers", "fileName": "Date 2025 without answers.pdf", "locator": "Q13 (synchronized keyword), Q16 (deadlock definition)" },
+      { "fileId": "restoration_2023_version_a", "fileName": "Restoration 2023 Version A.docx", "locator": "Q5 (volatile+synchronized stopRunning code trace)" }
+    ],
+    "subtopics": [
+      { "id": "race-conditions", "titleHe": "Race Conditions", "titleEn": "Race Conditions" },
+      { "id": "synchronization", "titleHe": "synchronized ומוניטורים", "titleEn": "synchronized and Monitors" },
+      { "id": "volatile-atomic", "titleHe": "volatile ופעולות אטומיות", "titleEn": "volatile and Atomic Actions" },
+      { "id": "deadlock-starvation", "titleHe": "Deadlock ו-Lock Starvation", "titleEn": "Deadlock and Lock Starvation" }
+    ]
+  },
+  {
+    "id": "concurrency-utilities-callable-future-mediator",
+    "order": 14,
+    "titleHe": "Callable, Future, ExecutorService, Thread Pool כ-Mediator+Command",
+    "titleEn": "Callable, Future, ExecutorService, Thread Pool as Mediator+Command",
+    "lectureRefs": [8, 9],
+    "labRefs": ["lab_7"],
+    "examFrequency": "high",
+    "definitionHe": "Callable<V> דומה ל-Runnable אך יכול להחזיר ערך (call() throws Exception) ולזרוק חריגות. Future<V> מייצג את התוצאה העתידית של חישוב אסינכרוני; get() חוסם (blocking) עד שהתוצאה מוכנה; ניתן לבטל עם cancel(). ExecutorService מנהל Thread Pool - מספק execute(Runnable) ו-submit(Callable) שמחזיר Future מיידית. Executors היא Factory שיוצרת מופעי ExecutorService (למשל newFixedThreadPool(n)). thread pool מיושם בשילוב תבניות Mediator (מתאם בין המשימות ל-threads) ו-Command (כל משימה עטופה כאובייקט).",
+    "intuitiveExplanationHe": "Callable+Future זה כמו להזמין פיצה (submit) ולקבל מיד פתק-קבלה (Future) שמבטיח שהפיצה תגיע - אתה יכול להמשיך בעניינים אחרים, ורק כשאתה קורא ל-get() (רוצה לאכול) אתה מחכה עד שהיא מגיעה אם היא לא הגיעה עדיין. Thread Pool זה כמו צוות קבוע של שליחים - במקום לגייס שליח חדש לכל הזמנה (יקר), יש צוות קבוע שמקבל משימות מתור ומטפל בהן אחת-אחת.",
+    "examAccurateExplanationHe": "היתרון המרכזי ב-ExecutorService+Future על פני יצירת Thread חדש לכל משימה: מאפשר ניהול מאגר קבוע של תהליכונים, שליחת משימות אליו, וקבלת תוצאה מהמשימות (זו התשובה המדויקת שאושרה במבחן 2025 מושלם). Future.get() בלי timeout חוסם עד לסיום החישוב; get(timeout, unit) זורק TimeoutException אם לא הסתיים בזמן. FutureTask הוא wrapper שהופך Callable גם ל-Runnable וגם ל-Future בו-זמנית. ExecutorService.shutdown() ממתין לסיום המשימות הקיימות ומונע כניסת חדשות; shutdownNow() מפסיק הכל מיד (גם משימות רצות, דרך interrupt). ההבדל בין execute() ל-submit(): execute מקבל Runnable ואינה מחזירה ערך; submit מקבלת Runnable או Callable ומחזירה Future.",
+    "examplesHe": [
+      "ExecutorService pool = Executors.newFixedThreadPool(2); Future<Integer> f = pool.submit(callable); f.get();",
+      "FutureTask<Integer> task = new FutureTask<>(myCallable); new Thread(task).start(); Integer result = task.get();",
+      "Executors.newFixedThreadPool(6) עם 6 משימות - רק 6 threads יריצו את המשימות, השאר ימתינו בתור"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "ExecutorService pool = Executors.newFixedThreadPool(2);\nFuture<Integer> f = pool.submit(new Callable<Integer>() {\n    public Integer call() throws InterruptedException {\n        Thread.sleep(500);\n        return 42;\n    }\n});\npool.shutdown();\nSystem.out.println(f.get()); // blocks until result is ready -> 42",
+        "captionHe": "דוגמת Callable+Future אמיתית (advancedprogramming/lecture_9/CallableExample.java)"
+      }
+    ],
+    "comparisons": [
+      "Runnable (run(), אין החזרת ערך, אין זריקת exception מפורשת) לעומת Callable<V> (call(), מחזיר V, יכול לזרוק Exception).",
+      "execute(Runnable) (אין ערך חוזר) לעומת submit(Callable/Runnable) (מחזיר Future).",
+      "shutdown() (מחכה לסיום המשימות הנוכחיות, לא מקבל חדשות) לעומת shutdownNow() (מפסיק הכל מיידית, כולל רצות).",
+      "Adapter (מטרה: לחבר קוד קיים - למשל Runnable-to-Callable adapter) לעומת Mediator (מטרה: לתאם ארכיטקטורה חדשה - Thread Pool)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב ש-Future.get() לא חוסם - הוא כן חוסם (blocking) עד שהחישוב הסתיים.",
+      "לבלבל בין execute() (Runnable, ללא ערך) ל-submit() (Callable/Runnable, מחזיר Future) - שאלת מבחן ישירה.",
+      "לחשוב שניתן לבטל (cancel) משימה שכבר הסתיימה - לא ניתן."
+    ],
+    "americanTrapPatternsHe": [
+      "'מה היתרון המרכזי ב-ExecutorService עם Future על פני יצירת Thread חדש לכל משימה' - תשובות מסיחות: 'מאלץ ריצה סינכרונית', 'תמיד יוצר Thread חדש' - התשובה הנכונה: ניהול מאגר קבוע + שליחת משימות + קבלת תוצאות (מאושר 2025 exam Q5, 100 ציון).",
+      "'Executors מספקת ExecutorService - באיזו תבנית עיצוב' - תמיד Factory (לא Singleton/Builder/Observer/Command).",
+      "'Thread Pool ממומש בעזרת אילו תבניות עיצוב' - תשובה: שילוב Mediator + Command (לא רק אחת מהן)."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Callable<V>: כמו Runnable אך call() מחזיר V ויכולה לזרוק Exception.",
+      "Future<V>: מייצג תוצאה עתידית; get() חוסם עד לסיום; cancel() מבטל אם עדיין לא הסתיים; isDone() בודק סיום.",
+      "ExecutorService.shutdown() מחכה לסיום המשימות הקיימות; shutdownNow() עוצר הכל כולל רצות (עם interrupt)."
+    ],
+    "relatedTopicIds": ["thread-safety-synchronization", "design-patterns-behavioral", "design-patterns-creational"],
+    "sourceRefs": [
+      { "fileId": "lec_8", "fileName": "Lec_8.pptx", "locator": "slides 29-41 (Thread Pool overview, management, Callable, Future intro)" },
+      { "fileId": "lec_9", "fileName": "Lec_9.pptx", "locator": "slides 17-21 (Callables and Futures, FutureTask wrapper)" },
+      { "fileId": "lab_7", "fileName": "Lab 7.pptx", "locator": "slides 18-30 (Executor interface, Thread Pool examples, Callable, Future solution)" },
+      { "fileId": "advancedprogramming", "fileName": "AdvancedProgramming.zip", "locator": "src/com/company/lecture_7_4/ThreadPool.java, lecture_9/CallableExample.java, FactorialCalculator.java" },
+      { "fileId": "grade_100_term_a", "fileName": "Grade 100, Term A.pdf", "locator": "Q5 (ExecutorService+Future benefit), Q12 (Executors uses Factory) - both confirmed correct, 2025 exam" }
+    ],
+    "subtopics": [
+      { "id": "callable-future", "titleHe": "Callable ו-Future", "titleEn": "Callable and Future" },
+      { "id": "executor-service", "titleHe": "ExecutorService ו-Thread Pool", "titleEn": "ExecutorService and Thread Pool" }
+    ]
+  },
+  {
+    "id": "event-driven-javafx-mvc",
+    "order": 15,
+    "titleHe": "תכנות מונחה-אירועים, JavaFX, ו-MVC/MVVM",
+    "titleEn": "Event-Driven Programming, JavaFX, MVC/MVVM",
+    "lectureRefs": [10, 11],
+    "labRefs": ["lab_10", "lab11_s"],
+    "examFrequency": "medium",
+    "definitionHe": "תכנות מונחה-אירועים (Event-Driven): זרימת התוכנית נקבעת על ידי אירועים (לחיצות עכבר, הקלדות, הודעות threads) ולא על ידי סדר קבוע מראש - חיוני ל-GUI ולשרתים. Listener: אובייקט הרשום (subscribes) לקבל עדכונים ממקור אירוע (Source); ממתין לאירוע שיתרחש. Handler: אובייקט שאחראי לטפל בפועל באירוע (מקושר ל-Event). היסטוריית GUI ב-Java: AWT (1995, ספריות native לכל OS) -> Swing (1998, ציור עצמי, look אחיד, כיום dead-end) -> SWT (2001, IBM, Dependency Injection בין JAR-ים) -> JavaFX (2008, הרשמי והמודרני). ארכיטקטורת JavaFX: Application -> Stage (חלון) -> Scene (עץ תוכן) -> Layout/Pane -> Node (אלמנטים). MVC: Model-View-Controller (קונטרולר מתווך בין מודל לתצוגה). MVVM: Model-View-ViewModel (ViewModel מתווך, מבוסס Observer/Observable - Model הוא Observable, ViewModel גם Observer וגם Observable, View הוא Observer).",
+    "intuitiveExplanationHe": "תכנות מונחה-אירועים זה כמו לצפות בסרטון יוטיוב - לוחצים play כשרוצים, pause כשרוצים; הזרימה נקבעת ע\"י המשתמש, לא ע\"י תסריט קבוע מראש. Listener/Handler זה כמו פעמון בדלת (Listener - מקשיב לצליל) לעומת האדם שקם ופותח את הדלת (Handler - מטפל בפועל). MVVM זה כמו מתורגם (ViewModel) שעומד בין תייר (View) למקומי (Model) - התייר לא מדבר ישירות עם המקומי, אלא דרך המתורגם שמעביר ומתאם ביניהם.",
+    "examAccurateExplanationHe": "GUI רץ בתהליכון (Thread) נפרד מ-Main - חובה לא להריץ חישובים כבדים/רשת/DB על ה-GUI Thread כי המסך 'יקפא' (Not Responding). ב-JavaFX רצים מספר threads: JavaFX Application Thread (עדכון scene graph), Prism Render Thread (רינדור), Media Thread. הפרדת Presentation Logic (איך מוצג - צבעים, מיקום) מ-Business Logic (הלוגיקה העסקית) היא עיקרון יסוד. הבדלי MVC מול MVVM: (1) תלויות - ב-MVC ה-Controller מכיל Model ו-View; ב-MVVM ה-View מכיל ViewModel, וה-ViewModel מכיל Model (Model לא מודע ל-View/ViewModel). (2) המתווך - Controller (MVC) מנהל את שניהם ישירות; ViewModel (MVVM) רק מעביר נתונים ומוודא תקינותם. (3) תקשורת - ב-MVC ה-Controller מקבל את האירוע ומטפל בו ישירות; ב-MVVM ה-View מקבל את האירוע, קורא ל-ViewModel וממתין להתראה, שקורא ל-Model וממתין להתראה. (4) ירושה - ב-MVVM: Model יורש מ-Observable (רק נצפה); ViewModel גם Observable וגם Observer; View מממש Observer בלבד. Data Binding ב-JavaFX מאפשר לקשור ערך של פקד גרפי לתכונה של מחלקה אחרת.",
+    "examplesHe": [
+      "Application -> Stage -> Scene -> Layout (BorderPane/VBox/GridPane) -> Node (Button/Label/TextField)",
+      "Bridge לעומת Strategy במעבדה 10: CalculatorEngine (Casio/TexasInstruments) נפרד מ-Calculator (Basic/Graphic)",
+      "MazeDisplayer extends Canvas - ציור immediate-mode (draw now, אין שמירת אובייקטים, לניקוי - clearRect ואז לצייר מחדש)"
+    ],
+    "codeSnippets": [
+      {
+        "language": "java",
+        "code": "public class BasicWindow extends Application {\n    public static void main(String[] args) { launch(args); }\n    @Override\n    public void start(Stage primaryStage) {\n        Button button = new Button(\"Click me\");\n        StackPane layout = new StackPane();\n        layout.getChildren().add(button);\n        Scene scene = new Scene(layout, 300, 250);\n        primaryStage.setScene(scene);\n        primaryStage.show();\n    }\n}",
+        "captionHe": "מבנה בסיסי של אפליקציית JavaFX: Application->Stage->Scene->Layout->Node (advancedprogramming/lecture_10/BasicWindow.java)"
+      }
+    ],
+    "comparisons": [
+      "Listener (נרשם למקור אירוע, 'מקשיב') לעומת Handler (מטפל בפועל באירוע שקרה).",
+      "Procedural Programming (התוכנית מכתיבה מתי קולטים קלט - מתאים לקונסולה) לעומת Event-Driven (המשתמש/הרשת מכתיבים מתי - מתאים ל-GUI ושרתים).",
+      "MVC (Controller מתווך יחיד בין Model ל-View, קשר ישיר) לעומת MVVM (ViewModel מבוסס Observer/Observable, קשר עקיף דרך התראות)."
+    ],
+    "commonMistakesHe": [
+      "לבלבל בין Listener ל-Handler - Listener מקושר למקור האירוע (Source), Handler מקושר לאירוע (Event) עצמו ומטפל בו.",
+      "להריץ פעולה ארוכה (רשת/DB/חישוב כבד) ישירות על ה-GUI Thread - גורם למסך לקפוא.",
+      "לחשוב ש-MVVM ו-MVC זהים - ההבדל המהותי: ב-MVVM ה-Model אינו מודע כלל ל-View/ViewModel, ואילו ב-MVC ה-Controller מכיר את שניהם."
+    ],
+    "americanTrapPatternsHe": [
+      "'מה מאפשר ל-Java (או JavaFX) להיות cross-platform' - שוב, לא JavaFX; זה תמיד JVM (חוזר גם בהקשר JavaFX).",
+      "'למה משמש Data Binding' - תשובה מדויקת: מאפשר לקשור בין ערך של פקד גרפי לתכונה ממחלקה אחרת (לא 'העברת ערכים בין פקדים' ולא 'קבלה אוטומטית')."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "היררכיית JavaFX: Application -> Stage -> Scene -> Layout/Pane -> Node.",
+      "MVVM: Model (Observable בלבד) -> ViewModel (Observer של Model + Observable עבור View) -> View (Observer בלבד)."
+    ],
+    "relatedTopicIds": ["design-patterns-behavioral", "oop-pillars-abstraction"],
+    "sourceRefs": [
+      { "fileId": "lec_10_11", "fileName": "Lec_10 _11.pptx", "locator": "slides 3-16 (Programming Paradigms, Event-Driven, Listener vs Handler), slides 24-51 (GUI history, MVC, GUI thread, Application/Stage/Scene/Node)" },
+      { "fileId": "lab_10", "fileName": "Lab 10.pptx", "locator": "slides 13-22 (Procedural vs Event-Driven, Listener vs Handler, JavaFX components, MVC/MVVM)" },
+      { "fileId": "lab11_s", "fileName": "Lab11-s.pptx", "locator": "slides 3-18 (JavaFX Canvas, Observer, MVC vs MVVM 4 key differences)" },
+      { "fileId": "atp2021_lab12", "fileName": "ATP2021_Lab12.zip", "locator": "src/View/*, src/ViewModel/ViewModel.java (real MVVM+Observer implementation)" },
+      { "fileId": "date_2018_without_answers", "fileName": "Date 2018 without answers.pdf", "locator": "Q18 (MVC pattern), Q20 (Data Binding)" }
+    ],
+    "subtopics": [
+      { "id": "event-driven-paradigm", "titleHe": "פרדיגמת תכנות מונחה-אירועים", "titleEn": "Event-Driven Paradigm" },
+      { "id": "javafx-architecture", "titleHe": "ארכיטקטורת JavaFX", "titleEn": "JavaFX Architecture" },
+      { "id": "mvc-vs-mvvm", "titleHe": "MVC מול MVVM", "titleEn": "MVC vs MVVM" }
+    ]
+  },
+  {
+    "id": "blockchain-cryptocurrency",
+    "order": 16,
+    "titleHe": "בלוקצ'יין ומטבעות קריפטוגרפיים",
+    "titleEn": "Blockchain and Cryptocurrency",
+    "lectureRefs": [12],
+    "labRefs": [],
+    "examFrequency": "low",
+    "definitionHe": "Blockchain הוא יומן חשבונות דיגיטלי, מבוזר וציבורי, של כל העסקאות במטבע קריפטוגרפי - כל בלוק חדש נוסף כרונולוגית וכל Node (מחשב ברשת) מחזיק עותק. Mining הוא תהליך פתרון בעיות חישוביות (hash) כדי ליצור בלוק חדש ולקבל תמורה (bounty). Proof of Work (Bitcoin): כל הכורים מנסים לפתור חידה בכוח (brute force); הראשון שפותר מקבל פרס; שאר הרשת (>50%) מאמתת. Proof of Stake (Ethereum, Cardano): בוחרים 'validator' יחיד באקראי (משוקלל לפי כמות המטבעות שהופקדו כ-stake) שמאשר את הבלוק, חוסך אנרגיה.",
+    "intuitiveExplanationHe": "Blockchain הוא כמו יומן חשבונות משותף שכולם רואים ומעדכנים יחד, כשכל דף חדש (בלוק) חתום ומקושר לדף הקודם. Proof of Work הוא כמו תחרות פתרון חידה שכל המשתתפים מנסים ביחד, והמנצח מקבל פרס. Proof of Stake הוא כמו הגרלה משוקללת - מי שהפקיד יותר 'ביטחונות' (stake) יש לו סיכוי גבוה יותר להיבחר כמאשר.",
+    "examAccurateExplanationHe": "מניעת 'הוצאה כפולה' (Double Spend) מתבססת על שילוב: Timestamps (חותמות זמן), Hash (מספר ייחודי לקבוצת עסקאות), ו-Blockchain (השרשור עצמו). אבטחת הרשת: מחשבים מקבלים תמיד את השרשרת הארוכה ביותר כאמיתית - האקר שרוצה לזייף היסטוריה חייב ליצור שרשרת ארוכה יותר משל כל שאר הרשת גם יחד (יקר וכמעט בלתי-אפשרי). Wallet (ארנק) מכיל מפתח פרטי (private key) ומפתח ציבורי (public key/address) - המטבעות עצמם אינם 'נשמרים' בארנק אלא רשומים בבלוקצ'יין.",
+    "examplesHe": [
+      "Bitcoin (המערכת, אות רישית) לעומת bitcoins (היחידות, אות קטנה)",
+      "21 מיליון ביטקוין הוא הגבול העליון (מספיק אינפלציה שהיתה מוגבלת)"
+    ],
+    "codeSnippets": [],
+    "comparisons": [
+      "Proof of Work (תחרות חישובית פתוחה לכולם, בזבזנית באנרגיה, כמו Bitcoin) לעומת Proof of Stake (בחירת validator יחיד משוקלל, חסכוני יותר, כמו Ethereum/Cardano).",
+      "Hot Wallet (מחובר לאינטרנט, נוח אך פגיע) לעומת Cold Wallet (לא מקוון, מאובטח יותר אך פחות נוח)."
+    ],
+    "commonMistakesHe": [
+      "לחשוב שהמטבעות עצמם 'נשמרים' בארנק (Wallet) - הם רשומים על הבלוקצ'יין; הארנק שומר רק את המפתח הפרטי."
+    ],
+    "americanTrapPatternsHe": [
+      "נושא זה לא נמצא בפועל באף שאלת מבחן שנבדקה (2018-2025) - סביר שהוא בעל משקל נמוך מאוד או לא נבדק כלל, אך כדאי לדעת הגדרות בסיסיות ליתר ביטחון."
+    ],
+    "mustMemorizeDefinitionsHe": [
+      "Blockchain: יומן חשבונות דיגיטלי מבוזר וציבורי של כל העסקאות במטבע קריפטוגרפי, גדל כרונולוגית, מועתק לכל Node ברשת."
+    ],
+    "relatedTopicIds": [],
+    "sourceRefs": [
+      { "fileId": "lec_12", "fileName": "Lec_12.pptx", "locator": "כל המצגת - slides 1-31 (Mining, Proof of Work/Stake, Wallets, Blockchain, Double Spend)" }
+    ],
+    "subtopics": [
+      { "id": "blockchain-basics", "titleHe": "יסודות Blockchain", "titleEn": "Blockchain Basics" },
+      { "id": "pow-vs-pos", "titleHe": "Proof of Work מול Proof of Stake", "titleEn": "Proof of Work vs Proof of Stake" }
+    ]
+  }
+]
