@@ -201,3 +201,44 @@ Routes: Learn (`java-platform-jvm`, `solid-principles`, `design-patterns-behavio
 ### Verification performed
 
 `npm run verify`: **117/117 tests pass** (82 original + 22 QuestionCard BiDi + 4 new PageContainer + updated alignment assertions), typecheck/lint clean, `validate:data` unchanged (16 topics, 293 active questions of 294, 188 flashcards, 7 mock exams, 0 errors, 4 pre-existing warnings), build succeeds. `npm run deploy:check` subpath preview: no server/console errors, all measurements above taken against this production-style build.
+
+## Learn Paragraph Full-Width Fix
+
+A follow-up bug remained after the previous pass: the Learn page's outer container, headings, and section separators already used almost the full desktop width, but the actual lesson **paragraphs** (summary, "אינטואיציה", "ידע למבחן", "יישום") still rendered in a narrow ~50%-width column, leaving a large blank area on the left and lengthening the page unnecessarily. The answer-option RTL/LTR alignment fix from the prior pass was confirmed correct and was **not** touched in this pass, per explicit instruction.
+
+### Root cause
+
+`src/routes/Learn.tsx`'s `TopicReader` — the single renderer for all 16 Learn topics (no separate `StudySection`/`RichText`/`prose` component exists) — had exactly **4 occurrences** of the Tailwind arbitrary-value class `max-w-[85ch]`, applied individually to 4 `<p>` elements: the topic summary (was line 104), and the "אינטואיציה"/"ידע למבחן"/"יישום" paragraphs per section (were lines 116/121/133). This was a deliberate choice from an earlier pass (a "readable prose measure"), but it capped each paragraph at roughly 850px regardless of how wide its container had grown — while the code blocks and callout boxes right next to it correctly had no such cap and used the full container width, producing the visible "half-width text, full-width everything else" mismatch the user described. A full grep of `Learn.tsx` and the shared layout/content components confirmed no other narrow-width class (`max-w-sm` through `max-w-7xl`, `prose`, `w-1/2`/`w-2/3`, inline `maxWidth`, unused grid columns) was present anywhere else in the Learn rendering path.
+
+### Fix
+
+Removed `max-w-[85ch]` from all 4 paragraphs in `src/routes/Learn.tsx`, leaving their other classes (`leading-relaxed`, `whitespace-pre-wrap`, `mt-2`) untouched. Each `<p>` now inherits its parent `<div>`/`<section>`'s full width, which is in turn the full `PageContainer` width. Additionally, all three `<PageContainer>` usages in `Learn.tsx` (topic list, "topic not found" branch, and the main `TopicReader`) were switched from the `default` size to `size="wide"`, giving Learn the same 2000px ceiling as the exam-taking screens rather than the 1900px `default` ceiling — a small consistency improvement, not required to fix the core bug. `dir`/RTL alignment, English-term ordering inside Hebrew sentences, and all other BiDi handling were left completely untouched; this was a width-only change.
+
+### Width — before/after by route and viewport
+
+| Route | Viewport | `main` width | `PageContainer` width | Paragraph width before | Paragraph width after | Utilization after |
+|---|---|---|---|---|---|---|
+| `solid-principles` | 1920×1080 | 1680.8px | 1552.8px (`wide`, was 1520.75px `default`) | ~789px (51.9%) | **1552.8px (100% of container)** | 92.4% of `main` |
+| `solid-principles` | 2560×1440 | 2320.8px | 2000px (cap) | ~795px | **2000px (100% of container)** | 86.2% of `main` |
+| `java-platform-jvm` | 1920×1080 | 1680.8px | 1552.8px | ~789px | **1553px (all 36 paragraphs checked)** | 92.4% |
+| `networking-sockets-io-streams` | 1920×1080 | 1680.8px | 1552.8px | ~789px | **1553px (open-flow paragraphs); 1519px inside padded callout boxes (97.8% of container)** | 92.4% |
+| `networking-sockets-io-streams` | 1600×900 | 1360.8px | 1242.4px | — | full-width | 91.3% |
+| `networking-sockets-io-streams` | 1366×768 | 1127.2px | 1015.8px | — | full-width | 90.1% |
+
+The 2560×1440 result (2000px) is a real, substantial increase over the 1920×1080 result (1552.8px) — confirming paragraphs now expand with the viewport rather than staying fixed. All three explicitly-requested routes (`solid-principles`, `java-platform-jvm`, `networking-sockets-io-streams`) were measured directly; a fourth (`design-patterns-behavioral`) was spot-checked via direct hash-route load to confirm the fix isn't route-specific.
+
+### Confirmation across all 16 topics
+
+An automated test (`src/routes/Learn.test.tsx`, `describe.each` over the real `topicsSorted` array from `dataStore`) renders every one of the 16 real topics and asserts no `<p>` in any of them carries `max-w-[85ch]` or any other narrow `max-w-*`/`prose` class — an exhaustive check rather than a 3-topic spot check, since the fix lives in the single shared `TopicReader` renderer used by all topics identically (no per-topic wrapper exists to regress independently).
+
+### Desktop and mobile results
+
+No horizontal overflow at 2560×1440, 1920×1080, 1600×900, 1366×768, or 1024×768. At 390×844 and 768×1024, the layout was confirmed clean via `document.documentElement.clientWidth`/`getBoundingClientRect()` (both exactly 390px, matching the requested viewport, with the code block correctly scrolling internally via its own `overflow-x: auto` rather than pushing the page wider) and a full-page screenshot showing no visible blank margin or horizontal scrollbar. Note: this browser-automation tool's own `window.innerWidth`/`visualViewport.width` reported a stale/inflated value (506px) after the resize at this viewport in this session, while every actual layout measurement (`clientWidth`, `getBoundingClientRect()` on `<html>`/`<body>`/`<main>`) and the screenshot itself were consistently correct at 390px — this is judged to be a tool-side measurement artifact (consistent with other tool quirks already documented in this report), not a product defect.
+
+### Tests added
+
+New `src/routes/Learn.test.tsx` (21 tests): a focused suite on `solid-principles` (wide `PageContainer` variant confirmed, no narrow-`max-w` paragraphs, all section headings still render, previous/next navigation links still point to the correct neighboring topics, code blocks retain `ltr-code`), plus an exhaustive `describe.each` sweep asserting the same "no narrow paragraph max-width" property across all 16 real topics.
+
+### Verification performed
+
+`npm run verify`: **138/138 tests pass** (117 from the previous pass + 21 new Learn tests), typecheck/lint clean, `validate:data` unchanged (16 topics, 293 active questions, 188 flashcards, 7 mock exams, 0 errors, 4 pre-existing warnings), build succeeds. `npm run deploy:check` subpath preview: no console errors, direct hash-route load confirmed, `localStorage` containing only the single namespaced progress key.

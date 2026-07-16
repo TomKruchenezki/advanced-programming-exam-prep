@@ -14,7 +14,7 @@ const FREQ_LABEL: Record<string, string> = { high: 'שכיחות גבוהה', me
 function TopicList() {
   const { progress } = useProgress()
   return (
-    <PageContainer className="space-y-3">
+    <PageContainer size="wide" className="space-y-3">
       <h1 className="text-page-title font-bold">למידה לפי נושא</h1>
       {topicsSorted.map((topic) => {
         const mastery = progress.topicMastery[topic.id]?.masteryScore ?? 0
@@ -67,7 +67,7 @@ function TopicReader({ topicId }: { topicId: string }) {
 
   if (!topic) {
     return (
-      <PageContainer>
+      <PageContainer size="wide">
         <p className="text-body-lg text-[var(--color-text-muted)]">נושא לא נמצא.</p>
         <Link to="/learn" className="text-nav-link text-[var(--color-accent)] hover:underline">
           חזרה לרשימת הנושאים
@@ -92,7 +92,7 @@ function TopicReader({ topicId }: { topicId: string }) {
   }
 
   return (
-    <PageContainer className="space-y-10">
+    <PageContainer size="wide" className="space-y-10">
       <div>
         <Link to="/learn" className="text-nav-link text-[var(--color-accent)] hover:underline">
           ← כל הנושאים
@@ -101,7 +101,7 @@ function TopicReader({ topicId }: { topicId: string }) {
         <p className="text-meta text-[var(--color-text-muted)]">
           <Ltr>{topic.titleEn}</Ltr> · הרצאות {topic.lectureRefs.join(', ')}
         </p>
-        <p className="text-body-lg mt-2 max-w-[85ch]">{topic.summary}</p>
+        <p className="text-body-lg mt-2">{topic.summary}</p>
       </div>
 
       {sections.map((section) => {
@@ -113,12 +113,12 @@ function TopicReader({ topicId }: { topicId: string }) {
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">אינטואיציה</h3>
-              <p className="text-body-lg max-w-[85ch] leading-relaxed">{section.intuitionHe}</p>
+              <p className="text-body-lg leading-relaxed">{section.intuitionHe}</p>
             </div>
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">ידע למבחן</h3>
-              <p className="text-body-lg max-w-[85ch] whitespace-pre-wrap leading-relaxed">{section.examKnowledgeHe}</p>
+              <p className="text-body-lg whitespace-pre-wrap leading-relaxed">{section.examKnowledgeHe}</p>
             </div>
 
             {section.codeExamples?.map((ex, i) => (
@@ -130,7 +130,7 @@ function TopicReader({ topicId }: { topicId: string }) {
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">יישום</h3>
-              <p className="text-body-lg max-w-[85ch] leading-relaxed">{section.applicationHe}</p>
+              <p className="text-body-lg leading-relaxed">{section.applicationHe}</p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
