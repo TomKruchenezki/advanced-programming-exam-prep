@@ -45,3 +45,105 @@ Full 10-screen sweeps were run at 1920×1080 (largest), 1024×768, 768×1024 (th
 - `prefers-reduced-motion` was reviewed and found not applicable: the only animation anywhere in the app is a plain `transition-colors` on nav links and option buttons, which is not the kind of vestibular motion effect that media feature is meant to suppress.
 - The sidebar (`AppLayout.tsx`) was deliberately left at its fixed `md:w-56` (224px) width rather than given additional `lg:`/`xl:` scaling — the audited problems were entirely about the *content area* lacking a consistent width cap, not the sidebar, and adding sidebar breakpoints would have been an unrequested, unverified extra variable.
 - Automated testing in this environment could not reliably drive native `confirm()`/`alert()` dialogs or execute long-running async browser scripts (they consistently hit the tool's own timeout regardless of actual delay) — all such interactions were instead verified by re-querying DOM state synchronously immediately after the action, in a fresh browser tab where needed to rule out stale console/state carryover.
+
+## Desktop Width and Typography Pass
+
+Performed as a second, dedicated audit after user feedback that the deployed desktop UI, while free of overflow bugs, still looked too narrow and small on a large monitor. This pass did not repeat the overflow sweep above — it measured actual **computed pixel widths and font sizes** against the available viewport, which the first audit did not do.
+
+### Root cause (measured, not assumed)
+
+Live measurement on `/diagnostic` (active `ExamRunner`) before any change:
+
+| | 1920×1080 (dpr 1.25) | 2560×1440 (dpr 1.25) |
+|---|---|---|
+| `innerWidth` | 1920 | 2560 |
+| `<main>` width (after 224px sidebar) | 1696px | 2336px |
+| `PageContainer` width in use | **1152px** (`max-w-6xl`, fixed) | **1152px** (`max-w-6xl`, fixed — identical to 1920px) |
+| Unused horizontal space | 480px | **1184px** |
+| Question stem font (`text-base`) | 16px | 16px |
+| Answer option font (`text-sm`) | 14px | 14px |
+| Code font (`text-sm`) | 14px | 14px |
+
+`PageContainer.tsx` — the single component every one of the 10 screens routes its width through — used two **fixed** Tailwind caps (`max-w-4xl`/896px, `max-w-6xl`/1152px) that do not move at all between 1920px and 2560px viewports. All content typography used Tailwind's stock `text-sm`/`text-base` with no desktop-specific scaling, and the project has no `@tailwindcss/typography`/`prose` plugin and no `xl:`/`2xl:` breakpoint usage anywhere.
+
+### Shared components changed
+
+| Component | Before | After |
+|---|---|---|
+| [PageContainer.tsx](exam-prep-app/src/components/layout/PageContainer.tsx) | `default: max-w-4xl` (896px fixed), `wide: max-w-6xl` (1152px fixed) | `default: max-w-[min(96%,1600px)]`, `wide: max-w-[min(97%,1900px)]` — fluid, capped, never identical across 1920px vs 2560px |
+| [AppLayout.tsx](exam-prep-app/src/components/layout/AppLayout.tsx) | `<main>` padding `p-4 md:p-8`; sidebar `md:w-56` | `<main>` padding `p-4 md:p-6 lg:p-8 xl:p-10` (graded); sidebar unchanged at 224px (within the requested 220-260px range — not the source of the problem) |
+| [index.css](exam-prep-app/src/index.css) | No content typography scale; only `text-sm`/`text-base`/`text-xs` stock Tailwind sizes | New `@layer utilities` block: 8 semantic `clamp()`-based classes (`text-page-title`, `text-section-title`, `text-question`, `text-answer`, `text-body-lg`, `text-code-lg`, `text-nav-link`, `text-meta`) — all `rem`-based so browser zoom and user font-size preferences are respected |
+| [QuestionCard.tsx](exam-prep-app/src/components/question/QuestionCard.tsx) | stem `text-base`, option `text-sm p-3`, explanation `text-sm`, sources `text-xs` | stem `text-question font-medium`, option `text-answer p-4`, explanation `text-body-lg`, sources `text-meta` |
+| [CodeBlock.tsx](exam-prep-app/src/components/question/CodeBlock.tsx) | `text-sm` | `text-code-lg` |
+| [ExamRunner.tsx](exam-prep-app/src/components/exam/ExamRunner.tsx) | title `font-bold`, counter `text-xs`, nav grid `h-8 w-8 text-xs`, action buttons `text-sm py-2` | title `text-section-title font-bold`, counter `text-meta`, nav grid `h-10 w-10 text-sm` (larger touch target), action buttons `text-base py-2.5` |
+| [ExamResultView.tsx](exam-prep-app/src/components/exam/ExamResultView.tsx) | score `text-4xl`, body/labels `text-sm`/`text-xs` | score `text-5xl`, section headings `text-section-title`, body `text-body-lg`, labels `text-meta` |
+
+Deliberately **not** changed: the global `html`/`body` root font-size (would have proportionally inflated every rem-based padding/gap app-wide, working against the "reduce excessive whitespace" goal); no `@tailwindcss/typography` plugin was added (not installed, not needed — the Learn-page reading measure is a plain `max-w-[85ch]` utility applied only to prose paragraphs).
+
+### PageContainer width — before/after by viewport
+
+| Viewport | `<main>` width | `PageContainer` before (fixed) | `PageContainer` after (fluid) | Utilization after |
+|---|---|---|---|---|
+| 1366×768 | 1127.2px | 1152px / 896px (capped, sometimes wider than main) | 1015.8px (`wide`) | 90.1% |
+| 1536×864 | 1312px | 1152px / 896px | 1195.0px (`wide`) | 91.1% |
+| 1600×900 | 1376px | 1152px / 896px | 1257.1px (`wide`) | 91.4% |
+| 1920×1080 | 1696px | 1152px (68% util) | 1567.5px (`wide`) | **92%** |
+| 2560×1440 | 2336px | 1152px (49% util, **identical** to 1920px) | 1900px (`wide`, hits intentional ceiling) | 81.3% (436px unused, down from 1184px) |
+| 390×844 (mobile) | 390.4px | 347.6px (unchanged behavior) | 347.6px | no regression, no overflow |
+
+The 2560×1440 result specifically satisfies the acceptance criterion that the layout must **not** remain visually identical in width to the 1920px (let alone 1280px) layout — it now correctly expands to 1900px vs 1567.5px, a real ~21% difference, while still refusing to stretch to the full 2336px main width (which would make a single question card absurdly wide on an ultra-wide monitor).
+
+### Typography — before/after (ExamRunner / QuestionCard, desktop)
+
+| Element | Before (fixed) | After (fluid `clamp()`, measured live) |
+|---|---|---|
+| Question stem | 16px (`text-base`) at every desktop size | 23.1px @1366px → 23.7px @1536px → 24px @1600px→2560px (ceiling) |
+| Answer option | 14px (`text-sm`) at every desktop size | 18.7px @1366px → 19.1px @1536px → 19.2px @1600px → 19.84px @1920px → 20px @2560px (ceiling) |
+| Dashboard `<h1>` | 24px (`text-2xl`) | 40px @2560px (ceiling of `text-page-title`) |
+| Learn topic body paragraph | 14px (`text-sm`) | 19px @2560px (ceiling of `text-body-lg`) |
+| Learn code block | 14px (`text-sm`) | 17.9px @2560px |
+| Mobile (390px) stem / option | 16px / 14px | 20px / 17px (floor of the clamp ranges — no regression, no overflow, not "excessively large") |
+
+All values sit inside the ranges the user specified (question 20-24px, answer options 17-20px, body 17-19px, page titles 30-40px, code 16-18px+, metadata ≥14px).
+
+### Learn screen — wide container, narrow prose, full-width code
+
+Measured at 2560×1440 on `/learn/solid-principles`:
+
+| Element | Width |
+|---|---|
+| `PageContainer` (default) | 1600px (hits its ceiling, same as the code block below) |
+| Code block (`CodeBlock`) | **1600px** — spans the full container, not narrowed |
+| Prose paragraph (`max-w-[85ch]`) | **794.6px** — narrowed independently to a readable measure |
+
+This confirms the intended split: the container itself is wide, code/tables/callouts (`mustRemember`/`easyToConfuse`/`howProfessorMightAsk` boxes) use the full width, and only plain reading paragraphs (`intuitionHe`/`examKnowledgeHe`/`applicationHe`) get the `max-w-[85ch]` reading-measure class. No `@tailwindcss/typography`/`prose` plugin was installed for this — it's a single arbitrary-value Tailwind utility.
+
+### Flashcards — intentional intermediate width
+
+`Flashcards.tsx` gained one new inner wrapper (`mx-auto w-full max-w-[min(88%,1100px)]`) around just the active-card block, so the card grows well beyond its old 896px cap but does not stretch to the full ~1600-1900px page container (a single short flashcard sentence at 1900px would be unreadable). This is the one deliberately-added `max-w` in the whole pass, chosen per the user's explicit "70-90% of main content area" target.
+
+### Remaining intentional max-widths (and why)
+
+| Location | Class | Why it stays |
+|---|---|---|
+| `Learn.tsx` prose paragraphs | `max-w-[85ch]` | Reading-measure best practice (~80-100 characters/line) — explicitly requested, applies only to plain paragraphs, not code/tables/callouts |
+| `Flashcards.tsx` active card wrapper | `max-w-[min(88%,1100px)]` | A single flashcard sentence stretched to 1900px would be unreadable; 88%/1100px matches the requested 70-90% range |
+| `PageContainer` `default`/`wide` | `max-w-[min(96%,1600px)]` / `max-w-[min(97%,1900px)]` | Ceilings exist so an ultra-wide monitor doesn't stretch a single question card or dashboard grid to the full physical screen width — ceiling values chosen inside the user's explicitly requested 1800-2000px / ~1500-1750px ranges |
+
+### Route-level changes (typography only, no logic touched)
+
+`Dashboard.tsx`, `Learn.tsx` (TopicList + TopicReader), `Diagnostic.tsx`, `QuizMe.tsx`, `MockExam.tsx`, `PastExams.tsx`, `Flashcards.tsx`, `MistakeNotebook.tsx`, `LastMinuteReview.tsx`, `Search.tsx` — every `text-2xl`/`text-xl`/`text-lg` page/section heading replaced with `text-page-title`/`text-section-title`; every `text-sm` body/label replaced with `text-body-lg`; every `text-xs` metadata/citation replaced with `text-meta` (14px floor, never below the user's stated minimum). `PastExams.tsx`, `LastMinuteReview.tsx`, and `Search.tsx` result/card grids were also widened (`sm:grid-cols-2` → additional `xl:grid-cols-3`, or single-column → `lg:grid-cols-2`) since the wider `PageContainer` left room for more columns before individual cards got too wide.
+
+### Verification performed
+
+- `npm run verify` (typecheck + test + lint + validate:data + build): **82/82 tests pass**, typecheck clean, lint clean, `validate:data` unchanged (16 topics, 293 active questions of 294 total, 188 flashcards, 7 mock exams, 0 errors, 4 pre-existing warnings), production build succeeds.
+- `npm run deploy:check` (GitHub Pages subpath simulation, `vite preview` serving the production build under `/exam-prep-app/`): loaded and re-measured live, including confirming the served bundle matched the latest build after a stale-cache false alarm (resolved with a hard reload).
+- Live re-measurement (computed styles, not just screenshots) at **1366×768, 1536×864, 1600×900, 1920×1080, 2560×1440**, and a mobile regression check at **390×844** — all tables above.
+- Console checked for errors after the full typography pass: **none**.
+- Direct hash-route navigation (`#/learn/solid-principles`) loaded correctly under the `/exam-prep-app/` subpath build (confirms `HashRouter` + GitHub Pages `base` still work together after all changes).
+- `localStorage` inspected live in the browser: only the single namespaced key `advanced-programming-exam-prep:progress:v1` exists — no stray keys, progress data intact.
+- Spot-checked Dashboard, Diagnostic/ExamRunner, Learn (topic list + reader), and Flashcards visually at multiple viewports; all other routes checked via the full `verify`/`deploy:check` pass plus code review of every changed file.
+
+### Known limitation of this pass
+
+Screenshots were used for visual spot-checks during the session but are not embedded in this Markdown report (this repository has no image-asset pipeline for the report itself); all before/after claims above are instead backed by live `getComputedStyle`/`getBoundingClientRect()` measurements, which are more precise and reproducible than a static image.

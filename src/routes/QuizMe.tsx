@@ -75,12 +75,12 @@ export function QuizMe() {
 
   return (
     <PageContainer className="space-y-6">
-      <h1 className="text-2xl font-bold">תרגול (Quiz Me)</h1>
+      <h1 className="text-page-title font-bold">תרגול (Quiz Me)</h1>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div>
-          <label className="mb-1 block text-sm font-medium">סוג תרגול</label>
-          <select value={mode} onChange={(e) => setMode(e.target.value as FilterMode)} className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-sm">
+          <label className="text-body-lg mb-1 block font-medium">סוג תרגול</label>
+          <select value={mode} onChange={(e) => setMode(e.target.value as FilterMode)} className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2.5">
             <option value="adaptive">אדפטיבי (מומלץ)</option>
             <option value="topic">לפי נושא</option>
             <option value="difficulty">לפי רמת קושי</option>
@@ -96,8 +96,8 @@ export function QuizMe() {
 
         {mode === 'topic' && (
           <div>
-            <label className="mb-1 block text-sm font-medium">נושא</label>
-            <select value={topicId} onChange={(e) => setTopicId(e.target.value)} className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-sm">
+            <label className="text-body-lg mb-1 block font-medium">נושא</label>
+            <select value={topicId} onChange={(e) => setTopicId(e.target.value)} className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2.5">
               {topicsSorted.map((t) => (
                 <option key={t.id} value={t.id}>
                   {t.titleHe}
@@ -109,8 +109,8 @@ export function QuizMe() {
 
         {mode === 'difficulty' && (
           <div>
-            <label className="mb-1 block text-sm font-medium">רמת קושי</label>
-            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value as Difficulty)} className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-sm">
+            <label className="text-body-lg mb-1 block font-medium">רמת קושי</label>
+            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value as Difficulty)} className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2.5">
               <option value="easy">קלות</option>
               <option value="medium">בינוניות</option>
               <option value="hard">קשות</option>
@@ -119,13 +119,13 @@ export function QuizMe() {
         )}
 
         <div>
-          <label className="mb-1 block text-sm font-medium">מספר שאלות</label>
+          <label className="text-body-lg mb-1 block font-medium">מספר שאלות</label>
           <div className="flex gap-2">
             {SIZE_OPTIONS.map((s) => (
               <button
                 key={s}
                 onClick={() => setSize(s)}
-                className={`rounded-lg border px-4 py-1.5 text-sm ${size === s ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10' : 'border-[var(--color-border)]'}`}
+                className={`rounded-lg border px-4 py-2 text-base ${size === s ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10' : 'border-[var(--color-border)]'}`}
               >
                 {s}
               </button>
@@ -137,11 +137,11 @@ export function QuizMe() {
       <button
         disabled={!canStart}
         onClick={start}
-        className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-[var(--color-accent-contrast)] disabled:opacity-40"
+        className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-base font-medium text-[var(--color-accent-contrast)] disabled:opacity-40"
       >
         התחל תרגול
       </button>
-      {!canStart && <p className="text-xs text-[var(--color-text-muted)]">אין שאלות זמינות לפי הסינון הנוכחי (ייתכן שמאגר השאלות עדיין לא נטען).</p>}
+      {!canStart && <p className="text-meta text-[var(--color-text-muted)]">אין שאלות זמינות לפי הסינון הנוכחי (ייתכן שמאגר השאלות עדיין לא נטען).</p>}
     </PageContainer>
   )
 }

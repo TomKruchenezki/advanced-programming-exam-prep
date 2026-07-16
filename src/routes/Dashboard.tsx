@@ -31,13 +31,13 @@ function StudyPlanSection() {
   return (
     <section className="rounded-xl border border-[var(--color-border)] p-4">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="font-bold">תוכנית לימוד ל-3 ימים</h2>
-        <button onClick={regenerate} className="rounded-lg border border-[var(--color-accent)] px-3 py-1.5 text-xs text-[var(--color-accent)]">
+        <h2 className="text-section-title font-bold">תוכנית לימוד ל-3 ימים</h2>
+        <button onClick={regenerate} className="text-meta rounded-lg border border-[var(--color-accent)] px-3 py-1.5 text-[var(--color-accent)]">
           {plan.length > 0 ? 'בנה מחדש' : 'בנה תוכנית'}
         </button>
       </div>
 
-      <div className="mb-4 flex flex-wrap gap-4 text-xs">
+      <div className="text-meta mb-4 flex flex-wrap gap-4">
         {(['day1', 'day2', 'day3'] as const).map((day, i) => (
           <label key={day} className="flex items-center gap-1">
             שעות פנויות ביום {i + 1}:
@@ -54,7 +54,7 @@ function StudyPlanSection() {
       </div>
 
       {plan.length === 0 ? (
-        <p className="text-sm text-[var(--color-text-muted)]">לחץ על &quot;בנה תוכנית&quot; כדי ליצור תוכנית לימוד מותאמת אישית.</p>
+        <p className="text-body-lg text-[var(--color-text-muted)]">לחץ על &quot;בנה תוכנית&quot; כדי ליצור תוכנית לימוד מותאמת אישית.</p>
       ) : (
         <div className="grid gap-4 md:grid-cols-3">
           {([1, 2, 3] as const).map((day) => {
@@ -63,12 +63,12 @@ function StudyPlanSection() {
             const availableMin = progress.availableHoursPerDay[`day${day}` as const] * 60
             return (
               <div key={day}>
-                <h3 className="mb-1 text-sm font-bold">
+                <h3 className="text-body-lg mb-1 font-bold">
                   {DAY_LABEL[day]} · {Math.round(totalMin / 60)} שעות מתוכננות {totalMin > availableMin && <span className="text-[var(--color-warning)]">(מעל הזמן הפנוי)</span>}
                 </h3>
                 <ul className="space-y-1">
                   {dayTasks.map((task) => (
-                    <li key={task.id} className="flex items-start gap-2 text-xs">
+                    <li key={task.id} className="text-meta flex items-start gap-2">
                       <input type="checkbox" checked={task.completed} onChange={() => toggleTask(task.id)} className="mt-0.5" />
                       <span className={task.completed ? 'text-[var(--color-text-muted)] line-through' : ''}>
                         {task.titleHe} ({task.estimatedMinutes} דק')
@@ -88,8 +88,8 @@ function StudyPlanSection() {
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
-      <div className="text-2xl font-bold">{value}</div>
-      <div className="text-xs text-[var(--color-text-muted)]">{label}</div>
+      <div className="text-section-title font-bold">{value}</div>
+      <div className="text-meta text-[var(--color-text-muted)]">{label}</div>
     </div>
   )
 }
@@ -135,33 +135,33 @@ export function Dashboard() {
   return (
     <PageContainer className="space-y-8">
       <section>
-        <h1 className="mb-1 text-2xl font-bold">לוח בקרה</h1>
-        <p className="text-sm text-[var(--color-text-muted)]">
+        <h1 className="text-page-title mb-1 font-bold">לוח בקרה</h1>
+        <p className="text-body-lg text-[var(--color-text-muted)]">
           מבחן <Ltr>Advanced Topics in Programming</Ltr> — 19.07.2026, 17:30
         </p>
       </section>
 
       <section className="rounded-2xl border border-[var(--color-accent)] bg-[var(--color-bg-subtle)] p-6 text-center">
-        <div className="text-sm text-[var(--color-text-muted)]">זמן שנותר עד המבחן</div>
-        <div className="mt-2 flex justify-center gap-4 text-3xl font-bold">
+        <div className="text-body-lg text-[var(--color-text-muted)]">זמן שנותר עד המבחן</div>
+        <div className="mt-2 flex justify-center gap-4 text-4xl font-bold">
           <div>
             {countdown.days}
-            <div className="text-xs font-normal text-[var(--color-text-muted)]">ימים</div>
+            <div className="text-meta font-normal text-[var(--color-text-muted)]">ימים</div>
           </div>
           <div>
             {countdown.hours}
-            <div className="text-xs font-normal text-[var(--color-text-muted)]">שעות</div>
+            <div className="text-meta font-normal text-[var(--color-text-muted)]">שעות</div>
           </div>
           <div>
             {countdown.minutes}
-            <div className="text-xs font-normal text-[var(--color-text-muted)]">דקות</div>
+            <div className="text-meta font-normal text-[var(--color-text-muted)]">דקות</div>
           </div>
           <div>
             {countdown.seconds}
-            <div className="text-xs font-normal text-[var(--color-text-muted)]">שניות</div>
+            <div className="text-meta font-normal text-[var(--color-text-muted)]">שניות</div>
           </div>
         </div>
-        {countdown.isPast && <div className="mt-2 text-sm text-[var(--color-danger)]">מועד המבחן כבר עבר</div>}
+        {countdown.isPast && <div className="text-body-lg mt-2 text-[var(--color-danger)]">מועד המבחן כבר עבר</div>}
       </section>
 
       <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -177,9 +177,9 @@ export function Dashboard() {
 
       <section className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-[var(--color-border)] p-4">
-          <h2 className="mb-2 font-bold">נושאים חלשים</h2>
-          {weakest.length === 0 && <p className="text-sm text-[var(--color-text-muted)]">עדיין אין מספיק נתונים — התחל לתרגל.</p>}
-          <ul className="space-y-1 text-sm">
+          <h2 className="text-section-title mb-2 font-bold">נושאים חלשים</h2>
+          {weakest.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">עדיין אין מספיק נתונים — התחל לתרגל.</p>}
+          <ul className="text-body-lg space-y-1">
             {weakest.map(({ topic, mastery }) => (
               <li key={topic.id} className="flex justify-between">
                 <span>{topic.titleHe}</span>
@@ -189,9 +189,9 @@ export function Dashboard() {
           </ul>
         </div>
         <div className="rounded-xl border border-[var(--color-border)] p-4">
-          <h2 className="mb-2 font-bold">נושאים חזקים</h2>
-          {strongest.length === 0 && <p className="text-sm text-[var(--color-text-muted)]">עדיין אין מספיק נתונים.</p>}
-          <ul className="space-y-1 text-sm">
+          <h2 className="text-section-title mb-2 font-bold">נושאים חזקים</h2>
+          {strongest.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">עדיין אין מספיק נתונים.</p>}
+          <ul className="text-body-lg space-y-1">
             {strongest.map(({ topic, mastery }) => (
               <li key={topic.id} className="flex justify-between">
                 <span>{topic.titleHe}</span>
@@ -203,9 +203,9 @@ export function Dashboard() {
       </section>
 
       <section className="rounded-xl border border-[var(--color-accent)] p-4">
-        <h2 className="mb-2 font-bold">המשימה המומלצת הבאה</h2>
-        <p className="mb-3 text-sm">{nextTask.label}</p>
-        <Link to={nextTask.to} className="inline-block rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-contrast)]">
+        <h2 className="text-section-title mb-2 font-bold">המשימה המומלצת הבאה</h2>
+        <p className="text-body-lg mb-3">{nextTask.label}</p>
+        <Link to={nextTask.to} className="inline-block rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]">
           המשך
         </Link>
       </section>

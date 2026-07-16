@@ -20,24 +20,24 @@ export function ExamResultView({ result, questions, previousResults = [] }: Exam
   return (
     <PageContainer size="wide" className="space-y-8">
       <section className="rounded-2xl border border-[var(--color-accent)] p-6 text-center">
-        <div className="text-4xl font-bold">{result.scorePercent}</div>
-        <div className="text-sm text-[var(--color-text-muted)]">מתוך 100 · {result.correctCount} מתוך {questions.length} נכונות</div>
-        <div className={`mt-2 text-sm font-medium ${result.wouldPass55 ? 'text-[var(--color-success)]' : 'text-[var(--color-danger)]'}`}>
+        <div className="text-5xl font-bold">{result.scorePercent}</div>
+        <div className="text-body-lg text-[var(--color-text-muted)]">מתוך 100 · {result.correctCount} מתוך {questions.length} נכונות</div>
+        <div className={`text-body-lg mt-2 font-medium ${result.wouldPass55 ? 'text-[var(--color-success)]' : 'text-[var(--color-danger)]'}`}>
           {result.wouldPass55 ? 'ציון עובר (מעל 55)' : 'ציון לא עובר (מתחת ל-55)'}
         </div>
-        <div className="mt-1 text-xs text-[var(--color-text-muted)]">
+        <div className="text-meta mt-1 text-[var(--color-text-muted)]">
           זמן: {Math.floor(result.durationSeconds / 60)} דקות {result.durationSeconds % 60} שניות
         </div>
       </section>
 
       <section>
-        <h2 className="mb-3 font-bold">פירוט לפי נושא</h2>
+        <h2 className="text-section-title mb-3 font-bold">פירוט לפי נושא</h2>
         <div className="space-y-2">
           {Object.entries(result.topicBreakdown).map(([topicId, breakdown]) => {
             const topic = topicsById.get(topicId)
             const pct = breakdown.total > 0 ? Math.round((breakdown.correct / breakdown.total) * 100) : 0
             return (
-              <div key={topicId} className="flex items-center gap-3 text-sm">
+              <div key={topicId} className="text-meta flex items-center gap-3">
                 <span className="w-40 shrink-0">{topic?.titleHe ?? topicId}</span>
                 <div className="h-2 flex-1 rounded-full bg-[var(--color-bg-subtle)]">
                   <div className="h-2 rounded-full bg-[var(--color-accent)]" style={{ width: `${pct}%` }} />
@@ -53,21 +53,21 @@ export function ExamResultView({ result, questions, previousResults = [] }: Exam
 
       {previousResults.length > 0 && (
         <section>
-          <h2 className="mb-2 font-bold">השוואה למבחנים קודמים</h2>
+          <h2 className="text-section-title mb-2 font-bold">השוואה למבחנים קודמים</h2>
           <div className="flex gap-2">
             {previousResults.map((r) => (
-              <span key={r.id} className="rounded-full bg-[var(--color-bg-subtle)] px-3 py-1 text-xs">
+              <span key={r.id} className="text-meta rounded-full bg-[var(--color-bg-subtle)] px-3 py-1">
                 {r.scorePercent}
               </span>
             ))}
-            <span className="rounded-full bg-[var(--color-accent)] px-3 py-1 text-xs text-[var(--color-accent-contrast)]">{result.scorePercent} (נוכחי)</span>
+            <span className="text-meta rounded-full bg-[var(--color-accent)] px-3 py-1 text-[var(--color-accent-contrast)]">{result.scorePercent} (נוכחי)</span>
           </div>
         </section>
       )}
 
       {wrongAnswers.length > 0 && (
         <section>
-          <h2 className="mb-3 font-bold">טעויות והסברים</h2>
+          <h2 className="text-section-title mb-3 font-bold">טעויות והסברים</h2>
           <div className="space-y-6">
             {wrongAnswers.map((a) => {
               const q = questionById.get(a.questionId)

@@ -36,15 +36,15 @@ export function MockExam() {
   if (!examId) {
     return (
       <PageContainer className="space-y-4">
-        <h1 className="text-2xl font-bold">מבחן מדומה</h1>
-        <p className="text-sm text-[var(--color-text-muted)]">בחר מבחן מדומה מהרשימה:</p>
-        <div className="space-y-2">
+        <h1 className="text-page-title font-bold">מבחן מדומה</h1>
+        <p className="text-body-lg text-[var(--color-text-muted)]">בחר מבחן מדומה מהרשימה:</p>
+        <div className="grid gap-3 sm:grid-cols-2">
           {mockExams.map((exam) => (
-            <Link key={exam.id} to={`/mock/${exam.id}`} className="block rounded-lg border border-[var(--color-border)] p-3 text-sm hover:border-[var(--color-accent)]">
-              {exam.titleHe} {exam.isAuthenticPastExam && <span className="text-xs text-[var(--color-text-muted)]">(מבחן עבר אמיתי)</span>}
+            <Link key={exam.id} to={`/mock/${exam.id}`} className="text-body-lg block rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
+              {exam.titleHe} {exam.isAuthenticPastExam && <span className="text-meta text-[var(--color-text-muted)]">(מבחן עבר אמיתי)</span>}
             </Link>
           ))}
-          {mockExams.length === 0 && <p className="text-xs text-[var(--color-text-muted)]">מאגר המבחנים המדומים עדיין לא נטען.</p>}
+          {mockExams.length === 0 && <p className="text-meta text-[var(--color-text-muted)]">מאגר המבחנים המדומים עדיין לא נטען.</p>}
         </div>
       </PageContainer>
     )
@@ -55,7 +55,7 @@ export function MockExam() {
     return (
       <>
         <PageContainer size="wide" className="mb-6">
-          <h1 className="text-2xl font-bold">{selectedExam?.titleHe ?? 'תוצאות מבחן מדומה'}</h1>
+          <h1 className="text-page-title font-bold">{selectedExam?.titleHe ?? 'תוצאות מבחן מדומה'}</h1>
         </PageContainer>
         <ExamResultView result={result.result} questions={result.qs} previousResults={previousResults} />
       </>
@@ -77,23 +77,23 @@ export function MockExam() {
   if (questions.length === 0) {
     return (
       <PageContainer className="space-y-4">
-        <p className="text-sm text-[var(--color-text-muted)]">מבחן זה עדיין לא זמין, או שמאגר השאלות לא נטען.</p>
+        <p className="text-body-lg text-[var(--color-text-muted)]">מבחן זה עדיין לא זמין, או שמאגר השאלות לא נטען.</p>
       </PageContainer>
     )
   }
 
   return (
     <PageContainer className="space-y-6">
-      <h1 className="text-2xl font-bold">{selectedExam?.titleHe}</h1>
-      <p className="text-sm text-[var(--color-text-muted)]">20 שאלות, 5 נקודות לכל שאלה, ציון מתוך 100.</p>
+      <h1 className="text-page-title font-bold">{selectedExam?.titleHe}</h1>
+      <p className="text-body-lg text-[var(--color-text-muted)]">20 שאלות, 5 נקודות לכל שאלה, ציון מתוך 100.</p>
 
-      <div className="space-y-3 rounded-xl border border-[var(--color-border)] p-4">
-        <label className="flex items-center gap-2 text-sm">
+      <div className="text-body-lg space-y-3 rounded-xl border border-[var(--color-border)] p-4">
+        <label className="flex items-center gap-2">
           <input type="checkbox" checked={useTimer} onChange={(e) => setUseTimer(e.target.checked)} />
           מצב עם טיימר
         </label>
         {useTimer && (
-          <label className="flex items-center gap-2 text-sm">
+          <label className="flex items-center gap-2">
             משך זמן (דקות):
             <input
               type="number"
@@ -105,12 +105,12 @@ export function MockExam() {
             />
           </label>
         )}
-        <p className="text-xs text-[var(--color-text-muted)]">
+        <p className="text-meta text-[var(--color-text-muted)]">
           משך המבחן האמיתי אינו ידוע בוודאות מהמקורות (נראו 90 ו-150 דקות במבחני עבר שונים) — ניתן לשנות את הזמן.
         </p>
       </div>
 
-      <button onClick={() => setStarted(true)} className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-[var(--color-accent-contrast)]">
+      <button onClick={() => setStarted(true)} className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]">
         התחל מבחן
       </button>
     </PageContainer>

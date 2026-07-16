@@ -29,8 +29,8 @@ export function Diagnostic() {
     return (
       <>
         <PageContainer size="wide" className="mb-6 space-y-2">
-          <h1 className="text-2xl font-bold">תוצאות מבחן האבחון</h1>
-          <p className="text-sm text-[var(--color-text-muted)]">
+          <h1 className="text-page-title font-bold">תוצאות מבחן האבחון</h1>
+          <p className="text-body-lg text-[var(--color-text-muted)]">
             זהו מבחן אבחון בלבד — מטרתו למפות מה אתה כבר יודע ומה כדאי להתמקד בו. אל תתייחס לציון כמבחן אמיתי.
           </p>
         </PageContainer>
@@ -45,13 +45,13 @@ export function Diagnostic() {
 
   return (
     <PageContainer className="space-y-4">
-      <h1 className="text-2xl font-bold">מבחן אבחון</h1>
-      <p className="text-sm text-[var(--color-text-muted)]">
+      <h1 className="text-page-title font-bold">מבחן אבחון</h1>
+      <p className="text-body-lg text-[var(--color-text-muted)]">
         {progress.diagnosticCompleted
           ? 'כבר ביצעת מבחן אבחון בעבר. ניתן לבצע שוב כדי לרענן את המיפוי.'
           : '30 שאלות הפזורות על פני כל נושאי הקורס. אין ציון עובר/נכשל — המטרה היא לבנות עבורך תוכנית לימוד ממוקדת. אל תתייחס לתוצאה כשיפוט.'}
       </p>
-      <button onClick={() => setStarted(true)} className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-sm font-medium text-[var(--color-accent-contrast)]">
+      <button onClick={() => setStarted(true)} className="rounded-lg bg-[var(--color-accent)] px-5 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]">
         התחל מבחן אבחון
       </button>
     </PageContainer>

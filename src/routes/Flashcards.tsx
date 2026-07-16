@@ -39,9 +39,9 @@ export function Flashcards() {
 
   return (
     <PageContainer className="space-y-6">
-      <h1 className="text-2xl font-bold">כרטיסיות</h1>
+      <h1 className="text-page-title font-bold">כרטיסיות</h1>
 
-      <div className="flex flex-wrap gap-4 text-sm">
+      <div className="text-body-lg flex flex-wrap gap-4">
         <label className="flex items-center gap-1">
           <input type="checkbox" checked={dueOnly} onChange={(e) => { setDueOnly(e.target.checked); setIndex(0) }} />
           רק כרטיסיות שהגיע מועדן
@@ -57,42 +57,44 @@ export function Flashcards() {
         {topicId && <span className="text-[var(--color-text-muted)]">נושא: {topicsById.get(topicId)?.titleHe}</span>}
       </div>
 
-      {!card && <p className="text-sm text-[var(--color-text-muted)]">אין כרטיסיות התואמות את הסינון הנוכחי.</p>}
+      {!card && <p className="text-body-lg text-[var(--color-text-muted)]">אין כרטיסיות התואמות את הסינון הנוכחי.</p>}
 
       {card && (
-        <div className="space-y-4">
-          <p className="text-xs text-[var(--color-text-muted)]">
+        // Narrower than the page's own wide container: a single flashcard reads better at
+        // ~70-90% of the main area than stretched to the full page width.
+        <div className="mx-auto w-full max-w-[min(88%,1100px)] space-y-4">
+          <p className="text-meta text-[var(--color-text-muted)]">
             כרטיסייה {index + 1} מתוך {pool.length} · {topicsById.get(card.topicId)?.titleHe}
           </p>
           <div
             onClick={() => setRevealed((r) => !r)}
-            className="flex min-h-48 cursor-pointer flex-col justify-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-6 text-center"
+            className="flex min-h-56 cursor-pointer flex-col justify-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-8 text-center"
           >
-            <p className="text-lg font-medium">{card.frontHe}</p>
+            <p className="text-question font-medium">{card.frontHe}</p>
             {revealed && (
-              <div className="mt-4 space-y-2 border-t border-[var(--color-border)] pt-4">
+              <div className="text-body-lg mt-4 space-y-2 border-t border-[var(--color-border)] pt-4">
                 <p>{card.backHe}</p>
                 {card.code && <CodeBlock code={card.code} />}
-                {card.mnemonic && <p className="text-sm text-[var(--color-accent)]">זכרון: {card.mnemonic}</p>}
-                {card.commonConfusion && <p className="text-xs text-[var(--color-text-muted)]">בלבול נפוץ: {card.commonConfusion}</p>}
+                {card.mnemonic && <p className="text-[var(--color-accent)]">זכרון: {card.mnemonic}</p>}
+                {card.commonConfusion && <p className="text-meta text-[var(--color-text-muted)]">בלבול נפוץ: {card.commonConfusion}</p>}
               </div>
             )}
-            {!revealed && <p className="mt-4 text-xs text-[var(--color-text-muted)]">לחץ לחשיפת התשובה</p>}
+            {!revealed && <p className="text-meta mt-4 text-[var(--color-text-muted)]">לחץ לחשיפת התשובה</p>}
           </div>
 
           <div className="flex justify-between gap-2">
-            <button onClick={() => setIndex((i) => Math.max(0, i - 1))} disabled={index === 0} className="rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-sm disabled:opacity-40">
+            <button onClick={() => setIndex((i) => Math.max(0, i - 1))} disabled={index === 0} className="rounded-lg border border-[var(--color-border)] px-4 py-2 text-base disabled:opacity-40">
               קודם
             </button>
             {revealed ? (
               <div className="flex gap-2">
-                <button onClick={() => rate('again')} className="rounded-lg bg-[var(--color-danger)]/20 px-3 py-1.5 text-sm">לא ידעתי</button>
-                <button onClick={() => rate('hard')} className="rounded-lg bg-[var(--color-warning)]/20 px-3 py-1.5 text-sm">קשה</button>
-                <button onClick={() => rate('good')} className="rounded-lg bg-[var(--color-success)]/20 px-3 py-1.5 text-sm">ידעתי</button>
-                <button onClick={() => rate('easy')} className="rounded-lg bg-[var(--color-accent)]/20 px-3 py-1.5 text-sm">קל</button>
+                <button onClick={() => rate('again')} className="rounded-lg bg-[var(--color-danger)]/20 px-4 py-2 text-base">לא ידעתי</button>
+                <button onClick={() => rate('hard')} className="rounded-lg bg-[var(--color-warning)]/20 px-4 py-2 text-base">קשה</button>
+                <button onClick={() => rate('good')} className="rounded-lg bg-[var(--color-success)]/20 px-4 py-2 text-base">ידעתי</button>
+                <button onClick={() => rate('easy')} className="rounded-lg bg-[var(--color-accent)]/20 px-4 py-2 text-base">קל</button>
               </div>
             ) : (
-              <button onClick={() => setIndex((i) => Math.min(pool.length - 1, i + 1))} className="rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-sm">
+              <button onClick={() => setIndex((i) => Math.min(pool.length - 1, i + 1))} className="rounded-lg border border-[var(--color-border)] px-4 py-2 text-base">
                 דלג
               </button>
             )}
@@ -101,10 +103,10 @@ export function Flashcards() {
       )}
 
       <div className="border-t border-[var(--color-border)] pt-4">
-        <p className="mb-2 text-xs font-medium text-[var(--color-text-muted)]">סינון לפי נושא</p>
+        <p className="text-meta mb-2 font-medium text-[var(--color-text-muted)]">סינון לפי נושא</p>
         <div className="flex flex-wrap gap-2">
           {topicsSorted.map((t) => (
-            <a key={t.id} href={`#/flashcards/${t.id}`} className="rounded-full border border-[var(--color-border)] px-3 py-1 text-xs hover:border-[var(--color-accent)]">
+            <a key={t.id} href={`#/flashcards/${t.id}`} className="text-meta rounded-full border border-[var(--color-border)] px-3 py-1 hover:border-[var(--color-accent)]">
               {t.titleHe}
             </a>
           ))}

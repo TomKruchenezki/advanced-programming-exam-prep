@@ -12,7 +12,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
   return (
     <div className="space-y-4">
       <div>
-        <p className="whitespace-pre-wrap text-base leading-relaxed">{question.stemHe}</p>
+        <p className="text-question whitespace-pre-wrap font-medium">{question.stemHe}</p>
         {question.code && <CodeBlock code={question.code} />}
       </div>
       <div className="space-y-2">
@@ -31,7 +31,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
               key={opt.id}
               disabled={revealed}
               onClick={() => onSelect(opt.id)}
-              className={`block w-full rounded-lg border p-3 text-start text-sm transition-colors ${stateClasses} disabled:cursor-default`}
+              className={`text-answer block w-full rounded-lg border p-4 text-start transition-colors ${stateClasses} disabled:cursor-default`}
             >
               <span className="me-2 font-bold">{opt.id.toUpperCase()}.</span>
               {opt.text}
@@ -40,7 +40,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
         })}
       </div>
       {revealed && (
-        <div className="space-y-3 rounded-lg bg-[var(--color-bg-subtle)] p-4 text-sm">
+        <div className="text-body-lg space-y-3 rounded-lg bg-[var(--color-bg-subtle)] p-4">
           <p>
             <strong>הסבר: </strong>
             {question.explanation}
@@ -56,7 +56,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
             })}
           </div>
           {question.sourceReferences.length > 0 && (
-            <p className="text-xs text-[var(--color-text-muted)]">
+            <p className="text-meta text-[var(--color-text-muted)]">
               מקור: {question.sourceReferences.map((r) => `${r.fileName} (${r.locator})`).join(', ')}
             </p>
           )}

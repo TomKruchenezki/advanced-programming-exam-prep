@@ -15,24 +15,24 @@ function TopicList() {
   const { progress } = useProgress()
   return (
     <PageContainer className="space-y-3">
-      <h1 className="text-2xl font-bold">למידה לפי נושא</h1>
+      <h1 className="text-page-title font-bold">למידה לפי נושא</h1>
       {topicsSorted.map((topic) => {
         const mastery = progress.topicMastery[topic.id]?.masteryScore ?? 0
         return (
           <Link key={topic.id} to={`/learn/${topic.id}`} className="block rounded-xl border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-bold">{topic.titleHe}</h2>
-                <p className="text-xs text-[var(--color-text-muted)]">
+                <h2 className="text-lg font-bold">{topic.titleHe}</h2>
+                <p className="text-meta text-[var(--color-text-muted)]">
                   <Ltr>{topic.titleEn}</Ltr> · {FREQ_LABEL[topic.examFrequency]}
                 </p>
               </div>
-              <span className="text-sm text-[var(--color-text-muted)]">{Math.round(mastery * 100)}%</span>
+              <span className="text-meta text-[var(--color-text-muted)]">{Math.round(mastery * 100)}%</span>
             </div>
           </Link>
         )
       })}
-      {topicsSorted.length === 0 && <p className="text-sm text-[var(--color-text-muted)]">מפת הנושאים עדיין לא נטענה.</p>}
+      {topicsSorted.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">מפת הנושאים עדיין לא נטענה.</p>}
     </PageContainer>
   )
 }
@@ -68,8 +68,8 @@ function TopicReader({ topicId }: { topicId: string }) {
   if (!topic) {
     return (
       <PageContainer>
-        <p className="text-sm text-[var(--color-text-muted)]">נושא לא נמצא.</p>
-        <Link to="/learn" className="text-sm text-[var(--color-accent)] hover:underline">
+        <p className="text-body-lg text-[var(--color-text-muted)]">נושא לא נמצא.</p>
+        <Link to="/learn" className="text-nav-link text-[var(--color-accent)] hover:underline">
           חזרה לרשימת הנושאים
         </Link>
       </PageContainer>
@@ -94,14 +94,14 @@ function TopicReader({ topicId }: { topicId: string }) {
   return (
     <PageContainer className="space-y-10">
       <div>
-        <Link to="/learn" className="text-sm text-[var(--color-accent)] hover:underline">
+        <Link to="/learn" className="text-nav-link text-[var(--color-accent)] hover:underline">
           ← כל הנושאים
         </Link>
-        <h1 className="mt-2 text-2xl font-bold">{topic.titleHe}</h1>
-        <p className="text-sm text-[var(--color-text-muted)]">
+        <h1 className="text-page-title mt-2 font-bold">{topic.titleHe}</h1>
+        <p className="text-meta text-[var(--color-text-muted)]">
           <Ltr>{topic.titleEn}</Ltr> · הרצאות {topic.lectureRefs.join(', ')}
         </p>
-        <p className="mt-2 text-sm">{topic.summary}</p>
+        <p className="text-body-lg mt-2 max-w-[85ch]">{topic.summary}</p>
       </div>
 
       {sections.map((section) => {
@@ -109,32 +109,32 @@ function TopicReader({ topicId }: { topicId: string }) {
         const confidence = progress.sectionConfidence[section.id]
         return (
           <section key={section.id} className="space-y-4 border-t border-[var(--color-border)] pt-6">
-            <h2 className="text-xl font-bold">{section.headingHe}</h2>
+            <h2 className="text-section-title font-bold">{section.headingHe}</h2>
 
             <div>
-              <h3 className="mb-1 text-sm font-bold text-[var(--color-accent)]">אינטואיציה</h3>
-              <p className="text-sm leading-relaxed">{section.intuitionHe}</p>
+              <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">אינטואיציה</h3>
+              <p className="text-body-lg max-w-[85ch] leading-relaxed">{section.intuitionHe}</p>
             </div>
 
             <div>
-              <h3 className="mb-1 text-sm font-bold text-[var(--color-accent)]">ידע למבחן</h3>
-              <p className="whitespace-pre-wrap text-sm leading-relaxed">{section.examKnowledgeHe}</p>
+              <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">ידע למבחן</h3>
+              <p className="text-body-lg max-w-[85ch] whitespace-pre-wrap leading-relaxed">{section.examKnowledgeHe}</p>
             </div>
 
             {section.codeExamples?.map((ex, i) => (
               <div key={i}>
-                {ex.captionHe && <p className="mb-1 text-xs text-[var(--color-text-muted)]">{ex.captionHe}</p>}
+                {ex.captionHe && <p className="text-meta mb-1 text-[var(--color-text-muted)]">{ex.captionHe}</p>}
                 <CodeBlock code={ex.code} language={ex.language} />
               </div>
             ))}
 
             <div>
-              <h3 className="mb-1 text-sm font-bold text-[var(--color-accent)]">יישום</h3>
-              <p className="text-sm leading-relaxed">{section.applicationHe}</p>
+              <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">יישום</h3>
+              <p className="text-body-lg max-w-[85ch] leading-relaxed">{section.applicationHe}</p>
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg bg-[var(--color-bg-subtle)] p-3 text-sm">
+              <div className="text-body-lg rounded-lg bg-[var(--color-bg-subtle)] p-3">
                 <p className="mb-1 font-bold">מה חובה לזכור</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.mustRemember.map((p, i) => (
@@ -142,7 +142,7 @@ function TopicReader({ topicId }: { topicId: string }) {
                   ))}
                 </ul>
               </div>
-              <div className="rounded-lg bg-[var(--color-bg-subtle)] p-3 text-sm">
+              <div className="text-body-lg rounded-lg bg-[var(--color-bg-subtle)] p-3">
                 <p className="mb-1 font-bold">מה קל לבלבל</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.easyToConfuse.map((p, i) => (
@@ -153,7 +153,7 @@ function TopicReader({ topicId }: { topicId: string }) {
             </div>
 
             {section.howProfessorMightAsk.length > 0 && (
-              <div className="rounded-lg border border-[var(--color-warning)] p-3 text-sm">
+              <div className="text-body-lg rounded-lg border border-[var(--color-warning)] p-3">
                 <p className="mb-1 font-bold">איך המרצה עשוי לשאול על זה</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.howProfessorMightAsk.map((p, i) => (
@@ -163,17 +163,17 @@ function TopicReader({ topicId }: { topicId: string }) {
               </div>
             )}
 
-            {section.mnemonicHe && <p className="text-sm text-[var(--color-accent)]">זכרון: {section.mnemonicHe}</p>}
+            {section.mnemonicHe && <p className="text-body-lg text-[var(--color-accent)]">זכרון: {section.mnemonicHe}</p>}
 
             {section.termsHeEn.length > 0 && (
-              <p className="text-xs text-[var(--color-text-muted)]">
+              <p className="text-meta text-[var(--color-text-muted)]">
                 מונחים: {section.termsHeEn.map((t) => `${t.he} (${t.en})`).join(' · ')}
               </p>
             )}
 
             {section.checkQuestionIds && section.checkQuestionIds.length > 0 && (
               <div className="space-y-3">
-                <p className="text-sm font-bold">שאלות בדיקה</p>
+                <p className="text-body-lg font-bold">שאלות בדיקה</p>
                 {section.checkQuestionIds.map((qid) => (
                   <SectionCheckQuestion key={qid} questionId={qid} />
                 ))}
@@ -181,7 +181,7 @@ function TopicReader({ topicId }: { topicId: string }) {
             )}
 
             {section.sourceRefs.length > 0 && (
-              <p className="text-xs text-[var(--color-text-muted)]">
+              <p className="text-meta text-[var(--color-text-muted)]">
                 מקורות: {section.sourceRefs.map((r) => `${r.fileName} (${r.locator})`).join(', ')}
               </p>
             )}
@@ -189,17 +189,17 @@ function TopicReader({ topicId }: { topicId: string }) {
             <div className="flex flex-wrap items-center gap-4 border-t border-[var(--color-border)] pt-3">
               <button
                 onClick={() => markLearned(section.id)}
-                className={`rounded-lg px-3 py-1.5 text-sm ${isLearned ? 'bg-[var(--color-success)]/20 text-[var(--color-success)]' : 'border border-[var(--color-border)]'}`}
+                className={`rounded-lg px-3 py-1.5 text-base ${isLearned ? 'bg-[var(--color-success)]/20 text-[var(--color-success)]' : 'border border-[var(--color-border)]'}`}
               >
                 {isLearned ? '✓ למדתי' : 'סמן כלמדתי'}
               </button>
-              <div className="flex items-center gap-1 text-sm">
+              <div className="flex items-center gap-1 text-base">
                 <span className="text-[var(--color-text-muted)]">רמת ביטחון:</span>
                 {[1, 2, 3, 4, 5].map((level) => (
                   <button
                     key={level}
                     onClick={() => setConfidence(section.id, level as 1 | 2 | 3 | 4 | 5)}
-                    className={`h-7 w-7 rounded-full text-xs ${confidence === level ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]' : 'bg-[var(--color-bg-subtle)]'}`}
+                    className={`h-8 w-8 rounded-full text-sm ${confidence === level ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]' : 'bg-[var(--color-bg-subtle)]'}`}
                   >
                     {level}
                   </button>
@@ -210,18 +210,18 @@ function TopicReader({ topicId }: { topicId: string }) {
         )
       })}
 
-      {sections.length === 0 && <p className="text-sm text-[var(--color-text-muted)]">חומר הלימוד לנושא זה עדיין לא נטען.</p>}
+      {sections.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">חומר הלימוד לנושא זה עדיין לא נטען.</p>}
 
       <div className="flex items-center justify-between border-t border-[var(--color-border)] pt-6">
         {prevTopic ? (
-          <Link to={`/learn/${prevTopic.id}`} className="text-sm text-[var(--color-accent)] hover:underline">
+          <Link to={`/learn/${prevTopic.id}`} className="text-nav-link text-[var(--color-accent)] hover:underline">
             → {prevTopic.titleHe}
           </Link>
         ) : (
           <span />
         )}
         {nextTopic ? (
-          <Link to={`/learn/${nextTopic.id}`} className="text-sm text-[var(--color-accent)] hover:underline">
+          <Link to={`/learn/${nextTopic.id}`} className="text-nav-link text-[var(--color-accent)] hover:underline">
             {nextTopic.titleHe} ←
           </Link>
         ) : (

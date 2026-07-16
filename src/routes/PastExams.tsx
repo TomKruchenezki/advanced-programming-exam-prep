@@ -35,27 +35,27 @@ export function PastExams() {
   if (!examId) {
     return (
       <PageContainer className="space-y-4">
-        <h1 className="text-2xl font-bold">מבחני עבר</h1>
-        <p className="text-sm text-[var(--color-text-muted)]">
+        <h1 className="text-page-title font-bold">מבחני עבר</h1>
+        <p className="text-body-lg text-[var(--color-text-muted)]">
           מבחנים שחוזרו על ידי סטודנטים אינם בהכרח מדויקים — התשובות המוצגות במערכת עברו אימות מול חומר הקורס ככל האפשר, ואינן מבוססות באופן עיוור על סימון הסטודנט.
         </p>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {pastExamIndex.map((exam) => (
             <button
               key={exam.id}
               onClick={() => navigate(`/past-exams/${exam.id}`)}
-              className="block w-full rounded-lg border border-[var(--color-border)] p-3 text-start text-sm hover:border-[var(--color-accent)]"
+              className="text-body-lg block w-full rounded-lg border border-[var(--color-border)] p-4 text-start hover:border-[var(--color-accent)]"
             >
               <div className="flex items-center justify-between">
                 <span>מבחן {exam.year}</span>
-                <span className="text-xs text-[var(--color-text-muted)]">{DOC_TYPE_LABEL[exam.docType]}</span>
+                <span className="text-meta text-[var(--color-text-muted)]">{DOC_TYPE_LABEL[exam.docType]}</span>
               </div>
-              {exam.isScanned && <span className="text-xs text-[var(--color-warning)]">מסמך סרוק — עבר תמלול ואימות ידני</span>}
-              {exam.warning && <p className="mt-1 text-xs text-[var(--color-danger)]">{exam.warning}</p>}
-              <p className="mt-1 text-xs text-[var(--color-text-muted)]">{exam.questionIds.length} שאלות זמינות</p>
+              {exam.isScanned && <span className="text-meta text-[var(--color-warning)]">מסמך סרוק — עבר תמלול ואימות ידני</span>}
+              {exam.warning && <p className="text-meta mt-1 text-[var(--color-danger)]">{exam.warning}</p>}
+              <p className="text-meta mt-1 text-[var(--color-text-muted)]">{exam.questionIds.length} שאלות זמינות</p>
             </button>
           ))}
-          {pastExamIndex.length === 0 && <p className="text-xs text-[var(--color-text-muted)]">מאגר מבחני העבר עדיין לא נטען.</p>}
+          {pastExamIndex.length === 0 && <p className="text-meta text-[var(--color-text-muted)]">מאגר מבחני העבר עדיין לא נטען.</p>}
         </div>
       </PageContainer>
     )
@@ -65,7 +65,7 @@ export function PastExams() {
     return (
       <>
         <PageContainer size="wide" className="mb-6">
-          <h1 className="text-2xl font-bold">תוצאות — מבחן {selected?.year}</h1>
+          <h1 className="text-page-title font-bold">תוצאות — מבחן {selected?.year}</h1>
         </PageContainer>
         <ExamResultView result={result.result} questions={result.qs} />
       </>
@@ -75,7 +75,7 @@ export function PastExams() {
   if (questions.length === 0) {
     return (
       <PageContainer>
-        <p className="text-sm text-[var(--color-text-muted)]">מבחן זה עדיין לא זמין.</p>
+        <p className="text-body-lg text-[var(--color-text-muted)]">מבחן זה עדיין לא זמין.</p>
       </PageContainer>
     )
   }

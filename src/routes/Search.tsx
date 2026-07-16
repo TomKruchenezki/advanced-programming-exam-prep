@@ -75,13 +75,13 @@ export function Search() {
 
   return (
     <PageContainer className="space-y-6">
-      <h1 className="text-2xl font-bold">חיפוש</h1>
+      <h1 className="text-page-title font-bold">חיפוש</h1>
       <input
         autoFocus
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="חפש נושא, מושג, שאלה או כרטיסייה..."
-        className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-3 text-sm"
+        className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-3.5"
       />
 
       <div className="flex flex-wrap gap-2">
@@ -89,28 +89,28 @@ export function Search() {
           <button
             key={f.value}
             onClick={() => setKindFilter(f.value)}
-            className={`rounded-full border px-3 py-1 text-xs ${kindFilter === f.value ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10' : 'border-[var(--color-border)]'}`}
+            className={`text-meta rounded-full border px-3 py-1.5 ${kindFilter === f.value ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/10' : 'border-[var(--color-border)]'}`}
           >
             {f.label}
           </button>
         ))}
       </div>
 
-      <div className="space-y-2">
+      <div className="grid gap-3 lg:grid-cols-2">
         {results.map((r) => {
           const titleMatch = r.matches?.find((m) => m.key === 'title')
           const bodyMatch = r.matches?.find((m) => m.key === 'body')
           return (
-            <Link key={`${r.item.kind}-${r.item.id}`} to={r.item.link} className="block rounded-lg border border-[var(--color-border)] p-3 text-sm hover:border-[var(--color-accent)]">
+            <Link key={`${r.item.kind}-${r.item.id}`} to={r.item.link} className="block rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
               <div className="mb-1 flex items-center justify-between">
-                <span className="font-medium">{highlightMatches(r.item.title, titleMatch?.indices)}</span>
-                <span className="text-xs text-[var(--color-text-muted)]">{kindLabel[r.item.kind]}</span>
+                <span className="text-body-lg font-medium">{highlightMatches(r.item.title, titleMatch?.indices)}</span>
+                <span className="text-meta text-[var(--color-text-muted)]">{kindLabel[r.item.kind]}</span>
               </div>
-              <p className="line-clamp-2 text-xs text-[var(--color-text-muted)]">{highlightMatches(r.item.body, bodyMatch?.indices)}</p>
+              <p className="text-meta line-clamp-2 text-[var(--color-text-muted)]">{highlightMatches(r.item.body, bodyMatch?.indices)}</p>
             </Link>
           )
         })}
-        {query.trim() && results.length === 0 && <p className="text-sm text-[var(--color-text-muted)]">לא נמצאו תוצאות.</p>}
+        {query.trim() && results.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">לא נמצאו תוצאות.</p>}
       </div>
     </PageContainer>
   )

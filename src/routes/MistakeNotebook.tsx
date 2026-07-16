@@ -36,8 +36,8 @@ export function MistakeNotebook() {
   if (progress.mistakeLog.length === 0) {
     return (
       <PageContainer className="space-y-2">
-        <h1 className="text-2xl font-bold">מחברת טעויות</h1>
-        <p className="text-sm text-[var(--color-text-muted)]">עדיין לא נרשמו טעויות. המשך לתרגל!</p>
+        <h1 className="text-page-title font-bold">מחברת טעויות</h1>
+        <p className="text-body-lg text-[var(--color-text-muted)]">עדיין לא נרשמו טעויות. המשך לתרגל!</p>
       </PageContainer>
     )
   }
@@ -45,11 +45,11 @@ export function MistakeNotebook() {
   return (
     <PageContainer className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold">מחברת טעויות</h1>
+        <h1 className="text-page-title font-bold">מחברת טעויות</h1>
         <div className="mt-3 grid gap-3 sm:grid-cols-3">
           <div>
-            <label className="mb-1 block text-xs font-medium text-[var(--color-text-muted)]">סינון לפי נושא</label>
-            <select value={topicFilter} onChange={(e) => setTopicFilter(e.target.value)} className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-sm">
+            <label className="text-meta mb-1 block font-medium text-[var(--color-text-muted)]">סינון לפי נושא</label>
+            <select value={topicFilter} onChange={(e) => setTopicFilter(e.target.value)} className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2.5">
               <option value="all">כל הנושאים</option>
               {topicsWithMistakes.map((t) => (
                 <option key={t.id} value={t.id}>
@@ -59,43 +59,43 @@ export function MistakeNotebook() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-[var(--color-text-muted)]">מיון</label>
-            <select value={sortMode} onChange={(e) => setSortMode(e.target.value as SortMode)} className="w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2 text-sm">
+            <label className="text-meta mb-1 block font-medium text-[var(--color-text-muted)]">מיון</label>
+            <select value={sortMode} onChange={(e) => setSortMode(e.target.value as SortMode)} className="text-body-lg w-full rounded-lg border border-[var(--color-border)] bg-transparent p-2.5">
               <option value="date">לפי תאריך (חדש קודם)</option>
               <option value="timesWrong">לפי מספר טעויות</option>
             </select>
           </div>
-          <label className="flex items-end gap-2 text-sm">
+          <label className="text-body-lg flex items-end gap-2">
             <input type="checkbox" checked={showResolved} onChange={(e) => setShowResolved(e.target.checked)} />
             הצג גם טעויות שתוקנו
           </label>
         </div>
       </div>
 
-      {grouped.size === 0 && <p className="text-sm text-[var(--color-text-muted)]">אין טעויות התואמות את הסינון הנוכחי.</p>}
+      {grouped.size === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">אין טעויות התואמות את הסינון הנוכחי.</p>}
 
       {[...grouped.entries()].map(([topicId, entries]) => (
         <section key={topicId}>
-          <h2 className="mb-2 font-bold">{topicsById.get(topicId)?.titleHe ?? topicId}</h2>
+          <h2 className="text-section-title mb-2 font-bold">{topicsById.get(topicId)?.titleHe ?? topicId}</h2>
           <div className="space-y-3">
             {entries.map((entry) => {
               const q = questionsById.get(entry.questionId)
               if (!q) return null
               return (
-                <div key={entry.id} className="rounded-xl border border-[var(--color-border)] p-4 text-sm">
-                  <div className="mb-1 flex items-center justify-between">
+                <div key={entry.id} className="rounded-xl border border-[var(--color-border)] p-4">
+                  <div className="text-meta mb-1 flex items-center justify-between">
                     <span className={entry.resolved ? 'text-[var(--color-success)]' : 'text-[var(--color-danger)]'}>
                       {entry.resolved ? 'תוקן בהמשך' : `טעית ${entry.timesWrong} פעמים`}
                     </span>
-                    <span className="text-xs text-[var(--color-text-muted)]">{new Date(entry.timestampISO).toLocaleDateString('he-IL')}</span>
+                    <span className="text-[var(--color-text-muted)]">{new Date(entry.timestampISO).toLocaleDateString('he-IL')}</span>
                   </div>
-                  <p className="mb-1">{q.stemHe}</p>
-                  <p className="text-xs text-[var(--color-text-muted)]">
+                  <p className="text-body-lg mb-1">{q.stemHe}</p>
+                  <p className="text-meta text-[var(--color-text-muted)]">
                     בחרת: {entry.chosenOptionId.toUpperCase()} · נכון: {entry.correctOptionId.toUpperCase()}
                   </p>
-                  {entry.possibleReason && <p className="text-xs text-[var(--color-warning)]">סיבה אפשרית: {entry.possibleReason}</p>}
-                  <p className="mt-1 text-xs">{q.explanation}</p>
-                  <Link to={`/learn/${topicId}`} className="mt-1 inline-block text-xs text-[var(--color-accent)] hover:underline">
+                  {entry.possibleReason && <p className="text-meta text-[var(--color-warning)]">סיבה אפשרית: {entry.possibleReason}</p>}
+                  <p className="text-body-lg mt-1">{q.explanation}</p>
+                  <Link to={`/learn/${topicId}`} className="text-meta mt-1 inline-block text-[var(--color-accent)] hover:underline">
                     חזור ללמידה בנושא זה
                   </Link>
                 </div>

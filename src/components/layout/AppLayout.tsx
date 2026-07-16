@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 
 function navLinkClass({ isActive }: { isActive: boolean }) {
   return [
-    'block rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+    'block rounded-lg px-3 py-2 text-nav-link font-medium transition-colors',
     isActive
       ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
       : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-text)]',
@@ -62,7 +62,7 @@ export function AppLayout() {
           </div>
         </div>
       </aside>
-      <main className="min-w-0 flex-1 p-4 md:p-8">
+      <main className="min-w-0 flex-1 p-4 md:p-6 lg:p-8 xl:p-10">
         <Outlet />
       </main>
     </div>

@@ -25,19 +25,19 @@ export function LastMinuteReview() {
 
   return (
     <PageContainer className="space-y-8 print:max-w-none">
-      <h1 className="text-2xl font-bold">חזרה אחרונה (Last-Minute Review)</h1>
-      <p className="text-sm text-[var(--color-text-muted)]">מסך זה מרוכז בכוונה — רק החומר החשוב ביותר. ניתן להדפיס (Ctrl+P).</p>
+      <h1 className="text-page-title font-bold">חזרה אחרונה (Last-Minute Review)</h1>
+      <p className="text-body-lg text-[var(--color-text-muted)]">מסך זה מרוכז בכוונה — רק החומר החשוב ביותר. ניתן להדפיס (Ctrl+P).</p>
 
       <section>
-        <h2 className="mb-2 font-bold">נושאים בעלי שכיחות גבוהה במבחני עבר</h2>
-        <div className="space-y-4">
+        <h2 className="text-section-title mb-2 font-bold">נושאים בעלי שכיחות גבוהה במבחני עבר</h2>
+        <div className="grid gap-4 lg:grid-cols-2">
           {highYieldTopics.map((topic) => {
             const sections = sectionsByTopic.get(topic.id) ?? []
             const allKeyPoints = sections.flatMap((s) => s.mustRemember)
             return (
               <div key={topic.id} className="rounded-xl border border-[var(--color-border)] p-4">
-                <h3 className="mb-1 font-bold">{topic.titleHe}</h3>
-                <ul className="list-inside list-disc space-y-0.5 text-sm">
+                <h3 className="text-body-lg mb-1 font-bold">{topic.titleHe}</h3>
+                <ul className="text-body-lg list-inside list-disc space-y-0.5">
                   {allKeyPoints.slice(0, 6).map((p, i) => (
                     <li key={i}>{p}</li>
                   ))}
@@ -45,16 +45,16 @@ export function LastMinuteReview() {
               </div>
             )
           })}
-          {highYieldTopics.length === 0 && <p className="text-xs text-[var(--color-text-muted)]">מפת הנושאים עדיין לא נטענה.</p>}
+          {highYieldTopics.length === 0 && <p className="text-meta text-[var(--color-text-muted)]">מפת הנושאים עדיין לא נטענה.</p>}
         </div>
       </section>
 
       {personalMistakeTopics.size > 0 && (
         <section>
-          <h2 className="mb-2 font-bold">הטעויות האישיות שלך שעדיין לא תוקנו</h2>
+          <h2 className="text-section-title mb-2 font-bold">הטעויות האישיות שלך שעדיין לא תוקנו</h2>
           <div className="flex flex-wrap gap-2">
             {[...personalMistakeTopics].map((topicId) => (
-              <span key={topicId} className="rounded-full bg-[var(--color-danger)]/10 px-3 py-1 text-xs">
+              <span key={topicId} className="text-meta rounded-full bg-[var(--color-danger)]/10 px-3 py-1">
                 {topicsById.get(topicId)?.titleHe ?? topicId}
               </span>
             ))}
@@ -63,20 +63,20 @@ export function LastMinuteReview() {
       )}
 
       <section>
-        <h2 className="mb-2 font-bold">כרטיסיות מפתח</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <h2 className="text-section-title mb-2 font-bold">כרטיסיות מפתח</h2>
+        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {topFlashcards.map((c) => (
-            <div key={c.id} className="rounded-lg border border-[var(--color-border)] p-3 text-sm">
-              <p className="font-medium">{c.frontHe}</p>
-              <p className="text-xs text-[var(--color-text-muted)]">{c.backHe}</p>
+            <div key={c.id} className="rounded-lg border border-[var(--color-border)] p-3">
+              <p className="text-body-lg font-medium">{c.frontHe}</p>
+              <p className="text-meta text-[var(--color-text-muted)]">{c.backHe}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section>
-        <h2 className="mb-2 font-bold">שאלות מהירות ({quickQuestions.length})</h2>
-        <p className="text-xs text-[var(--color-text-muted)]">
+        <h2 className="text-section-title mb-2 font-bold">שאלות מהירות ({quickQuestions.length})</h2>
+        <p className="text-meta text-[var(--color-text-muted)]">
           עבור לכרטיסייה &quot;תרגול&quot; ובחר &quot;שאלות ממבחני עבר בלבד&quot; כדי לתרגל את השאלות האלה בפועל.
         </p>
       </section>

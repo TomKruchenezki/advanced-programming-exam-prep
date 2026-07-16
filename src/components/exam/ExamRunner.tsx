@@ -71,8 +71,8 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
       <h1 className="sr-only">{title ?? (mode === 'exam' ? 'מבחן פעיל' : 'תרגול פעיל')}</h1>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          {title && <h2 className="font-bold">{title}</h2>}
-          <p className="text-xs text-[var(--color-text-muted)]">
+          {title && <h2 className="text-section-title font-bold">{title}</h2>}
+          <p className="text-meta text-[var(--color-text-muted)]">
             שאלה {index + 1} מתוך {shuffled.length} · נענו: {answeredCount}
           </p>
         </div>
@@ -80,7 +80,7 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
       </div>
 
       {mode === 'exam' && (
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1.5">
           {shuffled.map((q, i) => {
             const isAnswered = !!answers[q.id]
             const isFlagged = !!flagged[q.id]
@@ -89,7 +89,7 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
               <button
                 key={q.id}
                 onClick={() => setIndex(i)}
-                className={`h-8 w-8 rounded text-xs font-medium ${
+                className={`h-10 w-10 rounded text-sm font-medium ${
                   isCurrent
                     ? 'ring-2 ring-[var(--color-accent)]'
                     : isFlagged
@@ -117,7 +117,7 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
         <button
           disabled={index === 0}
           onClick={() => setIndex((i) => Math.max(0, i - 1))}
-          className="rounded-lg border border-[var(--color-border)] px-4 py-2 text-sm disabled:opacity-40"
+          className="rounded-lg border border-[var(--color-border)] px-4 py-2.5 text-base disabled:opacity-40"
         >
           הקודם
         </button>
@@ -125,20 +125,20 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
         {mode === 'exam' && (
           <button
             onClick={() => setFlagged((prev) => ({ ...prev, [current.id]: !prev[current.id] }))}
-            className="rounded-lg border border-[var(--color-warning)] px-4 py-2 text-sm text-[var(--color-warning)]"
+            className="rounded-lg border border-[var(--color-warning)] px-4 py-2.5 text-base text-[var(--color-warning)]"
           >
             {flagged[current.id] ? 'בטל סימון' : 'סמן לחזרה'}
           </button>
         )}
 
         {isLast ? (
-          <button onClick={handleSubmitClick} className="rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-contrast)]">
+          <button onClick={handleSubmitClick} className="rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]">
             {mode === 'exam' ? 'הגש מבחן' : 'סיים תרגול'}
           </button>
         ) : (
           <button
             onClick={() => setIndex((i) => Math.min(shuffled.length - 1, i + 1))}
-            className="rounded-lg bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-contrast)]"
+            className="rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]"
           >
             הבא
           </button>
