@@ -37,7 +37,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
               className={`text-answer flex w-full items-start gap-2 rounded-lg border p-4 transition-colors ${stateClasses} disabled:cursor-default`}
             >
               <span className="shrink-0 font-bold">{opt.id.toUpperCase()}.</span>
-              <bdi dir="auto" className="min-w-0 flex-1 text-start">
+              <bdi dir="auto" className="min-w-0 flex-1 text-right">
                 {opt.text}
               </bdi>
             </button>
@@ -56,7 +56,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
               return (
                 <div key={opt.id} dir="rtl" className="flex items-start gap-2 text-[var(--color-text-muted)]">
                   <strong className="shrink-0">{opt.id.toUpperCase()}:</strong>
-                  <bdi dir="auto" className="min-w-0 flex-1">
+                  <bdi dir="auto" className="min-w-0 flex-1 text-right">
                     {question.optionExplanations[originalId] ?? ''}
                   </bdi>
                 </div>

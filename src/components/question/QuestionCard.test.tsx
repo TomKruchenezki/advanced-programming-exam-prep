@@ -96,6 +96,16 @@ describe('QuestionCard BiDi option rendering', () => {
     expect(labelSpan.textContent).not.toContain(text)
   })
 
+  it.each(cases)('%s: is explicitly right-aligned (physical, not logical) regardless of detected reading direction', (_label, text) => {
+    // text-align must be the PHYSICAL "right", never the logical "start" - "start" resolves
+    // to left once dir="auto" detects LTR content, which is exactly the bug being guarded against.
+    const question = makeShuffled(text)
+    const { container } = renderCard(question)
+    const bdi = container.querySelector('bdi')!
+    expect(bdi.className).toContain('text-right')
+    expect(bdi.className).not.toContain('text-start')
+  })
+
   it.each(cases)('%s: exposes an accessible name containing both the displayed letter and the full answer text', (_label, text) => {
     const question = makeShuffled(text)
     const { container } = renderCard(question)
@@ -176,6 +186,9 @@ describe('QuestionCard BiDi option rendering', () => {
     const { container } = renderCard(question, { revealed: true })
     const explanationRows = container.querySelectorAll('.space-y-1 > div')
     expect(explanationRows[0]!.getAttribute('dir')).toBe('rtl')
-    expect(explanationRows[0]!.querySelector('bdi')!.textContent).toBe('right-c')
+    const explanationBdi = explanationRows[0]!.querySelector('bdi')!
+    expect(explanationBdi.textContent).toBe('right-c')
+    expect(explanationBdi.className).toContain('text-right')
+    expect(explanationBdi.className).not.toContain('text-start')
   })
 })

@@ -147,3 +147,57 @@ This confirms the intended split: the container itself is wide, code/tables/call
 ### Known limitation of this pass
 
 Screenshots were used for visual spot-checks during the session but are not embedded in this Markdown report (this repository has no image-asset pipeline for the report itself); all before/after claims above are instead backed by live `getComputedStyle`/`getBoundingClientRect()` measurements, which are more precise and reproducible than a static image.
+
+## Answer Alignment and Full-Width Learn Audit
+
+Two follow-up bugs were reported after the BiDi label-position fix (a prior pass, not covered above) and the Desktop Width pass: (1) English/code answer text was still visually left-aligned inside the option button even though its `A.`/`B.`/etc. label was correctly pinned to the right, and (2) the Learn route (and, on inspection, every other `default`-size route) had regressed to using only about half the available desktop width.
+
+### Bug 1 — answer text left-aligned: root cause and fix
+
+Root cause, confirmed in `src/components/question/QuestionCard.tsx`: the answer-text `<bdi dir="auto">` used the **logical** Tailwind class `text-start`. `text-start` resolves relative to the *element's own* resolved direction — and `dir="auto"` resolves a `bdi` containing strong-LTR content (English, code) to `ltr`, at which point `text-start` becomes `text-align: left`. So English/code answers were pulled to the literal left edge of the button, even though the separate label `<span>` (fixed via the earlier BiDi pass) stayed correctly pinned to the right. The per-option explanation row had the same underlying issue (no alignment class at all, so the browser default — also direction-dependent — applied).
+
+Fix: replaced the logical `text-start` with the **physical** `text-right` on both `bdi` elements (option button, line ~40; explanation row, line ~59). `text-align: right` is not affected by the element's own resolved direction, so it now holds regardless of whether `dir="auto"` resolves the content to `ltr` or `rtl`. `dir="auto"` itself was kept unchanged — it still correctly governs the *internal* character order of mixed content (e.g. an embedded English term inside a Hebrew sentence reads left-to-right in place), which is an entirely separate concern from alignment.
+
+Live-measured on `q-pastexam-2019-012` (Adapter/Strategy/Observer/Factory design pattern + "אף תשובה אינה נכונה", shuffled) at 1920×1080: every option's `bdi` computed `text-align: right`, independent of its computed `direction` (`ltr` for the English options, `rtl` for the Hebrew one) — and the `bdi`'s own right edge sits immediately adjacent to its label's left edge (verified via `getBoundingClientRect()`), so the answer text now begins right next to the label as required. Also verified visually via screenshot at 900×700: `Observer design pattern .A`, `Factory design pattern .B`, `Strategy design pattern .C`, `אף תשובה אינה נכונה .D`, `Adapter design pattern .E` — every line reads with its label flush right and text starting immediately to its left.
+
+No second answer-renderer was found or needed — `QuestionCard.tsx` remains the sole rendering site for Quiz Me, Diagnostic, Mock Exam, Past Exams, Learn's in-lesson check questions, and `ExamResultView`.
+
+### Bug 2 — Learn (and other routes) using only ~half the desktop width: root cause and fix
+
+This was **not a code regression** — a full code audit (grep for `max-w-2xl` through `max-w-7xl`, `prose`, `mx-auto`, `w-1/2`/`w-2/3`, inline `maxWidth`) found nothing stray: `@tailwindcss/typography`/`prose` was never installed, and Learn's `max-w-[85ch]` reading-measure class was correctly scoped to individual `<p>` elements only (never a section/wrapper/`PageContainer`). The actual cause: `src/components/layout/PageContainer.tsx`'s `default` variant (used by Learn, Dashboard, Flashcards, Mistake Notebook, Last-Minute Review, Search, and the setup/list screens of Diagnostic/Quiz Me/Mock Exam/Past Exams — i.e. every route except the active exam-taking/results screens) had a **fixed 1600px ceiling** from the previous pass. That ceiling was tuned against 1920–2560px test viewports where it still gave 68-96% utilization, but on a desktop wider than that (a large monitor, especially with Windows display scaling reducing the effective CSS pixel budget less than expected), 1600px increasingly under-fills the available `main` width — exactly the "large empty region" the user described.
+
+Fix: raised both `PageContainer` ceilings in the one shared file:
+
+| Variant | Before | After |
+|---|---|---|
+| `default` | `max-w-[min(96%,1600px)]` | `max-w-[min(95%,1900px)]` |
+| `wide` | `max-w-[min(97%,1900px)]` | `max-w-[min(97%,2000px)]` |
+
+No route file needed to change its `size` prop — every `default`-size route automatically inherited the wider ceiling from this one shared component, and every `wide`-size screen (`ExamRunner`, `ExamResultView`) automatically inherited the new 2000px ceiling. No third "reading" variant was added: Learn's paragraph-level `max-w-[85ch]` already provides exactly the requested "readable paragraph, full-width everything else" behavior at the correct granularity (per-paragraph, not per-page), so a page-level reading variant would have been redundant.
+
+### Width — before/after by route and viewport
+
+| Route | Viewport | `main` width | `PageContainer` before | `PageContainer` after | Utilization after |
+|---|---|---|---|---|---|
+| Learn (`java-platform-jvm`) | 1920×1080 | 1680.8px | ~1551px (est., 1600px cap) | 1520.75px | 90.5% |
+| Learn (`java-platform-jvm`) | 2560×1440 | 2320.8px | 1600px (69%) | 1900px (cap) | 81.9% |
+| Learn (`solid-principles`) | 2560×1440 | 2320.8px | 1600px | 1900px (cap) | 81.9% (matches `java-platform-jvm`, confirms shared fix) |
+| Dashboard | 2560×1440 | 2336px | 1600px | 1900px (cap) | 81.3% |
+| Flashcards (outer container) | 1920×1080 | 1696px | ~1551px | 1535.2px | 90.5% |
+| Search | 1920×1080 | 1696px | ~1551px | 1535.2px | 90.5% |
+| Diagnostic/ExamRunner (`wide`) | 1920×1080 | 1696px | 1567.5px | 1567.5px (unchanged at this width — cap not yet binding) | 92.4% |
+| Diagnostic/ExamRunner (`wide`) | 2560×1440 | 2336px | 1900px (cap, 81.3%) | 2000px (cap) | 85.6% |
+
+Learn's code block (`<pre>`) was independently confirmed to always match the full `PageContainer` width (1520.75px at 1920px, 1900px at 2560px) — it is never narrowed by the paragraph-level `max-w-[85ch]` class, which stayed at ~789-795px throughout (unchanged from the previous pass), confirming the "wide container, narrow prose, full-width code" split still holds after the ceiling increase.
+
+### Remaining intentional max-widths (unchanged, re-confirmed still justified)
+
+Same two as the previous pass, both re-verified to still be correctly scoped after this change: `Learn.tsx` paragraph `max-w-[85ch]` (reading measure, per-`<p>` only) and `Flashcards.tsx` active-card wrapper `max-w-[min(88%,1100px)]` (70-90%-of-container target for a single flashcard, scales with the now-larger outer container but stays well short of it).
+
+### Routes and viewports tested
+
+Routes: Learn (`java-platform-jvm`, `solid-principles`, `design-patterns-behavioral`), Dashboard, Flashcards, Search, Diagnostic/`ExamRunner`, Past Exams (`pastexam-2019` question 12). Viewports: 2560×1440, 1920×1080, 1600×900, 1366×768, 1024×768, 768×1024, 390×844 — no horizontal overflow at any of them, `text-align: right` confirmed on every answer option at every viewport checked, direct hash-route load (`#/learn/design-patterns-behavioral`) confirmed working under the `/exam-prep-app/` subpath build, console clean, `localStorage` containing only the single namespaced progress key.
+
+### Verification performed
+
+`npm run verify`: **117/117 tests pass** (82 original + 22 QuestionCard BiDi + 4 new PageContainer + updated alignment assertions), typecheck/lint clean, `validate:data` unchanged (16 topics, 293 active questions of 294, 188 flashcards, 7 mock exams, 0 errors, 4 pre-existing warnings), build succeeds. `npm run deploy:check` subpath preview: no server/console errors, all measurements above taken against this production-style build.
