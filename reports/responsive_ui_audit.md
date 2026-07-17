@@ -359,3 +359,51 @@ Single file: `src/lib/bidiSegment.ts`. No changes to `BidiText.tsx`, `QuestionCa
 ### Verification performed
 
 `npm run verify`: **232/232 tests pass**, typecheck/lint clean, `validate:data` unchanged (293 active core + 28 supplemental questions, 0 errors), build succeeds. SHA-256 hash diff of every `src/data/**/*.json` file: zero changes. Re-ran the full Part A stable-answer-order/scoring suite (`shuffle.test.ts`, `Learn.test.tsx`, `ExamRunner.test.tsx`, `ExamResultView.test.tsx` - 47 tests): all pass unchanged, confirming this pass did not disturb the stable-option-order fix.
+
+## Comprehensive Mixed RTL/LTR and Question-State Integrity Audit
+
+### Baseline (recorded before this pass)
+
+293 active core questions (294 total), 188 flashcards, 16 topics, 53 study sections, 7 mock exams, 4 Past Exam entries, 3 supplemental packs (28 active questions). `npm run verify`: 232/232 tests, 0 typecheck/lint errors, `validate:data` 0 errors/4 pre-existing warnings, build succeeds. SHA-256 hashes recorded for every `src/data/**/*.json` file; git working tree was clean at `8723e6d`.
+
+### Part B: root cause of the pre-answered supplemental question bug
+
+Not a duplicate-ID or shared-state bug - the validator already treats duplicate question IDs (within core, within packs, and core-vs-pack collisions) as hard errors (`scripts/validateQuestionBank.ts`, `src/lib/validateData.ts`), and 0 exist. Every question-list React key was already a stable question ID (`key={q.id}`/`key={qid}`), never an array index; the only index-keyed `.map()` calls in the codebase render static, non-interactive content (bullet lists, BiDi segments) with no answer state at all.
+
+The actual defect: [Learn.tsx](exam-prep-app/src/routes/Learn.tsx)'s "שאלות חדשות בנושא זה" (supplemental preview) block hardcoded `<QuestionCard ... selectedOptionId={shuffled.correctOptionId} revealed onSelect={() => {}} />` for **every** supplemental question, unconditionally - a deliberate "answer-key preview" design from the original supplemental-packs feature, which visually looks exactly like an already-answered, already-graded question to a user who never clicked anything.
+
+**Fix:** extracted a shared `InteractiveCheckQuestion` component ([src/components/question/InteractiveCheckQuestion.tsx](exam-prep-app/src/components/question/InteractiveCheckQuestion.tsx)) that owns its own `answered` state (`null` until clicked), computes its stable shuffle from `question.id` (reusing the existing Part-A `stableShuffleQuestionOptions`), and records progress via `recordPracticeAnswer` on selection - identical behavior to Learn's per-section check questions. Both `SectionCheckQuestion` and the supplemental block now render through this one component, so there is exactly one interactive-question implementation in Learn, not two. Each instance is a separate React component invocation keyed by `question.id`, so state can never leak between sibling questions.
+
+### Question-ID and React-key audit results
+
+0 duplicate question IDs (core, packs, or core-vs-pack) - already enforced by the existing validator. 0 array-index-keyed interactive components. Supplemental IDs are already namespaced (`supplemental-practice{1,2,3}-{q|gen}NNN`). No migration was needed since no invalid records existed.
+
+### Question-mark and punctuation audit
+
+Scripted two independent heuristic passes across all 321 active questions (293 core + 28 supplemental): (1) interrogative-starter detection vs. question-mark presence/position, (2) unbalanced-parenthesis and duplicated-punctuation detection. **Result: zero genuine issues.** Every flagged candidate was manually reviewed and confirmed to be a false positive of the heuristic itself - either a code block legitimately following the question mark within the same stem, or `..` used as genuine UML multiplicity/range notation (`0..1`, `1..*`, `-128..127`), not a duplicated period. **No question text was modified in this pass** - the bank was already clean.
+
+### Site-wide BiDi coverage re-verified
+
+Confirmed `dir="auto"` appears in exactly two places in production code, both a deliberate, already-tested exception scoped to a single answer option's own text (`QuestionCard.tsx`'s per-option `<bdi dir="auto">`, established in the original A-E label fix) - never on a complete Hebrew sentence, heading, or paragraph. Every other text block renders through `BidiText`/`BidiSegments`, always `dir="rtl"`.
+
+One genuine gap found and fixed: **`Search.tsx`'s result titles and body snippets bypassed the shared renderer entirely**, relying only on the inherited `dir="rtl"` from `<html>` with zero technical-term isolation - meaning a search for "JVM" or "JDK" would render the matching topic/question text as raw, unsegmented mixed content. Fixed by composing `BidiSegments` into `highlightMatches()`: each text slice produced by Fuse.js's match-index splitting (both inside and outside a `<mark>`) is now rendered through `BidiSegments` independently, so highlighting and BiDi isolation compose without needing to remap Fuse's original-string character indices. `<option>` dropdown text and `SupplementalBadge` remain documented, low-risk exceptions (unchanged from the prior audit - platform limitation and pure-Hebrew-only data respectively).
+
+### Components and routes updated this pass
+
+`src/components/question/InteractiveCheckQuestion.tsx` (new, shared), `src/routes/Learn.tsx` (both check-question paths now use it), `src/routes/Search.tsx` (BiDi-aware highlighting).
+
+### Tests added
+
+`Learn.test.tsx` (+3, exact name per spec: `Learn supplemental questions do not inherit answer state from other questions`) - verified against real `generics-collections-equals-hashcode` supplemental questions: every never-answered question renders with no selection/no color/no explanation; answering one leaves every sibling question neutral and interactive; a full parent rerender changes nothing. Confirmed these tests **fail** against the pre-fix code (verified by temporarily reverting the fix and re-running), then pass after. `Search.test.tsx` (new, 4 tests): `dir="rtl"`/`text-right` on result containers, technical terms isolated as `.ltr-inline` within highlighted matches, text preservation, empty-results handling.
+
+### Manual verification
+
+Live-clicked a supplemental question in `generics-collections-equals-hashcode`: all 5 options started neutral; clicking one revealed correct/incorrect styling and the per-option explanation for that question only; the next supplemental question on the same page remained completely untouched (screenshots captured). Searched "JVM" on `/search`: results render with the technical term correctly isolated inside the highlight `<mark>`, in a right-aligned `dir="rtl"` container. Re-ran the confidence/"למדתי" stability check on `java-platform-jvm` after the refactor - all 35 option buttons on the page (check questions + supplemental) remained in identical order, confirming the `InteractiveCheckQuestion` extraction did not disturb Part A's stable-order fix.
+
+### Remaining limitations
+
+None new. The two exceptions documented in the prior BiDi pass (`<option>` elements, `SupplementalBadge`) still stand for the same reasons.
+
+### Confirmations
+
+Stable option order: unchanged, re-verified (47 Part-A tests still pass). Scoring: still resolved via `recordPracticeAnswer`/original option ID, untouched. Valid progress: no migration was needed, no schema change. Academic content: zero `.json` data changes (hash diff), zero question text modified (punctuation audit found nothing to fix).

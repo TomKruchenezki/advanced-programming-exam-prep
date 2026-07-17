@@ -1,12 +1,9 @@
-import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { topicsSorted, sectionsByTopic, questionsById } from '../lib/dataStore'
 import { useProgress } from '../lib/ProgressContext'
 import { CodeBlock } from '../components/question/CodeBlock'
 import { Ltr } from '../components/question/Ltr'
-import { QuestionCard } from '../components/question/QuestionCard'
-import { stableShuffleQuestionOptions } from '../lib/shuffle'
-import { recordPracticeAnswer } from '../lib/progressActions'
+import { InteractiveCheckQuestion } from '../components/question/InteractiveCheckQuestion'
 import { PageContainer } from '../components/layout/PageContainer'
 import { supplementalQuestionsByTopic, packsById } from '../lib/questionPackStore'
 import { SupplementalBadge } from '../components/question/SupplementalBadge'
@@ -41,29 +38,9 @@ function TopicList() {
 }
 
 function SectionCheckQuestion({ questionId }: { questionId: string }) {
-  const { updateProgress } = useProgress()
-  const [answered, setAnswered] = useState<string | null>(null)
   const question = questionsById.get(questionId)
-  // Seeded purely by questionId: deterministic and stable regardless of how many times
-  // this component re-renders (e.g. from confidence/"learned" clicks elsewhere on the
-  // page triggering a ProgressContext update), not merely reliant on useMemo caching.
-  const shuffled = useMemo(() => (question ? stableShuffleQuestionOptions(question, questionId) : null), [question, questionId])
-  if (!question || !shuffled) return null
-
-  return (
-    <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
-      <QuestionCard
-        question={shuffled}
-        selectedOptionId={answered}
-        revealed={!!answered}
-        onSelect={(optId) => {
-          setAnswered(optId)
-          const original = shuffled.displayToOriginal[optId] ?? optId
-          updateProgress((prev) => recordPracticeAnswer(prev, question, original))
-        }}
-      />
-    </div>
-  )
+  if (!question) return null
+  return <InteractiveCheckQuestion question={question} />
 }
 
 function TopicReader({ topicId }: { topicId: string }) {
@@ -229,21 +206,21 @@ function TopicReader({ topicId }: { topicId: string }) {
           <section className="space-y-4 border-t border-[var(--color-border)] pt-6">
             <h2 className="text-section-title font-bold">שאלות חדשות בנושא זה</h2>
             <p className="text-meta text-[var(--color-text-muted)]">
-              שאלות מאגרים משלימים (לא חלק ממאגר הליבה המאומת) לעיון בלבד - אינן נכללות בניקוד מבחנים מדומים אלא אם נבחרו במפורש.
+              שאלות ממאגרים משלימים (לא חלק ממאגר הליבה המאומת) - ניתן לענות עליהן כתרגול; אינן נכללות בניקוד מבחנים מדומים אלא אם נבחרו במפורש.
             </p>
             {supplementalQuestions.map((q) => {
-              // Seeded purely by question id: deterministic, so calling it fresh inside
-              // this .map() (a hook-free context) on every render is safe and stable.
-              const shuffled = stableShuffleQuestionOptions(q, q.id)
               const pack = q.packId ? packsById.get(q.packId) : undefined
               return (
-                <div key={q.id} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <SupplementalBadge label="מאגר נוסף" />
-                    {pack && <SupplementalBadge label={pack.titleHe} />}
-                  </div>
-                  <QuestionCard question={shuffled} selectedOptionId={shuffled.correctOptionId} revealed onSelect={() => {}} />
-                </div>
+                <InteractiveCheckQuestion
+                  key={q.id}
+                  question={q}
+                  badge={
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <SupplementalBadge label="מאגר נוסף" />
+                      {pack && <SupplementalBadge label={pack.titleHe} />}
+                    </div>
+                  }
+                />
               )
             })}
           </section>

@@ -3,6 +3,7 @@ import { useMemo, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { topics, questions, flashcards, studySections } from '../lib/dataStore'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiSegments } from '../components/shared/BidiText'
 
 interface SearchItem {
   id: string
@@ -14,23 +15,30 @@ interface SearchItem {
 
 type KindFilter = 'all' | SearchItem['kind']
 
+/**
+ * Renders Fuse.js match ranges (computed against the ORIGINAL, unsegmented string - the
+ * indices must not be remapped) as `<mark>` highlights, while still isolating embedded
+ * technical/Latin runs via the shared `BidiSegments` renderer within each resulting slice
+ * (marked or plain). This is the same segmentation used everywhere else in the app; only the
+ * highlight boundaries themselves are still driven by the original-string Fuse.js indices.
+ */
 function highlightMatches(text: string, ranges: readonly (readonly [number, number])[] | undefined) {
-  if (!ranges || ranges.length === 0) return text
+  if (!ranges || ranges.length === 0) return <BidiSegments text={text} />
   const parts: ReactNode[] = []
   let cursor = 0
   ranges
     .slice()
     .sort((a, b) => a[0] - b[0])
     .forEach(([start, end], i) => {
-      if (start > cursor) parts.push(text.slice(cursor, start))
+      if (start > cursor) parts.push(<BidiSegments key={`t-${i}`} text={text.slice(cursor, start)} />)
       parts.push(
-        <mark key={i} className="rounded bg-[var(--color-accent)]/25 text-inherit">
-          {text.slice(start, end + 1)}
+        <mark key={`m-${i}`} className="rounded bg-[var(--color-accent)]/25 text-inherit">
+          <BidiSegments text={text.slice(start, end + 1)} />
         </mark>,
       )
       cursor = end + 1
     })
-  if (cursor < text.length) parts.push(text.slice(cursor))
+  if (cursor < text.length) parts.push(<BidiSegments key="tail" text={text.slice(cursor)} />)
   return parts
 }
 
@@ -103,10 +111,14 @@ export function Search() {
           return (
             <Link key={`${r.item.kind}-${r.item.id}`} to={r.item.link} className="block rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-body-lg font-medium">{highlightMatches(r.item.title, titleMatch?.indices)}</span>
+                <span dir="rtl" className="text-body-lg text-right font-medium">
+                  {highlightMatches(r.item.title, titleMatch?.indices)}
+                </span>
                 <span className="text-meta text-[var(--color-text-muted)]">{kindLabel[r.item.kind]}</span>
               </div>
-              <p className="text-meta line-clamp-2 text-[var(--color-text-muted)]">{highlightMatches(r.item.body, bodyMatch?.indices)}</p>
+              <p dir="rtl" className="text-meta line-clamp-2 text-right text-[var(--color-text-muted)]">
+                {highlightMatches(r.item.body, bodyMatch?.indices)}
+              </p>
             </Link>
           )
         })}

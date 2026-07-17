@@ -91,6 +91,87 @@ describe('Learn TopicReader full-width layout', () => {
   })
 })
 
+describe('Learn supplemental questions do not inherit answer state from other questions', () => {
+  // generics-collections-equals-hashcode has 6 real supplemental-pack questions - enough to
+  // prove answering one never touches its neighbors.
+  function optionButtons(container: Element) {
+    return [...container.querySelectorAll('button[aria-label]')].filter((b) => /^[A-E]\. /.test(b.getAttribute('aria-label') ?? ''))
+  }
+  function isNeutral(button: Element) {
+    // The default (never-selected, never-revealed) button carries `hover:border-[var(--color-accent)]`
+    // - only the actual highlight-fill classes (bg-*) indicate a selected/correct/incorrect state.
+    const cls = button.className
+    return !cls.includes('bg-[var(--color-success)]') && !cls.includes('bg-[var(--color-danger)]') && !cls.includes('bg-[var(--color-accent)]')
+  }
+
+  it('renders every never-answered supplemental question with no option selected, no green/red styling, and no explanation visible', () => {
+    const { container } = renderTopic('generics-collections-equals-hashcode')
+    const heading = [...container.querySelectorAll('h2')].find((h) => h.textContent === 'שאלות חדשות בנושא זה')
+    expect(heading).toBeTruthy()
+    const section = heading!.closest('section')!
+    const buttons = optionButtons(section)
+    expect(buttons.length).toBeGreaterThanOrEqual(5)
+    for (const b of buttons) {
+      expect(isNeutral(b)).toBe(true)
+      expect((b as HTMLButtonElement).disabled).toBe(false)
+    }
+    // No explanation text ("הסבר:") should be visible anywhere in this section yet.
+    expect(section.textContent).not.toContain('הסבר:')
+  })
+
+  it('answering one supplemental question only changes that question - neighbors stay neutral and unanswered', () => {
+    const { container } = renderTopic('generics-collections-equals-hashcode')
+    const heading = [...container.querySelectorAll('h2')].find((h) => h.textContent === 'שאלות חדשות בנושא זה')!
+    const section = heading.closest('section')!
+    const questionCards = [...section.querySelectorAll('.rounded-xl')].filter((el) => el.querySelector('button[aria-label]'))
+    expect(questionCards.length).toBeGreaterThanOrEqual(2)
+
+    const firstCardButtons = optionButtons(questionCards[0]!)
+    fireEvent.click(firstCardButtons[0]!)
+
+    // The clicked question now shows feedback (one option is marked, disabled).
+    const afterFirstCard = optionButtons(questionCards[0]!)
+    expect(afterFirstCard.some((b) => (b as HTMLButtonElement).disabled)).toBe(true)
+
+    // Every OTHER question in the same section remains completely neutral and interactive.
+    for (const card of questionCards.slice(1)) {
+      const buttons = optionButtons(card)
+      for (const b of buttons) {
+        expect(isNeutral(b)).toBe(true)
+        expect((b as HTMLButtonElement).disabled).toBe(false)
+      }
+      expect(card.textContent).not.toContain('הסבר:')
+    }
+  })
+
+  it('scrolling/rerendering the parent topic never answers or reveals a never-clicked supplemental question', () => {
+    const { container, rerender } = render(
+      <MemoryRouter initialEntries={['/learn/generics-collections-equals-hashcode']}>
+        <ProgressProvider>
+          <Routes>
+            <Route path="/learn/:topicId" element={<Learn />} />
+          </Routes>
+        </ProgressProvider>
+      </MemoryRouter>,
+    )
+    const heading = () => [...container.querySelectorAll('h2')].find((h) => h.textContent === 'שאלות חדשות בנושא זה')!
+    const before = optionButtons(heading().closest('section')!).map((b) => b.className)
+
+    // Force a re-render of the whole tree (simulates a parent state change / rerender).
+    rerender(
+      <MemoryRouter initialEntries={['/learn/generics-collections-equals-hashcode']}>
+        <ProgressProvider>
+          <Routes>
+            <Route path="/learn/:topicId" element={<Learn />} />
+          </Routes>
+        </ProgressProvider>
+      </MemoryRouter>,
+    )
+    const after = optionButtons(heading().closest('section')!).map((b) => b.className)
+    expect(after).toEqual(before)
+  })
+})
+
 function optionButtonsInDomOrder(container: HTMLElement, optionTexts: string[]) {
   return [...container.querySelectorAll('button')].filter((b) => optionTexts.some((t) => (b.getAttribute('aria-label') ?? '').endsWith(t)))
 }
