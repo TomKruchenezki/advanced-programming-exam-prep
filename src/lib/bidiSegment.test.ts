@@ -202,6 +202,118 @@ describe('segmentBidiText — technical expressions with operators stay one inta
   })
 })
 
+describe('segmentBidiText — bracket/quote pairs split by an interrupting Hebrew word (Part C)', () => {
+  // Root cause: a delimiter run with no Latin/digit of its own (e.g. a trailing "),") was left
+  // unisolated whenever a Hebrew word split it from the Latin content its matching opening
+  // delimiter belongs to. Confirmed via real-browser character-position measurement against the
+  // actual rendered "מבנה מחלקה וקובץ ב-Java" section - these are the two real strings that failed.
+  it('real case 1: closing paren+comma split from "public class" by the Hebrew word "אחת" stays paired, not reordered', () => {
+    const input = 'ציבורי אחד בלבד (public class אחת), ששמו חייב להיות זהה'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    // The trailing "),"  must be its own isolated LTR segment (not merged into Hebrew context).
+    const closer = segs.find((s) => s.isLtr && s.text.includes(')'))
+    expect(closer?.text).toBe('),')
+  })
+
+  it('real case 2: two adjacent parenthetical fragments separated by a Hebrew hyphenated term stay in source order', () => {
+    const input = 'מבנה בסיסי: שם הקובץ (Hello.java) תואם בדיוק לשם המחלקה ה-public (Hello) (lec_1_2 סליידים 32-35)'
+    expect(reconstruct(input)).toBe(input)
+    const segs = segmentBidiText(input)
+    const texts = segs.map((s) => s.text)
+    // Each fragment must still appear as a distinct, correctly-ordered piece - not merged/scrambled.
+    expect(texts).toContain('(Hello.java)')
+    expect(texts.some((t) => t.includes('(Hello)') && t.includes('lec_1_2'))).toBe(true)
+    expect(texts.some((t) => t === '32-35)')).toBe(true)
+  })
+
+  it('does NOT isolate quotes around a purely Hebrew quoted word (no Latin anywhere nearby)', () => {
+    // ~111 occurrences of this pattern (Hebrew quoted/emphasized words) exist in the real data -
+    // isolating them would create unnecessary spans for perfectly ordinary Hebrew prose.
+    const input = "מה ש'מגיע' אל ה-JVM כדי שיעבד אותו הוא Bytecode"
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    const quoteSegs = segs.filter((s) => s.isLtr && s.text.includes("'"))
+    expect(quoteSegs).toHaveLength(0)
+    // JVM and Bytecode themselves are still isolated as before.
+    expect(segs.some((s) => s.isLtr && s.text === '-JVM')).toBe(true)
+    expect(segs.some((s) => s.isLtr && s.text === 'Bytecode')).toBe(true)
+  })
+
+  it('does not isolate any punctuation in a purely Hebrew sentence with commas, periods, and a question mark', () => {
+    const input = 'שלום, מה שלומך היום? אני מקווה שהכל בסדר, ושתהיה לך שבת שלום.'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    expect(segs.every((s) => !s.isLtr)).toBe(true)
+  })
+
+  it('does not isolate a plain Hebrew sentence-level dash separator', () => {
+    const input = 'טעות נפוצה - יש להימנע ממנה בכל מחיר'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    expect(segs.every((s) => !s.isLtr)).toBe(true)
+  })
+
+  it('real case 3: backtick-quoted identifiers split across a Hebrew word stay paired (e.g. `OrderService`)', () => {
+    const input = 'בקוד אמיתי שהופיע במבחן (2025, Q15): מחלקת `OrderService` שגם מבצעת לוגיקה עסקית (`placeOrder`) וגם יוצרת ומנהלת ישירות אובייקט `MySQLDatabase` בבנאי שלה'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    expect(segs.some((s) => s.isLtr && s.text === '`OrderService`')).toBe(true)
+    expect(segs.some((s) => s.isLtr && s.text.includes('`placeOrder`'))).toBe(true)
+  })
+
+  it('real case 4: does not falsely pair Hebrew gershayim abbreviation marks (ע"י, בד"כ) across unrelated Latin content between them', () => {
+    const input =
+      'Socket מוגדר ברמת Transport layer (מודל OSI) ומיוצג ע"י כתובת IP + מספר Port. פורטים 0-1023 שמורים לשירותים ידועים (FTP=21). ברגע שמתקבל לקוח, ה-accept() מחזיר אובייקט Socket חדש (בד"כ עם פורט אחר)'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    // Neither gershayim mark should be isolated as part of a bogus quote-pair spanning the paragraph.
+    const geshayimSegs = segs.filter((s) => s.isLtr && s.text === '"')
+    expect(geshayimSegs).toHaveLength(0)
+    // The real technical fragments around them must still be correctly isolated.
+    expect(segs.some((s) => s.isLtr && s.text.includes('FTP=21'))).toBe(true)
+    expect(segs.some((s) => s.isLtr && s.text.includes('accept()'))).toBe(true)
+  })
+
+  it('real case 5: a parenthetical gloss with purely Hebrew content still stays paired when it directly follows an English term (e.g. "DIP (תלות ישירה...)."', () => {
+    const input = 'וגם DIP (תלות ישירה במימוש קונקרטי). שאלות מבחן על SOLID לעיתים מציגות תרשים כזה'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    const closer = segs.find((s) => s.isLtr && s.text.includes(')'))
+    expect(closer?.text).toBe(').')
+  })
+
+  it('does NOT isolate a purely Hebrew parenthetical aside with no Latin content anywhere nearby', () => {
+    const input = 'המשפט הזה (רק עברית בסוגריים) ממשיך הלאה בלי שום קשר לאנגלית'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    expect(segs.every((s) => !s.isLtr)).toBe(true)
+  })
+
+  it('handles nested parentheses correctly', () => {
+    const input = 'תבנית Observer (Behavioral Pattern (חדש)) שימושית'
+    const segs = segmentBidiText(input)
+    expect(reconstruct(input)).toBe(input)
+    const closer = segs.find((s) => s.isLtr && s.text.startsWith('))'))
+    expect(closer).toBeTruthy()
+  })
+
+  it('does not crash and does not mark anything ltr-worthy for unbalanced/unmatched brackets', () => {
+    const input = 'זהו משפט עם סוגר לא תואם ( באמצע המשפט העברי'
+    expect(() => segmentBidiText(input)).not.toThrow()
+    expect(reconstruct(input)).toBe(input)
+  })
+
+  it('the 293+ question stems, 16 topic titles, and 53 section headings still reconstruct exactly (no regression from the new pass)', () => {
+    const questions = questionsJson as unknown as Question[]
+    const topics = topicsJson as unknown as Topic[]
+    const sections = studySectionsJson as unknown as StudySection[]
+    for (const q of questions) expect(reconstruct(q.stemHe)).toBe(q.stemHe)
+    for (const t of topics) expect(reconstruct(t.titleHe)).toBe(t.titleHe)
+    for (const s of sections) expect(reconstruct(s.headingHe)).toBe(s.headingHe)
+  })
+})
+
 describe('segmentBidiText — regression sweep over the real data set', () => {
   const questions = questionsJson as unknown as Question[]
   const topics = topicsJson as unknown as Topic[]

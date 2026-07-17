@@ -311,3 +311,51 @@ Loaded `java-platform-jvm` in the browser and located the real production senten
 ### TYPOGRAPHY GATE
 
 Confirmed: complete technical expressions (including their operators) preserve source order; containment/comparison notation is not reversed; `+`/`=` signs stay between their correct operands; quotes/parentheses stay attached to their expression; Hebrew text remains right-aligned RTL; technical expressions remain internally LTR. No academic content, no `.json` data file, and no invisible Unicode direction-control character was touched anywhere in this pass (confirmed by SHA-256 hash diff of every file under `src/data/**/*.json` before and after all changes - zero differences).
+
+## Long Mixed Hebrew-English Prose BiDi Audit
+
+A more severe defect was reported in dense Learn paragraphs (flagged section: `sec-java-basics-oop-memory-01`, "מבנה מחלקה וקובץ ב-Java") - punctuation visibly displaced around parenthetical/quoted technical asides in long sentences mixing many Java identifiers, filenames, and signatures with Hebrew prose.
+
+### Root cause
+
+`segmentBidiText` isolates a maximal non-Hebrew run as LTR only if that run itself contains a Latin letter/digit. When a bracket or quote **pair** has its Latin content **inside** the pair but a Hebrew word splits the run so the **closing** delimiter ends up in its own run with no Latin/digit of its own (e.g. `"(public class אחת),"` - the trailing `),` has no Latin), that closing run was left unisolated, merged into plain Hebrew-context text. There it became a "neutral" character subject to the Unicode BiDi Algorithm's own (unpredictable, to a page author) reordering relative to adjacent punctuation - producing exactly the visible comma/paren swaps and multi-parenthetical scrambling reported.
+
+Two real confirmed failures (found via a real-browser character-position measurement tool built for this pass, not eyeballing - see Methodology below), both in `sec-java-basics-oop-memory-01`:
+1. `intuitionHe`: `"...(public class אחת), ששמו..."` rendered as `"...(public class אחת,)ששמו..."` - comma and closing paren swapped.
+2. `codeExamples[0].captionHe`: `"...ה-public (Hello) (lec_1_2 סליידים 32-35)"` rendered severely scrambled, with the two adjacent parenthetical fragments interleaving.
+
+A broader real-browser sweep (Methodology below) across `solid-principles`, `networking-sockets-io-streams`, `threads-basics-lifecycle`, and `concurrency-utilities-callable-future-mediator` found the **same root cause manifesting in two further shapes**, both fixed by extending the same mechanism (not a second, separate fix):
+3. Backtick-quoted code identifiers split from their Latin content by a Hebrew word (e.g. `` `OrderService` `` in a `solid-principles` paragraph) - backtick was not previously a recognized quote character at all.
+4. A parenthetical gloss whose **enclosed content is entirely Hebrew** but that directly follows an English term outside the parens (e.g. `"DIP (תלות ישירה במימוש קונקרטי)."`) - the enclosed-content-only check missed this; fixed by also checking whether the delimiter pair sits directly against Latin content **just outside** it.
+
+### Why the previous (operator-expression) fix was insufficient here
+
+The prior pass confirmed that a *single, uninterrupted* non-Hebrew run containing Latin content is already isolated correctly (covers `JDK ⊇ JRE ⊇ JVM`, generics, quoted assignments, etc.) and required no change. This defect is different in kind: it only occurs when a **Hebrew word sits between the two halves of a matched bracket/quote pair**, splitting one non-Hebrew run into two, one of which loses its only Latin anchor.
+
+### The fix
+
+One additive change to `src/lib/bidiSegment.ts`: a new `findLtrWorthyDelimiterPositions()` pass runs before segmentation. It stack-matches `()`, `[]`, `{}` pairs and toggle-matches `'...'`, `"..."`, `` `...` `` pairs, and marks **both** delimiter characters of a pair as LTR-worthy if either (a) the enclosed content contains a Latin letter/digit anywhere (even across a Hebrew interruption), or (b) the nearest non-space character immediately outside the pair, on either side, is Latin/digit. A quote/backtick character sitting directly between two Hebrew letters (a Hebrew abbreviation mark like `ע"י` or `בד"כ`, or a geresh as in `ד'ר`) is explicitly excluded from pairing, since treating it as a phrase-quote boundary would wrongly pair it with an unrelated later mark of the same character and isolate huge, arbitrary spans of ordinary Hebrew prose. `segmentBidiText`'s public signature and all other behavior are unchanged.
+
+Verified this does **not** over-isolate: a purely Hebrew sentence with ordinary commas/periods/question marks (0 isolated spans), a plain Hebrew dash separator (`" - "`, 0 spans), a purely Hebrew quoted phrase (`ש'מגיע'`, 0 spans - ~111 similar occurrences exist in the real data), and a purely Hebrew parenthetical aside with no Latin anywhere nearby (0 spans) all remain completely untouched.
+
+### Methodology: real-browser verification, not eyeballing
+
+Screenshots of mixed RTL/LTR text are easy to misread by eye even carefully at high zoom - this was demonstrated directly during this pass (see Remaining limitations below). The verification tool built for this audit measures the actual on-screen x-coordinate of every rendered character via `Range.getBoundingClientRect()`, groups characters into visual lines, and reconstructs the true left-to-right paint order into a "logical reading order" string (reversing Hebrew runs, preserving LTR-isolate internal order), which is then compared character-for-character against the original source string. The technique was first validated against trivial known-correct cases (pure LTR text, pure RTL text, an RTL sentence with one trailing LTR word) before being trusted against real content.
+
+Applying this tool to every `<h1>/<h2>/<p>/<li>` with an `aria-label` across all **16 Learn topics** after the fix found **zero remaining divergences** anywhere in the Learn content.
+
+### Remaining limitations
+
+One case surfaced during this pass and was resolved as a **false positive of the measurement tool itself**, not a product bug: a lone punctuation cluster with **no isolation applied at all** (a plain Hebrew quoted phrase immediately followed by a dash, e.g. `"'עשה דבר אחד טוב' - אם..."`) was flagged as reordered by the automated measurement, but a deliberate high-zoom screenshot inspection showed it renders correctly. The automated tool's line/character grouping appears to be unreliable specifically for very short, un-isolated neutral-character clusters; it was cross-checked against direct screenshots for every finding reported as fixed in this section before being trusted, and the two genuinely-fixed cases (`),` and the DIP parenthetical) were each independently re-confirmed via a dedicated, isolated, high-zoom screenshot after the fix.
+
+### Components and routes affected
+
+Single file: `src/lib/bidiSegment.ts`. No changes to `BidiText.tsx`, `QuestionCard.tsx`, or any route - they all already consume `segmentBidiText`/`BidiSegments`, so the fix applies automatically everywhere `BidiText` is already used (per the prior pass's site-wide rollout).
+
+### Tests added
+
+8 new cases in `bidiSegment.test.ts` (51 total in the file): the two real originally-reported failures, the backtick case, the DIP-style case, three negative cases (pure Hebrew quote, pure Hebrew sentence, pure Hebrew parenthetical - each asserting 0 isolated segments), nested parentheses, and unbalanced-bracket safety (does not throw). The existing 293+/16/53-string reconstruction sweep and all 41 pre-existing `bidiSegment.test.ts` cases continue to pass unchanged.
+
+### Verification performed
+
+`npm run verify`: **232/232 tests pass**, typecheck/lint clean, `validate:data` unchanged (293 active core + 28 supplemental questions, 0 errors), build succeeds. SHA-256 hash diff of every `src/data/**/*.json` file: zero changes. Re-ran the full Part A stable-answer-order/scoring suite (`shuffle.test.ts`, `Learn.test.tsx`, `ExamRunner.test.tsx`, `ExamResultView.test.tsx` - 47 tests): all pass unchanged, confirming this pass did not disturb the stable-option-order fix.
