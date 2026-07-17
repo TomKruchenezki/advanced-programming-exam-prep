@@ -242,3 +242,72 @@ New `src/routes/Learn.test.tsx` (21 tests): a focused suite on `solid-principles
 ### Verification performed
 
 `npm run verify`: **138/138 tests pass** (117 from the previous pass + 21 new Learn tests), typecheck/lint clean, `validate:data` unchanged (16 topics, 293 active questions, 188 flashcards, 7 mock exams, 0 errors, 4 pre-existing warnings), build succeeds. `npm run deploy:check` subpath preview: no console errors, direct hash-route load confirmed, `localStorage` containing only the single namespaced progress key.
+
+## Stable Option Order and Scoring Audit
+
+A critical correctness bug was reported: in Learn check questions, an option displayed at position D was clicked while it was the correct answer, and immediately after the click the options changed position (the same text moved from D to C), and the click was marked incorrect.
+
+### Root cause
+
+Three call sites invoked `shuffleQuestionOptions(question)` **directly inside a component's render body, unmemoized, with the default non-deterministic `Math.random` RNG**: `src/routes/Learn.tsx` line 48 (`SectionCheckQuestion`), `src/routes/Learn.tsx` line 232 (the "שאלות חדשות בנושא זה" supplemental-question preview block), and `src/components/exam/ExamResultView.tsx` line 76 (the wrong-answers review block). Every re-render of these components generated a **brand-new random shuffle**.
+
+The re-render trigger was traced to `src/lib/ProgressContext.tsx`: `ProgressProvider` passes a **new context value object** (`{ progress, updateProgress, resetProgress }`) on every render, so any `updateProgress()` call anywhere in the app (a confidence-level click, a "סמן כלמדתי" click, or even the check question's own answer-recording call) re-renders **every** consumer of `useProgress()` in the tree — including every `SectionCheckQuestion` instance on the page. The re-render re-ran the unmemoized shuffle, producing a new option order, while the component's `answered` state still held the *previously displayed* option id — so the click was scored against a mapping that had already shifted. This is an exact match for the reported D→C symptom, and also explains why confidence/"learned" clicks in an unrelated section could trigger it.
+
+`src/components/exam/ExamRunner.tsx` (used by Quiz Me, Diagnostic, Mock Exam, and Past Exams) was the one call site already wrapped in `useMemo(() => questions.map(shuffleQuestionOptions), [questions])`. Its `questions` prop was confirmed referentially stable within an attempt in all four callers (`QuizMe.tsx`'s `session` state, `Diagnostic.tsx`'s `useMemo(..., [])`, `MockExam.tsx`/`PastExams.tsx`'s `useMemo(..., [selectedExam])`), so there was no live scoring bug there today - but it relied on memoization alone for correctness, which the fix below no longer does.
+
+### Fix
+
+Added `hashStringToSeed(input: string): number` and `stableShuffleQuestionOptions(question, seedKey: string): ShuffledQuestion` to `src/lib/shuffle.ts` (pure additions; `shuffleQuestionOptions`/`shuffleArray` are unchanged). `stableShuffleQuestionOptions` seeds `mulberry32` from a hash of `seedKey`, making the shuffle a **pure, deterministic function of its inputs** - correctness no longer depends on `useMemo` caching, only on the seed key staying the same:
+
+- **Learn check questions** (`Learn.tsx:48`): seeded by `questionId` alone (stable for the life of the question), wrapped in `useMemo([question, questionId])` as a performance optimization only.
+- **Learn supplemental-question previews** (`Learn.tsx:232`, inside a `.map()` - no hooks allowed there): called directly with `seedKey = q.id`; safe because the function is pure.
+- **Exam result wrong-answer review** (`ExamResultView.tsx:76`, also inside a `.map()`): seeded by `` `${result.id}:${a.questionId}` `` - identical every time a specific completed result is reviewed.
+- **`ExamRunner.tsx`** (hardened, not a live bug): added a per-mount `attemptId` (`useState` lazy initializer), and reseeded the existing `useMemo` with `` `${attemptId}:${q.id}` `` per question - a new attempt (a fresh mount) draws a new `attemptId`; the same attempt is provably stable regardless of re-renders.
+
+Scoring and the Mistake Notebook/mastery pipeline were not touched: `progressActions.ts`'s `recordQuestionOutcome` already compares `chosenOptionId === question.correctOptionId` **exclusively in original option-id space** (callers translate the clicked display-id to the original id via `displayToOriginal` before calling into progress actions) - confirmed by reading the code directly, not assumed. No progress-record migration is required.
+
+### Tests added (24 in `Learn.test.tsx`, 6 in `ExamRunner.test.tsx`/`ExamResultView.test.tsx`, 6 in `shuffle.test.ts`)
+
+- `does not reshuffle options after selecting the correct Learn answer` - reproduces the exact reported scenario against the real `q-java-platform-jvm-002` question (the "javac Hello.java / java Hello" question named by the user); verified this test **fails** against the pre-fix code (confirmed by temporarily reverting the fix and re-running it, then restoring it) before being counted as a valid regression guard.
+- `Learn confidence and learned controls do not reshuffle check-question options` - clicks "סמן כלמדתי" and confidence levels 1-5 and asserts the check question's option order is untouched.
+- A third test covers the supplemental-question preview block.
+- `shuffle.test.ts`: `hashStringToSeed` determinism, `stableShuffleQuestionOptions` producing an identical result across repeated/interleaved calls, and a sweep asserting the scoring invariant (`displayToOriginal[correctOptionId] === question.correctOptionId`) across **every real active question in the bank (293 core + 28 supplemental)**.
+- `ExamRunner.test.tsx`/`ExamResultView.test.tsx`: option order survives forward/back navigation, flagging, and unrelated prop-driven re-renders.
+
+### Data validation and progress-compatibility audit
+
+`npm run validate:data`: 293 active core questions + 28 active supplemental questions, 0 errors (5 options each, one valid `correctOptionId`, `optionExplanations` keyed by original option id). `progressActions.ts` confirmed (by reading the code) to key `questionStats`/`mistakeLog`/mastery calculations by `question.id` and original option ids only - never by shuffle-display index or letter. **No existing user progress needs to be reset.**
+
+### Manual verification
+
+Reproduced live in the browser against the two exact questions named in the bug report (`q-java-platform-jvm-001`, the cross-platform question, and `q-java-platform-jvm-002`, the javac/java compilation question): clicked the correct option (displayed at D) - it stayed at D and was marked correct; clicked "סמן כלמדתי" and confidence level 3 afterward - all 35 option buttons on the page kept their exact order. Ran a full Mock Exam 1 (20 questions): navigating forward/back and flagging a question left its option order untouched; the results screen's wrong-answers review (18 wrong answers, 90 option buttons) was unchanged across a forced re-render. No console errors in any of these checks.
+
+### CORRECTNESS GATE
+
+Confirmed: option order is generated once per attempt/question and frozen; confidence, "learned", flagging, progress/mastery updates, and unrelated re-renders never reshuffle it; scoring and explanations are always resolved through the original option id, never the displayed letter/position; returning to a question (via navigation) restores the identical order.
+
+## Site-Wide Mixed RTL/LTR Technical Expression Audit
+
+Follow-up to the earlier BiDi heading/stem fix: the requirement was that a **complete technical expression including its operators** (containment `⊂ ⊃ ⊆ ⊇`, membership `∈ ∉`, comparison `≠ ≤ ≥`, arrows `↔ →`, and ASCII `= + - * / % -> => < > <= >= == != && ||`) must be isolated as a single LTR unit - not just the individual Latin tokens with the operators left outside the isolate.
+
+### Finding: no algorithm change was required
+
+`src/lib/bidiSegment.ts`'s `segmentBidiText` splits only at **actual Hebrew-character boundaries** (Unicode range `֐-׿`) - it does not special-case any operator or symbol. Since none of the required operators (ASCII or Unicode math symbols) fall inside the Hebrew block, an expression like `JDK ⊇ JRE ⊇ JVM` or `0 <= port <= 65535` was already captured as **one uninterrupted non-Hebrew run**, and rendered via the existing `Ltr` isolate - the same mechanism already in production since the prior BiDi pass. This was **verified with new tests, not assumed**: adding synthetic tests initially surfaced 3 failures caused by an unrelated, already-documented, and correct existing behavior (a Hebrew connector hyphen like "ש-JDK" attaches the hyphen to the following LTR run, per the pre-existing test suite) - after correcting the test sentences to avoid that specific construction, all 20 new operator/expression cases passed against the unmodified algorithm. No production code in `bidiSegment.ts` was changed.
+
+### Tests added (20 new cases + 2 structural checks in `bidiSegment.test.ts`)
+
+Covers every operator in the user's list, embedded in full Hebrew sentences: containment chains (`JDK ⊇ JRE ⊇ JVM`, `JVM ⊆ JRE ⊆ JDK`), equality+addition (`JDK = JRE + javac + development tools`), arrows (`source -> intermediate code`, `Bytecode → machine code`), double comparisons (`0 <= port <= 65535`, `1 ≤ x ≤ 10`), field assignment (`restoredUser.city = null`), generics (`List<? extends Number>`, `Map<String, List<Integer>>`), quoted assignment (`String name = "Dudi"`), and membership/equality/boolean operators (`∈`, `∉`, `↔`, `=>`, `&&`, `||`, `==`, `!=`, `⊂`/`⊃`). Each case asserts the expression appears as exactly one LTR segment and that operand order is not reversed.
+
+### Call-site audit
+
+Re-grepped every `*He`/`description`/`explanation` field interpolation across `src/routes` and `src/components`. All are already routed through `BidiText`/`BidiSegments` (confirmed in `Learn.tsx`, `Flashcards.tsx`, `MistakeNotebook.tsx`, `LastMinuteReview.tsx`, `SupplementalQuestions.tsx`, `Dashboard.tsx`, `QuestionCard.tsx`, `ExamResultView.tsx`). Two documented, deliberate exceptions, neither a regression:
+- **`<option>` elements** (topic/pack filter dropdowns in `QuizMe.tsx`, `MistakeNotebook.tsx`) render plain text only - browsers strip any nested markup inside `<option>`, so `BidiText`'s isolating `<span>`s cannot be used there. This is a pre-existing HTML platform limitation, not something introduced or fixable in this pass.
+- **`SupplementalBadge`** renders its `label` prop directly with no isolation wrapper; all current callers pass either a hardcoded pure-Hebrew string or `pack.titleHe`, which is pure Hebrew for all 3 packs today (`מבחן תרגול נוסף 1/2/3`). No mixed-language badge content exists in the current data, so this is a documented latent gap, not an active bug.
+
+### Manual verification
+
+Loaded `java-platform-jvm` in the browser and located the real production sentence containing "JDK ⊇ JRE ⊇ JVM" (the JVM/JRE/JDK containment section). Confirmed via DOM inspection and a screenshot that `(JDK ⊇ JRE ⊇ JVM)` and `JRE (Java Runtime Environment) = JVM + ...` render as single `.ltr-inline` spans with the correct left-to-right operand order, inside a `dir="rtl"` paragraph carrying the full original string as `aria-label`.
+
+### TYPOGRAPHY GATE
+
+Confirmed: complete technical expressions (including their operators) preserve source order; containment/comparison notation is not reversed; `+`/`=` signs stay between their correct operands; quotes/parentheses stay attached to their expression; Hebrew text remains right-aligned RTL; technical expressions remain internally LTR. No academic content, no `.json` data file, and no invisible Unicode direction-control character was touched anywhere in this pass (confirmed by SHA-256 hash diff of every file under `src/data/**/*.json` before and after all changes - zero differences).
