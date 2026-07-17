@@ -6,6 +6,7 @@ import { topicsSorted, activeQuestions, flashcards } from '../lib/dataStore'
 import { Ltr } from '../components/question/Ltr'
 import { generateStudyPlan, totalMinutesForDay } from '../lib/studyPlan'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiText, BidiSegments } from '../components/shared/BidiText'
 
 const DAY_LABEL: Record<1 | 2 | 3, string> = { 1: 'יום 1', 2: 'יום 2', 3: 'יום 3' }
 
@@ -71,7 +72,7 @@ function StudyPlanSection() {
                     <li key={task.id} className="text-meta flex items-start gap-2">
                       <input type="checkbox" checked={task.completed} onChange={() => toggleTask(task.id)} className="mt-0.5" />
                       <span className={task.completed ? 'text-[var(--color-text-muted)] line-through' : ''}>
-                        {task.titleHe} ({task.estimatedMinutes} דק')
+                        <BidiSegments text={task.titleHe} /> ({task.estimatedMinutes} דק')
                       </span>
                     </li>
                   ))}
@@ -182,7 +183,7 @@ export function Dashboard() {
           <ul className="text-body-lg space-y-1">
             {weakest.map(({ topic, mastery }) => (
               <li key={topic.id} className="flex justify-between">
-                <span>{topic.titleHe}</span>
+                <BidiText as="span" text={topic.titleHe} />
                 <span className="text-[var(--color-danger)]">{Math.round(mastery * 100)}%</span>
               </li>
             ))}
@@ -194,7 +195,7 @@ export function Dashboard() {
           <ul className="text-body-lg space-y-1">
             {strongest.map(({ topic, mastery }) => (
               <li key={topic.id} className="flex justify-between">
-                <span>{topic.titleHe}</span>
+                <BidiText as="span" text={topic.titleHe} />
                 <span className="text-[var(--color-success)]">{Math.round(mastery * 100)}%</span>
               </li>
             ))}
@@ -204,7 +205,7 @@ export function Dashboard() {
 
       <section className="rounded-xl border border-[var(--color-accent)] p-4">
         <h2 className="text-section-title mb-2 font-bold">המשימה המומלצת הבאה</h2>
-        <p className="text-body-lg mb-3">{nextTask.label}</p>
+        <BidiText as="p" className="text-body-lg mb-3" text={nextTask.label} />
         <Link to={nextTask.to} className="inline-block rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-base font-medium text-[var(--color-accent-contrast)]">
           המשך
         </Link>

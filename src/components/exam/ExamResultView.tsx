@@ -3,6 +3,7 @@ import { topicsById } from '../../lib/dataStore'
 import { QuestionCard } from '../question/QuestionCard'
 import { shuffleQuestionOptions } from '../../lib/shuffle'
 import { PageContainer } from '../layout/PageContainer'
+import { BidiText } from '../shared/BidiText'
 
 interface ExamResultViewProps {
   result: MockExamResult
@@ -38,7 +39,7 @@ export function ExamResultView({ result, questions, previousResults = [] }: Exam
             const pct = breakdown.total > 0 ? Math.round((breakdown.correct / breakdown.total) * 100) : 0
             return (
               <div key={topicId} className="text-meta flex items-center gap-3">
-                <span className="w-40 shrink-0">{topic?.titleHe ?? topicId}</span>
+                <BidiText as="span" className="w-40 shrink-0" text={topic?.titleHe ?? topicId} />
                 <div className="h-2 flex-1 rounded-full bg-[var(--color-bg-subtle)]">
                   <div className="h-2 rounded-full bg-[var(--color-accent)]" style={{ width: `${pct}%` }} />
                 </div>

@@ -1,5 +1,6 @@
 import { CodeBlock } from './CodeBlock'
 import type { ShuffledQuestion } from '../../lib/shuffle'
+import { BidiText, BidiSegments } from '../shared/BidiText'
 
 interface QuestionCardProps {
   question: ShuffledQuestion
@@ -12,7 +13,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
   return (
     <div className="space-y-4">
       <div>
-        <p className="text-question whitespace-pre-wrap font-medium">{question.stemHe}</p>
+        <BidiText as="p" className="text-question whitespace-pre-wrap font-medium" text={question.stemHe} />
         {question.code && <CodeBlock code={question.code} />}
       </div>
       <div className="space-y-2">
@@ -38,7 +39,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
             >
               <span className="shrink-0 font-bold">{opt.id.toUpperCase()}.</span>
               <bdi dir="auto" className="min-w-0 flex-1 text-right">
-                {opt.text}
+                <BidiSegments text={opt.text} />
               </bdi>
             </button>
           )
@@ -48,7 +49,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
         <div className="text-body-lg space-y-3 rounded-lg bg-[var(--color-bg-subtle)] p-4">
           <p>
             <strong>הסבר: </strong>
-            {question.explanation}
+            <BidiSegments text={question.explanation} />
           </p>
           <div className="space-y-1">
             {question.options.map((opt) => {
@@ -57,7 +58,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
                 <div key={opt.id} dir="rtl" className="flex items-start gap-2 text-[var(--color-text-muted)]">
                   <strong className="shrink-0">{opt.id.toUpperCase()}:</strong>
                   <bdi dir="auto" className="min-w-0 flex-1 text-right">
-                    {question.optionExplanations[originalId] ?? ''}
+                    <BidiSegments text={question.optionExplanations[originalId] ?? ''} />
                   </bdi>
                 </div>
               )
@@ -65,7 +66,7 @@ export function QuestionCard({ question, selectedOptionId, revealed, onSelect }:
           </div>
           {question.sourceReferences.length > 0 && (
             <p className="text-meta text-[var(--color-text-muted)]">
-              מקור: {question.sourceReferences.map((r) => `${r.fileName} (${r.locator})`).join(', ')}
+              מקור: <BidiSegments text={question.sourceReferences.map((r) => `${r.fileName} (${r.locator})`).join(', ')} />
             </p>
           )}
         </div>

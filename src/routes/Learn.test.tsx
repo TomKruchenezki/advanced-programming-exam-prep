@@ -53,11 +53,16 @@ describe('Learn TopicReader full-width layout', () => {
   })
 
   it('still renders every study section heading for the topic (no content lost)', () => {
-    const { getByText } = renderTopic('solid-principles')
+    // Headings now render via BidiText, which isolates embedded LTR fragments into nested
+    // <span> elements - getByText's default matcher looks for one element whose OWN text node
+    // equals the query, so a heading fragmented across children needs a textContent-based check
+    // (which is robust to that fragmentation) rather than getByText's node-level matching.
+    const { container } = renderTopic('solid-principles')
     const sections = sectionsByTopic.get('solid-principles') ?? []
     expect(sections.length).toBeGreaterThan(0)
+    const headings = [...container.querySelectorAll('h2')]
     for (const section of sections) {
-      expect(getByText(section.headingHe)).toBeTruthy()
+      expect(headings.some((h) => h.textContent === section.headingHe)).toBe(true)
     }
   })
 

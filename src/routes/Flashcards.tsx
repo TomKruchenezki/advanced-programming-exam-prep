@@ -5,6 +5,7 @@ import { useProgress } from '../lib/ProgressContext'
 import { nextReviewState, isDue, type Rating } from '../lib/spacedRepetition'
 import { CodeBlock } from '../components/question/CodeBlock'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiText, BidiSegments } from '../components/shared/BidiText'
 
 export function Flashcards() {
   const { topicId } = useParams()
@@ -54,7 +55,11 @@ export function Flashcards() {
           <input type="checkbox" checked={lastMinuteMode} onChange={(e) => { setLastMinuteMode(e.target.checked); setIndex(0) }} />
           מצב Last Minute
         </label>
-        {topicId && <span className="text-[var(--color-text-muted)]">נושא: {topicsById.get(topicId)?.titleHe}</span>}
+        {topicId && (
+          <span className="text-[var(--color-text-muted)]">
+            נושא: <BidiSegments text={topicsById.get(topicId)?.titleHe ?? ''} />
+          </span>
+        )}
       </div>
 
       {!card && <p className="text-body-lg text-[var(--color-text-muted)]">אין כרטיסיות התואמות את הסינון הנוכחי.</p>}
@@ -64,19 +69,27 @@ export function Flashcards() {
         // ~70-90% of the main area than stretched to the full page width.
         <div className="mx-auto w-full max-w-[min(88%,1100px)] space-y-4">
           <p className="text-meta text-[var(--color-text-muted)]">
-            כרטיסייה {index + 1} מתוך {pool.length} · {topicsById.get(card.topicId)?.titleHe}
+            כרטיסייה {index + 1} מתוך {pool.length} · <BidiSegments text={topicsById.get(card.topicId)?.titleHe ?? ''} />
           </p>
           <div
             onClick={() => setRevealed((r) => !r)}
             className="flex min-h-56 cursor-pointer flex-col justify-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-8 text-center"
           >
-            <p className="text-question font-medium">{card.frontHe}</p>
+            <BidiText as="p" className="text-question font-medium" text={card.frontHe} />
             {revealed && (
               <div className="text-body-lg mt-4 space-y-2 border-t border-[var(--color-border)] pt-4">
-                <p>{card.backHe}</p>
+                <BidiText as="p" text={card.backHe} />
                 {card.code && <CodeBlock code={card.code} />}
-                {card.mnemonic && <p className="text-[var(--color-accent)]">זכרון: {card.mnemonic}</p>}
-                {card.commonConfusion && <p className="text-meta text-[var(--color-text-muted)]">בלבול נפוץ: {card.commonConfusion}</p>}
+                {card.mnemonic && (
+                  <p className="text-[var(--color-accent)]">
+                    זכרון: <BidiSegments text={card.mnemonic} />
+                  </p>
+                )}
+                {card.commonConfusion && (
+                  <p className="text-meta text-[var(--color-text-muted)]">
+                    בלבול נפוץ: <BidiSegments text={card.commonConfusion} />
+                  </p>
+                )}
               </div>
             )}
             {!revealed && <p className="text-meta mt-4 text-[var(--color-text-muted)]">לחץ לחשיפת התשובה</p>}
@@ -106,8 +119,8 @@ export function Flashcards() {
         <p className="text-meta mb-2 font-medium text-[var(--color-text-muted)]">סינון לפי נושא</p>
         <div className="flex flex-wrap gap-2">
           {topicsSorted.map((t) => (
-            <a key={t.id} href={`#/flashcards/${t.id}`} className="text-meta rounded-full border border-[var(--color-border)] px-3 py-1 hover:border-[var(--color-accent)]">
-              {t.titleHe}
+            <a key={t.id} href={`#/flashcards/${t.id}`} dir="rtl" className="text-meta rounded-full border border-[var(--color-border)] px-3 py-1 hover:border-[var(--color-accent)]">
+              <BidiSegments text={t.titleHe} />
             </a>
           ))}
         </div>

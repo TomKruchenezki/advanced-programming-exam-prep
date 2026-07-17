@@ -4,6 +4,7 @@ import { questionsById, topicsById, topicsSorted } from '../lib/dataStore'
 import { useProgress } from '../lib/ProgressContext'
 import { PageContainer } from '../components/layout/PageContainer'
 import { Ltr } from '../components/question/Ltr'
+import { BidiText, BidiSegments } from '../components/shared/BidiText'
 
 type SortMode = 'date' | 'timesWrong'
 
@@ -77,7 +78,7 @@ export function MistakeNotebook() {
 
       {[...grouped.entries()].map(([topicId, entries]) => (
         <section key={topicId}>
-          <h2 className="text-section-title mb-2 font-bold">{topicsById.get(topicId)?.titleHe ?? topicId}</h2>
+          <BidiText as="h2" className="text-section-title mb-2 font-bold" text={topicsById.get(topicId)?.titleHe ?? topicId} />
           <div className="space-y-3">
             {entries.map((entry) => {
               const q = questionsById.get(entry.questionId)
@@ -90,12 +91,16 @@ export function MistakeNotebook() {
                     </span>
                     <span className="text-[var(--color-text-muted)]">{new Date(entry.timestampISO).toLocaleDateString('he-IL')}</span>
                   </div>
-                  <p className="text-body-lg mb-1">{q.stemHe}</p>
+                  <BidiText as="p" className="text-body-lg mb-1" text={q.stemHe} />
                   <p className="text-meta text-[var(--color-text-muted)]">
                     בחרת: <Ltr>{entry.chosenOptionId.toUpperCase()}</Ltr> · נכון: <Ltr>{entry.correctOptionId.toUpperCase()}</Ltr>
                   </p>
-                  {entry.possibleReason && <p className="text-meta text-[var(--color-warning)]">סיבה אפשרית: {entry.possibleReason}</p>}
-                  <p className="text-body-lg mt-1">{q.explanation}</p>
+                  {entry.possibleReason && (
+                    <p className="text-meta text-[var(--color-warning)]">
+                      סיבה אפשרית: <BidiSegments text={entry.possibleReason} />
+                    </p>
+                  )}
+                  <BidiText as="p" className="text-body-lg mt-1" text={q.explanation} />
                   <Link to={`/learn/${topicId}`} className="text-meta mt-1 inline-block text-[var(--color-accent)] hover:underline">
                     חזור ללמידה בנושא זה
                   </Link>

@@ -4,6 +4,7 @@ import { shuffleQuestionOptions, type ShuffledQuestion } from '../../lib/shuffle
 import { QuestionCard } from '../question/QuestionCard'
 import { ExamTimer } from './ExamTimer'
 import { PageContainer } from '../layout/PageContainer'
+import { BidiText } from '../shared/BidiText'
 
 export type ExamMode = 'exam' | 'practice'
 
@@ -71,7 +72,7 @@ export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, 
       <h1 className="sr-only">{title ?? (mode === 'exam' ? 'מבחן פעיל' : 'תרגול פעיל')}</h1>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          {title && <h2 className="text-section-title font-bold">{title}</h2>}
+          {title && <BidiText as="h2" className="text-section-title font-bold" text={title} />}
           <p className="text-meta text-[var(--color-text-muted)]">
             שאלה {index + 1} מתוך {shuffled.length} · נענו: {answeredCount}
           </p>

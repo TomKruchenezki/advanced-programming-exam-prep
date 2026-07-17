@@ -8,6 +8,7 @@ import { ExamRunner } from '../components/exam/ExamRunner'
 import { ExamResultView } from '../components/exam/ExamResultView'
 import { buildCustomMockExam } from '../lib/mockExamGenerator'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiText, BidiSegments } from '../components/shared/BidiText'
 
 const DEFAULT_DURATION = 90 // matches the 1.5h duration seen on the most recent (2024) real exam; configurable below
 
@@ -40,8 +41,8 @@ export function MockExam() {
         <p className="text-body-lg text-[var(--color-text-muted)]">בחר מבחן מדומה מהרשימה:</p>
         <div className="grid gap-3 sm:grid-cols-2">
           {mockExams.map((exam) => (
-            <Link key={exam.id} to={`/mock/${exam.id}`} className="text-body-lg block rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
-              {exam.titleHe} {exam.isAuthenticPastExam && <span className="text-meta text-[var(--color-text-muted)]">(מבחן עבר אמיתי)</span>}
+            <Link key={exam.id} to={`/mock/${exam.id}`} dir="rtl" className="text-body-lg block rounded-lg border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
+              <BidiSegments text={exam.titleHe} /> {exam.isAuthenticPastExam && <span className="text-meta text-[var(--color-text-muted)]">(מבחן עבר אמיתי)</span>}
             </Link>
           ))}
           {mockExams.length === 0 && <p className="text-meta text-[var(--color-text-muted)]">מאגר המבחנים המדומים עדיין לא נטען.</p>}
@@ -55,7 +56,7 @@ export function MockExam() {
     return (
       <>
         <PageContainer size="wide" className="mb-6">
-          <h1 className="text-page-title font-bold">{selectedExam?.titleHe ?? 'תוצאות מבחן מדומה'}</h1>
+          <BidiText as="h1" className="text-page-title font-bold" text={selectedExam?.titleHe ?? 'תוצאות מבחן מדומה'} />
         </PageContainer>
         <ExamResultView result={result.result} questions={result.qs} previousResults={previousResults} />
       </>
@@ -84,7 +85,7 @@ export function MockExam() {
 
   return (
     <PageContainer className="space-y-6">
-      <h1 className="text-page-title font-bold">{selectedExam?.titleHe}</h1>
+      <BidiText as="h1" className="text-page-title font-bold" text={selectedExam?.titleHe ?? ''} />
       <p className="text-body-lg text-[var(--color-text-muted)]">20 שאלות, 5 נקודות לכל שאלה, ציון מתוך 100.</p>
 
       <div className="text-body-lg space-y-3 rounded-xl border border-[var(--color-border)] p-4">

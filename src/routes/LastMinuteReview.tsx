@@ -3,6 +3,7 @@ import { useProgress } from '../lib/ProgressContext'
 import { shuffleArray } from '../lib/shuffle'
 import { useMemo } from 'react'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiText } from '../components/shared/BidiText'
 
 export function LastMinuteReview() {
   const { progress } = useProgress()
@@ -36,10 +37,10 @@ export function LastMinuteReview() {
             const allKeyPoints = sections.flatMap((s) => s.mustRemember)
             return (
               <div key={topic.id} className="rounded-xl border border-[var(--color-border)] p-4">
-                <h3 className="text-body-lg mb-1 font-bold">{topic.titleHe}</h3>
+                <BidiText as="h3" className="text-body-lg mb-1 font-bold" text={topic.titleHe} />
                 <ul className="text-body-lg list-inside list-disc space-y-0.5">
                   {allKeyPoints.slice(0, 6).map((p, i) => (
-                    <li key={i}>{p}</li>
+                    <BidiText key={i} as="li" text={p} />
                   ))}
                 </ul>
               </div>
@@ -54,9 +55,12 @@ export function LastMinuteReview() {
           <h2 className="text-section-title mb-2 font-bold">הטעויות האישיות שלך שעדיין לא תוקנו</h2>
           <div className="flex flex-wrap gap-2">
             {[...personalMistakeTopics].map((topicId) => (
-              <span key={topicId} className="text-meta rounded-full bg-[var(--color-danger)]/10 px-3 py-1">
-                {topicsById.get(topicId)?.titleHe ?? topicId}
-              </span>
+              <BidiText
+                key={topicId}
+                as="span"
+                className="text-meta rounded-full bg-[var(--color-danger)]/10 px-3 py-1"
+                text={topicsById.get(topicId)?.titleHe ?? topicId}
+              />
             ))}
           </div>
         </section>
@@ -67,8 +71,8 @@ export function LastMinuteReview() {
         <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
           {topFlashcards.map((c) => (
             <div key={c.id} className="rounded-lg border border-[var(--color-border)] p-3">
-              <p className="text-body-lg font-medium">{c.frontHe}</p>
-              <p className="text-meta text-[var(--color-text-muted)]">{c.backHe}</p>
+              <BidiText as="p" className="text-body-lg font-medium" text={c.frontHe} />
+              <BidiText as="p" className="text-meta text-[var(--color-text-muted)]" text={c.backHe} />
             </div>
           ))}
         </div>

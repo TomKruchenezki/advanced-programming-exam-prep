@@ -7,6 +7,7 @@ import { recordMockExamResult } from '../lib/progressActions'
 import { ExamRunner } from '../components/exam/ExamRunner'
 import { ExamResultView } from '../components/exam/ExamResultView'
 import { PageContainer } from '../components/layout/PageContainer'
+import { BidiText } from '../components/shared/BidiText'
 
 const DOC_TYPE_LABEL: Record<string, string> = {
   official_no_answers: 'מבחן רשמי (ללא תשובות)',
@@ -51,7 +52,7 @@ export function PastExams() {
                 <span className="text-meta text-[var(--color-text-muted)]">{DOC_TYPE_LABEL[exam.docType]}</span>
               </div>
               {exam.isScanned && <span className="text-meta text-[var(--color-warning)]">מסמך סרוק — עבר תמלול ואימות ידני</span>}
-              {exam.warning && <p className="text-meta mt-1 text-[var(--color-danger)]">{exam.warning}</p>}
+              {exam.warning && <BidiText as="p" className="text-meta mt-1 text-[var(--color-danger)]" text={exam.warning} />}
               <p className="text-meta mt-1 text-[var(--color-text-muted)]">{exam.questionIds.length} שאלות זמינות</p>
             </button>
           ))}

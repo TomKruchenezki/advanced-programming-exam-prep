@@ -10,6 +10,7 @@ import { recordPracticeAnswer } from '../lib/progressActions'
 import { PageContainer } from '../components/layout/PageContainer'
 import { supplementalQuestionsByTopic, packsById } from '../lib/questionPackStore'
 import { SupplementalBadge } from '../components/question/SupplementalBadge'
+import { BidiText, BidiSegments } from '../components/shared/BidiText'
 
 const FREQ_LABEL: Record<string, string> = { high: 'שכיחות גבוהה', medium: 'שכיחות בינונית', low: 'שכיחות נמוכה' }
 
@@ -24,7 +25,7 @@ function TopicList() {
           <Link key={topic.id} to={`/learn/${topic.id}`} className="block rounded-xl border border-[var(--color-border)] p-4 hover:border-[var(--color-accent)]">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-bold">{topic.titleHe}</h2>
+                <BidiText as="h2" className="text-section-title font-bold" text={topic.titleHe} />
                 <p className="text-meta text-[var(--color-text-muted)]">
                   <Ltr>{topic.titleEn}</Ltr> · {FREQ_LABEL[topic.examFrequency]}
                 </p>
@@ -99,11 +100,11 @@ function TopicReader({ topicId }: { topicId: string }) {
         <Link to="/learn" className="text-nav-link text-[var(--color-accent)] hover:underline">
           ← כל הנושאים
         </Link>
-        <h1 className="text-page-title mt-2 font-bold">{topic.titleHe}</h1>
+        <BidiText as="h1" className="text-page-title mt-2 font-bold" text={topic.titleHe} />
         <p className="text-meta text-[var(--color-text-muted)]">
           <Ltr>{topic.titleEn}</Ltr> · הרצאות {topic.lectureRefs.join(', ')}
         </p>
-        <p className="text-body-lg mt-2">{topic.summary}</p>
+        <BidiText as="p" className="text-body-lg mt-2" text={topic.summary} />
       </div>
 
       {sections.map((section) => {
@@ -111,16 +112,16 @@ function TopicReader({ topicId }: { topicId: string }) {
         const confidence = progress.sectionConfidence[section.id]
         return (
           <section key={section.id} className="space-y-4 border-t border-[var(--color-border)] pt-6">
-            <h2 className="text-section-title font-bold">{section.headingHe}</h2>
+            <BidiText as="h2" className="text-section-title font-bold" text={section.headingHe} />
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">אינטואיציה</h3>
-              <p className="text-body-lg leading-relaxed">{section.intuitionHe}</p>
+              <BidiText as="p" className="text-body-lg leading-relaxed" text={section.intuitionHe} />
             </div>
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">ידע למבחן</h3>
-              <p className="text-body-lg whitespace-pre-wrap leading-relaxed">{section.examKnowledgeHe}</p>
+              <BidiText as="p" className="text-body-lg whitespace-pre-wrap leading-relaxed" text={section.examKnowledgeHe} />
             </div>
 
             {section.codeExamples?.map((ex, i) => (
@@ -132,7 +133,7 @@ function TopicReader({ topicId }: { topicId: string }) {
 
             <div>
               <h3 className="text-meta mb-1 font-bold text-[var(--color-accent)]">יישום</h3>
-              <p className="text-body-lg leading-relaxed">{section.applicationHe}</p>
+              <BidiText as="p" className="text-body-lg leading-relaxed" text={section.applicationHe} />
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
@@ -140,7 +141,7 @@ function TopicReader({ topicId }: { topicId: string }) {
                 <p className="mb-1 font-bold">מה חובה לזכור</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.mustRemember.map((p, i) => (
-                    <li key={i}>{p}</li>
+                    <BidiText key={i} as="li" text={p} />
                   ))}
                 </ul>
               </div>
@@ -148,7 +149,7 @@ function TopicReader({ topicId }: { topicId: string }) {
                 <p className="mb-1 font-bold">מה קל לבלבל</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.easyToConfuse.map((p, i) => (
-                    <li key={i}>{p}</li>
+                    <BidiText key={i} as="li" text={p} />
                   ))}
                 </ul>
               </div>
@@ -159,17 +160,21 @@ function TopicReader({ topicId }: { topicId: string }) {
                 <p className="mb-1 font-bold">איך המרצה עשוי לשאול על זה</p>
                 <ul className="list-inside list-disc space-y-0.5">
                   {section.howProfessorMightAsk.map((p, i) => (
-                    <li key={i}>{p}</li>
+                    <BidiText key={i} as="li" text={p} />
                   ))}
                 </ul>
               </div>
             )}
 
-            {section.mnemonicHe && <p className="text-body-lg text-[var(--color-accent)]">זכרון: {section.mnemonicHe}</p>}
+            {section.mnemonicHe && (
+              <p className="text-body-lg text-[var(--color-accent)]">
+                זכרון: <BidiSegments text={section.mnemonicHe} />
+              </p>
+            )}
 
             {section.termsHeEn.length > 0 && (
               <p className="text-meta text-[var(--color-text-muted)]">
-                מונחים: {section.termsHeEn.map((t) => `${t.he} (${t.en})`).join(' · ')}
+                מונחים: <BidiSegments text={section.termsHeEn.map((t) => `${t.he} (${t.en})`).join(' · ')} />
               </p>
             )}
 
@@ -184,7 +189,7 @@ function TopicReader({ topicId }: { topicId: string }) {
 
             {section.sourceRefs.length > 0 && (
               <p className="text-meta text-[var(--color-text-muted)]">
-                מקורות: {section.sourceRefs.map((r) => `${r.fileName} (${r.locator})`).join(', ')}
+                מקורות: <BidiSegments text={section.sourceRefs.map((r) => `${r.fileName} (${r.locator})`).join(', ')} />
               </p>
             )}
 
@@ -242,15 +247,15 @@ function TopicReader({ topicId }: { topicId: string }) {
 
       <div className="flex items-center justify-between border-t border-[var(--color-border)] pt-6">
         {prevTopic ? (
-          <Link to={`/learn/${prevTopic.id}`} className="text-nav-link text-[var(--color-accent)] hover:underline">
-            → {prevTopic.titleHe}
+          <Link to={`/learn/${prevTopic.id}`} dir="rtl" className="text-nav-link text-[var(--color-accent)] hover:underline">
+            → <BidiSegments text={prevTopic.titleHe} />
           </Link>
         ) : (
           <span />
         )}
         {nextTopic ? (
-          <Link to={`/learn/${nextTopic.id}`} className="text-nav-link text-[var(--color-accent)] hover:underline">
-            {nextTopic.titleHe} ←
+          <Link to={`/learn/${nextTopic.id}`} dir="rtl" className="text-nav-link text-[var(--color-accent)] hover:underline">
+            <BidiSegments text={nextTopic.titleHe} /> ←
           </Link>
         ) : (
           <span />

@@ -202,4 +202,16 @@ describe('QuestionCard BiDi option rendering', () => {
     expect(bdi.className).toContain('text-right')
     expect(bdi.textContent).toBe('Observer design pattern')
   })
+
+  it('isolates the parenthetical English fragment inside a multi-fragment answer option, without changing the outer bdi', () => {
+    const question = makeShuffled('Observer (Behavioral Pattern)')
+    const { container } = renderCard(question)
+    const bdi = container.querySelector('bdi')!
+    expect(bdi.getAttribute('dir')).toBe('auto')
+    expect(bdi.className).toContain('text-right')
+    expect(bdi.textContent).toBe('Observer (Behavioral Pattern)')
+    const isolated = bdi.querySelector('span.ltr-inline')
+    expect(isolated).toBeTruthy()
+    expect(isolated!.textContent).toBe('Observer (Behavioral Pattern)')
+  })
 })

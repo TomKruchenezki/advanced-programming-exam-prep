@@ -8,6 +8,7 @@ import { ExamRunner } from '../components/exam/ExamRunner'
 import { shuffleArray } from '../lib/shuffle'
 import { PageContainer } from '../components/layout/PageContainer'
 import { SupplementalBadge } from '../components/question/SupplementalBadge'
+import { BidiText } from '../components/shared/BidiText'
 
 type TopicFilter = 'all' | string
 type DifficultyFilter = 'all' | Difficulty
@@ -134,7 +135,7 @@ export function SupplementalQuestions() {
           return (
             <div key={pack.packId} className="space-y-3 rounded-xl border border-[var(--color-border)] p-4">
               <div className="flex items-start justify-between gap-2">
-                <h2 className="text-body-lg font-bold">{pack.titleHe}</h2>
+                <BidiText as="h2" className="text-body-lg font-bold" text={pack.titleHe} />
                 <SupplementalBadge label="מאגר נוסף" />
               </div>
               <div className="text-meta flex flex-wrap gap-2 text-[var(--color-text-muted)]">
@@ -144,7 +145,7 @@ export function SupplementalQuestions() {
                 <span>·</span>
                 <span>ביטחון: {pack.confidence === 'high' ? 'גבוה' : pack.confidence === 'medium' ? 'בינוני' : 'נמוך'}</span>
               </div>
-              <p className="text-meta text-[var(--color-text-muted)]">{pack.description}</p>
+              <BidiText as="p" className="text-meta text-[var(--color-text-muted)]" text={pack.description} />
               <div className="text-meta flex flex-wrap gap-2 text-[var(--color-text-muted)]">
                 <span>{verifiedCount} שאלות מאומתות</span>
                 <span>·</span>
