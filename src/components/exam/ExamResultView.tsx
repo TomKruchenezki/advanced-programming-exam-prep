@@ -1,7 +1,7 @@
 import type { MockExamResult, Question } from '../../types/domain'
 import { topicsById } from '../../lib/dataStore'
 import { QuestionCard } from '../question/QuestionCard'
-import { shuffleQuestionOptions } from '../../lib/shuffle'
+import { stableShuffleQuestionOptions } from '../../lib/shuffle'
 import { PageContainer } from '../layout/PageContainer'
 import { BidiText } from '../shared/BidiText'
 
@@ -73,7 +73,9 @@ export function ExamResultView({ result, questions, previousResults = [] }: Exam
             {wrongAnswers.map((a) => {
               const q = questionById.get(a.questionId)
               if (!q) return null
-              const shuffledForDisplay = shuffleQuestionOptions(q, Math.random)
+              // Seeded by this result's id + question id: identical every time this
+              // completed result is reviewed/re-rendered, without relying on memoization.
+              const shuffledForDisplay = stableShuffleQuestionOptions(q, `${result.id}:${a.questionId}`)
               const selectedDisplayId = a.chosenOptionId
                 ? Object.entries(shuffledForDisplay.displayToOriginal).find(([, orig]) => orig === a.chosenOptionId)?.[0] ?? null
                 : null

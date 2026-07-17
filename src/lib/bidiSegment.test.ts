@@ -148,6 +148,60 @@ describe('segmentBidiText', () => {
   })
 })
 
+describe('segmentBidiText — technical expressions with operators stay one intact LTR unit (Part B)', () => {
+  // Each case embeds one of the user-specified technical expressions (with its operators)
+  // inside a full Hebrew sentence, and asserts the WHOLE expression - operators included -
+  // survives as a single LTR segment in the original left-to-right order, not just the
+  // individual Latin tokens (JDK / JRE / JVM) isolated separately with operators left outside.
+  const cases: { name: string; input: string; expr: string }[] = [
+    { name: 'containment ⊇ chain (JDK contains JRE contains JVM)', input: 'חשוב לזכור כי JDK ⊇ JRE ⊇ JVM תמיד', expr: 'JDK ⊇ JRE ⊇ JVM' },
+    { name: 'containment ⊆ chain, reverse direction (JVM subset of JRE subset of JDK)', input: 'ניתן גם לכתוב JVM ⊆ JRE ⊆ JDK ולקבל אותה משמעות', expr: 'JVM ⊆ JRE ⊆ JDK' },
+    { name: 'equality + addition with multiple terms (JDK = JRE + javac + development tools)', input: 'הכלל הוא כי JDK = JRE + javac + development tools בהגדרה', expr: 'JDK = JRE + javac + development tools' },
+    { name: 'equality + addition (JVM = JRE + class libraries)', input: 'באופן דומה JVM = JRE + class libraries הוא לא נכון', expr: 'JVM = JRE + class libraries' },
+    { name: 'arrow operator -> (source -> intermediate code)', input: 'התהליך הוא source -> intermediate code ולאחר מכן הרצה', expr: 'source -> intermediate code' },
+    { name: 'double comparison with <= (0 <= port <= 65535)', input: 'התנאי התקין הוא 0 <= port <= 65535 לפי התקן', expr: '0 <= port <= 65535' },
+    { name: 'field assignment to null (restoredUser.city = null)', input: 'לאחר הדה-סריאליזציה מתקיים restoredUser.city = null בגלל transient', expr: 'restoredUser.city = null' },
+    { name: 'bounded wildcard generic (List<? extends Number>)', input: 'משתמשים בטיפוס List<? extends Number> כדי להגביל', expr: 'List<? extends Number>' },
+    { name: 'nested generic (Map<String, List<Integer>>)', input: 'מבנה הנתונים הוא Map<String, List<Integer>> במקרה הזה', expr: 'Map<String, List<Integer>>' },
+    { name: 'quoted string assignment (String name = "Dudi")', input: 'ההצהרה String name = "Dudi" יוצרת אובייקט חדש במאגר', expr: 'String name = "Dudi"' },
+    { name: 'not-equal ≠ symbol', input: 'שימו לב כי JDK ≠ JRE מבחינת התוכן', expr: 'JDK ≠ JRE' },
+    { name: 'less-than-or-equal ≤ and greater-than-or-equal ≥ symbols', input: 'מתקיים 1 ≤ x ≤ 10 בכל מקרה', expr: '1 ≤ x ≤ 10' },
+    { name: 'element-of ∈ symbol', input: 'הערך x ∈ Set חייב להתקיים', expr: 'x ∈ Set' },
+    { name: 'not-element-of ∉ symbol', input: 'הערך y ∉ Set הוא המקרה השני', expr: 'y ∉ Set' },
+    { name: 'bidirectional arrow ↔ symbol', input: 'הקשר A ↔ B הוא הדדי', expr: 'A ↔ B' },
+    { name: 'unicode arrow → symbol', input: 'המעבר Bytecode → machine code קורה ב-JIT', expr: 'Bytecode → machine code' },
+    { name: 'ASCII fat arrow => (lambda-style)', input: 'התחביר x => x + 1 הוא lambda', expr: 'x => x + 1' },
+    { name: 'boolean AND/OR operators (&& and ||)', input: 'התנאי a && b || c נבדק בסדר עדיפויות', expr: 'a && b || c' },
+    { name: 'equality/inequality ASCII operators (== and !=)', input: 'ההשוואה a == b ו-a != c שונות מהותית', expr: 'a == b' },
+    { name: 'strict subset/superset ⊂/⊃ symbols', input: 'הקבוצה A ⊂ B ⊃ C ממחישה את זה', expr: 'A ⊂ B ⊃ C' },
+  ]
+
+  for (const { name, input, expr } of cases) {
+    it(`${name}: "${expr}" stays intact, in order, as one LTR segment`, () => {
+      const segs = segmentBidiText(input)
+      expect(reconstruct(input)).toBe(input)
+      const exprSeg = segs.find((s) => s.isLtr && s.text === expr)
+      expect(exprSeg).toBeTruthy()
+    })
+  }
+
+  it('does not reverse containment order - JDK still appears before JRE before JVM textually', () => {
+    const segs = segmentBidiText('חשוב לזכור כי JDK ⊇ JRE ⊇ JVM תמיד')
+    const seg = segs.find((s) => s.isLtr && s.text.includes('⊇'))!
+    expect(seg.text.indexOf('JDK')).toBeLessThan(seg.text.indexOf('JRE'))
+    expect(seg.text.indexOf('JRE')).toBeLessThan(seg.text.indexOf('JVM'))
+  })
+
+  it('does not split the operator away from its operands into a separate segment', () => {
+    const segs = segmentBidiText('התנאי התקין הוא 0 <= port <= 65535 לפי התקן')
+    // The whole "0 <= port <= 65535" must be ONE segment - operators must never end up
+    // isolated on their own, detached from the numbers/identifiers they relate.
+    const ltrSegs = segs.filter((s) => s.isLtr)
+    expect(ltrSegs).toHaveLength(1)
+    expect(ltrSegs[0]!.text).toBe('0 <= port <= 65535')
+  })
+})
+
 describe('segmentBidiText — regression sweep over the real data set', () => {
   const questions = questionsJson as unknown as Question[]
   const topics = topicsJson as unknown as Topic[]

@@ -60,3 +60,22 @@ export function shuffleQuestionOptions(question: Question, rng: () => number = M
     displayToOriginal,
   }
 }
+
+/** Deterministic string hash (djb2-style), used to derive a stable PRNG seed from a key. */
+export function hashStringToSeed(input: string): number {
+  let hash = 0
+  for (let i = 0; i < input.length; i++) {
+    hash = (Math.imul(31, hash) + input.charCodeAt(i)) | 0
+  }
+  return hash >>> 0
+}
+
+/**
+ * Shuffles a question's options using a seed derived purely from `seedKey`, so the same
+ * seedKey always produces the exact same order - safe to call on every render (no reliance
+ * on memoization for correctness), and stable across unrelated state changes as long as the
+ * seedKey (e.g. question id, or attempt id + question id) stays the same.
+ */
+export function stableShuffleQuestionOptions(question: Question, seedKey: string): ShuffledQuestion {
+  return shuffleQuestionOptions(question, mulberry32(hashStringToSeed(seedKey)))
+}

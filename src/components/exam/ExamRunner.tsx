@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { MockExamAnswer, Question } from '../../types/domain'
-import { shuffleQuestionOptions, type ShuffledQuestion } from '../../lib/shuffle'
+import { stableShuffleQuestionOptions, type ShuffledQuestion } from '../../lib/shuffle'
 import { QuestionCard } from '../question/QuestionCard'
 import { ExamTimer } from './ExamTimer'
 import { PageContainer } from '../layout/PageContainer'
@@ -20,7 +20,14 @@ interface ExamRunnerProps {
 export function ExamRunner({ questions, mode, durationMinutes = null, onFinish, onAnswerPractice, title }: ExamRunnerProps) {
   // Lazy initializer: the recognized React pattern for a one-time impure read (exam start time).
   const [startedAt] = useState(() => ({ current: Date.now() }))
-  const shuffled: ShuffledQuestion[] = useMemo(() => questions.map((q) => shuffleQuestionOptions(q)), [questions])
+  // Lazy initializer: a per-mount attempt id, stable for this attempt's lifetime, so the
+  // seeded shuffle below stays deterministic across re-renders without depending on the
+  // `questions` array reference alone - a fresh attempt (a new mount) draws a new id.
+  const [attemptId] = useState(() => `${Date.now()}-${Math.random().toString(36).slice(2)}`)
+  const shuffled: ShuffledQuestion[] = useMemo(
+    () => questions.map((q) => stableShuffleQuestionOptions(q, `${attemptId}:${q.id}`)),
+    [questions, attemptId],
+  )
 
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string>>({})

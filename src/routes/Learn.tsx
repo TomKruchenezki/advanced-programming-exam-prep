@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { topicsSorted, sectionsByTopic, questionsById } from '../lib/dataStore'
 import { useProgress } from '../lib/ProgressContext'
 import { CodeBlock } from '../components/question/CodeBlock'
 import { Ltr } from '../components/question/Ltr'
 import { QuestionCard } from '../components/question/QuestionCard'
-import { shuffleQuestionOptions } from '../lib/shuffle'
+import { stableShuffleQuestionOptions } from '../lib/shuffle'
 import { recordPracticeAnswer } from '../lib/progressActions'
 import { PageContainer } from '../components/layout/PageContainer'
 import { supplementalQuestionsByTopic, packsById } from '../lib/questionPackStore'
@@ -44,8 +44,11 @@ function SectionCheckQuestion({ questionId }: { questionId: string }) {
   const { updateProgress } = useProgress()
   const [answered, setAnswered] = useState<string | null>(null)
   const question = questionsById.get(questionId)
-  if (!question) return null
-  const shuffled = shuffleQuestionOptions(question)
+  // Seeded purely by questionId: deterministic and stable regardless of how many times
+  // this component re-renders (e.g. from confidence/"learned" clicks elsewhere on the
+  // page triggering a ProgressContext update), not merely reliant on useMemo caching.
+  const shuffled = useMemo(() => (question ? stableShuffleQuestionOptions(question, questionId) : null), [question, questionId])
+  if (!question || !shuffled) return null
 
   return (
     <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
@@ -229,7 +232,9 @@ function TopicReader({ topicId }: { topicId: string }) {
               שאלות מאגרים משלימים (לא חלק ממאגר הליבה המאומת) לעיון בלבד - אינן נכללות בניקוד מבחנים מדומים אלא אם נבחרו במפורש.
             </p>
             {supplementalQuestions.map((q) => {
-              const shuffled = shuffleQuestionOptions(q)
+              // Seeded purely by question id: deterministic, so calling it fresh inside
+              // this .map() (a hook-free context) on every render is safe and stable.
+              const shuffled = stableShuffleQuestionOptions(q, q.id)
               const pack = q.packId ? packsById.get(q.packId) : undefined
               return (
                 <div key={q.id} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">

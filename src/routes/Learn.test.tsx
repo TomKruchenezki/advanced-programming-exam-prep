@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Learn } from './Learn'
 import { ProgressProvider } from '../lib/ProgressContext'
-import { topicsSorted, sectionsByTopic } from '../lib/dataStore'
+import { topicsSorted, sectionsByTopic, questionsById } from '../lib/dataStore'
+import { stableShuffleQuestionOptions } from '../lib/shuffle'
 
 const NARROW_MAXW_PATTERNS = [
   'max-w-[85ch]',
@@ -87,6 +88,68 @@ describe('Learn TopicReader full-width layout', () => {
     for (const block of codeBlocks) {
       expect(block.className).toContain('ltr-code')
     }
+  })
+})
+
+function optionButtonsInDomOrder(container: HTMLElement, optionTexts: string[]) {
+  return [...container.querySelectorAll('button')].filter((b) => optionTexts.some((t) => (b.getAttribute('aria-label') ?? '').endsWith(t)))
+}
+
+describe('Learn check-question stable option order (correctness gate)', () => {
+  // These are the exact two questions reported by the user as reshuffling: the javac/java
+  // compilation question, and the cross-platform Java question - both are check questions
+  // under java-platform-jvm's first study section.
+  const question = questionsById.get('q-java-platform-jvm-002')!
+  const optionTexts = question.options.map((o) => o.text)
+
+  it('does not reshuffle options after selecting the correct Learn answer', () => {
+    const { container } = renderTopic('java-platform-jvm')
+    const before = optionButtonsInDomOrder(container, optionTexts).map((b) => b.getAttribute('aria-label'))
+    expect(before).toHaveLength(5)
+
+    // The component seeds its shuffle with the question id, exactly like the production code -
+    // this predicts which button currently displays the correct answer.
+    const expectedShuffle = stableShuffleQuestionOptions(question, question.id)
+    const correctText = expectedShuffle.options.find((o) => o.id === expectedShuffle.correctOptionId)!.text
+    const correctButton = optionButtonsInDomOrder(container, optionTexts).find((b) => (b.getAttribute('aria-label') ?? '').endsWith(correctText))!
+
+    fireEvent.click(correctButton)
+
+    expect(correctButton.className).toContain('color-success')
+    const after = optionButtonsInDomOrder(container, optionTexts).map((b) => b.getAttribute('aria-label'))
+    expect(after).toEqual(before)
+  })
+
+  it('Learn confidence and learned controls do not reshuffle check-question options', () => {
+    const { container, getAllByText } = renderTopic('java-platform-jvm')
+    const before = optionButtonsInDomOrder(container, optionTexts).map((b) => b.getAttribute('aria-label'))
+    expect(before).toHaveLength(5)
+
+    fireEvent.click(getAllByText('סמן כלמדתי')[0]!)
+    const afterLearned = optionButtonsInDomOrder(container, optionTexts).map((b) => b.getAttribute('aria-label'))
+    expect(afterLearned).toEqual(before)
+
+    const confidenceButtons = [...container.querySelectorAll('button')].filter((b) => /^[1-5]$/.test(b.textContent ?? '') && b.className.includes('rounded-full'))
+    expect(confidenceButtons.length).toBeGreaterThan(0)
+    for (const btn of confidenceButtons.slice(0, 5)) {
+      fireEvent.click(btn)
+      const afterConfidence = optionButtonsInDomOrder(container, optionTexts).map((b) => b.getAttribute('aria-label'))
+      expect(afterConfidence).toEqual(before)
+    }
+  })
+
+  it('does not reshuffle the supplemental "new questions" preview cards across unrelated re-renders', () => {
+    const { container, getAllByText } = renderTopic('java-platform-jvm')
+    const supplementalHeading = container.querySelector('h2')
+    if (!supplementalHeading) return // no supplemental questions for this topic - nothing to assert
+    const badges = [...container.querySelectorAll('span')].filter((s) => s.textContent === 'מאגר נוסף')
+    if (badges.length === 0) return
+    // Trigger unrelated re-renders (confidence + learned clicks) and confirm supplemental
+    // preview cards (revealed, non-interactive) keep the same displayed option order.
+    const before = [...container.querySelectorAll('button[aria-label]')].map((b) => b.getAttribute('aria-label'))
+    fireEvent.click(getAllByText('סמן כלמדתי')[0]!)
+    const after = [...container.querySelectorAll('button[aria-label]')].map((b) => b.getAttribute('aria-label'))
+    expect(after).toEqual(before)
   })
 })
 

@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { ExamRunner } from './ExamRunner'
 import type { Question } from '../../types/domain'
 
-function makeQuestion(): Question {
+function makeQuestion(overrides: Partial<Question> = {}): Question {
   return {
     id: 'q-1',
     topicIds: ['t1'],
@@ -31,6 +31,7 @@ function makeQuestion(): Question {
     keyLearningPoint: 'point',
     points: 5,
     active: true,
+    ...overrides,
   }
 }
 
@@ -69,5 +70,35 @@ describe('ExamRunner practice mode', () => {
     const [, chosenOptionId, correct] = onAnswerPractice.mock.calls[0]!
     expect(chosenOptionId).toBe('a')
     expect(correct).toBe(false)
+  })
+})
+
+describe('ExamRunner stable option order (correctness gate)', () => {
+  function optionLabels(container: HTMLElement) {
+    return [...container.querySelectorAll('button[aria-label]')]
+      .filter((b) => /^[A-E]\. /.test(b.getAttribute('aria-label') ?? ''))
+      .map((b) => b.getAttribute('aria-label'))
+  }
+
+  it('keeps the same option order after navigating to another question and back', () => {
+    const q1 = makeQuestion({ id: 'q-1' })
+    const q2 = makeQuestion({ id: 'q-2', options: q1.options.map((o) => ({ ...o, text: `${o.text} 2` })) })
+    const { container, getByText } = render(<ExamRunner questions={[q1, q2]} mode="exam" durationMinutes={null} onFinish={vi.fn()} />)
+
+    const before = optionLabels(container)
+    fireEvent.click(getByText('הבא'))
+    fireEvent.click(getByText('הקודם'))
+    const after = optionLabels(container)
+    expect(after).toEqual(before)
+  })
+
+  it('keeps the same option order across unrelated re-renders (flagging a question for review)', () => {
+    const q1 = makeQuestion({ id: 'q-1' })
+    const { container, getByText } = render(<ExamRunner questions={[q1]} mode="exam" durationMinutes={null} onFinish={vi.fn()} />)
+
+    const before = optionLabels(container)
+    fireEvent.click(getByText('סמן לחזרה'))
+    const after = optionLabels(container)
+    expect(after).toEqual(before)
   })
 })
