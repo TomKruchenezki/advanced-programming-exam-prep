@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { to: '/quiz', label: 'תרגול' },
   { to: '/mock', label: 'מבחן מדומה' },
   { to: '/past-exams', label: 'מבחני עבר' },
+  { to: '/supplemental', label: 'שאלות נוספות' },
   { to: '/flashcards', label: 'כרטיסיות' },
   { to: '/mistakes', label: 'מחברת טעויות' },
   { to: '/review', label: 'חזרה אחרונה' },

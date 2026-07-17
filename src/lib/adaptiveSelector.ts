@@ -63,6 +63,10 @@ export function selectAdaptiveQuestions(
     const unresolvedMistake = progress.mistakeLog.some((m) => m.questionId === q.id && !m.resolved)
     if (unresolvedMistake) weight *= 2
 
+    // Supplemental (medium-confidence, non-core) questions get a lower initial weight so they
+    // supplement adaptive practice without crowding out the validated core bank.
+    if (q.packId) weight *= 0.4
+
     return weight
   })
 

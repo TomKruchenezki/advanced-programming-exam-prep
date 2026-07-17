@@ -1,0 +1,50 @@
+[
+  {
+    "packId": "supplemental-practice1",
+    "titleHe": "מבחן תרגול נוסף 1",
+    "titleEn": "Additional Practice Test 1",
+    "description": "12 שאלות (6 מחולצות ומאומתות + 6 וריאנטים חדשים) מתוך atp_practice_test_1.pdf, לאחר סינון כפילויות מול הבנק הקיים.",
+    "sourceFiles": ["atp_practice_test_1.pdf"],
+    "sourceType": "unknown",
+    "year": null,
+    "dateAdded": "2026-07-17",
+    "confidence": "medium",
+    "activeQuestionCount": 12,
+    "needsReviewCount": 0,
+    "topics": ["generics-collections-equals-hashcode", "solid-principles", "design-patterns-creational", "networking-sockets-io-streams"],
+    "adaptivePracticeEligible": true,
+    "mockExamEligible": true
+  },
+  {
+    "packId": "supplemental-practice2",
+    "titleHe": "מבחן תרגול נוסף 2",
+    "titleEn": "Additional Practice Test 2",
+    "description": "6 שאלות (3 מחולצות ומאומתות + 3 וריאנטים חדשים) מתוך atp_practice_test_2.pdf, לאחר סינון כפילויות מול הבנק הקיים.",
+    "sourceFiles": ["atp_practice_test_2.pdf"],
+    "sourceType": "unknown",
+    "year": null,
+    "dateAdded": "2026-07-17",
+    "confidence": "medium",
+    "activeQuestionCount": 6,
+    "needsReviewCount": 0,
+    "topics": ["threads-basics-lifecycle", "networking-sockets-io-streams", "solid-principles", "thread-safety-synchronization"],
+    "adaptivePracticeEligible": true,
+    "mockExamEligible": true
+  },
+  {
+    "packId": "supplemental-practice3",
+    "titleHe": "מבחן תרגול נוסף 3",
+    "titleEn": "Additional Practice Test 3",
+    "description": "10 שאלות (5 מחולצות ומאומתות + 5 וריאנטים חדשים) מתוך atp_practice_test_3.pdf, לאחר סינון כפילויות מול הבנק הקיים.",
+    "sourceFiles": ["atp_practice_test_3.pdf"],
+    "sourceType": "unknown",
+    "year": null,
+    "dateAdded": "2026-07-17",
+    "confidence": "medium",
+    "activeQuestionCount": 10,
+    "needsReviewCount": 0,
+    "topics": ["generics-collections-equals-hashcode", "event-driven-javafx-mvc", "threads-basics-lifecycle", "uml-class-diagrams", "thread-safety-synchronization"],
+    "adaptivePracticeEligible": true,
+    "mockExamEligible": true
+  }
+]

@@ -123,3 +123,14 @@ describe('markDiagnosticComplete', () => {
     expect(next.diagnosticCompleted).toBe(true)
   })
 })
+
+describe('supplemental (question pack) question compatibility', () => {
+  it('records a mistake and questionStats for a namespaced supplemental question id exactly like a core question', () => {
+    const q = { ...makeQuestion('supplemental-practice1-q001', ['generics-collections-equals-hashcode']), packId: 'supplemental-practice1' }
+    const next = recordPracticeAnswer(createEmptyProgress(), q, 'a')
+    expect(next.mistakeLog).toHaveLength(1)
+    expect(next.mistakeLog[0]?.questionId).toBe('supplemental-practice1-q001')
+    expect(next.questionStats['supplemental-practice1-q001']?.seen).toBe(1)
+    expect(next.topicMastery['generics-collections-equals-hashcode']?.attempts).toBe(1)
+  })
+})

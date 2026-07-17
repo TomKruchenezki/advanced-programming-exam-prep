@@ -8,6 +8,8 @@ import { QuestionCard } from '../components/question/QuestionCard'
 import { shuffleQuestionOptions } from '../lib/shuffle'
 import { recordPracticeAnswer } from '../lib/progressActions'
 import { PageContainer } from '../components/layout/PageContainer'
+import { supplementalQuestionsByTopic, packsById } from '../lib/questionPackStore'
+import { SupplementalBadge } from '../components/question/SupplementalBadge'
 
 const FREQ_LABEL: Record<string, string> = { high: 'שכיחות גבוהה', medium: 'שכיחות בינונית', low: 'שכיחות נמוכה' }
 
@@ -211,6 +213,32 @@ function TopicReader({ topicId }: { topicId: string }) {
       })}
 
       {sections.length === 0 && <p className="text-body-lg text-[var(--color-text-muted)]">חומר הלימוד לנושא זה עדיין לא נטען.</p>}
+
+      {(() => {
+        const supplementalQuestions = supplementalQuestionsByTopic.get(topicId) ?? []
+        if (supplementalQuestions.length === 0) return null
+        return (
+          <section className="space-y-4 border-t border-[var(--color-border)] pt-6">
+            <h2 className="text-section-title font-bold">שאלות חדשות בנושא זה</h2>
+            <p className="text-meta text-[var(--color-text-muted)]">
+              שאלות מאגרים משלימים (לא חלק ממאגר הליבה המאומת) לעיון בלבד - אינן נכללות בניקוד מבחנים מדומים אלא אם נבחרו במפורש.
+            </p>
+            {supplementalQuestions.map((q) => {
+              const shuffled = shuffleQuestionOptions(q)
+              const pack = q.packId ? packsById.get(q.packId) : undefined
+              return (
+                <div key={q.id} className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <SupplementalBadge label="מאגר נוסף" />
+                    {pack && <SupplementalBadge label={pack.titleHe} />}
+                  </div>
+                  <QuestionCard question={shuffled} selectedOptionId={shuffled.correctOptionId} revealed onSelect={() => {}} />
+                </div>
+              )
+            })}
+          </section>
+        )
+      })()}
 
       <div className="flex items-center justify-between border-t border-[var(--color-border)] pt-6">
         {prevTopic ? (

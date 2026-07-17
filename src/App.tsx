@@ -8,6 +8,7 @@ import { Diagnostic } from './routes/Diagnostic'
 import { QuizMe } from './routes/QuizMe'
 import { MockExam } from './routes/MockExam'
 import { PastExams } from './routes/PastExams'
+import { SupplementalQuestions } from './routes/SupplementalQuestions'
 import { Flashcards } from './routes/Flashcards'
 import { MistakeNotebook } from './routes/MistakeNotebook'
 import { LastMinuteReview } from './routes/LastMinuteReview'
@@ -29,6 +30,7 @@ function App() {
               <Route path="/mock/:examId" element={<MockExam />} />
               <Route path="/past-exams" element={<PastExams />} />
               <Route path="/past-exams/:examId" element={<PastExams />} />
+              <Route path="/supplemental" element={<SupplementalQuestions />} />
               <Route path="/flashcards" element={<Flashcards />} />
               <Route path="/flashcards/:topicId" element={<Flashcards />} />
               <Route path="/mistakes" element={<MistakeNotebook />} />

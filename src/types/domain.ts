@@ -95,12 +95,14 @@ export interface Question {
   confidence: Confidence
   basedOnPastExam: boolean
   pastExamYear: number | null
-  origin: 'original' | 'reconstruction' | 'adapted' | 'new_past_exam_style'
+  origin: 'original' | 'reconstruction' | 'adapted' | 'new_past_exam_style' | 'unknown_source' | 'supplemental_generated'
   tags: string[]
   keyLearningPoint: string
   points: number
   active: boolean
   needsReview?: boolean
+  /** id of the supplemental question pack this question belongs to; absent for the core 293-question bank */
+  packId?: string
 }
 
 export interface Flashcard {
@@ -222,3 +224,22 @@ export interface UserProgress {
 }
 
 export const EMPTY_PROGRESS_VERSION = 2 as const
+
+// ---------------- Supplemental question packs ----------------
+
+export interface QuestionPackMetadata {
+  packId: string
+  titleHe: string
+  titleEn?: string
+  description: string
+  sourceFiles: string[]
+  sourceType: 'official' | 'reconstruction' | 'student-created' | 'unknown'
+  year: number | string | null
+  dateAdded: string
+  confidence: Confidence
+  activeQuestionCount: number
+  needsReviewCount: number
+  topics: string[]
+  adaptivePracticeEligible: boolean
+  mockExamEligible: boolean
+}

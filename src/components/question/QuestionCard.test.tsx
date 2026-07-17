@@ -191,4 +191,15 @@ describe('QuestionCard BiDi option rendering', () => {
     expect(explanationBdi.className).toContain('text-right')
     expect(explanationBdi.className).not.toContain('text-start')
   })
+
+  it('renders a supplemental (packId) question with identical BiDi/alignment behavior to a core question', () => {
+    const question = makeShuffled('Observer design pattern', { packId: 'supplemental-practice1' })
+    const { container } = renderCard(question)
+    const button = container.querySelectorAll('button')[0]!
+    const bdi = button.querySelector('bdi')!
+    expect(button.getAttribute('dir')).toBe('rtl')
+    expect(bdi.getAttribute('dir')).toBe('auto')
+    expect(bdi.className).toContain('text-right')
+    expect(bdi.textContent).toBe('Observer design pattern')
+  })
 })
