@@ -2495,5 +2495,938 @@
       "bitcoin",
       "cap"
     ]
+  },
+  {
+    "id": "fc-java-platform-jvm-015",
+    "topicId": "java-platform-jvm",
+    "frontHe": "מי יצר את Java, ומה היה השם המקורי שלה?",
+    "backHe": "Java פותחה ע\"י חברת Sun Microsystems, ונקראה במקור Oak - ולאחר מכן שונה שמה ל-Java. אורקל (Oracle) רכשה את Sun Microsystems כבר בשנת 2009.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 1",
+    "tags": [
+      "history",
+      "sun-microsystems",
+      "oracle"
+    ]
+  },
+  {
+    "id": "fc-java-platform-jvm-016",
+    "topicId": "java-platform-jvm",
+    "frontHe": "מהו קובץ .jar?",
+    "backHe": "ארכיון (חבילה) שמאגד קבצי .class מקומפלים יחד עם משאבי האפליקציה, כדי להפיץ/להריץ אפליקציית Java שלמה כקובץ אחד.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 2",
+    "tags": [
+      "file-types",
+      "jar"
+    ]
+  },
+  {
+    "id": "fc-java-platform-jvm-017",
+    "topicId": "java-platform-jvm",
+    "frontHe": "מה ההבדל בין Java SE, EE, ME, ו-JavaFX?",
+    "backHe": "SE - הגרסה הרגילה למשתמש הרגיל. EE - גרסה רחבה יותר הכוללת אפשרות לסקלביליות גדולה יותר (מערכות ארגוניות גדולות). ME - פלטפורמה למכשירים מיקרו/מוגבלים (למשל משחק לאנדרואיד). JavaFX - פלטפורמה ליצירת יישומי אינטרנט עשירים באמצעות ממשק משתמש (GUI) קל לשימוש.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 1",
+    "tags": [
+      "java-editions",
+      "se",
+      "ee",
+      "me",
+      "javafx"
+    ]
+  },
+  {
+    "id": "fc-java-platform-jvm-018",
+    "topicId": "java-platform-jvm",
+    "frontHe": "מהו String Pooling, והיכן הוא ממוקם בזיכרון?",
+    "backHe": "מנגנון שבו Java שומרת string literals זהים פעם אחת בלבד באזור מיוחד בתוך ה-Heap (String Pool/String Constant Pool), במקום ליצור עותק נפרד לכל מחרוזת זהה - כך חוסכים זיכרון. אזור זה נמצא בתוך ה-Heap, שגודלו נשלט ע\"י -Xms/-Xmx.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 3",
+    "tags": [
+      "heap",
+      "string-pool"
+    ]
+  },
+  {
+    "id": "fc-java-platform-jvm-019",
+    "topicId": "java-platform-jvm",
+    "frontHe": "האם יכולות להיות דליפות זיכרון (memory leaks) ב-Java?",
+    "backHe": "לפי הסיכום - לא: הודות לניקוי האוטומטי של ה-Garbage Collector (שמנקה זיכרון של אובייקטים שאין להם יותר הפניות/שימוש), אין דליפות זיכרון ב-Java - בניגוד לשפות כמו C/C++ שבהן על המתכנת לשחרר זיכרון ידנית.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 2",
+    "commonConfusion": "בפועל עדיין אפשר 'לדלוף' זיכרון לוגית ב-Java (למשל החזקת הפניות מיותרות באוסף static), אך זו אינה 'דליפת זיכרון' קלאסית כמו ב-C/C++ שבה הזיכרון פשוט אבד ולא ניתן לשחרור בכלל.",
+    "tags": [
+      "garbage-collector",
+      "memory-leaks"
+    ]
+  },
+  {
+    "id": "fc-java-platform-jvm-020",
+    "topicId": "java-platform-jvm",
+    "frontHe": "אילו פקודות מעבד (CPU) תומכות בפעולת ה-Stack?",
+    "backHe": "המעבד תומך בפקודות ייעודיות של הכנסה למחסנית (push) והוצאה ממנה (pop) - כל קריאה למתודה דוחפת frame חדש, וכל סיום מתודה 'קופץ' (pop) אותו.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 3",
+    "tags": [
+      "stack",
+      "cpu",
+      "push-pop"
+    ]
+  },
+  {
+    "id": "fc-java-basics-oop-memory-010",
+    "topicId": "java-basics-oop-memory",
+    "frontHe": "מהי 'חתימת השיטה' (Method Signature)?",
+    "backHe": "חתימת השיטה מתארת את הפרמטרים שהיא מקבלת, את מה שהיא מחזירה (טיפוס ההחזרה), ומי (איזה מודיפייר גישה) רשאי לגשת אליה.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 3",
+    "tags": [
+      "method-signature"
+    ]
+  },
+  {
+    "id": "fc-java-basics-oop-memory-011",
+    "topicId": "java-basics-oop-memory",
+    "frontHe": "למה חייבים להכריז על main כ-static?",
+    "backHe": "כי static מציינת שהמתודה שייכת למחלקה עצמה (לא למופע ספציפי) וניתן לקרוא לה בלי ליצור אובייקט. זה בדיוק מה שמאפשר למפענח (interpreter) של Java להריץ את התוכנית - הוא מפעיל את main של המחלקה שהוגדרה בפקודת ההרצה, בלי ליצור מופע שלה קודם.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 4",
+    "tags": [
+      "static",
+      "main-method"
+    ]
+  },
+  {
+    "id": "fc-java-basics-oop-memory-012",
+    "topicId": "java-basics-oop-memory",
+    "frontHe": "מה משמעות final כשהיא חלה על מחלקה, על שיטה, ועל משתנה?",
+    "backHe": "final class - לא ניתן לרשת ממנה (extends אסור). final method - לא ניתן לדרוס אותה (override אסור) בתת-מחלקה. final variable - לא ניתן להקצות לה ערך יותר מפעם אחת (קבוע).",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 4",
+    "tags": [
+      "final",
+      "modifiers"
+    ]
+  },
+  {
+    "id": "fc-java-basics-oop-memory-013",
+    "topicId": "java-basics-oop-memory",
+    "frontHe": "מה תפקיד המודיפייר synchronized?",
+    "backHe": "מבטיח שרק thread אחד יכול לגשת בו-זמנית לאותו אובייקט/משאב (למשל אחד קורא ואחד כותב) - מונע race condition בין threads שונים שניגשים לאותו state משותף.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 4",
+    "tags": [
+      "synchronized",
+      "threads"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-012",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "אילו סוגי משתנים מותר להכריז בתוך ממשק (Interface)?",
+    "backHe": "רק משתנים קבועים (constants) - כלומר משתנים שהם למעשה public static final באופן מובלע. אי אפשר להכריז בממשק על שדות state רגילים שמשתנים בזמן ריצה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 8",
+    "commonConfusion": "בניגוד למחלקה אבסטרקטית, שיכולה להכיל שדות state רגילים (לא-static/לא-final), ממשק מוגבל אך ורק לקבועים.",
+    "tags": [
+      "interface",
+      "constants"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-013",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "מהי הרשאת הגישה (access modifier) המובלעת של שיטות בממשק?",
+    "backHe": "public - כל שיטה המוכרזת בממשק חייבת להיות public (וברירת המחדל היא abstract, אלא אם הוגדרה כ-default/static מ-Java 8 ואילך).",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 8",
+    "tags": [
+      "interface",
+      "access-modifiers"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-014",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "באילו דרכים אפשר להשתמש בפולימורפיזם בפועל בקוד?",
+    "backHe": "שלוש דרכים עיקריות: (1) כאיבר במערך (array) המכיל אובייקטים מטיפוסים שונים בעץ הירושה, (2) כארגומנט לשיטה (פרמטר מטיפוס-על שמקבל בפועל תת-טיפוסים שונים), (3) כערך החזרה (return value) של שיטה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 8",
+    "tags": [
+      "polymorphism",
+      "usage-patterns"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-015",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "כל מחלקה ב-Java יורשת (במובלע) ממחלקת Object. אילו שלוש שיטות מוכרות היא מקבלת ממנה 'בחינם'?",
+    "backHe": "toString(), equals(Object obj), ו-getClass() - שלושתן מוגדרות במחלקת Object ולכן זמינות בכל אובייקט, גם בלי לכתוב אותן בעצמנו (וניתן לדרוס - override - אותן).",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 8",
+    "tags": [
+      "object-class",
+      "inheritance"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-016",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "למה Java לא מאפשרת למחלקה לרשת (extends) משתי מחלקות בו-זמנית?",
+    "backHe": "כי אם לשתי מחלקות-האב יש אותה פונקציה/שדה (אותו שם), נוצרת בעיה - לא ברור איזו גרסה היורש אמור לקבל בפועל (בעיית ה'יהלום'/Diamond Problem). לכן Java מגבילה ל-extends יחיד, אך מאפשרת implements מרובה של ממשקים.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 8",
+    "tags": [
+      "inheritance",
+      "diamond-problem",
+      "classic-trap"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-017",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "האם מחלקה יכולה להיות גם abstract וגם final בו-זמנית?",
+    "backHe": "לא - זו סתירה לוגית: abstract מחייבת שמישהו ירחיב (extends) ויממש את המתודות המופשטות שלה, בעוד final אוסרת לחלוטין הרחבה/ירושה מהמחלקה. שני המודיפיירים סותרים זה את זה על אותה מחלקה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 8",
+    "tags": [
+      "abstract",
+      "final",
+      "classic-trap"
+    ]
+  },
+  {
+    "id": "fc-oop-pillars-abstraction-018",
+    "topicId": "oop-pillars-abstraction",
+    "frontHe": "אם מחלקה מממשת שני ממשקים (למשל IA ו-IB), ומחזיקים הפניה למופע שלה מטיפוס IA בלבד - אילו שיטות ניתן לקרוא דרך ההפניה הזו?",
+    "backHe": "רק את השיטות שמוגדרות בממשק IA - למרות שהאובייקט בפועל מממש גם את IB. כדי לגשת לשיטות של IB יש לבצע cast מפורש להפניה מטיפוס IB. זו טכניקה שמאפשרת לחשוף כלפי חוץ רק חלק מהפונקציונליות של האובייקט.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 9",
+    "tags": [
+      "interface",
+      "reference-typing",
+      "encapsulation"
+    ]
+  },
+  {
+    "id": "fc-uml-class-diagrams-010",
+    "topicId": "uml-class-diagrams",
+    "frontHe": "מהם ששת השלבים בתהליך התכנון מונחה-העצמים (OOP) שמוביל ליצירת דיאגרמת מחלקות?",
+    "backHe": "1. איסוף הדרישות (Requirements). 2. תיאור האפליקציה. 3. זיהוי הישויות (Entities) הקיימות במערכת. 4. איתור החיבורים בין הישויות (יחסים/Relationships). 5. יצירת דיאגרמת מחלקות (Class Diagram). 6. מימוש (Implementation).",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 9",
+    "tags": [
+      "design-process",
+      "class-diagram"
+    ]
+  },
+  {
+    "id": "fc-state-space-decoupling-interfaces-007",
+    "topicId": "state-space-decoupling-interfaces",
+    "frontHe": "מהם ארבעת היתרונות של תבנית Bridge, כפי שהוצגו בהקשר ISearchable/ISearcher, ומתי היא נחוצה במיוחד?",
+    "backHe": "יתרונות: (1) מאפשרת לבחור/להחליף מימושים (אלגוריתמים) בזמן ריצה; (2) כל צד (בעיות/אלגוריתמים) ניתן להרחבה עצמאית ע\"י תת-מחלקות; (3) האופן שבו משתמשים באובייקטים מוסתר מהלקוח; (4) נמנעים משכפול קוד. סימן מובהק לצורך ב-Bridge: כאשר יש 'כמות של הורשה' - כלומר הרבה קומבינציות אפשריות בין שתי היררכיות בלתי-תלויות - שבלעדי Bridge היו נאלצים ליצור מחלקה נפרדת לכל שילוב.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, pages 14, 17",
+    "commonConfusion": "אל תבלבלו את 'יתרונות Bridge' עם 'יתרונות Factory' - מניעת שכפול קוד משותפת לשתיהן, אך Bridge מוסיף גם החלפת מימוש בזמן ריצה והרחבה עצמאית של שני צדדים",
+    "tags": [
+      "state-space",
+      "bridge-pattern",
+      "benefits"
+    ]
+  },
+  {
+    "id": "fc-solid-principles-017",
+    "topicId": "solid-principles",
+    "frontHe": "מדוע העיקרון נקרא דווקא 'היפוך תלות' (Dependency INVERSION) ולא סתם 'הפחתת תלות'?",
+    "backHe": "כי המטרה אינה למנוע תלויות לחלוטין (זה בלתי אפשרי) אלא להפוך את כיוונן: במימוש נאיבי, הממשק מוגדר בתוך השכבה ה'גבוהה', כך שהשכבה הנמוכה צריכה 'להכיר' אותה כדי לממש את הממשק. מימוש טוב יותר מוציא את הגדרת הממשק לגמרי למודול עצמאי שאינו שייך לאף שכבה - כך גם השכבה הגבוהה (המשתמשת) וגם הנמוכה (המממשת) תלויות רק במודול העצמאי הזה, ולא זו בזו.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 12",
+    "tags": [
+      "solid",
+      "dip",
+      "nuance"
+    ]
+  },
+  {
+    "id": "fc-solid-principles-018",
+    "topicId": "solid-principles",
+    "frontHe": "מהי שרשרת התלות ה'טריוויאלית' (מלמעלה למטה) שמתוארת כבעייתית לפני הפתרון של DIP?",
+    "backHe": "במערכת פשוטה, מערכת מורכבת ממספר אפליקציות שהיא מכירה ישירות; כל אפליקציה משתמשת במספר רכיבי תוכנה שהיא מכירה ישירות; וכל רכיב משתמש במספר מימושים שהוא מכיר ישירות. למרות שייתכן reuse, יהיה קשה מאוד לשנות רכיבים בשכבות הנמוכות בלי לפגוע בשכבות הגבוהות יותר - זו הבעיה ש-DIP בא לפתור.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 12",
+    "tags": [
+      "solid",
+      "dip",
+      "layered-architecture"
+    ]
+  },
+  {
+    "id": "fc-solid-principles-019",
+    "topicId": "solid-principles",
+    "frontHe": "מעבר לדוגמת Mammal/Whale - מהי התובנה הכללית יותר של ISP לגבי מספר וגודל הממשקים?",
+    "backHe": "עדיף להחזיק מספר רב של ממשקים קטנים וספציפיים מאוד, מאשר ממשק יחיד גנרי-כולל ('fat interface'). קיימים לא מעט design patterns שעוסקים במפורש ביצירה/פירוק של ממשקים - המטרה המשותפת לכולם זהה: להפריד את התלות בין ישויות שאינן קשורות בהכרח זו לזו.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 11",
+    "tags": [
+      "solid",
+      "isp",
+      "nuance"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-011",
+    "topicId": "design-patterns-creational",
+    "frontHe": "מתי בכלל כדאי (ומתי לא כדאי) להשתמש בתבנית עיצוב כלשהי?",
+    "backHe": "כדאי לשקול תבנית עיצוב כאשר: (1) יש if-else/switch מורכבים עם שימוש חוזר באותה לוגיקה, (2) קשה לבדוק (test) את השיטות/הלוגיקה. אך הבעיה תמיד צריכה לבוא קודם - אין להכניס תבניות עיצוב בכל מקום כברירת מחדל; יש לבדוק בכל מקרה האם התבנית באמת מוסיפה ערך ומפשטת את הפתרון.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 16",
+    "tags": [
+      "creational",
+      "design-patterns",
+      "when-to-use"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-012",
+    "topicId": "design-patterns-creational",
+    "frontHe": "מה ההבדל בין 'Simple Factory' (כמו ShapeFactory.getShape עם if-else) לבין 'Factory Method' הקלאסי של Gang of Four?",
+    "backHe": "ב-Simple Factory, מתודה סטטית אחת עם if-else/switch יוצרת ומחזירה את האובייקט המתאים - כל הלוגיקה מרוכזת במקום אחד. ב-Factory Method הקלאסי של GoF, הממשק מגדיר שיטת יצירה, וכל תת-מחלקה יורשת וממשת אותה בעצמה - כך שהבחירה איזה אובייקט קונקרטי ליצור מתבצעת דרך ירושה/פולימורפיזם, לא דרך if-else מרוכז במחלקה אחת.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 16",
+    "commonConfusion": "בקורס שני הווריאנטים מכונים שניהם 'Factory' - שימו לב לפי הקוד הנתון בשאלה איזו גרסה מוצגת",
+    "tags": [
+      "creational",
+      "factory",
+      "factory-method-vs-simple-factory"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-013",
+    "topicId": "design-patterns-creational",
+    "frontHe": "מהם חמשת ה-Creational Design Patterns המופיעים בספר ה-Gang of Four, ומה כל אחד עושה בקצרה (לפי החומר)?",
+    "backHe": "Abstract Factory - Creates an instance of several families of classes. Builder - Separates object construction from its representation. Factory Method - Creates an instance of several derived classes. Prototype - A fully initialized instance to be copied or cloned. Singleton - A class in which only a single instance can exist.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "creational",
+      "gof",
+      "classification"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-014",
+    "topicId": "design-patterns-creational",
+    "frontHe": "מהי תבנית Prototype, ובמה היא שונה עקרונית מ-Factory Method ומ-Singleton?",
+    "backHe": "Prototype: מופע מאותחל-במלואו המשמש כ'אב-טיפוס' לשכפול (clone) - יוצרים אובייקטים חדשים ע\"י העתקת מופע קיים במקום בנייתו מאפס. שונה מ-Factory Method (שבוחר איזו מחלקה ליצור, ע\"י if-else או ירושה) ומ-Singleton (שמגביל למופע יחיד) - Prototype דווקא מייצר מופעים רבים ע\"י שכפול של מופע קיים.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 15",
+    "mnemonic": "Prototype = 'צלם/שכפל אותי' - מעתיקים מופע קיים במקום לבנות חדש מאפס",
+    "tags": [
+      "creational",
+      "prototype",
+      "gof"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-015",
+    "topicId": "design-patterns-creational",
+    "frontHe": "האם תבנית Singleton מגבילה תמיד למופע יחיד בדיוק, ולא יותר?",
+    "backHe": "ברוב המקרים כן - זה השימוש הנפוץ. אך התבנית קשורה לעיתים גם למקרים בהם רוצים להגביל את מספר המופעים לכמות מוגדרת כלשהי (לאו דווקא 1) - הרעיון הכללי הוא שליטה/הגבלה על מספר המופעים של מחלקה מסוימת, כשהמקרה הפרטי והנפוץ ביותר הוא מופע יחיד בדיוק.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 20",
+    "tags": [
+      "creational",
+      "singleton",
+      "nuance"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-creational-016",
+    "topicId": "design-patterns-creational",
+    "frontHe": "איזו רמת גישה (access modifier) חייבת להיות לבנאי (constructor) של מחלקת Singleton?",
+    "backHe": "private, אך לפי החומר גם protected יכול לספק - העיקרון החשוב הוא שהבנאי אינו public, כך שאי אפשר ליצור מופע חדש ישירות מבחוץ עם new; חייבים לעבור דרך מתודת הגישה הגלובלית (למשל getInstance()).",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 20",
+    "commonConfusion": "אל תניחו אוטומטית ש-private הוא האפשרות היחידה - protected מוזכר בחומר כאופציה תקפה נוספת",
+    "tags": [
+      "creational",
+      "singleton",
+      "constructor-visibility"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-structural-019",
+    "topicId": "design-patterns-structural",
+    "frontHe": "Composite Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מבנה עץ (tree structure) של אובייקטים פשוטים (Leaf) ואובייקטים מורכבים/מכילים (Composite), כך שהלקוח יכול להתייחס לאובייקט בודד ולקבוצת אובייקטים באופן אחיד דרך ממשק משותף. דוגמה טיפוסית: מערכת קבצים - תיקייה יכולה להכיל קבצים ותיקיות נוספות, וכולם מטופלים דרך אותו ממשק.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "commonConfusion": "Composite מול Decorator: שתיהן משתמשות ב-Composition וממשק משותף, אך Composite בונה מבנה עץ היררכי (חלק-שלם, one-to-many) בעוד Decorator בונה שרשור ליניארי (עטיפה-בתוך-עטיפה, one-to-one) להוספת התנהגות.",
+    "tags": [
+      "composite",
+      "structural",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-structural-020",
+    "topicId": "design-patterns-structural",
+    "frontHe": "Flyweight Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מופע 'דק' (fine-grained instance) המשותף בין אובייקטים רבים כדי לחסוך בזיכרון/משאבים, כאשר יש כמות גדולה של אובייקטים דומים. הרעיון: להפריד בין מצב פנימי משותף (intrinsic state, ניתן לשיתוף בין כל השימושים) לבין מצב חיצוני (extrinsic state, ייחודי לכל הקשר שימוש).",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 15",
+    "commonConfusion": "Flyweight מול Singleton: Flyweight משתף מספר רב של מופעים 'דקים' זהים בין הקשרים שונים כדי לחסוך זיכרון; Singleton מבטיח מופע יחיד ויחיד בלבד לכל המערכת.",
+    "tags": [
+      "flyweight",
+      "structural",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-structural-021",
+    "topicId": "design-patterns-structural",
+    "frontHe": "Proxy Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "אובייקט (Proxy) שמייצג אובייקט אחר (Real Subject) ושולט בגישה אליו - הלקוח פונה ל-Proxy במקום ישירות לאובייקט האמיתי, מה שמאפשר למשל טעינה עצלה (lazy loading), בקרת הרשאות, או תקשורת מרוחקת (remote proxy), מבלי שהלקוח ידע על כך.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "commonConfusion": "Proxy מול Decorator: שתיהן עוטפות אובייקט מאחורי אותו ממשק בדיוק, אך Proxy שולט/מגביל גישה לאובייקט המקורי (ולעיתים יוצר אותו רק לפי הצורך), בעוד Decorator מוסיפה התנהגות/אחריות נוספת על אובייקט שכבר קיים וזמין.",
+    "tags": [
+      "proxy",
+      "structural",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-structural-022",
+    "topicId": "design-patterns-structural",
+    "frontHe": "מהי ההגדרה הכללית של קטגוריית ה-Structural Design Patterns (לפי סיכום הקורס)?",
+    "backHe": "תבניות עיצוב הפותרות בעיות מבניות (structural) על ידי הפרדה בין ממשק (interface) למימוש (implementation); הן עוסקות בהרכב (composition) של אובייקטים ומחלקות כדי ליצור מבנים גדולים וגמישים יותר ממחלקות קטנות.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "structural",
+      "gof-catalog",
+      "category"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-017",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Memento Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מאפשר ללכוד (capture) ולשחזר (restore) את המצב הפנימי (internal state) של אובייקט, מבלי להפר את ההכמסה (encapsulation) שלו - שימושי למשל למימוש פעולת Undo/Redo.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "memento",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-018",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Interpreter Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "דרך לכלול אלמנטים של שפה (language elements) בתוך תוכנית - מגדירה ייצוג דקדוקי (grammar) לשפה, ומפרש (interpreter) שיודע 'לקרוא' ולבצע משפטים בשפה זו.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "interpreter",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-019",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Iterator Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מאפשר גישה סדרתית (sequentially) לאיברי אוסף (collection) מבלי לחשוף ללקוח את המבנה הפנימי של האוסף - למשל Iterator ב-Java עם hasNext()/next().",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "iterator",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-020",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Chain of Responsibility - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "דרך להעביר בקשה (request) בין שרשרת של אובייקטים, כאשר כל אובייקט בשרשרת בוחר אם לטפל בבקשה בעצמו או להעביר אותה הלאה לאובייקט הבא בשרשרת.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "chain-of-responsibility",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-021",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "State Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מאפשר לאובייקט לשנות את התנהגותו כאשר משתנה מצבו הפנימי (internal state) - נראה כאילו האובייקט 'משנה מחלקה' בזמן ריצה.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 15",
+    "commonConfusion": "State מול Strategy: המבנה בקוד דומה מאוד (Composition + interface), אך ב-State האובייקט עצמו מנהל/מחליף את מצבו הפנימי כתגובה לאירועים, ואילו ב-Strategy הלקוח בוחר מבחוץ איזה אלגוריתם להריץ, ללא קשר ל'מצב' פנימי כלשהו.",
+    "tags": [
+      "state",
+      "strategy",
+      "behavioral",
+      "gof-catalog",
+      "comparison"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-022",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Template Method - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מגדיר את השלד (skeleton) של אלגוריתם במחלקת-אב, אך דוחה (defer) חלק מהצעדים המדויקים למימוש בתת-מחלקות - כך שהמבנה הכללי של האלגוריתם קבוע, אך פרטים מסוימים ניתנים להתאמה אישית על ידי כל תת-מחלקה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "template-method",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-023",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "Visitor Design Pattern - מהי ההגדרה הבסיסית (GoF)?",
+    "backHe": "מגדירה פעולה (operation) חדשה שניתן להפעיל על אלמנטים של מבנה נתונים (למשל עץ Composite), מבלי לשנות את מחלקות האלמנטים עצמן - הפעולה החדשה 'מבקרת' (visits) כל אלמנט בתורו.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "visitor",
+      "behavioral",
+      "gof-catalog"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-024",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "מהי ההגדרה הכללית של קטגוריית ה-Behavioral Design Patterns (לפי סיכום הקורס)?",
+    "backHe": "תבניות עיצוב הפותרות בעיות התנהגותיות (behavioral) - כיצד אובייקט מתנהג, ועוסקות בתקשורת (communication) בין מחלקות ואובייקטים.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 15",
+    "tags": [
+      "behavioral",
+      "gof-catalog",
+      "category"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-025",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "מהי 'Default Method' בממשק (interface) בג'אווה, ואיך זה קשור למגבלת java.util.Observable?",
+    "backHe": "Default Method היא שיטה שמומשת ישירות בתוך ה-interface (יש לה גוף/implementation), וניתנת אוטומטית לכל מחלקה שחותמת (מממשת) על הממשק, מבלי שהמחלקה תצטרך לממש אותה בעצמה (לדוגמה: isEmpty() ב-Stack). זה מספק חלופה חלקית למגבלת הירושה היחידה של מחלקות אבסטרקטיות כמו java.util.Observable: מחלקה יכולה לממש הרבה ממשקים (גם עם default methods מוכנים), אבל לרשת (extends) רק ממחלקה אבסטרקטית אחת בלבד.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 23",
+    "commonConfusion": "ממשקים (עם default methods) - מחלקה יכולה לממש הרבה ממשקים בו-זמנית; מחלקה אבסטרקטית - מחלקה יכולה לרשת רק מחלקת-אב אחת, אך אותה מחלקה אבסטרקטית עצמה יכולה להיות מוּרשת על ידי הרבה תת-מחלקות שונות.",
+    "tags": [
+      "default-method",
+      "interface",
+      "observer",
+      "java",
+      "trap"
+    ]
+  },
+  {
+    "id": "fc-design-patterns-behavioral-026",
+    "topicId": "design-patterns-behavioral",
+    "frontHe": "מתי בכלל כדאי לשקול תבנית עיצוב, ומתי לא (כלל אצבע כללי מסיכום הקורס)?",
+    "backHe": "כדאי לשקול תבנית עיצוב כאשר: יש קוד if-else מסורבל שבורר לוגיקה; השיטות מורכבות ויש שימוש חוזר באותה הלוגיקה; קשה לבדוק (test) את השיטות/הלוגיקה הקיימת. אך הבעיה תמיד צריכה לבוא קודם - אסור להכניס תבנית עיצוב בכל מקום סתם; יש לשאול תמיד: 'האם התבנית הזו באמת מוסיפה ערך ומפשטת את הפתרון?'",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 16",
+    "tags": [
+      "general",
+      "when-to-use",
+      "meta"
+    ]
+  },
+  {
+    "id": "fc-generics-collections-equals-hashcode-015",
+    "topicId": "generics-collections-equals-hashcode",
+    "frontHe": "אפשר להגדיר מתודה גנרית עם Varargs? תן דוגמה",
+    "backHe": "כן - לדוגמה public static <T extends Comparable<T>> T argmax(T... array) מקבלת מספר בלתי-קבוע של ארגומנטים מאותו טיפוס T (בזכות varargs) ומחזירה את הערך המקסימלי שבהם (בעזרת compareTo). קריאה כמו argmax(1,2,3) עובדת כי הידועים הפרימיטיביים עוברים autoboxing ל-Integer ואז מכונסים אוטומטית למערך T[] מאחורי הקלעים - אין צורך ליצור מערך במפורש בקריאה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 18-19",
+    "commonConfusion": "לחשוב שצריך להעביר מערך במפורש (argmax(new Integer[]{1,2,3})) - למעשה varargs מאפשר להעביר את הערכים הבודדים ישירות, ו-Java בונה את המערך אוטומטית",
+    "tags": [
+      "generics",
+      "varargs",
+      "argmax"
+    ]
+  },
+  {
+    "id": "fc-networking-sockets-io-streams-014",
+    "topicId": "networking-sockets-io-streams",
+    "frontHe": "מהן שכבות מודל ה-OSI (Open Systems Interconnection), ובאיזו שכבה נמצא TCP/UDP?",
+    "backHe": "מודל ה-OSI בנוי מ-7 שכבות, מהנמוכה לגבוהה: Physical (רכיבי חומרה/מחשב שמעבירים ביניהם פולסים חשמליים) -> Data Link (העברת נתונים) -> Network (העברת נתונים מקצה לקצה/ניתוב) -> Transport (זו השכבה שבה נמצאים TCP/UDP) -> ... -> Presentation (קידוד ודחיסה) -> Application (שירותים ברמת המשתמש כמו FTP ו-GUI). כלומר Socket ו-TCP/UDP שייכים לשכבת ה-Transport (השכבה הרביעית).",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 25",
+    "mnemonic": "מלמטה למעלה: חוט חשמלי (Physical) -> חוליה (Data Link) -> רשת/ניתוב (Network) -> הובלה TCP/UDP (Transport) -> ... -> עיצוב/קידוד (Presentation) -> יישום למשתמש (Application)",
+    "tags": [
+      "OSI",
+      "layers",
+      "TCP",
+      "UDP"
+    ]
+  },
+  {
+    "id": "fc-networking-sockets-io-streams-015",
+    "topicId": "networking-sockets-io-streams",
+    "frontHe": "כמה מתודות מגדיר הממשק Serializable, ומי בפועל מבצע את תהליך הסריאליזציה?",
+    "backHe": "Serializable הוא marker interface - ממשק ריק לחלוטין, ללא אף מתודה להגדיר או לממש (בשונה מ-Comparable שיש בו compareTo). המחלקה רק 'מכריזה' class ClassName implements Serializable כדי לסמן ל-JVM שמותר לבצע לה סריאליזציה. את העבודה בפועל - מעבר על השדות והפיכתם לרצף בייטים - מבצע ה-JVM עצמו (דרך reflection), לא קוד שהמתכנת כותב.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 27",
+    "commonConfusion": "לחשוב ש-Serializable דורש מימוש מתודה כלשהי (כמו כל ממשק 'רגיל') - בפועל הוא ריק לגמרי, ותפקידו הוא רק סימון (marker)",
+    "tags": [
+      "Serializable",
+      "marker-interface",
+      "serialization"
+    ]
+  },
+  {
+    "id": "fc-threads-basics-lifecycle-014",
+    "topicId": "threads-basics-lifecycle",
+    "frontHe": "כאשר תוכנית Java ריקה עם main() בלבד עולה לריצה - כמה threads קיימים בפועל ברגע ההפעלה?",
+    "backHe": "לפחות 2: thread ה-main עצמו, ו-thread נוסף שהוא ה-Garbage Collector (GC) - שהוא Daemon Thread הרץ ברקע כבר מרגע עליית ה-JVM, גם בלי שהמתכנת יצר אף Thread בעצמו.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 28",
+    "tags": [
+      "jvm-startup",
+      "daemon-thread",
+      "garbage-collector"
+    ]
+  },
+  {
+    "id": "fc-threads-basics-lifecycle-015",
+    "topicId": "threads-basics-lifecycle",
+    "frontHe": "מהי מתודת Thread.yield() ומה היא עושה בפועל?",
+    "backHe": "thread שקורא ל-yield() 'מודיע' למתזמן (scheduler) שהוא מוכן לתת לתהליכונים אחרים (באותה עדיפות) לרוץ עכשיו במקומו, במקום להמשיך לתפוס את המעבד - אך זהו רק רמז (hint): ה-thread חוזר למצב Runnable (לא Blocked!) ואין שום הבטחה שה-scheduler אכן יכבד את הבקשה. חשוב: אסור לבסס נכונות תוכנית על ההנחה ש-yield() בהכרח יגרום להחלפת סדר הריצה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 32",
+    "commonConfusion": "yield() לעומת sleep()/wait() - yield() לא חוסם ולא ממתין למשהו קונקרטי, הוא רק 'מוותר מרצון' על תורו, וחוזר ל-Runnable מיד, לא ל-Blocked/Waiting.",
+    "tags": [
+      "yield",
+      "scheduler",
+      "thread-hint"
+    ]
+  },
+  {
+    "id": "fc-threads-basics-lifecycle-016",
+    "topicId": "threads-basics-lifecycle",
+    "frontHe": "אם ה-main thread מסיים לרוץ (מגיע ל-Dead), אבל יצר קודם לכן threads נוספים (non-daemon) שעדיין רצים - האם ה-JVM נסגר מיד?",
+    "backHe": "לא. ל-threads יש מבנה היררכי (הורה-ילד) שנוצר לפי מי יצר את מי; אך ה-JVM כתהליך שלם ממשיך לרוץ כל עוד קיים ולו thread אחד non-daemon חי - גם אם זה היה thread-'ילד' שנוצר ע\"י main ו-main עצמו כבר הגיע ל-Dead. ה-JVM יוצא רק כאשר כל ה-threads הנותרים הם daemon threads בלבד (או שכולם הסתיימו).",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 32",
+    "commonConfusion": "לחשוב ש'סיום main' = 'סיום התוכנית' - זה נכון רק אם לא נוצרו threads נוספים non-daemon, או אם כולם כבר הסתיימו.",
+    "tags": [
+      "thread-hierarchy",
+      "jvm-exit",
+      "daemon-thread",
+      "main-thread"
+    ]
+  },
+  {
+    "id": "fc-threads-basics-lifecycle-017",
+    "topicId": "threads-basics-lifecycle",
+    "frontHe": "דוגמה מהחיים: שרת (Server) שרץ ב-thread נפרד ומבצע הרבה פעולות הקמה ב-Run - מה עלולה להיות הבעיה, ואיך פותרים אותה?",
+    "backHe": "הבעיה: client עלול לנסות להתחבר לשרת (לפנות אליו) עוד לפני שהשרת סיים את שלב ההקמה שלו ומתחיל להאזין (Listen) בפועל - זהו race condition בין תהליכון ההקמה של השרת לתהליכון ה-client. הפתרון הנפוץ: משתנה בוליאני בשרת (למשל 'ready') שמאותחל ל-False, ורק בשורה האחרונה של הקמת השרת (אחרי שהוא כבר מאזין) הוא משתנה ל-True; ה-client בודק/ממתין לדגל הזה לפני שהוא פונה לשרת.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 31",
+    "tags": [
+      "server-client",
+      "readiness-flag",
+      "race-condition"
+    ]
+  },
+  {
+    "id": "fc-thread-safety-synchronization-014",
+    "topicId": "thread-safety-synchronization",
+    "frontHe": "דוגמה קונקרטית ל-race condition מהחיים: חשבון בנק משותף בין בני זוג",
+    "backHe": "לבני זוג יש חשבון בנק משותף. הבעל בודק את היתרה ורואה, למשל, 500 ₪. בדיוק באותו זמן האישה גם בודקת/מושכת כסף - כך שהיתרה האמיתית כבר השתנתה (למשל ירדה) לפני שהבעל פעל לפי מה שהוא ראה. הבעל מבצע משיכה נוספת בהתבסס על הנתון הישן (500 ₪) שכבר לא מעודכן - והתוצאה עלולה להיות שהחשבון נכנס למינוס, אף שאף אחד מהם לא התכוון לכך. הבעיה: שני threads (הבעל והאישה) קוראים וכותבים לאותו משאב משותף (יתרת החשבון) בו-זמנית, בלי סנכרון - קריאה שאינה מעודכנת (stale read) מובילה לפעולה שגויה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 33",
+    "mnemonic": "כל פעם ששני 'threads' קוראים ערך משותף ואז פועלים לפי מה שקראו (check-then-act) בלי לנעול - חשבון הבנק המשותף הוא הדוגמה הקלאסית לזכור.",
+    "tags": [
+      "race-condition",
+      "real-world-example",
+      "shared-resource",
+      "check-then-act"
+    ]
+  },
+  {
+    "id": "fc-thread-safety-synchronization-015",
+    "topicId": "thread-safety-synchronization",
+    "frontHe": "דוגמה קונקרטית נוספת ל-race condition: הזמנת כרטיסים/מקומות ישיבה (seat reservation)",
+    "backHe": "באתר הזמנת כרטיסים יש מפה של מקומות ישיבה פנויים. כל עוד לקוח מסוים רק 'בחר' מקום אך עוד לא סיים לרכוש אותו בפועל, לקוח אחר (thread/משתמש אחר) יכול לבחור באותו הרגע באותם המקומות בדיוק - ואם שניהם ממשיכים לרכישה, עלול להיווצר מצב ששני לקוחות 'קונים' את אותם המקומות. גם כאן הבעיה היא check-then-act על משאב משותף (מפת המקומות) ללא נעילה/סנכרון בין בדיקת הזמינות לביצוע הרכישה בפועל.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 33",
+    "commonConfusion": "דומה במבנה לדוגמת חשבון הבנק המשותף - שני המקרים הם 'check-then-act' על משאב משותף, רק בהקשר עסקי שונה (כסף מול מקומות ישיבה).",
+    "tags": [
+      "race-condition",
+      "real-world-example",
+      "check-then-act",
+      "seat-reservation"
+    ]
+  },
+  {
+    "id": "fc-thread-safety-synchronization-016",
+    "topicId": "thread-safety-synchronization",
+    "frontHe": "איך בודקים Thread-Safety 'באופן מקצועי', ומה המגבלה של זה?",
+    "backHe": "משתמשים בכלים אוטומטיים ובדיקות תקניות (למשל JUnit) שמריצים טסטים ובודקים את הקוד. הכלים האלה מסייעים לגלות באגים של concurrency, אבל הם אף פעם לא נותנים 100% ודאות - race conditions הם לעיתים לא-דטרמיניסטיים (תלויי תזמון) ולכן עלולים 'להסתתר' ולא להתגלות גם בהרצת טסטים רבה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 35",
+    "tags": [
+      "junit",
+      "testing",
+      "thread-safety",
+      "non-deterministic"
+    ]
+  },
+  {
+    "id": "fc-thread-safety-synchronization-017",
+    "topicId": "thread-safety-synchronization",
+    "frontHe": "מדוע Thread.stop() (עצירה כפויה של thread) נחשבת שיטה בעייתית/deprecated, ומה מעדיפים במקומה?",
+    "backHe": "Thread.stop() עוצרת את ה-thread מיידית וכפויה, ללא הזדמנות לסיים פעולות/לשחרר משאבים/לצאת ממנעולים בצורה מסודרת - זה עלול להשאיר נתונים משותפים (shared state) במצב לא-עקבי (למשל אמצע עדכון של מבנה נתונים). לכן מעדיפים גישת 'עצירה בעזרת דגל' (flag-based stopping): משתנה בוליאני (לרוב volatile) שהתהליכון בודק מדי פעם בעצמו בתוך הלולאה שלו, ורק כשהדגל משתנה - הוא יוצא מהלולאה וממש מסיים את עצמו בצורה מבוקרת.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 30 and page 37",
+    "commonConfusion": "Thread.stop() (כפוי, מיידי, לא בטוח) לעומת דגל בוליאני/volatile (מבוקר, בטוח, אך תלוי בכך שה-thread 'משתף פעולה' ובודק את הדגל בעצמו).",
+    "tags": [
+      "thread-stop",
+      "deprecated",
+      "flag-based-stopping",
+      "volatile"
+    ]
+  },
+  {
+    "id": "fc-concurrency-utilities-callable-future-mediator-011",
+    "topicId": "concurrency-utilities-callable-future-mediator",
+    "frontHe": "מהו הנימוק המתמטי/מורכבות-התקשורת שמצדיק שימוש ב-Mediator כשיש k אובייקטים שצריכים לתקשר ביניהם?",
+    "backHe": "אם k אובייקטים צריכים לתקשר ישירות זה עם זה (כל זוג עם כל זוג), מספר ערוצי התקשורת האפשריים הוא k(k-1)/2 - גדילה ריבועית (quadratic) במספר האובייקטים. Mediator מרכז את כל התקשורת דרך אובייקט-מתווך אחד, כך שכל אובייקט צריך להכיר/לתקשר רק עם המתווך (k ערוצים בלבד, גדילה לינארית) במקום עם כל שאר האובייקטים ישירות.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 39",
+    "mnemonic": "k(k-1)/2 = מספר הקשתות במחרוזת מלאה בין k צמתים - בדיוק מה ש-Mediator חוסך.",
+    "tags": [
+      "mediator",
+      "design-pattern",
+      "communication-complexity"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-011",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהם שלושת העקרונות שהסיכום מציין תחת 'עקרונות תכנות מונחה-אירועים' - IoC, DI, DIP?",
+    "backHe": "Inversion of Control (IoC): רוצים לכתוב מול ממשקים ולא לממש ישירות עם מחלקות קונקרטיות. Dependency Injection (DI): רוצים להזריק את התלות מבחוץ ולא ליצור אותה בתוך המחלקה עצמה. Dependency Inversion Principle (DIP, מתוך SOLID): הפרדה בין מחלקות כך שמחלקות בתחתית ההיררכיה לא ישפיעו על מחלקות בראש ההיררכיה.",
+    "difficulty": "hard",
+    "source": "Giladi Summary 2022, page 43",
+    "commonConfusion": "IoC הוא העיקרון הכללי (מי שולט בזרימה), DI הוא הטכניקה הקונקרטית ליישומו (איך מזריקים תלות), ו-DIP הוא עיקרון SOLID נפרד שעניינו תלות בהפשטות ולא במחלקות קונקרטיות - קל לבלבל בין השלושה כי כולם 'מסתובבים' סביב הפחתת תלות.",
+    "tags": [
+      "ioc",
+      "dependency-injection",
+      "dip",
+      "solid"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-012",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהי תבנית העיצוב Strategy, ואיך היא מודגמת בדוגמת ה-spell check מהסיכום?",
+    "backHe": "Strategy מיועדת למצב שבו רוצים להחליף קטע קוד בזמן ריצה - יודעים איזו שיטה צריכה לרוץ, אך לא את המימוש הספציפי (איזו אסטרטגיה תרוץ מוחלט רק בזמן ריצה). בדוגמה: TextEditor היא מחלקה קונקרטית, ובמקום לחבר אותה ישירות למימוש קונקרטי של בדיקת איות, יוצרים ממשק spell - כך אם יום אחד רוצים להחליף את אלגוריתם בדיקת האיות, זה קל מאוד, וגם מפרידים בין הקוד ל-UI.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 43",
+    "mnemonic": "Strategy = 'החלטה על המימוש נדחית לזמן ריצה' - בדיוק כמו שה-TextEditor לא יודע מראש איזה מילון איות ישמש.",
+    "tags": [
+      "strategy-pattern",
+      "design-pattern",
+      "spell-check"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-013",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "אילו דוגמאות לסוגי אירועים (event types) מופיעות בסיכום?",
+    "backHe": "קליק, גרירה (drag), הגדלה/הקטנה (zoom in/out), סגירה, מסכי מגע, ג'ויסטיק, וגם אירועי זמן (timer) - כלומר אירוע לא חייב להיות תוצאה של פעולת עכבר/מקלדת בלבד.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 42",
+    "tags": [
+      "event-types",
+      "event-driven"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-014",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו Source Object בהקשר תכנות מונחה-אירועים?",
+    "backHe": "האובייקט שיוצר את האירוע. הוא יכול להיות כפתור, אך גם כל אובייקט אחר - לא מוגבל לפקדי GUI קלאסיים בלבד. ה-Event עצמו הוא אובייקט שמייצג את האינטראקציה של המשתמש, ולאו דווקא מיוחס לכפתור עצמו.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 42",
+    "commonConfusion": "Source Object (יוצר את האירוע) מול Listener (ממתין/מאזין למקור) מול Handler (מטפל באירוע בפועל) - שלושה תפקידים שונים בשרשרת אחת.",
+    "tags": [
+      "source-object",
+      "event"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-015",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מדוע הוחלפו בזו אחר זו AWT, Swing ו-SWT, עד שהגענו ל-JavaFX?",
+    "backHe": "AWT: לקח את ה-look&feel הנייטיבי של כל מערכת הפעלה ומימש על בסיסו - נחשב פתרון גרוע שהרגיש 'לא נכון', ולא הרבה אימצו GUI בדרך הזו. Swing: הגיע ל-look&feel אחיד משלו, אך לא טיפל בכלל ב-web application. SWT: פתר את בעיית ה-look&feel באמצעות SWT.jar - ספרייה נייטיבית נפרדת לכל מערכת הפעלה, אך עדיין סבל מחוסר שימוש/תמיכה ב-web. JavaFX: ה-SDK שהחליף את כולם ותומך גם בכך, תוך הפרדה בין Business Logic ל-Presentation.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, pages 44-45",
+    "commonConfusion": "כל טכנולוגיה פתרה את הבעיה של קודמתה אך יצרה/השאירה בעיה חדשה - AWT פתר cross-platform אך לא look&feel אחיד; Swing פתר look&feel אך לא web; SWT פתר את שניהם חלקית אך לא web; רק JavaFX סגר את המעגל.",
+    "tags": [
+      "awt",
+      "swing",
+      "swt",
+      "javafx",
+      "gui-history"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-016",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו תפקידו של StackPane ב-JavaFX?",
+    "backHe": "StackPane הוא Layout Node שיודע איך לסדר את הצמתים (nodes/פקדים) שהוצבו בתוכו בתוך הסצנה - הוא 'ערם' (stack) אותם זה על גבי זה, בדרך כלל ממורכז, בלי שצריך לחשב קואורדינטות ידנית.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 46",
+    "tags": [
+      "stackpane",
+      "layout"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-017",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו ComboBox, מהו ChoiceBox, ואיך שולפים מהם את הערך שנבחר?",
+    "backHe": "ComboBox: מציג רשימה שממנה ניתן לבחור פריט מסוים. ChoiceBox: פקד דומה לבחירה מרשימה. את הערך שנבחר בפועל שולפים בקוד באמצעות getValue() - לא באמצעות getText().",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, pages 46-48",
+    "commonConfusion": "ComboBox ו-ChoiceBox דומים מאוד בתפקידם (שניהם בחירה מרשימה) - ההבדל הוא ב-API/feature-set הספציפי, לא בעיקרון הבסיסי.",
+    "tags": [
+      "combobox",
+      "choicebox",
+      "getvalue"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-018",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מה קורה בפועל כשעושים Switch Scenes ב-JavaFX?",
+    "backHe": "האפליקציה מחזיקה Stage אחד, וכל פעם (למשל בלחיצת כפתור) מחליפים את ה-Scene שמוצג בתוכו - כלומר קוראים ל-primaryStage.setScene(newScene). ה-Stage עצמו (החלון) לא משתנה, רק תוכן ה-Scene המחובר אליו.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 48",
+    "tags": [
+      "switch-scenes",
+      "stage",
+      "scene"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-019",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מדוע שימוש ב-CSS נחשב לפרקטיקה טובה ב-JavaFX? (שלושה יתרונות מהסיכום)",
+    "backHe": "כי אפשר להגדיר הגדרות עיצוב פעם אחת עבור כל תג/selector רלוונטי, וכך: (1) יוצרים אחידות (uniformity) בין המסכים, (2) חוסכים כפילות קוד, (3) מונעים שגיאות ואי-התאמות (inconsistency) שהיו נוצרות אילו כל מסך עוצב בנפרד. אפשר גם להשתמש ביותר מגיליון CSS אחד באותה אפליקציה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 49",
+    "tags": [
+      "css",
+      "javafx",
+      "uniformity"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-020",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו FXML, ומה בדיוק הוא (לא) מגדיר?",
+    "backHe": "FXML הוא קובץ XML (Extensible Markup Language) שמגדיר את ה-View של האפליקציה: אילו אובייקטים/פקדים יהיו (כפתורים, טבלת בחירה וכו') וכיצד ייראו (למשל צבעים). FXML לעולם לא מגדיר לוגיקה - את החיבור בין אירוע לקוד עושים באמצעות attribute כמו onAction על פקד (למשל Button), שמצביע על שם המתודה בקונטרולר שתופעל כשהאירוע יקרה.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 49",
+    "commonConfusion": "FXML מגדיר View בלבד; הלוגיקה בפועל תמיד יושבת במחלקת ה-Controller, לא בקובץ ה-FXML עצמו - זו נקודת מלכודת קלאסית במבחן.",
+    "tags": [
+      "fxml",
+      "xml",
+      "onaction",
+      "controller"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-021",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו Scene Builder?",
+    "backHe": "עורך (editor) ויזואלי לקבצי FXML - בתוכו בונים את העיצוב של האפליקציה בצורה גרפית/אוטומטית, במקום לכתוב את ה-FXML ידנית שורה-שורה.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 49",
+    "tags": [
+      "scene-builder",
+      "fxml"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-022",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו Mouse Event ב-JavaFX?",
+    "backHe": "קטגוריה ייעודית של אירועים שקשורים ספציפית לעכבר (כמו קליק, תזוזה, גרירה) - תוכנית יכולה לתפוס ולטפל באירועי עכבר בנפרד מאירועי action כלליים (כמו לחיצת כפתור).",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 49",
+    "tags": [
+      "mouse-event",
+      "event-handling"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-023",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "מהו Builder ב-JavaFX, ולמה הוא משמש?",
+    "backHe": "מנגנון/תבנית שנותנת לנו לבצע פעולות בנייה על אובייקטים (בדרך כלל בסגנון fluent) - חלק מזרימת הבנייה של Application -> Stage -> Scene -> Layout -> Node, שם משתמשים ב-Builder כדי להרכיב את מבנה הממשק.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 45",
+    "tags": [
+      "builder",
+      "javafx"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-024",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "האם אנחנו 'רואים' את ה-Listener בקוד JavaFX הרגיל?",
+    "backHe": "לרוב לא באופן ישיר - Listener ו-Handler הם אובייקטים תחליפיים (interchangeable) מבחינת התפקיד, וב-JavaFX בפועל אנחנו בעיקר חושפים/מגדירים Handler (למשל דרך setOnAction/onAction), בעוד המנגנון של רישום ה-Listener למקור מוסתר מאיתנו ברוב המקרים.",
+    "difficulty": "medium",
+    "source": "Giladi Summary 2022, page 43",
+    "commonConfusion": "אל תניחו שאתם חייבים לכתוב קוד Listener מפורש בכל תרחיש JavaFX - לעיתים קרובות ה-API חושף רק את שכבת ה-Handler (onAction) והמנגנון הפנימי של הרישום כ-Listener מנוהל מאחורי הקלעים.",
+    "tags": [
+      "listener",
+      "handler",
+      "javafx"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-025",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "האם טיפול באירועים (events) מתבצע בצורה סינכרונית או א-סינכרונית?",
+    "backHe": "א-סינכרונית - האירוע לא ממתין בתור קבוע מראש; ברגע שהאירוע קורה, ה-Listener/Handler הרשום עליו מקבל התראה ומטפל בו, ללא סדר ריצה ליניארי כפוי כמו בתכנות פרוצדורלי.",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 45",
+    "tags": [
+      "asynchronous",
+      "event-handling"
+    ]
+  },
+  {
+    "id": "fc-event-driven-javafx-mvc-026",
+    "topicId": "event-driven-javafx-mvc",
+    "frontHe": "האם תכנות מונחה-אירועים מוגבל ליישומי Desktop בלבד?",
+    "backHe": "לא - תכנות מונחה-אירועים אינו מוגבל ל-desktop application; משתמשים בו גם ב-web application (ובכלל בכל מקום שבו הזרימה נשלטת על ידי אירועים חיצוניים, כולל טלפונים).",
+    "difficulty": "easy",
+    "source": "Giladi Summary 2022, page 42",
+    "tags": [
+      "event-driven",
+      "web-application",
+      "motivation"
+    ]
   }
 ]

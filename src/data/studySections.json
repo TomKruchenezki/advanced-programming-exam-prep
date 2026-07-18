@@ -94,7 +94,8 @@
       "JIT הוא רכיב בתוך ה-JVM, לא ישות נפרדת ולא תחליף לו",
       "JIT מתרגם רק בזמן ריצה חלק מה-Bytecode שכבר קיים למכונה - ולא הופך Java ל-Bytecode",
       "JIT פועל רק על קוד 'חם' (hot code) שמשתלם לקמפל, לא על כל התוכנית מראש",
-      "JIT מנצל מידע דינמי מזמן ריצה כדי לבצע אופטימיזציות כמו inlining"
+      "JIT מנצל מידע דינמי מזמן ריצה כדי לבצע אופטימיזציות כמו inlining",
+      "JIT גם בודק אם קטע קוד מסוים כבר קומפל בעבר, כדי להימנע מקומפילציה כפולה שמבזבזת זיכרון ללא צורך"
     ],
     "mustRemember": [
       "JIT = 'תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה' - הניסוח המדויק לשינון",
@@ -165,7 +166,9 @@
     "keyPoints": [
       "JVM = מנוע הרצה בלבד (interpreter + JIT + GC)",
       "JRE = JVM + ספריות מחלקה סטנדרטיות - להרצת תוכניות קיימות",
-      "JDK = JRE + כלי פיתוח (javac, jdb) - לפיתוח וקומפילציה של תוכניות חדשות"
+      "JDK = JRE + כלי פיתוח (javac, jdb) - לפיתוח וקומפילציה של תוכניות חדשות",
+      "Java פותחה במקור ע\"י חברת Sun Microsystems תחת השם Oak, ולאחר מכן שונה שמה ל-Java; אורקל (Oracle) רכשה את Sun כבר ב-2009",
+      "לכל אחת מפלטפורמות Java יש ייעוד ספציפי: SE (משתמש רגיל), EE (סקלביליות ומערכות ארגוניות גדולות), ME (מכשירים מיקרו כמו אנדרואיד), JavaFX (יישומי אינטרנט עשירים עם GUI קל)"
     ],
     "mustRemember": [
       "סדר ההכלה: JDK (הכי רחב) ⊇ JRE ⊇ JVM (הכי צר)",
@@ -194,6 +197,14 @@
       {
         "he": "ערכת פיתוח",
         "en": "JDK - Java Development Kit"
+      },
+      {
+        "he": "השם המקורי של Java",
+        "en": "Oak"
+      },
+      {
+        "he": "רכישת Sun ע\"י אורקל",
+        "en": "Oracle acquired Sun Microsystems (2009)"
       }
     ],
     "sourceRefs": [
@@ -225,13 +236,16 @@
       "Heap - לאובייקטים, משותף לכל ה-threads, מנוקה ע\"י GC, מוגדל ב--Xms/-Xmx, מלא-> OutOfMemoryError",
       "Stack - לכל Thread בנפרד, LIFO, מכיל משתנים מקומיים+הפניות, מוגדל ב--Xss, מלא-> StackOverflowError",
       "GC משחרר אוטומטית אובייקטים ללא הפניות; System.gc() רק מבקש, לא מכריח",
-      "finalize() ניתנת לדריסה ונקראת ע\"י ה-GC לפני שחרור אובייקט"
+      "finalize() ניתנת לדריסה ונקראת ע\"י ה-GC לפני שחרור אובייקט",
+      "ה-Heap כולל גם אזור מיוחד הנקרא String Pool (String Pooling) לאחסון string literals זהים פעם אחת בלבד - חוסך זיכרון",
+      "המעבד (CPU) תומך בפקודות ייעודיות של push (הכנסה למחסנית) ו-pop (הוצאה ממנה) התואמות בדיוק לפעולות ה-Stack"
     ],
     "mustRemember": [
       "רקורסיה אינסופית/עמוקה מדי -> StackOverflowError (בעיית Stack)",
       "יצירת אובייקטים בלי סוף בלי לשחרר הפניות -> OutOfMemoryError (בעיית Heap)",
       "System.gc() מזמין הרצת GC אך אינו מבטיח/מכריח אותה",
-      "-Xmx/-Xms שולטים ב-Heap; -Xss שולט ב-Stack"
+      "-Xmx/-Xms שולטים ב-Heap; -Xss שולט ב-Stack",
+      "לפי הסיכום - הודות לניקוי האוטומטי של ה-GC, אין דליפות זיכרון (memory leaks) ב-Java, בניגוד לשפות כמו C/C++"
     ],
     "easyToConfuse": [
       "OutOfMemoryError (Heap מלא) מול StackOverflowError (Stack מלא) - יש לזהות איזה תרחיש קוד גורם לאיזו שגיאה",
@@ -307,7 +321,8 @@
       "כל קוד נמצא בתוך class - אין קוד חופשי מחוץ למחלקה",
       "מחלקה public אחת בלבד לקובץ, ושמה חייב להתאים בדיוק לשם הקובץ",
       "Java רגישה לאותיות גדולות/קטנות (case sensitive)",
-      "חתימת main קבועה: public static void main(String[] args)"
+      "חתימת main קבועה: public static void main(String[] args)",
+      "חתימת שיטה (Method Signature) מורכבת משלושה מרכיבים: הפרמטרים שהיא מקבלת, טיפוס ההחזרה שלה, ומודיפייר הגישה שקובע מי רשאי לקרוא לה"
     ],
     "mustRemember": [
       "לכל היותר מחלקה public אחת בקובץ - שתי מחלקות public באותו קובץ = שגיאת קומפילציה",
@@ -342,6 +357,10 @@
       {
         "he": "רגיש-לרישיות",
         "en": "case sensitive"
+      },
+      {
+        "he": "חתימת שיטה",
+        "en": "Method Signature"
       }
     ],
     "sourceRefs": [
@@ -372,7 +391,10 @@
     "keyPoints": [
       "סדר הרחבת-גישה: private < default(package) < protected < public",
       "protected מוסיף גישה ליורשים גם מחוץ לחבילה - default לא",
-      "static/final/abstract/synchronized/volatile הם מודיפיירים שאינם קשורים לגישה"
+      "static/final/abstract/synchronized/volatile הם מודיפיירים שאינם קשורים לגישה",
+      "static על main מסבירה למה אפשר להריץ את התוכנית בלי ליצור מופע של המחלקה - ה-interpreter קורא ישירות למתודת ה-class עצמה",
+      "final חל בנפרד על מחלקה (לא ניתן לרשת ממנה), שיטה (לא ניתן לדרוס אותה), ומשתנה (לא ניתן להקצות לו ערך יותר מפעם אחת)",
+      "synchronized מבטיח שרק thread אחד ניגש בו-זמנית לאותו אובייקט/משאב (מונע race condition בין threads)"
     ],
     "mustRemember": [
       "private = המחלקה עצמה בלבד",
@@ -515,7 +537,8 @@
     "keyPoints": [
       "Class Diagram מתאר טיפוסי אובייקטים וקשרים סטטיים - נוצר לפני הכתיבה בפועל",
       "Association יכולה להיות בעלת שם וגם roles בקצוות",
-      "Multiplicity קובעת גבול תחתון/עליון וחובה/אופציונליות של קשר"
+      "Multiplicity קובעת גבול תחתון/עליון וחובה/אופציונליות של קשר",
+      "תהליך תכנון מונחה-עצמים טיפוסי: איסוף דרישות -> תיאור האפליקציה -> זיהוי ישויות (Entities) -> איתור קשרים (Relationships) ביניהן -> יצירת דיאגרמת מחלקות -> מימוש (Implementation)"
     ],
     "mustRemember": [
       "1 = בדיוק אחד | 0..* / * = אפס-או-יותר | 1..* = אחד-או-יותר | 0..1 = אפס-או-אחד | 2..4 = טווח קבוע",
@@ -707,7 +730,10 @@
       "Encapsulation = אריזת state+behavior והסתרת מימוש; Object = state + methods + message passing",
       "Inheritance מונע שכפול קוד: מחלקת-בת מקבלת שדות/מתודות מהאב עם extends",
       "Java: ירושת-מחלקה יחידה (extends אחד בלבד), אך implements מרובה של ממשקים",
-      "סדר מודיפיירי גישה מהצר לרחב: private < default/package < protected < public"
+      "סדר מודיפיירי גישה מהצר לרחב: private < default/package < protected < public",
+      "יתרונות נוספים של כימוס/OOP: בניית המערכת כקבוצת אובייקטים אינטראקטיביים עשויה להתאים יותר טוב לאופן שבו בני-אדם חושבים על בעיות, ומונעת כתיבת אותו קוד שוב ושוב (מגדילה שימוש חוזר בקוד)",
+      "הסיבה ש-Java לא מאפשרת ירושה מרובה של מחלקות (extends משתי מחלקות) היא בעיית ה'יהלום' (Diamond Problem) - אם לשתי מחלקות-אב יש אותה פונקציה/שדה, לא ברור איזו גרסה היורש מקבל",
+      "כל מחלקה ב-Java יורשת במובלע ממחלקת Object, ומקבלת ממנה 'בחינם' את השיטות toString(), equals(Object), ו-getClass()"
     ],
     "mustRemember": [
       "קובץ .java יכול להכיל מחלקה public אחת בלבד, ששמה זהה לשם הקובץ",
@@ -788,7 +814,8 @@
     "keyPoints": [
       "Overriding = runtime polymorphism (dynamic binding), אותה חתימה במחלקת-בת",
       "Overloading = compile-time polymorphism (static binding), אותו שם מתודה עם פרמטרים שונים",
-      "בחירת המימוש הנדרס (override) נעשית לפי טיפוס האובייקט האמיתי ב-Heap, לא לפי טיפוס המשתנה המוצהר"
+      "בחירת המימוש הנדרס (override) נעשית לפי טיפוס האובייקט האמיתי ב-Heap, לא לפי טיפוס המשתנה המוצהר",
+      "ניתן להשתמש בפולימורפיזם בכמה דרכים מעשיות: כאיבר במערך (array) המכיל תת-טיפוסים שונים, כארגומנט לשיטה, וכערך החזרה (return value) של שיטה"
     ],
     "mustRemember": [
       "Overriding = runtime; Overloading = compile-time - זו החלוקה ההפוכה ממה שאינטואיטיבית נשמע לפעמים",
@@ -856,7 +883,11 @@
       "מתודה abstract אחת הופכת את כל המחלקה למופשטת - אי אפשר new עליה",
       "ממשק = חוזה טהור (עד Java 7); מ-Java 8 אפשר default methods עם מימוש",
       "abstract class למחלקות קשורות + שיתוף קוד/state; interface למחלקות לא-קשורות + ריבוי ירושה של טיפוס",
-      "מחלקה אבסטרקטית שיורשת ממשק לא חייבת לממש את כל המתודות - אבל אז היא עצמה נשארת אבסטרקטית"
+      "מחלקה אבסטרקטית שיורשת ממשק לא חייבת לממש את כל המתודות - אבל אז היא עצמה נשארת אבסטרקטית",
+      "ממשק יכול להכיל אך ורק משתנים קבועים (constants, בפועל public static final מובלע) - לא שדות state רגילים",
+      "כל שיטה בממשק חייבת להיות עם הרשאת public (וברירת המחדל abstract, אלא אם default/static מ-Java 8)",
+      "מחלקה לא יכולה להיות גם abstract וגם final בו-זמנית - סתירה לוגית (abstract מחייב הרחבה, final אוסר אותה)",
+      "אם מחזיקים הפניה לאובייקט מטיפוס ממשק מסוים (למרות שהמחלקה מממשת כמה ממשקים), ניתן לקרוא רק לשיטות של אותו ממשק - יש לבצע cast מפורש כדי לגשת לשיטות ממשק אחר"
     ],
     "mustRemember": [
       "אסור בשום מקרה ליצור מופע (new) של מחלקה אבסטרקטית, גם אם רק מתודה אחת מוגדרת abstract",
@@ -1018,7 +1049,9 @@
       "ISearchable = חוזה מול הבעיה (מצב התחלתי, מצב יעד, יורשים אפשריים) - ממומש ע\"י Maze, EightPuzzle",
       "ISearcher = חוזה מול האלגוריתם (search, מספר צמתים שנבדקו) - ממומש דרך BaseSearcher ע\"י BFS/DFS/A-Star",
       "BaseSearcher אבסטרקטי משותף מונע שכפול קוד ניהול open/closed lists בין אלגוריתמי חיפוש",
-      "כל אלגוריתם רץ על כל בעיה בלי שינוי קוד - זו המשמעות המעשית של Decoupling"
+      "כל אלגוריתם רץ על כל בעיה בלי שינוי קוד - זו המשמעות המעשית של Decoupling",
+      "תבנית Bridge (כפי שמיושמת ב-ISearchable/ISearcher) מספקת ארבעה יתרונות מוחשיים: בחירה/החלפת מימושים בזמן ריצה, הרחבה עצמאית של כל צד ע\"י תת-מחלקות, הסתרת אופן השימוש באובייקטים מהלקוח, ומניעת שכפול קוד",
+      "סימן מובהק לצורך בתבנית Bridge: 'כמות של הורשה' - הרבה קומבינציות אפשריות בין שתי היררכיות בלתי-תלויות, שבלעדי Bridge היו דורשות מחלקה נפרדת לכל שילוב"
     ],
     "mustRemember": [
       "ISearchable מתאר את הבעיה, לא את האלגוריתם; ISearcher מתאר את האלגוריתם, לא את הבעיה - היפוך ביניהם הוא טעות שכיחה",
@@ -1219,11 +1252,15 @@
       "ISP: ממשקים קטנים וממוקדים; לקוח לא צריך לממש מתודות לא-רלוונטיות אליו",
       "DIP: שני חלקים - (א) high-level ו-low-level תלויים באבסטרקציה משותפת, (ב) details תלויים באבסטרקציה ולא להפך",
       "Dependency Injection = הטכניקה המעשית ליישום DIP - מזריקים מימוש קונקרטי מבחוץ במקום ליצור אותו (new) בפנים",
-      "'ממשק שמן' (fat interface) עם מתודות לא-קשורות = דגל אדום ל-ISP"
+      "'ממשק שמן' (fat interface) עם מתודות לא-קשורות = דגל אדום ל-ISP",
+      "DIP - שרשרת תלות 'מלמעלה למטה' במערכת טריוויאלית: מערכת מכירה ישירות אפליקציות, שמכירות ישירות רכיבי תוכנה, שמכירים ישירות מימושים - קשה לשנות שכבות נמוכות בלי לפגוע בגבוהות",
+      "DIP - למה 'היפוך'? לא מונעים תלויות לגמרי, אלא הופכים כיוון: הממשק מוגדר במודול עצמאי שלא שייך לאף שכבה, כך ששתי הצדדים (הגבוה שמשתמש, הנמוך שמממש) תלויים בו ולא זה בזה",
+      "ISP - עדיף הרבה ממשקים קטנים וספציפיים מאוד מאשר ממשק יחיד גנרי-כולל; המטרה המשותפת של design patterns רבים העוסקים בממשקים היא הפרדת תלות בין ישויות לא-קשורות"
     ],
     "mustRemember": [
       "יש לשנן ששני חלקי ה-DIP (A ו-B) - שאלות עלולות לבדוק את שני החלקים בנפרד",
-      "'new ConcreteClass()' בתוך שדה/בנאי של מחלקת שירות הוא הסימן הקלאסי ביותר להפרת DIP במבחן"
+      "'new ConcreteClass()' בתוך שדה/בנאי של מחלקת שירות הוא הסימן הקלאסי ביותר להפרת DIP במבחן",
+      "שאלה אפשרית ב-DIP: 'האם המטרה למנוע תלויות לחלוטין?' - לא; המטרה היא להפוך את כיוון התלות כך ששתי הצדדים תלויים במודול/ממשק עצמאי משותף"
     ],
     "easyToConfuse": [
       "ISP (ממשק עם יותר-מדי מתודות לא-קשורות שהמממשים נאלצים לספק) מול SRP (מחלקה עם יותר-מדי אחריות בעצמה) - בדקו: זה ממשק שגורם לבעיה, או מחלקה?",
@@ -1351,11 +1388,13 @@
       "פותר את בעיית ה-if-else/switch המפוזר ליצירת אובייקטים.",
       "תומך ב-Open/Closed Principle - לא פוגע בשום עיקרון SOLID.",
       "Executors (java.util.concurrent) הוא דוגמה אמיתית ל-Factory שמייצר ExecutorService.",
-      "הלקוח מקבל בחזרה טיפוס אבסטרקטי (ממשק/מחלקת-אב), לא את שם המחלקה הקונקרטית."
+      "הלקוח מקבל בחזרה טיפוס אבסטרקטי (ממשק/מחלקת-אב), לא את שם המחלקה הקונקרטית.",
+      "לפני הכנסת כל תבנית עיצוב - ודאו שהיא פותרת בעיה קיימת בקוד, ולא רק תוספת מלאכותית ללא ערך"
     ],
     "easyToConfuse": [
       "Factory מול Singleton: Factory פותר 'איזו מחלקה ליצור בזמן ריצה', Singleton פותר 'איך מבטיחים שיהיה מופע יחיד' - שני פאטרנים יצירתיים (Creational) שונים לגמרי במטרה.",
-      "Factory מול Strategy: Factory יוצר אובייקטים (Creational), Strategy בוחר אלגוריתם/התנהגות קיימת להרצה (Behavioral) - קל לבלבל כי שניהם 'בוחרים דבר-מה בזמן ריצה' אבל האחד יוצר אובייקט, השני מריץ התנהגות."
+      "Factory מול Strategy: Factory יוצר אובייקטים (Creational), Strategy בוחר אלגוריתם/התנהגות קיימת להרצה (Behavioral) - קל לבלבל כי שניהם 'בוחרים דבר-מה בזמן ריצה' אבל האחד יוצר אובייקט, השני מריץ התנהגות.",
+      "'Simple Factory' (מתודה סטטית אחת עם if-else, לדוגמת ShapeFactory) מול 'Factory Method' הקלאסי של GoF (כל תת-מחלקה יורשת וממשת בעצמה את שיטת היצירה של הממשק) - שתי הגרסאות נלמדות תחת השם 'Factory' אך שונות במבנה"
     ],
     "howProfessorMightAsk": [
       "נתון קוד עם if-else מרובה שיוצר אובייקטים לפי מחרוזת קלט - איזו תבנית עיצוב הכי מתאימה לשפר את העיצוב?",
@@ -1412,6 +1451,10 @@
       "q-design-patterns-creational-003",
       "q-design-patterns-creational-004",
       "q-design-patterns-creational-005"
+    ],
+    "keyPoints": [
+      "קריטריון כללי מתי להשתמש בתבנית עיצוב כלשהי (לא רק Factory): if-else/switch מורכבים עם שימוש חוזר באותה לוגיקה, וקושי לבדוק (test) שיטות/לוגיקה - אך תמיד לבדוק קודם אם התבנית באמת מוסיפה ערך ומפשטת, ולא להכניס תבניות בכל מקום כברירת מחדל",
+      "תבניות עיצוב (ותנאי הקדם שלהן) מתייחסות לרמת ה-programming types (מחלקות), לא לרמת instances ספציפיים - ומניחות שליטה בעקרונות מונחה-עצמים בסיסיים: הכמסה, הורשה, פולימורפיזם"
     ]
   },
   {
@@ -1486,6 +1529,10 @@
       "q-design-patterns-creational-007",
       "q-design-patterns-creational-008",
       "q-design-patterns-creational-009"
+    ],
+    "keyPoints": [
+      "Singleton קשור לעיתים גם למקרים שרוצים להגביל את מספר המופעים לכמות מוגדרת (לא רק 1 בדיוק) - הרעיון הכללי הוא שליטה במספר המופעים, שהמקרה הפרטי הנפוץ שלו הוא מופע יחיד",
+      "הגדרת הגישה לבנאי יכולה להיות private, אך גם protected מוזכר כאפשרות תקפה (למשל כדי לאפשר ירושה מבוקרת) - העיקרון הוא שהבנאי אינו public"
     ]
   },
   {
@@ -1549,6 +1596,10 @@
       "q-design-patterns-creational-010",
       "q-design-patterns-creational-011",
       "q-design-patterns-creational-012"
+    ],
+    "keyPoints": [
+      "רשימת חמשת ה-Creational Patterns לפי GoF כפי שהוצגו בחומר: Abstract Factory, Builder, Factory Method, Prototype (מופע מאותחל-מלא שניתן לשכפל), Singleton - שימו לב ש-Prototype נעדר לעיתים משחזורי תשובה קצרים אך הוא חלק מהרשימה הרשמית",
+      "Creational Patterns כקטגוריה: תבניות עיצוב של יצירת אובייקטים, שנותנות לתכנית גמישות רבה יותר בקביעת אילו אובייקטים צריכים להיווצר בכל זמן נתון"
     ]
   },
   {
@@ -1564,7 +1615,8 @@
       "Bridge מפריד Abstraction מ-Implementation - שתי היררכיות עצמאיות מחוברות דרך Composition.",
       "מזהים Bridge כששני צירי שינוי בלתי-תלויים גורמים ל'התפוצצות מחלקות' בירושה רגילה.",
       "Bridge הוא Structural; Strategy (שנראה דומה בקוד) הוא Behavioral.",
-      "שאלת ThreadScheduler (Preemptive/TimeSliced x Unix/Windows) - התשובה המאושרת היא Bridge."
+      "שאלת ThreadScheduler (Preemptive/TimeSliced x Unix/Windows) - התשובה המאושרת היא Bridge.",
+      "שיטת העבודה המעשית ליצירת Bridge (לפי סיכום ג'ילאדי): לזהות את שתי הישויות/ההיררכיות העיקריות במערכת ולהפריד ביניהן - זהו הצעד הראשון בפתרון בעיית 'כמות גדולה של ירושה' (class explosion), עוד לפני שבוחרים כיצד לחבר את שתי ההיררכיות ב-Composition."
     ],
     "easyToConfuse": [
       "Bridge מול Strategy: Bridge=Structural (הפרדת אבסטרקציה ממימוש, הלקוח לרוב לא בוחר מפורשות); Strategy=Behavioral (בחירת אלגוריתם, הלקוח בוחר מפורשות). שתיהן משתמשות ב-Composition וקוד דומה מאוד.",
@@ -1838,7 +1890,8 @@
       "Strategy מגדירה משפחת אלגוריתמים, עוטפת כל אחד, והופכת אותם לברי-החלפה בזמן ריצה.",
       "חלופה לירושה מרובה/if-else מסובך - מוציאה את ה'חלק המשתנה' לממשק נפרד המוזרק ב-Composition.",
       "דוגמה אמיתית: BubbleWorkerSorter(IWorkerComparator) - אלגוריתם המיון קבוע, קריטריון ההשוואה משתנה.",
-      "חיסרון: הלקוח חייב להכיר את כל ה-Strategies הקיימות כדי לבחור נכון."
+      "חיסרון: הלקוח חייב להכיר את כל ה-Strategies הקיימות כדי לבחור נכון.",
+      "מתי בכלל להשתמש בתבניות עיצוב (כלל אצבע כללי מסיכום ג'ילאדי): כאשר יש קוד if-else מסורבל, כאשר השיטות מורכבות ויש שימוש חוזר באותה לוגיקה, וכאשר קשה לבדוק (test) את השיטות/הלוגיקה. אך תמיד יש לבדוק קודם - הבעיה צריכה לבוא לפני הפתרון: האם התבנית באמת מוסיפה ערך ומפשטת את הפתרון? אין להכניס תבנית עיצוב בכל מקום סתם."
     ],
     "easyToConfuse": [
       "Strategy מול Bridge: שתיהן Composition+interface הנראות דומות בקוד, אבל Strategy=Behavioral (הלקוח בוחר אלגוריתם באופן מודע ומפורש), Bridge=Structural (מפריד אבסטרקציה ממימוש, לרוב ללא מעורבות ישירה של הלקוח בבחירה).",
@@ -1848,7 +1901,8 @@
     "howProfessorMightAsk": [
       "נתון: מחלקה עם if-else-if שבוחרת אלגוריתם מיון/חישוב לפי טיפוס נתון - איזו תבנית עיצוב הכי מתאימה לשפר את הקוד?",
       "מה ההבדל בין Strategy ל-Bridge כאשר שניהם משתמשים ב-Composition ונראים דומים בקוד?",
-      "נתון BubbleWorkerSorter שמקבל IWorkerComparator בבנאי - איזו תבנית עיצוב זו, ומדוע?"
+      "נתון BubbleWorkerSorter שמקבל IWorkerComparator בבנאי - איזו תבנית עיצוב זו, ומדוע?",
+      "מדוע לא כדאי 'לדחוף' תבנית עיצוב לתוך כל בעיה בקוד? מהם הקריטריונים שיש לבדוק לפני שבוחרים להשתמש בתבנית עיצוב?"
     ],
     "codeExamples": [
       {
@@ -1915,7 +1969,10 @@
       "Observer = תלות אחד-להרבה; Subject/Observable מנהל רשימת Observers ומעדכן את כולם אוטומטית בשינוי מצב.",
       "הקשר בין Observable ל-Observers הוא אבסטרקטי לחלוטין - ה-Observable לא צריך להכיר מחלקות קונקרטיות.",
       "java.util.Observable הוא class, לא interface - מגבלת ירושה יחידה ב-Java.",
-      "שאלת המבחן החוזרת: 'מה אינו נכון ב-Observer' - התשובה השגויה היא תמיד 'Observable חייב להכיר את המחלקות הקונקרטיות של Observers'."
+      "שאלת המבחן החוזרת: 'מה אינו נכון ב-Observer' - התשובה השגויה היא תמיד 'Observable חייב להכיר את המחלקות הקונקרטיות של Observers'.",
+      "הדוגמה הקלאסית WeatherData (Head First): במימוש ה'נאיבי' (השגוי) WeatherData מעדכנת כל תצוגה (Display) בנפרד באופן ישיר וקשיח. מה שגוי בכך: (1) מתכנתים מול מחלקות קונקרטיות במקום מול ממשקים; (2) לפי עקרון 'תכנות מול ממשק', כל מחלקות התצוגה צריכות לממש ממשק משותף; (3) עבור כל סוג תצוגה חדש צריך לפתוח ולשנות שוב את מחלקת WeatherData עצמה (מפר Open/Closed); (4) אין אפשרות להוסיף או להסיר תצוגות בזמן ריצה. הפתרון לכל הבעיות האלו הוא Observer Pattern.",
+      "המבנה הקלאסי (Head First) של WeatherData: ממשק Subject עם שלוש מתודות מרכזיות - הרשמה (registerObserver), מחיקה/הסרה (removeObserver) ועדכון (notifyObservers); מחלקות התצוגה מממשות גם את ממשק Observer (עם update()) וגם ממשק DisplayElement (עם display()) - שתי הפרדות ממשק נפרדות זו מזו.",
+      "מודל Push מול מודל Pull: בדוגמת WeatherData, ה-notifyObservers מעביר את הנתונים (טמפרטורה/לחות/לחץ) ישירות כפרמטרים לתוך update() של כל Observer - זהו מודל Push. לעומתו, במודל Pull החלופי ה-Observer עצמו פונה בחזרה ל-Subject ומושך (get) רק את הנתונים שהוא צריך."
     ],
     "easyToConfuse": [
       "Observer מול Mediator: Observer הוא תקשורת 'אחד-להרבה' חד-כיוונית (Push) דרך רשימת מנויים ללא מרכז אחד; Mediator הוא תקשורת 'הרבה-להרבה' דו-כיוונית דרך מתווך מרכזי יחיד שמנתב בין כל הצדדים.",
@@ -1924,7 +1981,9 @@
     "howProfessorMightAsk": [
       "מה מהבאים אינו נכון בתבנית Observer? (התשובה: ההנחה ש-Observable חייב להכיר את המחלקות הקונקרטיות של ה-Observers)",
       "מדוע java.util.Observable מגביל שימוש בפרויקטים מסוימים?",
-      "נתון Model extends Observable ו-ViewModel שהוא גם Observer וגם Observable - תארו את שרשרת העדכונים כאשר המבוך נוצר."
+      "נתון Model extends Observable ו-ViewModel שהוא גם Observer וגם Observable - תארו את שרשרת העדכונים כאשר המבוך נוצר.",
+      "מהן הבעיות במימוש ה'נאיבי' (הישיר) של WeatherData לפני החדרת Observer Pattern, ומה כל אחת מהן מפרה?",
+      "מה ההבדל בין מודל Push למודל Pull במימוש Observer, ואיזה מהם מודגם בדוגמת WeatherData?"
     ],
     "codeExamples": [
       {
@@ -1954,6 +2013,18 @@
       {
         "he": "פרסום-מנוי",
         "en": "Publish-Subscribe"
+      },
+      {
+        "he": "מודל דחיפה",
+        "en": "Push Model"
+      },
+      {
+        "he": "מודל משיכה",
+        "en": "Pull Model"
+      },
+      {
+        "he": "שיטת ברירת מחדל בממשק",
+        "en": "Default Method"
       }
     ],
     "mnemonicHe": "Observer = 'ערוץ יוטיוב' - סרטון חדש (Subject משתנה) -> כל מנוי (Observer) מקבל התראה, בלי שהערוץ מכיר את המנויים אישית.",
@@ -2126,12 +2197,14 @@
       "Generics מוגדרים על מחלקות, מתודות וממשקים",
       "מקבלים רק Object types - אף פעם לא פרימיטיביים (int, double, boolean)",
       "Autoboxing/Unboxing אוטומטי אך יקר חישובית",
-      "חסם תחתון: <T extends Comparable<T>> מבטיח אפשרות להשוואה עם compareTo"
+      "חסם תחתון: <T extends Comparable<T>> מבטיח אפשרות להשוואה עם compareTo",
+      "אפשר לשלב Generics עם Varargs: T argmax(T... array) מקבלת מספר בלתי-קבוע של ארגומנטים מאותו טיפוס גנרי T ומחזירה את המקסימלי (בעזרת compareTo)"
     ],
     "mustRemember": [
       "Pair<int,int> אינו חוקי - חובה Pair<Integer,Integer>",
       "Comparable<T> מגדיר int compareTo(T arg): חיובי=גדול, שלילי=קטן, אפס=שווה",
-      "כל ה-Wrapper types (Integer, Double...) מממשים Comparable"
+      "כל ה-Wrapper types (Integer, Double...) מממשים Comparable",
+      "קריאה כמו argmax(1,2,3) עובדת בזכות autoboxing (int->Integer) יחד עם varargs - הארגומנטים הבודדים מכונסים אוטומטית למערך T[] מאחורי הקלעים, בלי לבנות מערך במפורש"
     ],
     "easyToConfuse": [
       "Generics (בטיחות טיפוסים בקומפילציה בלבד, נמחקת בריצה) מול Polymorphism רגיל (בטיחות גם בזמן ריצה)",
@@ -2140,7 +2213,8 @@
     "howProfessorMightAsk": [
       "קטע קוד עם מחלקה גנרית - האם ניתן ליצור ממנה מופע עם טיפוס פרימיטיבי?",
       "מתודה גנרית עם <T extends Comparable<T>> - מה קורה אם קוראים לה עם טיפוס שלא מממש Comparable? (שגיאת קומפילציה)",
-      "מהי הפעולה היקרה שקורית כש-Generics 'עובדים' עם int בתוך Integer?"
+      "מהי הפעולה היקרה שקורית כש-Generics 'עובדים' עם int בתוך Integer?",
+      "קטע קוד עם מתודה גנרית המוגדרת בעזרת varargs (T... array) - איך קוראים לה עם כמה ארגומנטים בודדים, ומה קורה מאחורי הקלעים בזמן הקריאה?"
     ],
     "codeExamples": [
       {
@@ -2452,12 +2526,15 @@
       "Socket = endpoint לתקשורת, מוגדר ע\"י IP+Port, ברמת Transport",
       "Port הוא 16-bit; 0-1023 שמורים, >=1024 למשתמש",
       "ServerSocket.accept() חוסם (blocking) עד שמגיע לקוח",
-      "לכל לקוח מחובר - סוקט חדש (בד\"כ פורט אחר), הפורט המקורי נשאר פנוי"
+      "לכל לקוח מחובר - סוקט חדש (בד\"כ פורט אחר), הפורט המקורי נשאר פנוי",
+      "מודל ה-OSI (Open Systems Interconnection) בנוי מ-7 שכבות מהנמוכה לגבוהה: Physical (רכיבי חומרה המעבירים פולסים חשמליים) -> Data Link (העברת נתונים) -> Network (העברת נתונים מקצה לקצה/ניתוב) -> Transport (TCP/UDP) -> ... -> Presentation (קידוד ודחיסה) -> Application (שירותים ברמת משתמש כמו FTP ו-GUI)",
+      "java.net.InetAddress מייצג כתובת IP (IPv4 או IPv6 כאחד) וכולל מתודות לביצוע DNS lookup (תרגום שם מכונה לכתובת IP)"
     ],
     "mustRemember": [
       "FTP=21, TELNET=23, SMTP=25, HTTP=80 - פורטים שמורים קלאסיים",
       "אם ServerSocket מנסה להיפתח על פורט שכבר תפוס - תיזרק שגיאה (BindException), לא המתנה",
-      "java.net.Socket (TCP client), java.net.ServerSocket (TCP server), java.net.InetAddress (כתובת IP)"
+      "java.net.Socket (TCP client), java.net.ServerSocket (TCP server), java.net.InetAddress (כתובת IP)",
+      "בנאי Socket יכול לקבל גם שם מכונה (hostname, למשל \"Machine name\") ולא רק כתובת IP ישירה - תרגום השם לכתובת IP (DNS lookup) מתבצע אוטומטית לפני הקמת החיבור"
     ],
     "easyToConfuse": [
       "לחשוב שה-ServerSocket עצמו 'מדבר' עם הלקוח - בפועל, לאחר accept() מתקבל Socket חדש נפרד לכל לקוח",
@@ -2466,7 +2543,8 @@
     "howProfessorMightAsk": [
       "מה קורה אם מנסים לפתוח ServerSocket על פורט שכבר בשימוש ע\"י תהליך אחר?",
       "מדוע השרת פותח סוקט חדש לכל לקוח במקום להשתמש באותו סוקט שהאזין?",
-      "אילו מספרי פורט שמורים ל'שירותים ידועים' ואיזה טווח פנוי למשתמש?"
+      "אילו מספרי פורט שמורים ל'שירותים ידועים' ואיזה טווח פנוי למשתמש?",
+      "אילו שכבות מרכיבות את מודל ה-OSI, ובאיזו שכבה נמצאים TCP/UDP?"
     ],
     "codeExamples": [
       {
@@ -2491,6 +2569,14 @@
       {
         "he": "שגיאת קשירה",
         "en": "BindException"
+      },
+      {
+        "he": "מודל שכבות התקשורת",
+        "en": "OSI Model"
+      },
+      {
+        "he": "חיפוש DNS",
+        "en": "DNS lookup"
       }
     ],
     "sourceRefs": [
@@ -2677,7 +2763,8 @@
       "Serialization = כתיבה (אובייקט -> בייטים) - ObjectOutputStream.writeObject()",
       "Deserialization = קריאה/שליפה (בייטים -> אובייקט) - ObjectInputStream.readObject()",
       "transient = שדה שלא נשמר/משוחזר - ערך ברירת מחדל אחרי deserialization",
-      "המחלקה חייבת implements Serializable"
+      "המחלקה חייבת implements Serializable",
+      "Serializable הוא marker interface ריק לחלוטין (ללא אף מתודה) - הוא רק מסמן ל-JVM שמותר לבצע סריאליזציה למופעים של המחלקה; את העבודה בפועל (מעבר על השדות והמרתם לבייטים) מבצע ה-JVM עצמו (reflection), לא קוד שהמתכנת כותב"
     ],
     "mustRemember": [
       "Deserialization היא הפעולה ש'קוראת'/'שולפת' - לא 'כותבת'",
@@ -2686,12 +2773,14 @@
     ],
     "easyToConfuse": [
       "לחשוב ש-Deserialization היא 'כתיבה לזרם' - זו טעות; Serialization=כתיבה, Deserialization=קריאה",
-      "לבלבל transient עם volatile - הראשון משפיע על serialization, השני על concurrency/visibility"
+      "לבלבל transient עם volatile - הראשון משפיע על serialization, השני על concurrency/visibility",
+      "לחשוב ש-Serializable מכיל מתודה שצריך לממש (כמו Comparable.compareTo) - בפועל זהו ממשק ריק (marker interface) בלי אף מתודה"
     ],
     "howProfessorMightAsk": [
       "מחלקה עם שדה transient - מה יקרה לערך שלו אחרי serialize ואז deserialize?",
       "מהי Deserialization בדיוק - כתיבה או קריאה?",
-      "טבלת שדות עם transient/volatile/public/private - אילו מהם ישוחזרו אחרי deserialization?"
+      "טבלת שדות עם transient/volatile/public/private - אילו מהם ישוחזרו אחרי deserialization?",
+      "כמה מתודות מגדיר הממשק Serializable, ומי בפועל אחראי לבצע את הסריאליזציה?"
     ],
     "codeExamples": [
       {
@@ -2758,7 +2847,8 @@
       "Process = מופע תוכנית עצמאי עם Data (Heap) משלו",
       "Thread = יחידת ריצה תוך-תהליכית; חולק Heap עם threads אחרים, Stack פרטי",
       "Process אחד יכול להכיל threads מרובים ('קלי משקל')",
-      "main thread - כל תוכנית Java כבר רצה בתוך thread ראשי אחד"
+      "main thread - כל תוכנית Java כבר רצה בתוך thread ראשי אחד",
+      "דוגמה לאסטרטגיית CPU Scheduler: FIFO (First-In-First-Out) - התהליכון שהגיע ראשון לתור מקבל את זמן הריצה הראשון; לחלופין ניתן להגדיר עדיפויות (priority) ל-thread, ואז ה-scheduler מעדיף לפיהן"
     ],
     "mustRemember": [
       "Threads חולקים Heap (Data); כל Thread מקבל Stack פרטי משלו",
@@ -2912,12 +3002,14 @@
       "מחזור חיים: Runnable -> Running -> (Blocked) -> Dead",
       "Thread שהגיע ל-Dead לא ניתן להפעילו מחדש - IllegalThreadStateException",
       "עדיפות (priority): 1-10, ברירת מחדל 5 - לא מבטיח סדר ריצה מדויק",
-      "Daemon threads (כמו GC) - JVM יוצא כשרק הם נשארים"
+      "Daemon threads (כמו GC) - JVM יוצא כשרק הם נשארים",
+      "שלושה גורמים קונקרטיים שגורמים למעבר למצב Blocked: (1) קריאה מפורשת ל-wait(), (2) המתנה לגישה/כתיבה לנתון שנעול כרגע ע\"י thread אחר (סנכרון), (3) המתנה לפעולת קלט/פלט (I/O)"
     ],
     "mustRemember": [
       "אסור לבסס נכונות תוכנית על סדר תזמון/עדיפויות ספציפי - זה תלוי מערכת הפעלה",
       "static counter המשותף בין 2 threads, 5 הדפסות כל אחד -> 10 שורות בסה\"כ, סדר לא ידוע מראש",
-      "Context Switch + Time Slicing מאפשרים תחושת מקביליות גם על מעבד יחיד"
+      "Context Switch + Time Slicing מאפשרים תחושת מקביליות גם על מעבד יחיד",
+      "threads יוצרים מבנה היררכי הורה-ילד (למשל threads שנוצרו בתוך main) - אך ה-JVM כתהליך יכול להמשיך לרוץ גם אחרי ש-main עצמו הגיע ל-Dead, כל עוד קיים thread non-daemon חי כלשהו (גם אם הוא 'ילד' של main)"
     ],
     "easyToConfuse": [
       "לחשוב שעדיפות גבוהה יותר (priority) מבטיחה שה-thread ירוץ ראשון תמיד - זה רק 'רמז' למתזמן, לא הבטחה",
@@ -2997,7 +3089,8 @@
       "Race Condition = פלט תלוי בתזמון בלתי-צפוי בין threads מתחרים",
       "count++ הוא בפועל 3 פעולות: קריאה, הוספה, כתיבה - לא אטומי",
       "תבנית 'check-then-act' (למשל if(instance==null)) יוצרת race condition קלאסי",
-      "דרכי פתרון: No/Immutable/No-Shared State, java.util.concurrent, synchronized, volatile/atomic"
+      "דרכי פתרון: No/Immutable/No-Shared State, java.util.concurrent, synchronized, volatile/atomic",
+      "דוגמאות נוספות מהחיים לרייס קונדישן: (1) חשבון בנק משותף - בני זוג בודקים/מושכים כסף בו-זמנית מבלי לדעת על הפעולה של השני, מה שעלול להכניס את החשבון למינוס; (2) הזמנת מקומות ישיבה/כרטיסים - שני לקוחות בוחרים ורוכשים בו-זמנית את אותם המקומות במפה משותפת"
     ],
     "mustRemember": [
       "Race Condition אינו Deadlock - ב-race condition התוכנית כן מסתיימת, רק עם תוצאה שגויה/לא צפויה",
@@ -3153,7 +3246,8 @@
       "Atomic Action = פעולה שלא ניתנת לחלוקה/הפרעה",
       "כל reference ורוב הפרימיטיבים אטומיים מטבעם, חוץ מ-long ו-double",
       "AtomicInteger וכו' (java.util.concurrent.atomic) - פעולות מורכבות אטומיות בלי נעילה מפורשת",
-      "volatile (concurrency, visibility) לעומת transient (serialization, שדה לא נשמר)"
+      "volatile (concurrency, visibility) לעומת transient (serialization, שדה לא נשמר)",
+      "סיבה נפוצה לשימוש ב-transient: הסתרת מידע רגיש/לא-רלוונטי מהלקוח בזמן serialization - שדה המסומן transient לא ישלח/יישמר כחלק מהאובייקט המסוריאלז, ויקבל ערך ברירת מחדל (null/0/false) בעת deserialization בצד המקבל"
     ],
     "mustRemember": [
       "המלכודת הכי נפוצה במבחן: 'volatile מבטיח אטומיות' - זה שקר! volatile מבטיח רק visibility",
@@ -3237,7 +3331,8 @@
     "mustRemember": [
       "Deadlock ≠ 'thread שסיים ונעל' - זו תשובת מלכודת שגויה שחוזרת במבחנים",
       "עוטפים synchronized סביב הבדיקה בלבד, לא סביב לולאה שלמה - אחרת Lock Starvation",
-      "גם עם אוסף 'מסונכרן', חובה עדיין synchronized ידני מסביב ל-Iterator/for-each"
+      "גם עם אוסף 'מסונכרן', חובה עדיין synchronized ידני מסביב ל-Iterator/for-each",
+      "Thread.stop() (עצירה כפויה, ללא הודעה מוקדמת) נחשבת מסוכנת ו-deprecated כי היא עלולה להשאיר משאבים/מבני נתונים משותפים באמצע עדכון (מצב לא עקבי) - זו הסיבה המרכזית שבגללה מעדיפים את גישת ה-'דגל' (flag-based, לרוב עם volatile) שנלמדה בקורס"
     ],
     "easyToConfuse": [
       "Deadlock (אף thread לא מתקדם, מעגל המתנה הדדי) מול Lock Starvation (thread ספציפי אחד נחסם לנצח, השאר יכולים להתקדם) מול Race Condition (הכל מתקדם, אבל התוצאה שגויה)",
@@ -3403,7 +3498,8 @@
       "execute(Runnable) - ללא ערך חוזר; submit(Callable/Runnable) - מחזיר Future",
       "Executors היא Factory ליצירת סוגי ExecutorService (newFixedThreadPool וכו')",
       "shutdown() - מונע כניסת משימות חדשות, מחכה לסיום הקיימות; shutdownNow() - עוצר הכל מיד",
-      "היתרון המרכזי: ניהול pool קבוע + שליחת משימות + קבלת תוצאות (לא 'ריצה סינכרונית' ולא 'thread חדש בכל פעם')"
+      "היתרון המרכזי: ניהול pool קבוע + שליחת משימות + קבלת תוצאות (לא 'ריצה סינכרונית' ולא 'thread חדש בכל פעם')",
+      "ConnectionPooling (למשל pool של חיבורי מסד-נתונים) הוא רעיון מקביל ל-Thread Pool: רכיב תוכנה שנותן שירותי אחסון/שאילת חיבורים ומגביל/מנהל שימוש חוזר במשאב יקר (כמו חיבור ל-DB) במקום ליצור חיבור חדש לכל בקשה; אם המאגר קטן מדי, בקשות עלולות להמתין זמן רב או אף לגרום למצב קריסה (crash)"
     ],
     "mustRemember": [
       "Executors מספקת ExecutorService - זו תבנית Factory, לא Singleton/Builder/Observer",
@@ -3479,11 +3575,13 @@
       "Thread Pool = שילוב Mediator (מתאם בין משימות ל-threads) + Command (כל משימה = אובייקט פקודה)",
       "Mediator: משמש בתכנון ארכיטקטורה חדשה/refactoring - צימוד רופף בין רכיבים מרובים",
       "Adapter: משמש כשכבר יש שני בסיסי-קוד קיימים בלתי-תואמים שצריך לחבר",
-      "דוגמת Adapter: עטיפת Runnable כך שיתאים לממשק Callable"
+      "דוגמת Adapter: עטיפת Runnable כך שיתאים לממשק Callable",
+      "נימוק כמותי לשימוש ב-Mediator: אם יש k אובייקטים שצריכים לתקשר בכל זוג עם זוג ישירות, מספר ערוצי התקשורת הוא k(k-1)/2 (גדילה ריבועית) - Mediator מצמצם זאת ל-k ערוצים (כל אובייקט מול המתווך בלבד)"
     ],
     "mustRemember": [
       "השאלה 'איזו תבנית מאחורי Thread Pool' - התשובה היא Mediator+Command *יחד*, לא רק אחת מהן",
-      "אם השאלה מתארת 'חיבור שני קודים קיימים' - Adapter; אם מתארת 'תכנון/ריפקטור ארכיטקטורה' - Mediator"
+      "אם השאלה מתארת 'חיבור שני קודים קיימים' - Adapter; אם מתארת 'תכנון/ריפקטור ארכיטקטורה' - Mediator",
+      "קריטריון נוסף לשימוש ב-Mediator (מעבר לרשימה הקיימת): כאשר להרבה אובייקטים יש צורך להשתמש במשאב משותף אחד - זה בדיוק המצב ב-Thread Pool, שבו כל המשימות 'צריכות' את משאב ה-threads/CPU המשותף, וה-pool (Mediator) מתאם ביניהן"
     ],
     "easyToConfuse": [
       "Mediator (ארכיטקטורה חדשה, צימוד רופף בין הרבה אובייקטים) מול Adapter (חיבור נקודתי בין שני ממשקים קיימים ובלתי-תואמים)",
@@ -3549,7 +3647,12 @@
       "Procedural: התוכנית מכתיבה סדר קליטת קלט - מתאים לקונסולה בלבד",
       "Event-Driven: המשתמש/הרשת/החיישן מכתיבים את הזרימה - מתאים ל-GUI ולשרתים",
       "Listener: מקושר ל-Source (מקור האירוע), 'מקשיב' וממתין",
-      "Handler: מקושר ל-Event (האירוע עצמו), 'מטפל' בו בפועל"
+      "Handler: מקושר ל-Event (האירוע עצמו), 'מטפל' בו בפועל",
+      "Event = אובייקט שמייצג אינטראקציה של המשתמש עם ה-GUI; לא בהכרח מיוחס לכפתור עצמו בלבד",
+      "Source Object יוצר את האירוע - יכול להיות כפתור או כל אובייקט אחר",
+      "דוגמאות לסוגי אירועים מהסיכום: קליק, גרירה, זום, סגירה, מסכי מגע, ג'ויסטיק, וגם אירועי זמן (timer)",
+      "טיפול באירועים הוא א-סינכרוני מטבעו",
+      "תכנות מונחה-אירועים אינו מוגבל ל-desktop application - נמצא גם ב-web application ובטלפונים"
     ],
     "mustRemember": [
       "Listener = Source; Handler = Event - זו ההבחנה המדויקת הנדרשת במבחן",
@@ -3557,7 +3660,8 @@
     ],
     "easyToConfuse": [
       "Listener מול Handler - בפועל לרוב אותו אובייקט קוד ממלא את שני התפקידים, אך ההגדרה הפורמלית שונה (Source מול Event)",
-      "Procedural (התוכנית שואלת קלט) מול Event-Driven (הסביבה 'דוחפת' אירועים לתוכנית)"
+      "Procedural (התוכנית שואלת קלט) מול Event-Driven (הסביבה 'דוחפת' אירועים לתוכנית)",
+      "בפועל ב-JavaFX לרוב חושפים כלפינו רק את שכבת ה-Handler (למשל setOnAction/onAction), בעוד רישום ה-Listener למקור האירוע מוסתר/מנוהל מאחורי הקלעים"
     ],
     "howProfessorMightAsk": [
       "'מדוע תכנות פרוצדורלי אינו מתאים ליישומי GUI/שרת?'",
@@ -3609,17 +3713,23 @@
     "headingEn": "JavaFX Architecture and the GUI Thread",
     "intuitionHe": "תארו בית תיאטרון: ה-Application היא הפקת ההצגה כולה, ה-Stage הוא הבניין/האולם עצמו (החלון), ה-Scene הוא התפאורה על הבמה באותו רגע (אפשר להחליף תפאורות באותו אולם), וה-Node הוא כל פריט בודד על הבמה (שחקן, כיסא, שולחן). GUI Thread נפרד מ-main כדי שהמסך לא 'יקפא' אם עושים משהו כבד - בדיוק כמו שמלצר לא צריך לעצור את כל המסעדה כדי לבשל מנה אחת בעצמו, הוא מעביר את זה למטבח (thread נפרד) וממשיך לשרת.",
     "examKnowledgeHe": "JavaFX (2008) היא ספריית ה-GUI הרשמית והמודרנית של Java, שהחליפה את Swing (1998, 'dead-end' טכנולוגי כיום) שקדמה לה ל-AWT (1995, ספריות native נפרדות לכל מערכת הפעלה) ול-SWT (2001, IBM, השתמשה ב-Dependency Injection בין JAR-ים שונים כדי לקבל look&feel מקורי). ההיררכיה המרכזית של JavaFX (שאלת שינון קריטית): Application (מחלקת-על שממנה יורשים, עם מתודת start() שרצה אחרי טעינת ה-runtime, ומופעלת דרך launch()) -> Stage (מיכל העל-ברמה-הגבוהה, בדרך כלל חלון OS; אפליקציה אחת יכולה להכיל כמה Stage) -> Scene (עץ תוכן היררכי - Scene Graph - שמייצג את כל האלמנטים הוויזואליים; מטפל בקלט וניתן לרינדור) -> Layout/Pane (מנהל את המיקום/גודל האוטומטי של node-ים בתוכו) -> Node (אלמנט בודד בעץ - צורה, טקסט, פקד; לכל Node הורה יחיד ו-0 או יותר ילדים, למעט ה-root). GUI Thread: ה-GUI רץ ב-thread נפרד מה-main כדי לשמור על רספונסיביות - קוד שרץ זמן רב (רשת, מסד נתונים, חישוב כבד) מומלץ שירוץ ב-thread נפרד לגמרי, לא ב-GUI Thread עצמו, אחרת המסך 'יקפא' (Not Responding). ב-JavaFX ספציפית רצים כמה threads: JavaFX Application Thread (ה-thread העיקרי לעדכון ה-scene graph - ברגע ש-root node מחובר לאובייקט 'חי' בסצנה, יש לגשת אליו רק דרך thread זה), Prism Render Thread (מטפל ברינדור בנפרד מהאירועים), Media Thread (מסנכרן פריימים של מדיה ברקע).",
-    "applicationHe": "דוגמת קוד בסיסית: `public class BasicWindow extends Application { public static void main(String[] args){ launch(args); } public void start(Stage primaryStage){ Button button = new Button(\"Click me\"); StackPane layout = new StackPane(); layout.getChildren().add(button); Scene scene = new Scene(layout, 300, 250); primaryStage.setScene(scene); primaryStage.show(); } }` - שימו לב לזרימה: launch() מפעיל את ה-JavaFX runtime שקורא ל-start(Stage) עם ה-primaryStage המוכן; בתוך start() בונים Node (Button), שמים אותו בתוך Layout (StackPane), עוטפים ב-Scene, ומציבים את ה-Scene על ה-Stage, ולבסוף show(). FXML מאפשר להגדיר את אותה Scene בקובץ XML חיצוני (כמו MazeWindow.fxml בפרויקט המבוך) שנטען בזמן ריצה וממופה למחלקת Controller/View שמטפלת באירועים - כך מפריד עיצוב (FXML+CSS) מלוגיקה (הקוד ב-View/Controller).",
+    "applicationHe": "דוגמת קוד בסיסית: `public class BasicWindow extends Application { public static void main(String[] args){ launch(args); } public void start(Stage primaryStage){ Button button = new Button(\"Click me\"); StackPane layout = new StackPane(); layout.getChildren().add(button); Scene scene = new Scene(layout, 300, 250); primaryStage.setScene(scene); primaryStage.show(); } }` - שימו לב לזרימה: launch() מפעיל את ה-JavaFX runtime שקורא ל-start(Stage) עם ה-primaryStage המוכן; בתוך start() בונים Node (Button), שמים אותו בתוך Layout (StackPane), עוטפים ב-Scene, ומציבים את ה-Scene על ה-Stage, ולבסוף show(). FXML מאפשר להגדיר את אותה Scene בקובץ XML חיצוני (כמו MazeWindow.fxml בפרויקט המבוך) שנטען בזמן ריצה וממופה למחלקת Controller/View שמטפלת באירועים - כך מפריד עיצוב (FXML+CSS) מלוגיקה (הקוד ב-View/Controller). אנלוגיה מדגימה מהסיכום: חשבו על תהליך (process) שמריץ את Word - שם החלון/הקובץ שמוצג הוא ה-Stage, וכל אחת מהלשוניות (tabs) שנראות בחלק העליון של החלון היא בעצם Scene נפרדת שמוחלפת בתוך אותו Stage עצמו.",
     "keyPoints": [
       "היררכיית JavaFX: Application -> Stage -> Scene -> Layout/Pane -> Node",
       "AWT(1995) -> Swing(1998, dead-end) -> SWT(2001, DI) -> JavaFX(2008, הרשמי כיום)",
       "GUI Thread נפרד מ-main; פעולות כבדות/רשת/DB לא רצות עליו ישירות",
-      "ב-JavaFX: JavaFX Application Thread (scene graph), Prism Render Thread (רינדור), Media Thread"
+      "ב-JavaFX: JavaFX Application Thread (scene graph), Prism Render Thread (רינדור), Media Thread",
+      "AWT לקח את ה-look&feel הנייטיבי של כל מערכת הפעלה ומימש GUI על בסיסו - נחשב פתרון גרוע שהרגיש 'לא נכון'",
+      "Swing השיג look&feel אחיד משלו, אך לא טיפל כלל ב-web application",
+      "SWT פתר את בעיית ה-look&feel באמצעות ספריית native נפרדת לכל OS (SWT.jar), אך עדיין סבל מחוסר תמיכה/שימוש ב-web",
+      "Builder ב-JavaFX נותן יכולת לבצע פעולות בנייה (בסגנון fluent) על אובייקטים כחלק מזרימת Application->Stage->Scene->Layout->Node",
+      "Node לא מוגבל לפקדי-קצה בלבד - כל Node יכול לשאת מיקום, צבעים, ולהפיק אירועים"
     ],
     "mustRemember": [
       "JVM (לא JavaFX!) הוא מה שמאפשר ל-Java (כולל אפליקציות JavaFX) להיות cross-platform",
       "Application->Stage->Scene->Layout->Node - סדר קבוע שחוזר במבחנים",
-      "פעולה ארוכה על ה-GUI Thread = מסך קופא (Not Responding)"
+      "פעולה ארוכה על ה-GUI Thread = מסך קופא (Not Responding)",
+      "כל טכנולוגיית GUI פתרה את הבעיה של קודמתה אך השאירה בעיה חדשה, עד ש-JavaFX פתר גם look&feel וגם תמיכה מודרנית (כולל היבטי web) תוך הפרדת Business Logic מ-Presentation"
     ],
     "easyToConfuse": [
       "Stage (החלון/מיכל-העל, בדרך כלל אחד לכל אפליקציה אך אפשר יותר) מול Scene (תוכן שניתן להחליף בתוך Stage קיים)",
@@ -3866,6 +3976,327 @@
       "q-blockchain-cryptocurrency-002",
       "q-blockchain-cryptocurrency-003",
       "q-blockchain-cryptocurrency-004"
+    ]
+  },
+  {
+    "id": "sec-design-patterns-structural-05",
+    "topicId": "design-patterns-structural",
+    "order": 5,
+    "headingHe": "יתר תבניות העיצוב המבניות (GoF Catalog): Composite, Flyweight, Proxy",
+    "headingEn": "Other Structural Patterns - Composite, Flyweight, Proxy",
+    "intuitionHe": "מעבר לארבע התבניות שנלמדו לעומק (Bridge, Facade, Adapter, Decorator), הקורס מציג בקצרה עוד שלוש תבניות מבניות מקטלוג ה-GoF: Composite (מבנה עץ של תיקיות וקבצים), Flyweight (שיתוף מופעים 'דקים' כדי לחסוך זיכרון, כמו תווים בעורך טקסט) ו-Proxy (שומר-סף שמייצג אובייקט אחר ושולט בגישה אליו, כמו מתאם חשמל שמבקר מי מתחבר). ברוב המבחנים די להכיר את ההגדרה החד-שורתית של כל תבנית ולזהות אותה מתוך תיאור מקרה.",
+    "examKnowledgeHe": "לפי סיכום הקורס, כל תבניות העיצוב המבניות (Structural) עוסקות בפתרון בעיות מבניות על ידי הפרדה בין ממשק (interface) למימוש (implementation), ועוסקות בהרכב (composition) של אובייקטים ומחלקות. שלוש התבניות הנוספות שמופיעות ברשימה (מעבר לבריג', פאסאד, אדפטר ודקורטור): (1) Composite - מבנה עץ (tree structure) של אובייקטים פשוטים (Leaf) ואובייקטים מורכבים (Composite) שיכולים להכיל אובייקטים נוספים מאותו סוג, כך שהלקוח מתייחס לכולם באופן אחיד דרך ממשק משותף (דוגמה קלאסית: קבצים ותיקיות במערכת קבצים). (2) Flyweight - מופע 'דק' (fine-grained instance) המשמש לשיתוף יעיל בין הרבה אובייקטים דומים, כדי לחסוך בזיכרון - מפרידים בין מצב פנימי משותף (intrinsic) למצב חיצוני ייחודי (extrinsic) לכל שימוש. (3) Proxy - אובייקט שמייצג אובייקט אחר (Real Subject) ושולט בגישה אליו - מאפשר, למשל, טעינה עצלה (lazy initialization), בקרת הרשאות, לוגינג, או תיווך לאובייקט מרוחק, כאשר הלקוח פונה ל-Proxy בדיוק כמו שהיה פונה לאובייקט האמיתי (אותו ממשק).",
+    "applicationHe": "שאלות מבחן על שלוש התבניות הללו הן בדרך כלל שאלות זיהוי/התאמה: נותנים תיאור מקרה קצר (למשל 'מערכת קבצים עם תיקיות המכילות קבצים ותיקיות נוספות', 'עורך טקסט ששומר מופע יחיד לכל תו ומשתף אותו בין כל המקומות שבהם התו מופיע', 'אובייקט שמבקר הרשאות לפני שהוא מעביר קריאה הלאה לאובייקט האמיתי') ומבקשים לזהות את שם התבנית המתאימה. חשוב לדעת להבדיל בין Proxy ל-Decorator וברור בין Composite ל-Decorator (ראו easyToConfuse).",
+    "mustRemember": [
+      "Composite: מבנה עץ של Leaf ו-Composite, מטופלים באופן אחיד דרך ממשק משותף (דוגמה: מערכת קבצים).",
+      "Flyweight: שיתוף מופעים 'דקים' רבים לחיסכון בזיכרון - מפרדה בין מצב פנימי משותף (intrinsic) למצב חיצוני ייחודי (extrinsic).",
+      "Proxy: אובייקט שמייצג ושולט בגישה לאובייקט אחר, מאחורי אותו ממשק - טעינה עצלה, הרשאות, תיווך מרוחק."
+    ],
+    "easyToConfuse": [
+      "Composite מול Decorator: שתיהן Composition + ממשק משותף, אך Composite בונה עץ היררכי (חלק-שלם, אובייקט יכול להכיל כמה ילדים), בעוד Decorator בונה שרשור ליניארי (עטיפה בודדת אחר עטיפה) להוספת התנהגות בלבד.",
+      "Proxy מול Decorator: שתיהן עוטפות אובייקט מאחורי אותו ממשק בדיוק, אך Proxy שולט/מגביל גישה לאובייקט (ולעיתים דוחה את יצירתו), בעוד Decorator מוסיפה התנהגות נוספת על אובייקט שכבר קיים וזמין ללקוח.",
+      "Flyweight מול Singleton: Flyweight משתף מספר רב של מופעים דומים (לא בהכרח זהים לגמרי) לחיסכון בזיכרון; Singleton מבטיח מופע יחיד ויחיד בלבד בכל המערכת."
+    ],
+    "howProfessorMightAsk": [
+      "ניתן תיאור מקרה של מערכת קבצים עם תיקיות המכילות קבצים ותיקיות נוספות - איזו תבנית עיצוב מתאימה?",
+      "מדוע Flyweight שימושית כאשר יש כמות גדולה מאוד של אובייקטים דומים במערכת?",
+      "מה ההבדל בין Proxy ל-Decorator כאשר שתיהן עוטפות אובייקט מאחורי אותו ממשק?"
+    ],
+    "codeExamples": [],
+    "termsHeEn": [
+      {
+        "he": "מבנה עץ",
+        "en": "Tree Structure"
+      },
+      {
+        "he": "מצב פנימי משותף",
+        "en": "Intrinsic State"
+      },
+      {
+        "he": "מצב חיצוני ייחודי",
+        "en": "Extrinsic State"
+      },
+      {
+        "he": "אובייקט מייצג/שומר-סף",
+        "en": "Surrogate / Proxy Object"
+      }
+    ],
+    "mnemonicHe": "Composite = 'עץ תיקיות', Flyweight = 'תווים משותפים', Proxy = 'שומר-סף לפני האובייקט האמיתי'.",
+    "sourceRefs": [
+      {
+        "fileId": "summary_of_advanced_programming_topics_2022_shai_giladi",
+        "fileName": "Summary of Advanced Programming Topics 2022 - Shai Giladi.pdf",
+        "locator": "page 15"
+      }
+    ],
+    "keyPoints": []
+  },
+  {
+    "id": "sec-design-patterns-behavioral-05",
+    "topicId": "design-patterns-behavioral",
+    "order": 5,
+    "headingHe": "יתר תבניות העיצוב ההתנהגותיות (GoF Catalog): Memento, Interpreter, Iterator, Chain of Responsibility, State, Template Method, Visitor",
+    "headingEn": "Other Behavioral Patterns - Memento, Interpreter, Iterator, Chain of Responsibility, State, Template Method, Visitor",
+    "intuitionHe": "מעבר לארבע התבניות ההתנהגותיות שנלמדו לעומק (Strategy, Observer, Mediator, Command), הקורס מציג בקצרה עוד שבע תבניות התנהגותיות מקטלוג ה-GoF. ברוב המקרים די להכיר את ההגדרה החד-שורתית של כל תבנית כדי לזהות אותה בשאלת התאמה: Memento (Undo), Interpreter (פירוש שפה), Iterator (מעבר על אוסף), Chain of Responsibility (שרשרת טיפול בבקשה), State (התנהגות לפי מצב פנימי), Template Method (שלד אלגוריתם עם שלבים דחויים) ו-Visitor (הוספת פעולה חדשה בלי לשנות מחלקות).",
+    "examKnowledgeHe": "לפי סיכום הקורס, כל תבניות העיצוב ההתנהגותיות (Behavioral) פותרות בעיות התנהגותיות של האובייקט ועוסקות בתקשורת בין המחלקות לאובייקטים. שבע התבניות הנוספות שמופיעות ברשימה: (1) Memento - ללכוד ולשחזר את המצב הפנימי של אובייקט (Undo/Redo) מבלי להפר הכמסה. (2) Interpreter - דרך לכלול אלמנטים של שפה בתוך תוכנית, על ידי הגדרת דקדוק (grammar) ומפרש שמבצע משפטים בשפה זו. (3) Iterator - גישה סדרתית לאיברי אוסף מבלי לחשוף את המבנה הפנימי שלו. (4) Chain of Responsibility - העברת בקשה בין שרשרת אובייקטים, כשכל אחד בוחר אם לטפל בה או להעביר הלאה. (5) State - שינוי התנהגות האובייקט כתגובה לשינוי במצבו הפנימי, כאילו 'החליף מחלקה'. (6) Template Method - הגדרת שלד קבוע של אלגוריתם במחלקת-אב, תוך דחיית חלק מהצעדים המדויקים למימוש בתת-מחלקות. (7) Visitor - הגדרת פעולה חדשה שמופעלת על אלמנטים של מבנה נתונים קיים (למשל עץ Composite) מבלי לשנות את מחלקות האלמנטים עצמן.",
+    "applicationHe": "שאלות מבחן על תבניות אלו הן לרוב שאלות זיהוי/התאמה מתוך תיאור מקרה קצר: 'מנגנון Undo במעבד תמלילים' (Memento), 'מעבר על איברי רשימה עם hasNext/next בלי לדעת אם היא Array או LinkedList' (Iterator), 'בקשת אישור שעוברת ממנהל למנהל בכיר עד שמישהו מאשר אותה' (Chain of Responsibility), 'נגן מוזיקה שמתנהג אחרת אם הוא ב-Playing/Paused/Stopped' (State), 'אלגוריתם הכנת משקה חם עם שלבים קבועים אך צעד אחד שונה בין תה לקפה' (Template Method), 'הוספת פעולת export חדשה על עץ אלמנטים גרפיים בלי לשנות את מחלקות הצורות' (Visitor). חשוב להבחין בין State ל-Strategy - שתיהן דומות במבנה קוד (Composition+interface) אך שונות בכוונה.",
+    "mustRemember": [
+      "Memento: לכידה ושחזור של מצב פנימי (Undo/Redo) מבלי להפר הכמסה.",
+      "Interpreter: הגדרת דקדוק (grammar) ומפרש לביצוע אלמנטים של שפה בתוך התוכנית.",
+      "Iterator: גישה סדרתית לאיברי אוסף מבלי לחשוף את המבנה הפנימי שלו.",
+      "Chain of Responsibility: העברת בקשה בין שרשרת אובייקטים - כל אחד בוחר לטפל או להעביר הלאה.",
+      "State: שינוי התנהגות האובייקט לפי מצבו הפנימי - כאילו 'משנה מחלקה' בזמן ריצה.",
+      "Template Method: שלד אלגוריתם קבוע במחלקת-אב, צעדים ספציפיים נדחים למימוש בתת-מחלקות.",
+      "Visitor: פעולה חדשה על אלמנטים קיימים מבלי לשנות את מחלקות האלמנטים."
+    ],
+    "easyToConfuse": [
+      "State מול Strategy: מבנה קוד דומה (Composition+interface), אך ב-State האובייקט עצמו מנהל/מחליף מצב פנימי כתגובה לאירועים; ב-Strategy הלקוח בוחר מבחוץ אלגוריתם ללא קשר למצב פנימי.",
+      "Template Method מול Strategy: שתיהן מפרידות 'חלק קבוע' מ'חלק משתנה' באלגוריתם, אך Template Method עושה זאת באמצעות ירושה (תת-מחלקה דורסת שלב בודד), בעוד Strategy עושה זאת באמצעות Composition (מזריקים אובייקט אלגוריתם שלם כפרמטר).",
+      "Chain of Responsibility מול Mediator: שתיהן מנתבות בקשות בין אובייקטים מרובים, אך ב-Chain of Responsibility הבקשה עוברת בשרשרת ליניארית עד שמישהו מטפל בה (לא בהכרח כולם מודעים לכולם); ב-Mediator יש מתווך מרכזי יחיד שמכיר את כל הצדדים ומנתב ביניהם ישירות."
+    ],
+    "howProfessorMightAsk": [
+      "ניתן תיאור של נגן מוזיקה שמתנהג אחרת בהתאם למצב (מנגן/מושהה/עצור) - איזו תבנית עיצוב מתאימה, ובמה היא שונה מ-Strategy?",
+      "מדוע Iterator שימושי כאשר רוצים לתמוך במעבר על סוגי אוספים שונים (מערך, רשימה מקושרת) באותו קוד לקוח?",
+      "ניתן תיאור של בקשת אישור שעוברת בין דרגי ניהול עד שמישהו מאשר אותה - איזו תבנית עיצוב זו, ובמה שונה מ-Mediator?"
+    ],
+    "codeExamples": [],
+    "termsHeEn": [
+      {
+        "he": "לכידת מצב",
+        "en": "State Capture"
+      },
+      {
+        "he": "דקדוק שפה",
+        "en": "Grammar"
+      },
+      {
+        "he": "שרשרת טיפול",
+        "en": "Chain of Responsibility"
+      },
+      {
+        "he": "שלד אלגוריתם",
+        "en": "Algorithm Skeleton"
+      },
+      {
+        "he": "ביקור אלמנט",
+        "en": "Visiting an Element"
+      }
+    ],
+    "mnemonicHe": "Memento=Undo, Interpreter=שפה, Iterator=מעבר על אוסף, Chain of Resp=שרשרת אישורים, State=התנהגות-לפי-מצב, Template Method=מתכון עם שלב-חסר, Visitor=פעולה-חדשה-בלי-לגעת-במחלקה.",
+    "sourceRefs": [
+      {
+        "fileId": "summary_of_advanced_programming_topics_2022_shai_giladi",
+        "fileName": "Summary of Advanced Programming Topics 2022 - Shai Giladi.pdf",
+        "locator": "page 15"
+      }
+    ],
+    "keyPoints": []
+  },
+  {
+    "id": "sec-event-driven-javafx-mvc-04",
+    "topicId": "event-driven-javafx-mvc",
+    "order": 4,
+    "headingHe": "עקרונות תכנות מונחה-אירועים: Inversion of Control, Dependency Injection ותבנית ה-Strategy",
+    "headingEn": "Event-Driven Principles: IoC, Dependency Injection, and the Strategy Pattern",
+    "intuitionHe": "תחשבו על מסעדה: Inversion of Control זה כמו להזמין מהתפריט (ממשק) במקום ללכת למטבח ולהגיד לשף בדיוק באיזו סיר להשתמש (מחלקה קונקרטית) - אתם כותבים מול 'התפריט', ומישהו אחר מחליט מי בפועל יגיש את המנה. Dependency Injection זה כמו מסעדה שמביאה לכם את המצרכים הביתה במקום שתלכו לשוק בעצמכם - התלות מגיעה אליכם מבחוץ, אתם לא יוצרים אותה. Strategy זה כמו לבחור מילון איות כ'תוסף' נשלף בזמן ריצה במקום לתפור מילון ספציפי אחד לתוך עורך הטקסט - כך מחר קל להחליף מילון בלי לגעת בעורך עצמו.",
+    "examKnowledgeHe": "לפי הסיכום, המוטיבציה הרחבה יותר: תכנות מונחה-אירועים אינו מוגבל ל-desktop application בלבד, אלא משמש גם ב-web application. ה-Event עצמו מוגדר כאובייקט שמייצג את האינטראקציה של המשתמש עם ה-GUI שלנו - ולא בהכרח מיוחס רק לכפתור עצמו. את האירוע יוצר Source Object (יכול להיות כפתור, אך גם כל אובייקט אחר), וכדי לתפוס את האירוע צריך Listener שברגע שהאירוע קורה מחליט מה לעשות. חשוב: הטיפול באירועים הוא א-סינכרוני. דוגמאות לסוגי אירועים שמוזכרים במפורש: קליק, גרירה (drag), הגדלה/הקטנה (zoom), סגירה, מסכי מגע, ג'ויסטיק, ואירועי זמן (timer). מיד לאחר הדיון ב-Listener מול Handler, הסיכום מציג שלושה 'עקרונות תכנות מונחה-אירועים': (1) Inversion of Control (IoC) - רוצים לכתוב מול ממשקים ולא לממש ישירות עם מחלקות קונקרטיות. (2) Dependency Injection (DI) - רוצים להזריק את התלות מבחוץ ולא ליצור אותה בתוך המחלקה עצמה. (3) Dependency Inversion Principle (DIP, מתוך SOLID - decoupling software modules) - הפרדה בין מחלקות כך שמחלקות בתחתית ההיררכיה לא ישפיעו על מחלקות בראש ההיררכיה. מיד אחר כך מוצגת תבנית העיצוב Strategy: מיועדת למצב שרוצים להחליף קטע קוד בזמן ריצה - יודעים איזו שיטה צריכה לרוץ אך לא את המימוש הספציפי, כלומר לא יודעים מהי האסטרטגיה הספציפית; ההחלטה איזו אסטרטגיה תרוץ מתקבלת רק בזמן ריצה. הדוגמה הקלאסית מהסיכום: TextEditor היא מחלקה קונקרטית, ולא רוצים שתהיה מחוברת ישירות למימוש קונקרטי אחד של בדיקת איות (spell check) - לכן יוצרים ממשק (interface) בשם spell, וה-TextEditor תלוי בממשק ולא במימוש. המוטיבציה המוצהרת: רוצים לעשות הפרדה בין הקוד ל-UI, כי אם יום אחד ירצו להחליף משהו (למשל מילון איות אחר), זה יהיה קל מאוד.",
+    "applicationHe": "מבחן/שאלת ניתוח קוד קלאסית: אם רואים מחלקה עם שדה מטיפוס ממשק (למשל `private Spell checker;`) שמאותחל דרך פרמטר בקונסטרוקטור או setter ולא נוצר עם new בתוך המחלקה עצמה - זה בו-זמנית Dependency Injection (התלות מגיעה מבחוץ) ויישום של Strategy (המימוש/האלגוריתם הקונקרטי ניתן להחלפה בזמן ריצה על ידי העברת מימוש אחר של אותו ממשק). מלכודת מבחן נפוצה: לבלבל בין שלושת המונחים - IoC הוא העיקרון הכללי (מי שולט על זרימת התלויות - 'אל תקראו לנו, אנחנו נקרא לכם'), DI היא הטכניקה הקונקרטית ליישום IoC (הזרקת תלות מבחוץ), ו-DIP הוא עיקרון SOLID נפרד שקובע שגם מודולים ברמה גבוהה וגם ברמה נמוכה צריכים להיות תלויים בהפשטות (ממשקים) ולא שהמודול ברמה הגבוהה יהיה תלוי ישירות במחלקה קונקרטית ברמה הנמוכה.",
+    "keyPoints": [
+      "Event = אובייקט שמייצג אינטראקציה של המשתמש עם ה-GUI; Source Object יוצר את האירוע ויכול להיות כל אובייקט",
+      "דוגמאות לסוגי אירועים: קליק, גרירה, זום, סגירה, מסכי מגע, ג'ויסטיק, זמן (timer)",
+      "טיפול באירועים הוא א-סינכרוני; תכנות מונחה-אירועים משמש גם ב-web application ולא רק ב-desktop",
+      "IoC: כותבים מול ממשקים ולא מממשים ישירות עם מחלקות קונקרטיות",
+      "DI: מזריקים את התלות מבחוץ במקום ליצור אותה בתוך המחלקה",
+      "DIP (מ-SOLID): מחלקות בתחתית ההיררכיה לא ישפיעו/יכתיבו למחלקות בראש ההיררכיה",
+      "Strategy: מחליטים בזמן ריצה מה תהיה האסטרטגיה/המימוש הספציפי, כשהתוכנית יודעת רק איזו שיטה צריכה לרוץ",
+      "דוגמת spell-check: TextEditor תלוי בממשק spell ולא במימוש קונקרטי - כדי שיהיה קל להחליף מימוש בעתיד ולהפריד קוד מ-UI"
+    ],
+    "mustRemember": [
+      "IoC הוא העיקרון הכללי; DI היא הטכניקה הקונקרטית ליישומו; DIP הוא עיקרון SOLID נפרד (עוסק בתלות בהפשטות ולא במחלקות קונקרטיות לאורך ההיררכיה) - שלושה מונחים נפרדים שקל לערבב",
+      "אירועים מטופלים א-סינכרונית, לא בסדר ריצה קבוע מראש",
+      "Source Object אינו בהכרח כפתור - יכול להיות כל אובייקט"
+    ],
+    "easyToConfuse": [
+      "IoC (עיקרון כללי - מי שולט בזרימה) מול DI (טכניקה קונקרטית - איך מזריקים תלות) מול DIP (עיקרון SOLID - הפשטות בהיררכיית מחלקות)",
+      "Strategy (תבנית לבחירת מימוש/אלגוריתם בזמן ריצה) מול Observer (תבנית להודעה על שינוי מצב, שנדונה בהרחבה בשיעור קודם) - שתי תבניות עיצוב נפרדות שמופיעות שתיהן בהקשר event-driven"
+    ],
+    "howProfessorMightAsk": [
+      "'מהו ההבדל בין Inversion of Control ל-Dependency Injection?'",
+      "'תארו את יישום ה-Strategy Pattern בדוגמת TextEditor ו-spell check מהקורס, והסבירו מדוע זה מפריד קוד מ-UI'",
+      "'מהם סוגי האירועים האפשריים בתכנות מונחה-אירועים, ומדוע תכנות מונחה-אירועים אינו מוגבל ל-desktop application?'"
+    ],
+    "codeExamples": [],
+    "mnemonicHe": "IoC-DI-DIP: 'אני לא יוצר את התלות - מזריקים לי אותה מבחוץ, ואני תלוי רק בהפשטה (ממשק), לא במי שיושב מתחתיי בהיררכיה.'",
+    "termsHeEn": [
+      {
+        "he": "היפוך בקרה",
+        "en": "Inversion of Control (IoC)"
+      },
+      {
+        "he": "הזרקת תלות",
+        "en": "Dependency Injection (DI)"
+      },
+      {
+        "he": "עקרון היפוך התלות",
+        "en": "Dependency Inversion Principle (DIP)"
+      },
+      {
+        "he": "אובייקט מקור",
+        "en": "Source Object"
+      },
+      {
+        "he": "תבנית אסטרטגיה",
+        "en": "Strategy Pattern"
+      }
+    ],
+    "sourceRefs": [
+      {
+        "fileId": "summary_of_advanced_programming_topics_2022_shai_giladi",
+        "fileName": "Summary of Advanced Programming Topics 2022 - Shai Giladi.pdf",
+        "locator": "pages 42-44"
+      }
+    ]
+  },
+  {
+    "id": "sec-event-driven-javafx-mvc-05",
+    "topicId": "event-driven-javafx-mvc",
+    "order": 5,
+    "headingHe": "StackPane, UI Controls, Layout Nodes והחלפת Scenes ב-JavaFX",
+    "headingEn": "StackPane, UI Controls, Layout Nodes, and Switching Scenes in JavaFX",
+    "intuitionHe": "StackPane הוא כמו מסגרת תמונה שיודעת לבד למרכז ולערום שכבות אחת על השנייה בלי שתצטרכו לחשב קואורדינטות. UI Controls (כמו ComboBox ו-ChoiceBox) הם כמו קוביות לגו מוכנות מראש - לכל אחת התנהגות מובנית משלה (רשימה נפתחת, כפתור וכו') כך שלא בונים לוגיקת בחירה מאפס. Switch Scenes דומה להחלפת ערוץ בטלוויזיה: הטלוויזיה עצמה (ה-Stage) נשארת אותו קופסה פיזית, אבל מה שמוצג עליה (ה-Scene) מוחלף לגמרי בלחיצת כפתור.",
+    "examKnowledgeHe": "כפי שנלמד, Node הוא אלמנט בודד בעץ - מיקום בעמוד, צבעים - אך חשוב לזכור ש-Node גם יכול להפיק/לשאת אירועים, ולא רק פקדים כמו כפתורים. Builder ב-JavaFX נותן לנו לבצע פעולות בנייה על אובייקטים (חלק מזרימת ההקמה Application->Stage->Scene->Layout->Node). StackPane הוא Layout Node ספציפי שיודע איך פקדים (nodes) צריכים להיות מסודרים בתוך הסצנה - בפועל הוא ערם (stack) של שכבות, בדומה לשכבות המסודרות בתוך מסמך. אנלוגיה מהסיכום להמחשת Stage מול Scene: אם מסתכלים על התהליך (process) שמריץ את Word, שם הקובץ שמופיע בחלק העליון הוא ה-Stage, וכל לשונית (tab) שם היא בעצם Scene נפרדת. UI Controls Nodes: יש מלא סוגי פקדים/'כפתורים' ב-JavaFX, וכל פקד כזה הוא Node עם תכונה (feature) משלו. שני פקדים מרכזיים לבחירה מרשימה: ComboBox - מציג רשימה שממנה ניתן לבחור פריט מסוים; ChoiceBox - פקד דומה לבחירה מרשימה, וכדי לשלוף את הערך שנבחר בפועל משתמשים ב-getValue(). Layout Nodes הם אלגוריתמים/מכלים שניתן לעשות איתם שימושים כמו החלפת סצנות. Switch Scenes: תבנית שבה לתכנית יש Stage אחד, וכל פעם (למשל בלחיצת כפתור) מחליפים את ה-Scene שמוצג עליו - כלומר ה-Stage (החלון) נשאר קבוע, ורק תוכן ה-Scene המחובר אליו משתנה. הסיכום גם חוזר וממקד: Handler הוא מה שמחליט מה לעשות ברגע שנתפס אות של אירוע, ו-Listener הוא זה שמאזין ותופס אירוע מסוים - אותה הבחנה בדיוק כמו בהקשר הכללי, אך כאן במפורש בהקשר של UI Controls.",
+    "applicationHe": "קוד טיפוסי להחלפת סצנה בלחיצת כפתור: בתוך handler שמוגדר ל-onAction של כפתור, קוראים ל-`primaryStage.setScene(secondScene);` - שימו לב שאובייקט ה-Stage עצמו אינו משתנה, רק ה-Scene המחובר אליו. שליפת ערך מ-ChoiceBox: `String selected = choiceBox.getValue();`. מלכודת מבחן: אל תבלבלו בין getValue() (שולף את הפריט הנבחר מפקד בחירה כמו ChoiceBox/ComboBox) לבין getText() (שולף תוכן טקסטואלי מפקד כמו Label/TextField) - אלה שתי מתודות שונות על סוגי פקדים שונים, גם אם שתיהן 'מחזירות משהו שהמשתמש רואה'.",
+    "keyPoints": [
+      "Node יכול לשאת/להפיק אירועים - לא רק כפתורים",
+      "Builder ב-JavaFX נותן לנו לבצע פעולות בנייה (בסגנון fluent) על אובייקטים",
+      "StackPane - Layout Node שיודע לסדר/לערום (stack) את הצמתים שבתוכו בסצנה, בדרך כלל ממורכז",
+      "אנלוגיה: Stage = שם החלון/הקובץ (כמו כותרת Word), Scene = מה שמוצג כרגע בתוכו (כמו לשונית/tab)",
+      "UI Controls Nodes: כל פקד (למשל ComboBox, ChoiceBox) הוא Node עם תכונה/feature משלו",
+      "ComboBox - רשימה שממנה בוחרים פריט מסוים",
+      "ChoiceBox - פקד דומה לבחירה מרשימה; משתמשים ב-getValue() כדי לקבל את הערך שנבחר",
+      "Layout Nodes - אלגוריתמים/מכלים שמאפשרים דברים כמו החלפת סצנות (Switch Scenes)",
+      "Switch Scenes: תכנית עם Stage אחד, שבכל פעם (למשל בלחיצת כפתור) מחליפים את ה-Scene המוצג בו"
+    ],
+    "mustRemember": [
+      "getValue() הוא זה שמחזיר את הפריט שנבחר ב-ChoiceBox/ComboBox - לא getText()",
+      "בהחלפת סצנות (Switch Scenes) ה-Stage נשאר אותו אובייקט; רק ה-Scene המחובר אליו מוחלף",
+      "StackPane שייך למשפחת ה-Layout Nodes, ותפקידו לסדר את הבנים (children) שבתוכו בסצנה"
+    ],
+    "easyToConfuse": [
+      "ComboBox מול ChoiceBox - שני פקדים דומים מאוד לבחירה מרשימה; ההבדל העיקרי הוא ב-API/feature-set ולא בעיקרון הבסיסי",
+      "Layout Node (מכל שמארגן nodes אחרים, כמו StackPane) מול UI Control Node (פקד קצה כמו Button/ComboBox) - שניהם 'Node' אך תפקידם שונה בהיררכיה"
+    ],
+    "howProfessorMightAsk": [
+      "'מהי הפונקציה שבה נשתמש כדי לקבל את הערך שנבחר ב-ChoiceBox?'",
+      "'כשמבצעים Switch Scenes ב-JavaFX - האם משנים את ה-Stage או את ה-Scene?'",
+      "'מהו תפקידו של StackPane, ומדוע הוא נחשב Layout Node?'"
+    ],
+    "codeExamples": [
+      {
+        "language": "java",
+        "code": "// Switch Scenes: אותו Stage, Scene מוחלף\nButton switchButton = new Button(\"Next\");\nswitchButton.setOnAction(event -> primaryStage.setScene(secondScene));\n\n// ChoiceBox: שליפת הערך שנבחר\nChoiceBox<String> choiceBox = new ChoiceBox<>();\nchoiceBox.getItems().addAll(\"Option A\", \"Option B\");\nString selected = choiceBox.getValue();",
+        "captionHe": "דפוס Switch Scenes (Stage קבוע, Scene מוחלף) ושליפת ערך מ-ChoiceBox באמצעות getValue()"
+      }
+    ],
+    "termsHeEn": [
+      {
+        "he": "מחסנית תצוגה/פריסה",
+        "en": "StackPane"
+      },
+      {
+        "he": "תיבת בחירה משולבת",
+        "en": "ComboBox"
+      },
+      {
+        "he": "תיבת בחירה",
+        "en": "ChoiceBox"
+      },
+      {
+        "he": "החלפת סצנות",
+        "en": "Switch Scenes"
+      },
+      {
+        "he": "צמתי פריסה",
+        "en": "Layout Nodes"
+      },
+      {
+        "he": "בנאי",
+        "en": "Builder"
+      }
+    ],
+    "sourceRefs": [
+      {
+        "fileId": "summary_of_advanced_programming_topics_2022_shai_giladi",
+        "fileName": "Summary of Advanced Programming Topics 2022 - Shai Giladi.pdf",
+        "locator": "pages 45-48"
+      }
+    ]
+  },
+  {
+    "id": "sec-event-driven-javafx-mvc-06",
+    "topicId": "event-driven-javafx-mvc",
+    "order": 6,
+    "headingHe": "CSS, FXML ו-Scene Builder: הפרדת עיצוב (Design) מלוגיקה ב-JavaFX",
+    "headingEn": "CSS, FXML, and Scene Builder: Separating Design from Logic in JavaFX",
+    "intuitionHe": "CSS ב-JavaFX הוא כמו מסמך מיתוג של רשת מסעדות: במקום שכל סניף (כל מסך/Node) יבחר צבעים וגופנים משלו, כולם מצביעים לאותו גיליון סגנון, כך שכל הרשת נראית אחידה, ואם צבע המותג משתנה - מתקנים במקום אחד ולא בעשרות סניפים. FXML הוא כמו תוכנית אדריכלית (XML) שאומרת רק 'כאן תהיה דלת, שם יהיה חלון' (אילו רכיבים קיימים ואיך הם נראים) - היא לעולם לא מסבירה מה קורה כשדופקים בדלת (הלוגיקה יושבת ב-Controller). Scene Builder הוא כלי הגרירה-והשחרור שמצייר לכם את התוכנית האדריכלית ויזואלית, וכותב את ה-FXML מאחורי הקלעים.",
+    "examKnowledgeHe": "CSS - Cascading Style Sheets: גיליונות הסגנון נקראים 'מדורגים' (cascading) כי יש להם היררכיה. ה-CSS מגדיר צורות/עיצוב וצבעים בתוך אתר או אפליקציה. השאלה המרכזית מהסיכום - 'למה זה טוב?' - התשובה: כי אפשר להגדיר הגדרות עיצוב עבור כל תג (selector/ID) רלוונטי; ID מאפיין/מזהה כך את המחלקה/הרכיב לצורך העיצוב. ה-CSS יוצר אחידות (uniformity), חוסך כפילות קוד, וכך מונע שגיאות ואי-התאמות (inconsistency) - שלושה יתרונות שחוזרים כמעט מילה במילה בבחינה. אפשר גם להשתמש ביותר מגיליון CSS אחד באותה אפליקציה. FXML: קובץ XML (Extensible Markup Language) שמגדיר את ה-View של האפליקציה שלנו - אילו אובייקטים יהיו (כפתורים, טבלת בחירה וכו') ומגדיר צבעים וכדומה, אך לעולם לא מגדיר לוגיקה! יש שתי דרכים להציג/לבנות Scene: האחת כמסמך קוד רגיל (בונים הכל בג'אווה), והשנייה באמצעות FXML+Scene Builder (תצוגה חזותית/מתומצתת). חיווט אירועים מ-FXML לקוד: ב-FXML מגדירים איזו שיטה (method) בקונטרולר תופעל כאשר מתרחש אירוע על פקד מסוים - לדוגמה, על Button מגדירים attribute בשם onAction, שמצביע על שם המתודה שתופעל כשהכפתור יילחץ. Mouse Event: תוכנית שתופסת אירועים שקשורים ספציפית לעכבר (כמו קליק, תזוזה, גרירה) - קטגוריה נפרדת מאירועי action כלליים. Scene Builder: עורך (editor) של קבצי FXML - בתוכו בונים את העיצוב של האפליקציה באופן אוטומטי/ויזואלי, במקום לערוך את קובץ ה-XML ידנית.",
+    "applicationHe": "דוגמת FXML טיפוסית: `<Button text=\"Click me\" onAction=\"#handleButtonClick\" />` בתוך קובץ .fxml, יחד עם מחלקת Controller שמכילה `public void handleButtonClick(ActionEvent event) { ... }` - ה-FXML רק אומר 'יש כאן Button, זה הטקסט שלו, וזה שם המתודה שיש לקרוא לה' (הגדרת View וחיווט), בעוד ההתנהגות בפועל יושבת ב-Controller (Logic) - זו המימוש המעשי של הפרדת Design מ-Logic. באופן דומה, קובצי .css מחוברים ל-Scene/Node (למשל `scene.getStylesheets().add(\"style.css\");`) וסלקטורים (לפי ID או style class) קובעים אילו Node-ים מקבלים אילו כללי עיצוב - שינוי קובץ CSS אחד מעדכן באופן אחיד את כל ה-Node-ים שמשתמשים באותה מחלקת עיצוב, במקום לחפש צבעים מקודדים (hardcoded) פזורים בעשרות מקומות בקוד ה-Java.",
+    "keyPoints": [
+      "CSS נקרא 'מדורג' (Cascading) כי יש לו היררכיה של כללים",
+      "CSS מגדיר צורות/עיצוב וצבעים בתוך אתר/אפליקציה - לא לוגיקה",
+      "יתרונות CSS (שאלת מבחן ישירה): יוצר אחידות, חוסך כפילות קוד, מונע שגיאות ואי-התאמות",
+      "אפשר להגדיר עיצוב פר-תג (selector/ID) ולהשתמש ביותר מגיליון CSS אחד",
+      "FXML = XML שמגדיר את ה-View: אילו אובייקטים/פקדים יהיו ואיך ייראו - לעולם לא מגדיר לוגיקה",
+      "שתי דרכים לבנות/להציג Scene: מסמך קוד טהור לעומת FXML+Scene Builder (תצוגה חזותית)",
+      "חיווט אירועים מ-FXML ל-Controller נעשה דרך attribute בשם onAction שמצביע על שם המתודה בקונטרולר",
+      "Scene Builder הוא עורך ויזואלי (WYSIWYG) לקבצי FXML - בונה את העיצוב אוטומטית בתוכו",
+      "Mouse Event - קטגוריה ייעודית של אירועים הקשורים לעכבר (קליק, גרירה, תזוזה)"
+    ],
+    "mustRemember": [
+      "FXML אף פעם לא מגדיר לוגיקה - רק מבנה/מראה (View); הלוגיקה תמיד ב-Controller",
+      "onAction הוא ה-attribute ב-FXML שמחבר בין אירוע כפתור (או פקד אחר) למתודה בקוד ה-Controller",
+      "יתרונות ה-CSS: אחידות + חיסכון בכפילות קוד + מניעת שגיאות/אי-התאמות - שלושת המונחים חוזרים כמעט מילה במילה בבחינה"
+    ],
+    "easyToConfuse": [
+      "FXML (מגדיר View - מבנה ומראה) מול CSS (מגדיר עיצוב/צבעים) מול קוד ה-Controller (מגדיר לוגיקה) - שלוש שכבות נפרדות בכוונה",
+      "Scene Builder (כלי עריכה ויזואלי ל-FXML) מול FXML עצמו (קובץ ה-XML שהכלי עורך) - הכלי אינו הפורמט"
+    ],
+    "howProfessorMightAsk": [
+      "'מדוע שימוש ב-CSS ב-JavaFX נחשב לפרקטיקה טובה? פרטו שלושה יתרונות'",
+      "'האם FXML יכול להגדיר לוגיקה של האפליקציה? נמקו'",
+      "'כיצד מחברים בין לחיצת כפתור שהוגדרה ב-FXML לבין מתודה בקוד ה-Controller?'"
+    ],
+    "codeExamples": [
+      {
+        "language": "xml",
+        "code": "<Button fx:id=\"myButton\" text=\"Click me\" onAction=\"#handleButtonClick\" styleClass=\"primary-button\" />",
+        "captionHe": "FXML מגדיר רק את קיום הפקד, מראהו (styleClass לצורך CSS), ואת שם המתודה בקונטרולר שתופעל (onAction) - לא את הלוגיקה עצמה"
+      }
+    ],
+    "termsHeEn": [
+      {
+        "he": "גיליונות סגנון מדורגים",
+        "en": "CSS - Cascading Style Sheets"
+      },
+      {
+        "he": "שפת סימון מורחבת",
+        "en": "FXML / XML"
+      },
+      {
+        "he": "עורך סצנות חזותי",
+        "en": "Scene Builder"
+      },
+      {
+        "he": "אירוע עכבר",
+        "en": "Mouse Event"
+      }
+    ],
+    "sourceRefs": [
+      {
+        "fileId": "summary_of_advanced_programming_topics_2022_shai_giladi",
+        "fileName": "Summary of Advanced Programming Topics 2022 - Shai Giladi.pdf",
+        "locator": "pages 48-49"
+      }
     ]
   }
 ]

@@ -1,11 +1,11 @@
 # Question Bank Validation Report
 
-Generated: 2026-07-18T09:06:40.018Z
+Generated: 2026-07-18T09:56:56.097Z
 
 ## Summary
 - Topics: 16
 - Questions total: 294 (active: 293)
-- Flashcards: 188
+- Flashcards: 258
 - Mock exams: 7
 - Errors: 0
 - Warnings: 4
