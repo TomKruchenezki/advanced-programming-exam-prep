@@ -2,6 +2,10 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import type { Flashcard, MockExam, Question, QuestionPackMetadata, Topic } from '../src/types/domain'
+
+interface PastExamIndexEntry {
+  questionIds: string[]
+}
 import { validateFlashcards, validateMockExams, validateQuestions } from '../src/lib/validateData'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -23,11 +27,13 @@ const questions = loadJSON<Question[]>('questions.json')
 const flashcards = loadJSON<Flashcard[]>('flashcards.json')
 const mockExams = loadJSON<MockExam[]>('mockExams.json')
 const questionsById = new Map(questions.map((q) => [q.id, q]))
+const pastExamIndex = loadJSON<PastExamIndexEntry[]>('pastExamIndex.json')
+const pastExamIds = new Set(pastExamIndex.flatMap((e) => e.questionIds))
 
 const packManifest = loadPackJSON<QuestionPackMetadata[]>('manifest.json')
 const packQuestions: Question[] = packManifest.flatMap((pack) => loadPackJSON<Question[]>(`${pack.packId}.json`))
 
-const questionIssues = validateQuestions(questions, topics)
+const questionIssues = validateQuestions(questions, topics, { pastExamIds })
 const flashcardIssues = validateFlashcards(flashcards, topics)
 const mockExamIssues = validateMockExams(mockExams, questionsById)
 

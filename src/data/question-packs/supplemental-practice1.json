@@ -1,52 +1,98 @@
 [
   {
     "id": "supplemental-practice1-q001",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "autoboxing-unboxing",
     "stemHe": "אילו תהליכים מתרחשים בשורות הבאות?",
     "code": "List<Integer> list = new ArrayList<>();\nlist.add(5);\nint x = list.get(0);",
     "options": [
-      { "id": "a", "text": "AutoBoxing בלבד." },
-      { "id": "b", "text": "Unboxing בלבד." },
-      { "id": "c", "text": "גם AutoBoxing (בעת ההוספה) וגם Unboxing (בעת השליפה)." },
-      { "id": "d", "text": "שגיאת הידור — לא ניתן להוסיף int ל-List<Integer>." },
-      { "id": "e", "text": "כל התשובות שגויות." }
+      {
+        "id": "a",
+        "text": "AutoBoxing בלבד — list.add(5) עוטף ב-Integer, אך list.get(0) אינו מבצע Unboxing."
+      },
+      {
+        "id": "b",
+        "text": "Unboxing בלבד — list.add(5) מכניס int לרשימה בלי AutoBoxing; רק list.get(0) מבצע Unboxing."
+      },
+      {
+        "id": "c",
+        "text": "גם AutoBoxing (בעת ההוספה) וגם Unboxing (בעת השליפה)."
+      },
+      {
+        "id": "d",
+        "text": "שגיאת הידור — לא ניתן להוסיף int ל-List<Integer>."
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות — זו המרה מרומזת (implicit cast) של הקומפיילר, לא מנגנון ה-Boxing הסטנדרטי."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "list.add(5) עוטף את ה-int הליטרלי ב-Integer באמצעות AutoBoxing (כדי שיתאים לטיפוס הגנרי List<Integer>), ו-list.get(0) פורק (Unboxing) את ה-Integer המוחזר בחזרה ל-int כדי שיתאים למשתנה x. שני התהליכים מתרחשים כאן, בשני כיוונים מנוגדים.",
     "optionExplanations": {
-      "a": "שגוי - יש כאן גם Unboxing בשורה השלישית, לא רק AutoBoxing.",
-      "b": "שגוי - יש כאן גם AutoBoxing בשורה השנייה (בעת ההוספה), לא רק Unboxing.",
+      "a": "שגוי - יש כאן גם Unboxing בשורה השלישית: הקצאת ערך מטיפוס Integer למשתנה מוצהר כ-int דורשת המרה (unboxing) בפועל, בניגוד לנטען בתשובה.",
+      "b": "שגוי - יש כאן גם AutoBoxing בשורה השנייה: list.add(5) על List<Integer> אינו יכול לקבל int גולמי, ולכן הקומפיילר עוטף אותו ב-Integer באמצעות Integer.valueOf(5) לפני ההוספה בפועל.",
       "c": "נכון - list.add(5) מבצע AutoBoxing (int→Integer) ו-list.get(0) מבצע Unboxing (Integer→int).",
       "d": "שגוי - הקומפיילר מבצע AutoBoxing אוטומטית; אין כאן שגיאת הידור.",
-      "e": "שגוי - תשובה ג נכונה."
+      "e": "שגוי - תשובה ג נכונה; מה שקורה כאן הוא בדיוק AutoBoxing ו-Unboxing הסטנדרטיים (דרך Integer.valueOf ו-intValue), לא מנגנון המרה אחר כלשהו."
     },
     "difficulty": "easy",
     "questionType": "code-analysis",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 3" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 3"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["generics", "autoboxing", "unboxing", "collections"],
+    "tags": [
+      "generics",
+      "autoboxing",
+      "unboxing",
+      "collections"
+    ],
     "keyLearningPoint": "list.add/get על List<Integer> מבצעים AutoBoxing ו-Unboxing אוטומטיים בשני הכיוונים.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 3
   },
   {
     "id": "supplemental-practice1-q002",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "generics-type-erasure",
     "stemHe": "מה מהבאים אינו נכון לגבי Generics ב-Java?",
     "options": [
-      { "id": "a", "text": "הם מספקים בטיחות טיפוסים בזמן הידור (compile-time type safety)." },
-      { "id": "b", "text": "הם מאפשרים שימוש חוזר בקוד עבור טיפוסים שונים." },
-      { "id": "c", "text": "הם גורמים לקוד לרוץ מהר יותר בזמן ריצה." },
-      { "id": "d", "text": "שגיאות טיפוס מסוימות נתפסות בזמן הידור במקום בזמן ריצה." },
-      { "id": "e", "text": "ניתן להגדיר מחלקות, ממשקים ומתודות גנריים." }
+      {
+        "id": "a",
+        "text": "הם מספקים בטיחות טיפוסים בזמן הידור."
+      },
+      {
+        "id": "b",
+        "text": "הם מאפשרים שימוש חוזר בקוד עבור טיפוסים שונים."
+      },
+      {
+        "id": "c",
+        "text": "הם גורמים לקוד לרוץ מהר יותר בזמן ריצה בפועל."
+      },
+      {
+        "id": "d",
+        "text": "שגיאות טיפוס מסוימות נתפסות בזמן הידור במקום בזמן ריצה."
+      },
+      {
+        "id": "e",
+        "text": "ניתן להגדיר מחלקות, ממשקים ומתודות גנריים."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "Generics ב-Java ממומשים באמצעות Type Erasure - בזמן ריצה כל המידע הגנרי 'נמחק' והופך לטיפוס הגולמי (raw type) עם המרות (casts) אוטומטיות. לכן generics אינם משפרים ביצועי ריצה כלל - התועלת שלהם היא אך ורק בטיחות טיפוסים ותפיסת שגיאות בזמן הידור.",
@@ -60,29 +106,57 @@
     "difficulty": "medium",
     "questionType": "true-false",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 5" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 5"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["generics", "type-erasure", "misconception"],
+    "tags": [
+      "generics",
+      "type-erasure",
+      "misconception"
+    ],
     "keyLearningPoint": "Generics משפרים בטיחות טיפוסים בזמן הידור בלבד, לא ביצועי ריצה (עקב Type Erasure).",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice1-q003",
-    "topicIds": ["solid-principles"],
+    "topicIds": [
+      "solid-principles"
+    ],
     "subtopic": "single-responsibility-principle",
     "stemHe": "מחלקה Report מכילה את המתודות הבאות: generateData(), formatAsPdf(), sendEmail(), saveToDatabase(). איזה עקרון מעקרונות SOLID מופר כאן בצורה הבולטת ביותר?",
     "options": [
-      { "id": "a", "text": "Single Responsibility Principle" },
-      { "id": "b", "text": "Liskov Substitution Principle" },
-      { "id": "c", "text": "Interface Segregation Principle" },
-      { "id": "d", "text": "Dependency Inversion Principle" },
-      { "id": "e", "text": "לא מופר אף עקרון." }
+      {
+        "id": "a",
+        "text": "Single Responsibility Principle"
+      },
+      {
+        "id": "b",
+        "text": "Liskov Substitution Principle"
+      },
+      {
+        "id": "c",
+        "text": "Interface Segregation Principle"
+      },
+      {
+        "id": "d",
+        "text": "Dependency Inversion Principle"
+      },
+      {
+        "id": "e",
+        "text": "לא מופר אף עקרון."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "למחלקה Report יש ארבע אחריויות שונות ובלתי-קשורות: ייצור נתונים, המרה לפורמט PDF, שליחת מייל, ושמירה במסד נתונים - כל אחת מהן היא סיבה נפרדת לשינוי. זו בדיוק הפרת Single Responsibility Principle: מחלקה צריכה שיהיה לה סיבה יחידה להשתנות.",
@@ -96,12 +170,22 @@
     "difficulty": "medium",
     "questionType": "solid-violation",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 8" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 8"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["solid", "srp", "god-object"],
+    "tags": [
+      "solid",
+      "srp",
+      "god-object"
+    ],
     "keyLearningPoint": "מחלקה עם מספר אחריויות בלתי-קשורות (ייצור נתונים+פורמט+שליחה+שמירה) מפרה SRP.",
     "points": 5,
     "active": true,
@@ -110,15 +194,32 @@
   },
   {
     "id": "supplemental-practice1-q004",
-    "topicIds": ["solid-principles"],
+    "topicIds": [
+      "solid-principles"
+    ],
     "subtopic": "dependency-inversion-principle",
     "stemHe": "מחלקת EmailService יוצרת בעצמה, בתוך הבנאי שלה, מופע קונקרטי new MySQLDatabase() במקום לקבל את התלות דרך ממשק (abstraction). איזה עקרון SOLID מופר?",
     "options": [
-      { "id": "a", "text": "Open-Closed Principle" },
-      { "id": "b", "text": "Dependency Inversion Principle" },
-      { "id": "c", "text": "Single Responsibility Principle" },
-      { "id": "d", "text": "Liskov Substitution Principle" },
-      { "id": "e", "text": "Interface Segregation Principle" }
+      {
+        "id": "a",
+        "text": "Open-Closed Principle"
+      },
+      {
+        "id": "b",
+        "text": "Dependency Inversion Principle"
+      },
+      {
+        "id": "c",
+        "text": "Single Responsibility Principle"
+      },
+      {
+        "id": "d",
+        "text": "Liskov Substitution Principle"
+      },
+      {
+        "id": "e",
+        "text": "Interface Segregation Principle"
+      }
     ],
     "correctOptionId": "b",
     "explanation": "מודול גבוה-רמה (EmailService) יוצר ותלוי ישירות במחלקה קונקרטית נמוכת-רמה (MySQLDatabase) במקום להיות תלוי באבסטרקציה. זו בדיוק הפרת Dependency Inversion Principle: מודולים גבוהי-רמה ונמוכי-רמה שניהם צריכים להיות תלויים באבסטרקציות.",
@@ -132,12 +233,21 @@
     "difficulty": "medium",
     "questionType": "solid-violation",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 9" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 9"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["solid", "dip"],
+    "tags": [
+      "solid",
+      "dip"
+    ],
     "keyLearningPoint": "יצירת תלות קונקרטית פנימית (new ClassX()) במקום קבלת אבסטרקציה דרך הבנאי מפרה DIP.",
     "points": 5,
     "active": true,
@@ -146,15 +256,32 @@
   },
   {
     "id": "supplemental-practice1-q005",
-    "topicIds": ["design-patterns-creational"],
+    "topicIds": [
+      "design-patterns-creational"
+    ],
     "subtopic": "factory-pattern",
     "stemHe": "בקוד הלקוח שלנו יש שרשרת ארוכה של if/else שיוצרת אובייקטים מסוגים שונים (Circle, Square, Triangle) בהתאם למחרוזת קלט. איזו תבנית עיצוב תרכז את לוגיקת היצירה ותנתק אותה מקוד הלקוח בצורה הטובה ביותר?",
     "options": [
-      { "id": "a", "text": "Observer" },
-      { "id": "b", "text": "Factory" },
-      { "id": "c", "text": "Decorator" },
-      { "id": "d", "text": "Strategy" },
-      { "id": "e", "text": "Singleton" }
+      {
+        "id": "a",
+        "text": "Observer"
+      },
+      {
+        "id": "b",
+        "text": "Factory"
+      },
+      {
+        "id": "c",
+        "text": "Decorator"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      },
+      {
+        "id": "e",
+        "text": "Singleton"
+      }
     ],
     "correctOptionId": "b",
     "explanation": "ריכוז לוגיקת יצירת אובייקטים לפי קלט וניתוקה מקוד הלקוח הוא בדיוק תפקידה של Factory Pattern - הלקוח מבקש אובייקט לפי קריטריון, ולא צריך לדעת את שרשרת ה-if/else של הבנייה.",
@@ -168,12 +295,22 @@
     "difficulty": "medium",
     "questionType": "design-pattern-choice",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 10" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 10"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["design-patterns", "factory", "creational"],
+    "tags": [
+      "design-patterns",
+      "factory",
+      "creational"
+    ],
     "keyLearningPoint": "Factory Pattern מרכזת לוגיקת יצירה לפי קלט ומנתקת את קוד הלקוח מהמחלקות הקונקרטיות.",
     "points": 5,
     "active": true,
@@ -182,52 +319,97 @@
   },
   {
     "id": "supplemental-practice1-q006",
-    "topicIds": ["networking-sockets-io-streams"],
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
     "subtopic": "socket-ip-port-requirements",
     "stemHe": "תלמיד טוען שכדי להקים תקשורת socket בין שני תהליכים על אותה מכונה, מספיק שלכל צד תהיה כתובת IP. מה מהבאים מתאר נכון את הדרישות?",
     "options": [
-      { "id": "a", "text": "הטענה נכונה — כתובת IP מספיקה לשני הצדדים, הפורט נבחר אוטומטית תמיד." },
-      { "id": "b", "text": "הצד המאזין (השרת) חייב פורט פנוי שעליו הוא מאזין, והצד היוזם (הלקוח) חייב לדעת את כתובת ה-IP ואת הפורט של השרת כדי להתחבר." },
-      { "id": "c", "text": "רק הלקוח זקוק לפורט; השרת מאזין ללא פורט כלל." },
-      { "id": "d", "text": "אם משתמשים ב-TCP אין צורך בפורט באף אחד מהצדדים." },
-      { "id": "e", "text": "פורט נדרש רק בפרוטוקול UDP ולא ב-TCP." }
+      {
+        "id": "a",
+        "text": "הטענה נכונה — כתובת IP בלבד מספיקה לזיהוי שני הצדדים, ומערכת ההפעלה מקצה פורט אוטומטית לכל תהליך המאזין, ללא צורך לתאם פורט מראש."
+      },
+      {
+        "id": "b",
+        "text": "הצד המאזין (השרת) חייב פורט פנוי שעליו הוא מאזין, והצד היוזם (הלקוח) חייב לדעת את כתובת ה-IP ואת הפורט של השרת כדי להתחבר אליו בהצלחה."
+      },
+      {
+        "id": "c",
+        "text": "רק הלקוח זקוק לפורט; השרת מזוהה על ידי כתובת ה-IP בלבד ומקבל חיבורים נכנסים מבלי להאזין על פורט ספציפי כלשהו."
+      },
+      {
+        "id": "d",
+        "text": "ב-TCP (בניגוד ל-UDP) החיבור מבוסס על 'stream' רציף בין כתובות IP בלבד, ולכן אין צורך בפורט באף צד - הפורט רלוונטי רק לפרוטוקולים חסרי-חיבור."
+      },
+      {
+        "id": "e",
+        "text": "פורט נדרש רק ב-UDP, מכיוון שהוא חסר-חיבור וחייב לזהות כל datagram בנפרד; TCP מסתפק בכתובת IP של השרת בלבד לאחר ה-handshake."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "התלמיד טועה: כתובת IP בלבד אינה מספיקה. השרת חייב לבחור/להאזין על פורט ספציפי ופנוי, והלקוח חייב לדעת גם את כתובת ה-IP של השרת וגם את הפורט הספציפי הזה כדי ליזום חיבור. זה נכון הן ל-TCP והן ל-UDP.",
     "optionExplanations": {
-      "a": "שגוי - הפורט אינו נבחר אוטומטית אצל השרת; השרת חייב לציין/להאזין על פורט ספציפי, והלקוח חייב לדעת אותו.",
+      "a": "שגוי - הקצאת פורט אוטומטית (אפמרלי) קורית אצל הלקוח בעת יציאה, אך לא אצל השרת: השרת חייב להאזין בפועל על פורט קבוע וידוע מראש (למשל 5000), אחרת ללקוח אין כיצד לדעת לאן להתחבר.",
       "b": "נכון - תיאור מדויק של הדרישות: פורט פנוי אצל השרת, וידיעת IP+פורט אצל הלקוח.",
-      "c": "שגוי - הפוך - השרת הוא זה שחייב פורט להאזנה; הלקוח בדרך כלל מקבל פורט אפמרלי אוטומטי.",
-      "d": "שגוי - גם ב-TCP נדרש פורט בשני הצדדים.",
-      "e": "שגוי - פורט נדרש הן ב-TCP והן ב-UDP; שניהם עובדים מעל IP+פורט."
+      "c": "שגוי - הפוך לחלוטין: השרת הוא זה שחייב לפתוח ולהאזין על פורט ספציפי (דרך ServerSocket), בעוד שהלקוח בדרך כלל מקבל פורט אפמרלי זמני שמוקצה לו אוטומטית.",
+      "d": "שגוי - גם TCP וגם UDP פועלים מעל השילוב של IP+פורט; ה-'stream' הרציף של TCP אינו מבטל את הצורך בפורט, אלא רק מוסיף אבטחת מסירה וסדר מעל שכבת ה-IP:פורט.",
+      "e": "שגוי - גם TCP דורש פורט לאורך כל חייו של החיבור, כולל בזמן ה-handshake הראשוני עצמו; לא ניתן לבצע three-way handshake של TCP בלי לציין פורט יעד מההתחלה."
     },
     "difficulty": "medium",
     "questionType": "client-server-sockets",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "שאלה 19" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "שאלה 19"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["networking", "sockets", "tcp-udp"],
+    "tags": [
+      "networking",
+      "sockets",
+      "tcp-udp"
+    ],
     "keyLearningPoint": "חיבור socket דורש IP+פורט ספציפיים משני הצדדים - IP בלבד אינו מספיק.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 4
   },
   {
     "id": "supplemental-practice1-gen001",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "autoboxing-integer-cache",
     "stemHe": "מה יהיה הפלט של התכנית הבאה?",
     "code": "public class BoxingTest {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>();\n        for (int i = 0; i < 3; i++) list.add(i * 100);\n        Integer x = list.get(1);\n        Integer y = 100;\n        System.out.println(x == y);\n    }\n}",
     "options": [
-      { "id": "a", "text": "true" },
-      { "id": "b", "text": "false" },
-      { "id": "c", "text": "NullPointerException בזמן ריצה." },
-      { "id": "d", "text": "שגיאת הידור — list.get(1) מחזיר Integer ולא ניתן להשוותו ל-Integer עם ==." },
-      { "id": "e", "text": "תלוי במימוש ה-JVM הספציפי." }
+      {
+        "id": "a",
+        "text": "true"
+      },
+      {
+        "id": "b",
+        "text": "false"
+      },
+      {
+        "id": "c",
+        "text": "NullPointerException בזמן ריצה."
+      },
+      {
+        "id": "d",
+        "text": "שגיאת הידור — אין להשוות Integer עם ==."
+      },
+      {
+        "id": "e",
+        "text": "תלוי במימוש ה-JVM הספציפי."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "list.add(100) מבצע AutoBoxing על 100 דרך Integer.valueOf(100), אשר נמצא בטווח ה-cache הפנימי של Integer (-128 עד 127) ולכן מוחזר מופע קאשור קיים; y = 100 עובר אותו תהליך autoboxing ומקבל אותו מופע קאשור בדיוק. לכן x == y (השוואת reference) הוא true.",
@@ -241,196 +423,347 @@
     "difficulty": "hard",
     "questionType": "code-output",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 3" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 3"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["generics", "autoboxing", "integer-cache"],
+    "tags": [
+      "generics",
+      "autoboxing",
+      "integer-cache"
+    ],
     "keyLearningPoint": "AutoBoxing דרך רשימה גם הוא כפוף ל-Integer cache, בדיוק כמו autoboxing ישיר.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice1-gen002",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "generics-type-erasure-instanceof",
     "stemHe": "בהינתן `List<String> list = new ArrayList<>();`, מדוע הקוד `if (list instanceof List<String>)` גורם לשגיאת הידור?",
     "options": [
-      { "id": "a", "text": "כי List אינה יכולה להיבדק עם instanceof כלל." },
-      { "id": "b", "text": "בגלל Type Erasure — מידע הטיפוס הגנרי (String) נמחק בזמן ריצה, ולכן אי אפשר לבדוק instanceof מול טיפוס גנרי פרמטרי; ניתן לבדוק רק מול List<?> או List הגולמי." },
-      { "id": "c", "text": "כי List היא ממשק, וממשקים אינם נתמכים ב-instanceof." },
-      { "id": "d", "text": "כי list הוא null בזמן הבדיקה." },
-      { "id": "e", "text": "אין שגיאת הידור כאן, זהו קוד תקין לחלוטין." }
+      {
+        "id": "a",
+        "text": "כי הממשק List, בהיותו טיפוס גנרי, אינו נתמך כלל על ידי אופרטור instanceof בזמן הידור - מגבלה זו חלה על כל האוספים הגנריים ולא רק על List<String> הספציפי."
+      },
+      {
+        "id": "b",
+        "text": "בגלל Type Erasure — מידע הטיפוס הגנרי (String) נמחק בזמן ריצה, ולכן אי אפשר לבדוק instanceof מול טיפוס גנרי פרמטרי; ניתן לבדוק רק מול List<?> או List הגולמי."
+      },
+      {
+        "id": "c",
+        "text": "כי List הוא טיפוס ממשק (interface) ולא מחלקה קונקרטית, ואופרטור instanceof ב-Java פועל אך ורק כנגד מחלקות קונקרטיות שניתן ליצור מהן מופע - לא כנגד ממשקים כלל."
+      },
+      {
+        "id": "d",
+        "text": "כי המשתנה list מוצהר אך לא הוקצה בפועל (מצביע ל-null) ברגע ביצוע הבדיקה instanceof, ולכן הביטוי נכשל בזמן הידור עקב הפעלת אופרטור על הפניה ריקה."
+      },
+      {
+        "id": "e",
+        "text": "אין כאן שום שגיאת הידור - הקוד תקין ומתקמפל בהצלחה, מכיוון שהקומפיילר מסוגל להסיק את טיפוס הפרמטר הגנרי בזמן ריצה בעזרת reflection פנימי שמלווה כל אובייקט גנרי."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "עקב Type Erasure, ה-JVM אינו שומר בזמן ריצה איזה טיפוס פרמטר-גנרי הוזן ל-List - כל המידע הזה קיים רק בזמן הידור. בדיקת instanceof מתבצעת בזמן ריצה, ולכן אי אפשר לבדוק מול טיפוס גנרי ספציפי (List<String>) - ניתן לבדוק רק מול הטיפוס הגולמי (List) או עם wildcard לא-מוגבל (List<?>).",
     "optionExplanations": {
-      "a": "שגוי - ניתן לבדוק instanceof מול List (או List<?>), רק לא מול List<String> הספציפי.",
+      "a": "שגוי - ניתן לבדוק בהחלט instanceof מול List או מול List<?> (הטיפוס הגולמי או wildcard לא-מוגבל); המגבלה חלה רק על טיפוס גנרי פרמטרי ספציפי כמו List<String>, לא על כל שימוש ב-instanceof מול אוספים.",
       "b": "נכון - Type Erasure מונע מה-JVM לדעת בזמן ריצה מהו הטיפוס הגנרי הפרמטרי, ולכן הבדיקה חסומה בזמן הידור.",
-      "c": "שגוי - ממשקים נבדקים היטב עם instanceof; הבעיה כאן היא הטיפוס הגנרי הפרמטרי הספציפי, לא העובדה שזה ממשק.",
-      "d": "שגוי - זו שגיאת הידור (compile-time), לא קשורה לערך בזמן ריצה.",
-      "e": "שגוי - זהו קוד שאינו מתקמפל; יש שגיאת הידור בדיוק בגלל Type Erasure."
+      "c": "שגוי - אופרטור instanceof נתמך במלואו גם מול ממשקים (למשל if (obj instanceof Runnable)); הבעיה בשאלה אינה בעובדה ש-List הוא ממשק, אלא בטיפוס הגנרי הפרמטרי הספציפי (String) שנמחק בזמן ריצה.",
+      "d": "שגוי - list מאותחל בפועל עם new ArrayList<>() בשורה שלפני כן, ולכן אינו null; זו שגיאת הידור (compile-time) שנובעת מ-Type Erasure, ואינה תלויה כלל בערך בזמן ריצה.",
+      "e": "שגוי - זהו בדיוק קוד שאינו מתקמפל; ב-Java אין שום מנגנון reflection שמשחזר בזמן ריצה את טיפוס הפרמטר הגנרי שנמחק על ידי Type Erasure, ולכן הביטוי נחסם כבר בזמן ההידור."
     },
     "difficulty": "hard",
     "questionType": "compilation-error",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 5" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 5"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["generics", "type-erasure", "instanceof"],
+    "tags": [
+      "generics",
+      "type-erasure",
+      "instanceof"
+    ],
     "keyLearningPoint": "Type Erasure מונע בדיקת instanceof מול טיפוס גנרי פרמטרי ספציפי - רק מול הטיפוס הגולמי או wildcard.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 3
   },
   {
     "id": "supplemental-practice1-gen003",
-    "topicIds": ["solid-principles"],
+    "topicIds": [
+      "solid-principles"
+    ],
     "subtopic": "srp-refactoring-benefit",
     "stemHe": "לאחר שזוהתה הפרת Single Responsibility Principle במחלקת Report (שכללה גם ייצור נתונים, גם עיצוב PDF וגם שליחת מייל), הוחלט לפרק אותה לשלוש מחלקות נפרדות: ReportDataGenerator, PdfFormatter, ו-EmailSender. מה התועלת המרכזית שהושגה בפירוק הזה?",
     "options": [
-      { "id": "a", "text": "כל מחלקה כעת אחראית לדבר אחד בלבד, כך ששינוי בלוגיקת המייל (למשל) אינו מסכן פגיעה בלוגיקת ה-PDF או בייצור הנתונים." },
-      { "id": "b", "text": "הקוד רץ כעת מהר יותר, כי יש פחות שורות בכל מחלקה." },
-      { "id": "c", "text": "כעת ניתן להשתמש בירושה מרובה בין שלוש המחלקות." },
-      { "id": "d", "text": "פירוק למחלקות קטנות תמיד מונע שגיאות זמן-ריצה לחלוטין." },
-      { "id": "e", "text": "אין שום תועלת אמיתית — זהו רק ארגון קוסמטי." }
+      {
+        "id": "a",
+        "text": "כל מחלקה כעת אחראית לדבר אחד בלבד (Single Responsibility), כך ששינוי בלוגיקת המייל למשל אינו מסכן פגיעה בלוגיקת ה-PDF או בייצור הנתונים."
+      },
+      {
+        "id": "b",
+        "text": "הקוד רץ כעת מהר יותר בזמן ריצה, מכיוון שפיצול למחלקות קטנות מפחית את גודל ה-bytecode ומאפשר ל-JVM אופטימיזציות טובות יותר ב-JIT."
+      },
+      {
+        "id": "c",
+        "text": "כעת ניתן להשתמש בירושה מרובה (multiple inheritance) בין שלוש המחלקות, כך שמחלקה אחת יכולה לרשת בו-זמנית משלושתן ולשתף שדות ומתודות ישירות."
+      },
+      {
+        "id": "d",
+        "text": "פירוק למחלקות קטנות מבטיח תמיד מניעה מוחלטת של שגיאות זמן-ריצה, משום שכל מחלקה עוברת בדיקה מלאה ואין אפשרות לתקלות חוצות-מחלקות."
+      },
+      {
+        "id": "e",
+        "text": "אין שום תועלת אמיתית בפירוק הזה — מדובר בשינוי קוסמטי בלבד של ארגון הקבצים, ללא השפעה על מבנה התלויות (coupling) או על קלות התחזוקה."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "התועלת המרכזית של פירוק לפי SRP היא בידוד סיבות-לשינוי: כל מחלקה משרתת אחריות אחת, כך ששינוי דרישה באחד התחומים לא מחייב לגעת בקוד של תחום אחר, מפחית סיכון לרגרסיות ומשפר תחזוקתיות ובדיקתיות - לא ביצועים, לא ירושה מרובה, ולא ביטול שגיאות.",
     "optionExplanations": {
       "a": "נכון - זו בדיוק התועלת של SRP: בידוד סיבות-לשינוי, פחות סיכון לרגרסיה, קלות תחזוקה ובדיקה.",
-      "b": "שגוי - פירוק למחלקות אינו משפר ביצועי ריצה כשלעצמו; זו החלטה מבנית לתחזוקתיות, לא לביצועים.",
-      "c": "שגוי - Java אינה תומכת בירושה מרובה של מחלקות כלל, בפירוק או שלא.",
-      "d": "שגוי - פירוק טוב משפר תחזוקתיות אך אינו מבטיח היעדר שגיאות זמן-ריצה.",
-      "e": "שגוי - התועלת אינה קוסמטית; היא מפחיתה קישור (coupling) בין אחריויות בלתי-קשורות."
+      "b": "שגוי - פירוק למחלקות נפרדות הוא החלטה מבנית לצורך תחזוקתיות ובידוד אחריויות, ואינו משפיע באופן מהותי על ביצועי ה-JIT או על מהירות הריצה של התוכנית.",
+      "c": "שגוי - Java אינה תומכת בירושה מרובה של מחלקות בשום מקרה, בין אם לפני הפירוק ובין אם אחריו; ניתן לשתף התנהגות בין מחלקות רק באמצעות ממשקים או קומפוזיציה, לא ירושה מרובה.",
+      "d": "שגוי - פירוק טוב משפר תחזוקתיות ובהירות קוד, אך אינו מבטיח בשום צורה היעדר שגיאות זמן-ריצה; באגים יכולים להתרחש בכל מחלקה, גדולה או קטנה, ואף תקלות חוצות-מחלקות עדיין אפשריות דרך הקריאות ביניהן.",
+      "e": "שגוי - התועלת אינה קוסמטית כלל; פירוק לפי SRP מפחית קישוריות (coupling) בין אחריויות בלתי-קשורות ומבודד סיבות-לשינוי, מה שמשפר משמעותית את קלות התחזוקה והבדיקה של הקוד."
     },
     "difficulty": "medium",
     "questionType": "solid-violation",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 8" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 8"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["solid", "srp", "refactoring"],
+    "tags": [
+      "solid",
+      "srp",
+      "refactoring"
+    ],
     "keyLearningPoint": "פירוק לפי SRP מבודד סיבות-לשינוי ומפחית קישור בין אחריויות, לא משפר ביצועים.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 4
   },
   {
     "id": "supplemental-practice1-gen004",
-    "topicIds": ["solid-principles"],
+    "topicIds": [
+      "solid-principles"
+    ],
     "subtopic": "dip-fix-constructor-injection",
     "stemHe": "כדי לתקן את הפרת ה-Dependency Inversion Principle במחלקת EmailService (שיצרה בעצמה new MySQLDatabase()), מה השינוי הנכון ביותר?",
     "options": [
-      { "id": "a", "text": "להגדיר ממשק IDatabase, ולהזריק מימוש קונקרטי שלו (כגון MySQLDatabase) ל-EmailService דרך פרמטר בבנאי (constructor injection), כך ש-EmailService תלוי רק בממשק." },
-      { "id": "b", "text": "להפוך את המתודה שיוצרת את MySQLDatabase ל-private כדי להסתיר אותה." },
-      { "id": "c", "text": "להוסיף עוד מתודה למחלקת EmailService שתטפל גם בבסיס הנתונים." },
-      { "id": "d", "text": "להפוך את MySQLDatabase למחלקה final כדי שלא ניתן יהיה לרשת ממנה." },
-      { "id": "e", "text": "אין דרך לתקן זאת - התלות הקונקרטית היא חלק בלתי נמנע מהשפה." }
+      {
+        "id": "a",
+        "text": "להגדיר ממשק IDatabase, ולהזריק מימוש קונקרטי שלו (כגון MySQLDatabase) ל-EmailService דרך פרמטר בבנאי (constructor injection), כך ש-EmailService תלוי רק בממשק."
+      },
+      {
+        "id": "b",
+        "text": "להפוך את הבנאי (constructor) של EmailService, או את הקוד הפנימי שיוצר את MySQLDatabase, למתודה private נפרדת, כך שפרטי היצירה יהיו מוסתרים ומוכמסים (encapsulated) מחוץ למחלקה."
+      },
+      {
+        "id": "c",
+        "text": "להוסיף ל-EmailService מתודה ציבורית נוספת בשם כגון connectToDatabase(), שתרכז את כל הלוגיקה הקשורה לתקשורת עם בסיס הנתונים בתוך אותה מחלקה עצמה, במקום להפריד אותה למחלקה נפרדת."
+      },
+      {
+        "id": "d",
+        "text": "להוסיף למחלקת MySQLDatabase את מילת המפתח final, כדי למנוע מתת-מחלקות אחרות לרשת ממנה ולשנות את ההתנהגות שלה בעתיד, ובכך 'לנעול' את המימוש הקיים."
+      },
+      {
+        "id": "e",
+        "text": "אין דרך אמיתית לתקן זאת, מכיוון שביצוע new על מחלקה קונקרטית בתוך בנאי הוא חלק בלתי נמנע ממנגנון היצירה של אובייקטים בשפת Java, ולא ניתן לעקוף זאת ללא שימוש בכלים חיצוניים למסגרת השפה עצמה."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "הפתרון הסטנדרטי להפרת DIP הוא constructor injection מול אבסטרקציה: מגדירים ממשק, משנים את EmailService כך שתקבל את התלות כפרמטר בבנאי במקום ליצור אותה בעצמה - כעת EmailService תלוי רק בממשק, וניתן להחליף מימושים בלי לשנות את EmailService.",
     "optionExplanations": {
       "a": "נכון - זהו constructor injection דרך אבסטרקציה, הפתרון הקנוני ל-DIP.",
-      "b": "שגוי - הפיכת המתודה ל-private אינה משנה את עצם התלות הקונקרטית הפנימית.",
-      "c": "שגוי - הוספת אחריות נוספת ל-EmailService רק תחמיר גם הפרת SRP, ולא תפתור את DIP.",
-      "d": "שגוי - final מונע ירושה אך אינו קשור כלל לבעיית התלות הקונקרטית הישירה.",
-      "e": "שגוי - constructor injection מול ממשק היא בדיוק דרך פשוטה ומקובלת לתיקון."
+      "b": "שגוי - הסתרת קוד היצירה בתוך מתודה private אינה משנה את עצם קיום התלות הקונקרטית הפנימית ב-MySQLDatabase; ה-encapsulation אינו פותר בעיית DIP, שדורשת תלות באבסטרקציה, לא הסתרת מימוש.",
+      "c": "שגוי - הוספת עוד לוגיקת בסיס-נתונים לתוך EmailService רק מוסיפה עוד אחריות למחלקה (ומחמירה גם הפרת SRP), ואינה פותרת את הבעיה המקורית של תלות ישירה בקונקרטי במקום באבסטרקציה.",
+      "d": "שגוי - final מונע ירושה מ-MySQLDatabase, אך אינו קשור כלל לבעיה: הבעיה היא ש-EmailService יוצר את המחלקה הקונקרטית בעצמו (new MySQLDatabase()) במקום לקבל אבסטרקציה מבחוץ.",
+      "e": "שגוי - constructor injection מול ממשק (כפי שמתואר בתשובה א) הוא פתרון פשוט, סטנדרטי, וזמין באופן מובנה בכל Java רגילה, ללא צורך בשום כלי חיצוני; הבעיה ניתנת לתיקון מלא."
     },
     "difficulty": "medium",
     "questionType": "solid-violation",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 9" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 9"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["solid", "dip", "constructor-injection"],
+    "tags": [
+      "solid",
+      "dip",
+      "constructor-injection"
+    ],
     "keyLearningPoint": "תיקון DIP: constructor injection של אבסטרקציה במקום יצירת תלות קונקרטית פנימית.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice1-gen005",
-    "topicIds": ["design-patterns-creational"],
+    "topicIds": [
+      "design-patterns-creational"
+    ],
     "subtopic": "factory-pattern-misconception",
     "stemHe": "לאחר שהוחלף שרשרת ה-if/else ביצירת צורות (Circle/Square/Triangle) במחלקת ShapeFactory עם מתודה סטטית אחת createShape(String type), קולגה טוען שזה 'לא באמת תבנית עיצוב, כי עדיין יש if/else - רק הוזז למקום אחר'. האם הטענה נכונה?",
     "options": [
-      { "id": "a", "text": "הטענה נכונה לחלוטין - זה בדיוק אותו קוד, רק במקום אחר, ואין שום תועלת." },
-      { "id": "b", "text": "הטענה שגויה: התועלת של Factory אינה 'ביטול if/else' אלא ריכוזו במקום אחד וניתוק קוד הלקוח ממנו - הלקוח כעת קורא ל-createShape(type) בלי לדעת אילו מחלקות קונקרטיות קיימות." },
-      { "id": "c", "text": "הטענה שגויה, כי Factory Pattern אוסר שימוש ב-if/else בכל מקום בתוכנית." },
-      { "id": "d", "text": "הטענה נכונה, אך רק אם משתמשים ב-switch במקום if/else." },
-      { "id": "e", "text": "אין דרך להכריע - זה תלוי לחלוטין בטעם אישי." }
+      {
+        "id": "a",
+        "text": "הטענה נכונה לחלוטין — זה בדיוק אותו קוד, רק הועבר למקום אחר בקובץ נפרד, ואין בכך שום שיפור מהותי בארכיטקטורה או בקלות התחזוקה של המערכת."
+      },
+      {
+        "id": "b",
+        "text": "הטענה שגויה: התועלת של Factory אינה 'ביטול if/else' אלא ריכוזו במקום אחד וניתוק קוד הלקוח ממנו - הלקוח כעת קורא ל-createShape(type) בלי לדעת אילו מחלקות קונקרטיות קיימות."
+      },
+      {
+        "id": "c",
+        "text": "הטענה שגויה, כי תבנית Factory אוסרת באופן מוחלט כל שימוש ב-if/else או ב-switch בתוך שיטת היצירה עצמה - יש להשתמש אך ורק במיפוי (Map) של טיפוסים למחלקות."
+      },
+      {
+        "id": "d",
+        "text": "הטענה נכונה, אך זה תקף רק במקרה שבו משתמשים במבנה switch במקום if/else, מכיוון ש-switch נחשב מבחינה טכנית לתבנית עיצוב פורמלית בזכות תחביר ה-case המובנה שלו."
+      },
+      {
+        "id": "e",
+        "text": "אין דרך אובייקטיבית להכריע בשאלה הזו - ההחלטה האם זו 'תבנית אמיתית' תלויה לחלוטין בהעדפה סגנונית של הצוות ואין לכך קריטריון טכני מוסכם בהנדסת תוכנה."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "התועלת המרכזית של Factory אינה 'ביטול תנאים' אלא הפרדת אחריויות: קוד הלקוח כבר לא צריך לדעת אילו מחלקות קונקרטיות קיימות - הוא רק קורא למתודת factory ומקבל אובייקט מוכן. ה-if/else עדיין קיים, אבל הוא מרוכז במקום אחד, כך שהוספת סוג צורה חדש דורשת שינוי רק ב-Factory.",
     "optionExplanations": {
-      "a": "שגוי - יש תועלת אמיתית: ריכוז הלוגיקה במקום אחד וניתוק הלקוח ממנה, גם אם ה-if/else עצמו לא נעלם.",
+      "a": "שגוי - יש שיפור ארכיטקטוני אמיתי: קוד הלקוח כבר אינו יודע אילו מחלקות קונקרטיות (Circle/Square/Triangle) קיימות, ושינוי או הוספת סוג צורה חדש דורש עדכון במקום אחד בלבד (ה-Factory) ולא בכל מקום שבו נוצרו צורות.",
       "b": "נכון - זו בדיוק ההגדרה הנכונה של התועלת: הפרדת אחריויות, לא ביטול תנאים.",
-      "c": "שגוי - Factory Pattern אינו אוסר if/else; הוא רק ממקם את ההחלטה במקום אחד מבודד.",
-      "d": "שגוי - השימוש ב-switch לעומת if/else הוא עניין סגנוני בלבד, לא מהותי לתבנית.",
-      "e": "שגוי - יש קריטריון אובייקטיבי ברור (הפרדת אחריויות/ניתוק לקוח), לא עניין של טעם."
+      "c": "שגוי - Factory Pattern אינה אוסרת שימוש ב-if/else או switch בתוך מתודת היצירה; היא רק דואגת שהתנאים האלה יהיו מרוכזים במקום מבודד אחד ולא מפוזרים בקוד הלקוח. מימוש עם Map הוא אופציה אחת אפשרית, לא דרישה.",
+      "d": "שגוי - switch ו-if/else הם שני מבני בקרה תחביריים שקולים מבחינת המשמעות התכנונית; אף אחד מהם אינו הופך כשלעצמו את הקוד ל'תבנית עיצוב'. התועלת נובעת מהמיקום והריכוז של הלוגיקה, לא מהתחביר שנבחר.",
+      "e": "שגוי - יש קריטריון טכני ברור ומוסכם: השאלה היא האם הלוגיקה מרוכזת במקום אחד וקוד הלקוח מנותק מהמחלקות הקונקרטיות. זה אינו עניין של טעם אלא של מבנה תלויות (coupling) הניתן להערכה אובייקטיבית."
     },
     "difficulty": "medium",
     "questionType": "design-pattern-choice",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 10" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 10"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["design-patterns", "factory", "misconception"],
+    "tags": [
+      "design-patterns",
+      "factory",
+      "misconception"
+    ],
     "keyLearningPoint": "Factory לא 'מבטלת' תנאים - היא מרכזת אותם במקום אחד ומנתקת את הלקוח מהמחלקות הקונקרטיות.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice1-gen006",
-    "topicIds": ["networking-sockets-io-streams"],
+    "topicIds": [
+      "networking-sockets-io-streams"
+    ],
     "subtopic": "socket-connect-refused",
     "stemHe": "שרת מאזין באמצעות new ServerSocket(5000). לקוח מנסה להתחבר עם new Socket(\"localhost\", 6000) (פורט שגוי, שאין עליו האזנה). מה יקרה?",
     "options": [
-      { "id": "a", "text": "החיבור יצליח, כי ה-IP זהה." },
-      { "id": "b", "text": "השרת יקבל את הבקשה אוטומטית בכל פורט פנוי." },
-      { "id": "c", "text": "תיזרק חריגה בצד הלקוח (כגון ConnectException) — אין תהליך שמאזין על פורט 6000, ולכן החיבור נכשל." },
-      { "id": "d", "text": "מערכת ההפעלה תעביר את הבקשה אוטומטית לפורט 5000 הנכון." },
-      { "id": "e", "text": "החיבור יצליח אך יישאר תקוע (hang) לנצח ללא שגיאה." }
+      {
+        "id": "a",
+        "text": "החיבור יצליח ללא בעיה, מכיוון ששני הצדדים על אותה כתובת IP, ומערכת ההפעלה מתעלמת ממספר הפורט ומנתבת לתהליך פעיל כלשהו במכונה."
+      },
+      {
+        "id": "b",
+        "text": "השרת יקבל את הבקשה אוטומטית, מכיוון שה-ServerSocket(5000) ממשיך להאזין בפועל על כל טווח הפורטים הפנויים במכונה, לא רק על 5000."
+      },
+      {
+        "id": "c",
+        "text": "תיזרק חריגה בצד הלקוח (כגון ConnectException) — אין שום תהליך שמאזין בפועל על פורט 6000 הזה, ולכן החיבור נדחה ונכשל באופן מיידי."
+      },
+      {
+        "id": "d",
+        "text": "מערכת ההפעלה תזהה תהליך המאזין על פורט 5000, ותבצע הפניה (redirect) אוטומטית מפורט 6000 לפורט 5000, כך שהחיבור יושלם בהצלחה."
+      },
+      {
+        "id": "e",
+        "text": "החיבור יישאר תקוע ללא הגבלת זמן, מכיוון שמערכת ההפעלה ממתינה בלופ פנימי שמישהו יתחיל להאזין על פורט 6000, במקום לדחות מיידית."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "חיבור socket מזוהה על ידי הצירוף המדויק של כתובת IP ופורט. אם אין תהליך המאזין בדיוק על הפורט המבוקש, מערכת ההפעלה תדחה את בקשת החיבור באופן מיידי, וב-Java הדבר יתבטא בזריקת ConnectException בצד הלקוח - אין 'ניחוש' או הפניה אוטומטית לפורט אחר.",
     "optionExplanations": {
-      "a": "שגוי - IP זהה אינו מספיק; הפורט הספציפי חייב להתאים בדיוק לפורט שעליו מאזין השרת.",
-      "b": "שגוי - השרת מאזין רק על הפורט הספציפי שצוין (5000 כאן) ולא 'תופס' פורטים אחרים.",
+      "a": "שגוי - זהות כתובת ה-IP אינה מספיקה כלל; מערכת ההפעלה עדיין דורשת התאמה מדויקת גם של מספר הפורט כדי לנתב את בקשת החיבור לתהליך הנכון, גם כאשר שני התהליכים רצים על אותה מכונה.",
+      "b": "שגוי - ServerSocket מאזין אך ורק על הפורט הספציפי שצוין בקונסטרוקטור (5000 כאן); בקשות חיבור לפורטים אחרים (כמו 6000) אינן מגיעות אליו כלל.",
       "c": "נכון - היעדר מאזין על הפורט המבוקש גורם לדחיית החיבור ולזריקת ConnectException בצד הלקוח.",
-      "d": "שגוי - אין הפניה (redirect) אוטומטית של פורטים במערכת ההפעלה או ב-Java sockets.",
-      "e": "שגוי - הדחייה היא בדרך כלל מיידית (connection refused), לא תקיעה ללא הגבלה."
+      "d": "שגוי - אין שום מנגנון הפניה (redirect) אוטומטי בין פורטים ברמת מערכת ההפעלה או ב-Java sockets; בקשת חיבור לפורט שאין עליו מאזין נדחית, ואינה מנותבת מחדש לפורט אחר.",
+      "e": "שגוי - כאשר אין תהליך המאזין על הפורט המבוקש, מערכת ההפעלה דוחה את בקשת החיבור באופן מיידי (connection refused); היא אינה נכנסת להמתנה בלופ עד שמישהו יתחיל להאזין."
     },
     "difficulty": "medium",
     "questionType": "client-server-sockets",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_1", "fileName": "atp_practice_test_1.pdf", "locator": "בהשראת שאלה 19" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_1",
+        "fileName": "atp_practice_test_1.pdf",
+        "locator": "בהשראת שאלה 19"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["networking", "sockets", "connect-exception"],
+    "tags": [
+      "networking",
+      "sockets",
+      "connect-exception"
+    ],
     "keyLearningPoint": "חיבור לפורט שאין עליו מאזין נדחה מיידית עם ConnectException, ללא הפניה אוטומטית.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice1"
+    "packId": "supplemental-practice1",
+    "contentVersion": 4
   }
 ]

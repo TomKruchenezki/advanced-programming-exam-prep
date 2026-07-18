@@ -11,7 +11,18 @@ import { Ltr } from '../question/Ltr'
 export function BidiSegments({ text }: { text: string }) {
   return (
     <>
-      {segmentBidiText(text).map((seg, i) => (seg.isLtr ? <Ltr key={i}>{seg.text}</Ltr> : seg.text))}
+      {segmentBidiText(text).map((seg, i) => {
+        if (!seg.isLtr) return seg.text
+        const display = seg.displayText ?? seg.text
+        if (seg.isInlineCode) {
+          return (
+            <code key={i} className="ltr-inline rounded bg-[var(--color-bg-subtle)] px-1 py-0.5 font-mono text-[0.9em]">
+              {display}
+            </code>
+          )
+        }
+        return <Ltr key={i}>{display}</Ltr>
+      })}
     </>
   )
 }

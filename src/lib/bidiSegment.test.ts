@@ -314,6 +314,50 @@ describe('segmentBidiText — bracket/quote pairs split by an interrupting Hebre
   })
 })
 
+describe('segmentBidiText — Markdown backtick inline-code stripping (Part D)', () => {
+  it('real case: a whole backtick-delimited identifier gets displayText stripped of backticks and isInlineCode=true', () => {
+    const input = 'מחלקת `OrderService` שגם מבצעת לוגיקה עסקית'
+    expect(reconstruct(input)).toBe(input) // text (source) is completely untouched
+    const segs = segmentBidiText(input)
+    const codeSeg = segs.find((s) => s.text === '`OrderService`')
+    expect(codeSeg).toBeTruthy()
+    expect(codeSeg!.displayText).toBe('OrderService')
+    expect(codeSeg!.isInlineCode).toBe(true)
+  })
+
+  it('real case: a backtick pair merged with surrounding parentheses still has backticks stripped from displayText, but isInlineCode is false (mixed content)', () => {
+    const input = 'מחלקת OrderService שגם מבצעת לוגיקה עסקית (`placeOrder`) וגם'
+    expect(reconstruct(input)).toBe(input)
+    const segs = segmentBidiText(input)
+    const seg = segs.find((s) => s.text === '(`placeOrder`)')
+    expect(seg).toBeTruthy()
+    expect(seg!.displayText).toBe('(placeOrder)')
+    expect(seg!.isInlineCode).toBe(false)
+  })
+
+  it('multiple backtick-delimited identifiers in one sentence are each stripped independently', () => {
+    const input = 'תלות ישירה במחלקה הקונקרטית `MySQLDatabase` במקום בממשק כמו `IDatabase`'
+    expect(reconstruct(input)).toBe(input)
+    const segs = segmentBidiText(input)
+    const displayTexts = segs.filter((s) => s.isInlineCode).map((s) => s.displayText)
+    expect(displayTexts).toEqual(['MySQLDatabase', 'IDatabase'])
+  })
+
+  it('a lone unmatched backtick is left completely untouched (no displayText, no crash)', () => {
+    const input = 'זהו משפט עם תו בודד ` באמצע המשפט העברי'
+    expect(() => segmentBidiText(input)).not.toThrow()
+    expect(reconstruct(input)).toBe(input)
+    const segs = segmentBidiText(input)
+    expect(segs.some((s) => s.displayText)).toBe(false)
+  })
+
+  it('a string with no backticks at all has no displayText/isInlineCode on any segment', () => {
+    const input = 'JVM (Java Virtual Machine) הוא מנוע ההרצה'
+    const segs = segmentBidiText(input)
+    expect(segs.every((s) => s.displayText === undefined && s.isInlineCode === undefined)).toBe(true)
+  })
+})
+
 describe('segmentBidiText — regression sweep over the real data set', () => {
   const questions = questionsJson as unknown as Question[]
   const topics = topicsJson as unknown as Topic[]

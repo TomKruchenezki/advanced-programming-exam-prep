@@ -57,6 +57,25 @@ describe('BidiText', () => {
     expect(container.querySelectorAll('span.ltr-inline')).toHaveLength(0)
     expect(container.querySelector('p')!.textContent).toBe('זהו משפט עברי לגמרי.')
   })
+
+  it('strips raw Markdown backticks from the visible text while keeping the full original source in aria-label', () => {
+    const text = 'מחלקת `OrderService` שגם מבצעת לוגיקה עסקית'
+    const { container } = render(<BidiText as="p" text={text} />)
+    const p = container.querySelector('p')!
+    // The visible text must never contain a literal backtick character.
+    expect(p.textContent).not.toContain('`')
+    expect(p.textContent).toBe('מחלקת OrderService שגם מבצעת לוגיקה עסקית')
+    // aria-label still carries the exact, unmodified original (backticks included) - proving
+    // the underlying source string was never touched, only the display.
+    expect(p.getAttribute('aria-label')).toBe(text)
+  })
+
+  it('renders a whole backtick-delimited term as an isolated inline-code element', () => {
+    const { container } = render(<BidiText as="p" text="מחלקת `OrderService` שגם מבצעת" />)
+    const code = container.querySelector('code.ltr-inline')
+    expect(code).toBeTruthy()
+    expect(code!.textContent).toBe('OrderService')
+  })
 })
 
 describe('BidiSegments (composable, no outer wrapper)', () => {

@@ -1,16 +1,33 @@
 [
   {
     "id": "supplemental-practice3-q001",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "generic-class-code-trace",
     "stemHe": "מהו הפלט של התכנית הבאה?",
     "code": "public class Box<T> {\n    private T value;\n    public void set(T v) { value = v; }\n    public T get() { return value; }\n    public static void main(String[] args) {\n        Box<String> b1 = new Box<>();\n        b1.set(\"SOLID\");\n        Box<Integer> b2 = new Box<>();\n        b2.set(2025);\n        System.out.println(b1.get() + \" \" + (b2.get() + 1));\n    }\n}",
     "options": [
-      { "id": "a", "text": "שגיאת הידור — לא ניתן להשתמש באותה מחלקה גנרית עם String ועם Integer." },
-      { "id": "b", "text": "SOLID 2025" },
-      { "id": "c", "text": "SOLID 2026" },
-      { "id": "d", "text": "שגיאת זמן ריצה בגלל ה-unboxing של b2.get()." },
-      { "id": "e", "text": "SOLID 20251" }
+      {
+        "id": "a",
+        "text": "שגיאת הידור — לא ניתן להשתמש באותה מחלקה גנרית עם String ועם Integer."
+      },
+      {
+        "id": "b",
+        "text": "SOLID 2025"
+      },
+      {
+        "id": "c",
+        "text": "יודפס \"SOLID 2026\" למסך, בגלל החיבור האריתמטי בסוגריים."
+      },
+      {
+        "id": "d",
+        "text": "שגיאת זמן ריצה בגלל ה-unboxing של b2.get()."
+      },
+      {
+        "id": "e",
+        "text": "SOLID 20251"
+      }
     ],
     "correctOptionId": "c",
     "explanation": "b1 הוא Box<String> ומחזיר \"SOLID\" מ-get(). b2 הוא Box<Integer> ומחזיר את ה-Integer 2025 מ-get(); הביטוי (b2.get() + 1) מבצע Unboxing אוטומטי של ה-Integer ל-int כדי לבצע את חיבור המספרים השלמים, ומקבל 2026 - בגלל הסוגריים, החיבור האריתמטי מתבצע לפני ההצטרפות למחרוזת עם b1.get(). לכן הפלט הוא \"SOLID 2026\".",
@@ -24,29 +41,57 @@
     "difficulty": "medium",
     "questionType": "code-output",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "שאלה 1" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "שאלה 1"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["generics", "custom-generic-class", "unboxing"],
+    "tags": [
+      "generics",
+      "custom-generic-class",
+      "unboxing"
+    ],
     "keyLearningPoint": "מחלקה גנרית אחת (Box<T>) יכולה לשמש עם טיפוסים שונים במקביל; unboxing מתרחש לפי הקשר הביטוי (סוגריים).",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice3-q002",
-    "topicIds": ["event-driven-javafx-mvc"],
+    "topicIds": [
+      "event-driven-javafx-mvc"
+    ],
     "subtopic": "event-driven-paradigm-choice",
     "stemHe": "מהו הפרדיגמת התכנות המתאימה ביותר לפיתוח יישום GUI, שבו המשתמש הוא זה שקובע מתי ואילו אירועים יתרחשו (לחיצת כפתור, הקשה)?",
     "options": [
-      { "id": "a", "text": "תכנות פרוצדורלי (Procedural), שכן הוא הכי מתאים לקבל קלט ולטפל בו בזה אחר זה." },
-      { "id": "b", "text": "תכנות פונקציונלי (Functional), שכן הוא נמנע ממצב (state) ומנתונים משתנים." },
-      { "id": "c", "text": "תכנות מונחה אירועים (Event-Driven), שכן זרימת התוכנית נקבעת על ידי אירועים חיצוניים שהמשתמש מייצר." },
-      { "id": "d", "text": "תכנות פרוצדורלי, שכן ב-GUI סדר הקלט תמיד ידוע מראש." },
-      { "id": "e", "text": "לא ניתן להשתמש ב-GUI באף אחת מהפרדיגמות הקיימות." }
+      {
+        "id": "a",
+        "text": "תכנות פרוצדורלי (Procedural), שכן הוא הכי מתאים לקבל קלט ולטפל בו בזה אחר זה."
+      },
+      {
+        "id": "b",
+        "text": "תכנות פונקציונלי (Functional), שכן הוא נמנע ממצב (state) ומנתונים משתנים."
+      },
+      {
+        "id": "c",
+        "text": "תכנות מונחה אירועים (Event-Driven), שכן זרימת התוכנית נקבעת על ידי אירועים חיצוניים שהמשתמש מייצר."
+      },
+      {
+        "id": "d",
+        "text": "תכנות פרוצדורלי (Procedural), שכן ניתן לכתוב את הלוגיקה כרצף פקודות קבוע וידוע מראש, בדיוק כפי שמתבצע בתוכנית קונסולה הרצה שלב אחר שלב מההתחלה ועד הסוף."
+      },
+      {
+        "id": "e",
+        "text": "לא ניתן לפתח יישומי GUI באף אחת מפרדיגמות התכנות הקיימות (לא מונחה-עצמים, לא פרוצדורלי ולא פונקציונלי), משום שממשק גרפי דורש מודל תכנותי ייחודי שאינו קיים כלל בשפות התכנות המוכרות."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "ביישום GUI, זרימת התוכנית אינה נקבעת מראש בסדר קבוע אלא על ידי אירועים חיצוניים בלתי-צפויים שהמשתמש מייצר - זו בדיוק ההגדרה של תכנות מונחה-אירועים, שבו רכיבי הממשק נרשמים לאירועים ומגיבים כשהם מתרחשים, בסדר לא-קבוע מראש.",
@@ -54,221 +99,388 @@
       "a": "שגוי - תכנות פרוצדורלי מניח סדר ביצוע ליניארי וידוע מראש; ב-GUI הסדר נקבע דינמית על ידי אירועי משתמש בלתי-צפויים.",
       "b": "שגוי - תכנות פונקציונלי מתמקד בהימנעות ממצב משתנה; זו תכונה נפרדת לחלוטין מהשאלה של 'מי קובע מתי קורה אירוע'.",
       "c": "נכון - Event-Driven Programming היא בדיוק הפרדיגמה שבה זרימת התוכנית מוכתבת על ידי אירועים חיצוניים בזמן לא-ידוע מראש.",
-      "d": "שגוי - הנימוק שניתן ('סדר קלט תמיד ידוע מראש') הוא בדיוק ההפך מהמציאות ב-GUI.",
-      "e": "שגוי - GUI כן ניתן וגם נהוג לפתח בפרדיגמות שונות, אך Event-Driven היא המתאימה ביותר."
+      "d": "שגוי - הטענה שסדר הקלט ב-GUI תמיד ידוע וקבוע מראש היא בדיוק ההפך מהמציאות: המשתמש קובע דינמית מתי ואילו אירועים יתרחשו, ולכן לא ניתן לתכנן מראש רצף פקודות קבוע כמו בתכנות פרוצדורלי ליניארי.",
+      "e": "שגוי - GUI כן ניתן וגם נהוג לפתח בפרדיגמות מוכרות (בעיקר מונחה-עצמים יחד עם מונחה-אירועים); הטענה שאין שום פרדיגמה מתאימה כלל אינה נכונה."
     },
     "difficulty": "easy",
     "questionType": "javafx-mvc",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "שאלה 11" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "שאלה 11"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["event-driven", "gui", "paradigm"],
+    "tags": [
+      "event-driven",
+      "gui",
+      "paradigm"
+    ],
     "keyLearningPoint": "GUI אינטראקטיבי מתאים בעיקר לתכנות מונחה-אירועים, כי זרימתו נקבעת על ידי אירועי משתמש בלתי-צפויים.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice3-q003",
-    "topicIds": ["threads-basics-lifecycle"],
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
     "subtopic": "thread-state-enum",
     "stemHe": "מה מהבאים מתאר נכון את מחזור החיים (lifecycle) של Thread ב-Java?",
     "options": [
-      { "id": "a", "text": "Thread יכול להימצא במצבים כגון NEW, RUNNABLE, WAITING/BLOCKED ו-TERMINATED, ולאחר שהסתיים (TERMINATED) לא ניתן להפעילו שוב באמצעות start()." },
-      { "id": "b", "text": "Thread שסיים לרוץ (TERMINATED) ניתן להפעיל שוב בקריאה חוזרת ל-start()." },
-      { "id": "c", "text": "ל-Thread יש רק שני מצבים: רץ או לא רץ." },
-      { "id": "d", "text": "קריאה ל-sleep() מעבירה את ה-Thread למצב TERMINATED." },
-      { "id": "e", "text": "Thread חדש (NEW) מתחיל לרוץ מיד עם יצירתו, עוד לפני קריאה ל-start()." }
+      {
+        "id": "a",
+        "text": "Thread יכול להימצא במצבים כגון NEW, RUNNABLE, WAITING/BLOCKED ו-TERMINATED (כפי שמוגדר ב-Thread.State), ולאחר שהסתיים לא ניתן להפעילו שוב."
+      },
+      {
+        "id": "b",
+        "text": "Thread שסיים לרוץ והגיע למצב TERMINATED ניתן להפעיל מחדש באמצעות קריאה חוזרת ל-start(), כפי שניתן לקרוא שוב לכל מתודה רגילה על אותו אובייקט."
+      },
+      {
+        "id": "c",
+        "text": "ל-Thread יש רק שני מצבים אפשריים לאורך מחזור החיים שלו - 'רץ' (running) ו'לא רץ' (not running), המתאר יחד את שאר המצבים - ללא צורך בהבחנה נוספת ביניהם."
+      },
+      {
+        "id": "d",
+        "text": "קריאה למתודה sleep() מעבירה את ה-Thread למצב TERMINATED, מכיוון שהתהליכון מפסיק את פעילותו לחלוטין, ויש ליצור אובייקט Thread חדש כדי להמשיך לבצע את הלוגיקה."
+      },
+      {
+        "id": "e",
+        "text": "Thread חדש (NEW) מתחיל לרוץ מיד עם יצירתו על ידי הבנאי, עוד לפני קריאה מפורשת ל-start(), משום שה-JVM מקצה לו זמן מעבד ברגע שהאובייקט נוצר בזיכרון."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "Java מגדירה במפורש (java.lang.Thread.State) את המצבים NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING, ו-TERMINATED. לאחר שתהליכון מגיע למצב TERMINATED, לא ניתן להפעילו מחדש - קריאה נוספת ל-start() תזרוק IllegalThreadStateException. יש ליצור אובייקט Thread חדש אם רוצים להריץ שוב את אותה לוגיקה.",
     "optionExplanations": {
       "a": "נכון - תיאור מדויק של מצבי מחזור החיים הרשמיים ושל האיסור על הפעלה חוזרת של תהליכון שהסתיים.",
-      "b": "שגוי - קריאה חוזרת ל-start() על תהליכון TERMINATED תזרוק IllegalThreadStateException.",
-      "c": "שגוי - ל-Thread יש יותר משני מצבים (לפחות ששה לפי java.lang.Thread.State).",
-      "d": "שגוי - sleep() מעביר את התהליכון למצב TIMED_WAITING זמנית, לא ל-TERMINATED.",
-      "e": "שגוי - תהליכון במצב NEW נוצר אך טרם החל לרוץ בפועל; הריצה מתחילה רק לאחר קריאה מפורשת ל-start()."
+      "b": "שגוי - קריאה חוזרת ל-start() על תהליכון שכבר הגיע למצב TERMINATED תזרוק IllegalThreadStateException בזמן ריצה; לא ניתן להשתמש שוב באותו אובייקט Thread לאחר שסיים, בניגוד למתודות רגילות.",
+      "c": "שגוי - ל-Thread יש לפחות שישה מצבים רשמיים (java.lang.Thread.State): NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITING ו-TERMINATED, לא רק שניים.",
+      "d": "שגוי - sleep() מעביר את התהליכון למצב TIMED_WAITING זמנית בלבד, ולא ל-TERMINATED; התהליכון ממשיך לרוץ כרגיל מיד לאחר תום זמן ההשהיה.",
+      "e": "שגוי - תהליכון במצב NEW נוצר אך טרם מוקצה לו זמן מעבד; הריצה בפועל מתחילה רק לאחר קריאה מפורשת ל-start(), לא אוטומטית בבנאי."
     },
     "difficulty": "medium",
     "questionType": "threads-scheduling",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "שאלה 15" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "שאלה 15"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["threads", "lifecycle", "thread-state"],
+    "tags": [
+      "threads",
+      "lifecycle",
+      "thread-state"
+    ],
     "keyLearningPoint": "Thread.State הרשמי כולל NEW/RUNNABLE/BLOCKED/WAITING/TIMED_WAITING/TERMINATED; אי אפשר להפעיל תהליכון TERMINATED מחדש.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 4
   },
   {
     "id": "supplemental-practice3-q004",
-    "topicIds": ["threads-basics-lifecycle"],
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
     "subtopic": "anonymous-class-runnable",
     "stemHe": "מה מהבאים נכון לגבי שימוש במחלקה אנונימית (anonymous class) המממשת Runnable לצורך יצירת thread?",
     "options": [
-      { "id": "a", "text": "מחלקה אנונימית מאפשרת לספק מימוש של run() 'במקום' מבלי להגדיר מחלקה בעלת שם נפרדת, ולהעבירו ל-Thread." },
-      { "id": "b", "text": "לא ניתן ליצור Thread ממחלקה אנונימית — חובה להגדיר מחלקה בעלת שם." },
-      { "id": "c", "text": "מחלקה אנונימית המממשת Runnable מריצה את run() אוטומטית ב-thread חדש עוד לפני קריאה ל-start()." },
-      { "id": "d", "text": "מחלקות אנונימיות אינן יכולות לממש ממשקים, אלא רק להרחיב מחלקות." },
-      { "id": "e", "text": "שימוש במחלקה אנונימית הופך את הקוד ל-thread-safe באופן אוטומטי." }
+      {
+        "id": "a",
+        "text": "מחלקה אנונימית מאפשרת לספק מימוש של run() 'במקום' מבלי להגדיר מחלקה בעלת שם נפרדת, ולהעבירו ל-Thread."
+      },
+      {
+        "id": "b",
+        "text": "לא ניתן ליצור Thread ממחלקה אנונימית המממשת Runnable — חובה להגדיר מחלקה נפרדת בעלת שם, כי הבנאי של Thread דורש טיפוס קבוע מראש."
+      },
+      {
+        "id": "c",
+        "text": "מחלקה אנונימית המממשת Runnable מריצה את run() אוטומטית ב-thread חדש עוד לפני קריאה ל-start()."
+      },
+      {
+        "id": "d",
+        "text": "מחלקות אנונימיות אינן יכולות לממש ממשקים כלל, אלא רק להרחיב מחלקה קיימת, מכיוון שהתחביר שלהן נועד אך ורק להרחבת מחלקת-אב."
+      },
+      {
+        "id": "e",
+        "text": "שימוש במחלקה אנונימית הופך את הקוד ל-thread-safe אוטומטית, מכיוון שהקומפיילר מוסיף בלוק synchronized סביב מתודת ה-run() בכל מחלקה אנונימית."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "מחלקה אנונימית מאפשרת להגדיר 'inline', בתוך הביטוי עצמו, מימוש חד-פעמי של ממשק - כולל מימוש למתודה run() - מבלי לכתוב הכרזת מחלקה נפרדת בעלת שם. זה שימושי כשצריך התנהגות פשוטה וחד-פעמית, שקול פונקציונלית ל-lambda מודרנית אך עם תחביר מפורש יותר.",
     "optionExplanations": {
       "a": "נכון - זו בדיוק המטרה של מחלקה אנונימית: מימוש 'במקום' של ממשק בלי הכרזת מחלקה בעלת שם.",
-      "b": "שגוי - מחלקה אנונימית היא בדיוק החלופה ליצירת מחלקה בעלת שם; אין חובה להגדיר מחלקה נפרדת.",
+      "b": "שגוי - מחלקה אנונימית היא בדיוק החלופה ליצירת מחלקה בעלת שם; ניתן להעביר אותה ישירות לבנאי של Thread (או ל-Runnable) בלי להכריז על מחלקה נפרדת כלל.",
       "c": "שגוי - run() לא רץ אוטומטית בתהליכון חדש; יש לקרוא במפורש ל-start() על אובייקט ה-Thread כדי שהתהליכון החדש יתחיל וקורא ל-run().",
-      "d": "שגוי - מחלקות אנונימיות יכולות לממש ממשקים בדיוק כמו להרחיב מחלקות - זה שימוש נפוץ מאוד עם Runnable/Comparator.",
-      "e": "שגוי - השימוש במחלקה אנונימית הוא עניין תחבירי בלבד; הוא אינו מספק thread-safety אוטומטית."
+      "d": "שגוי - מחלקות אנונימיות יכולות לממש ממשק (כמו Runnable או Comparator) בדיוק כמו שהן יכולות להרחיב מחלקה - זה אחד השימושים הנפוצים ביותר שלהן.",
+      "e": "שגוי - הקומפיילר אינו מוסיף שום סנכרון אוטומטי; מחלקה אנונימית היא עניין תחבירי בלבד ואינה מספקת thread-safety, בדיוק כמו כל מימוש Runnable אחר."
     },
     "difficulty": "medium",
     "questionType": "threads-scheduling",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "שאלה 17" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "שאלה 17"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["threads", "anonymous-class", "runnable"],
+    "tags": [
+      "threads",
+      "anonymous-class",
+      "runnable"
+    ],
     "keyLearningPoint": "מחלקה אנונימית מספקת מימוש 'במקום' של ממשק (כמו Runnable) ללא הכרזת מחלקה נפרדת בעלת שם.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 3
   },
   {
     "id": "supplemental-practice3-q005",
-    "topicIds": ["uml-class-diagrams"],
+    "topicIds": [
+      "uml-class-diagrams"
+    ],
     "subtopic": "composition-concrete-example",
     "stemHe": "נתון תרשים מחלקות שבו מחלקת House מכילה אובייקטים מסוג Room, כך שה-Room-ים אינם יכולים להתקיים ללא ה-House (כאשר ה-House נהרס, גם ה-Room-ים נהרסים איתו). איזה סוג של קשר ב-UML מתאר זאת בצורה המדויקת ביותר?",
     "options": [
-      { "id": "a", "text": "הרכבה (Composition) — קשר \"יש-לו\" חזק שבו חיי הרכיב תלויים בחיי המכל." },
-      { "id": "b", "text": "צבירה (Aggregation) — קשר \"יש-לו\" חלש שבו הרכיב יכול להתקיים בנפרד מהמכל." },
-      { "id": "c", "text": "הורשה (Inheritance) — קשר \"הוא-סוג-של\"." },
-      { "id": "d", "text": "מימוש (Realization) של ממשק." },
-      { "id": "e", "text": "תלות (Dependency) חד-פעמית בלבד." }
+      {
+        "id": "a",
+        "text": "הרכבה (Composition) — קשר \"יש-לו\" חזק שבו חיי הרכיב תלויים לחלוטין בחיי המכל, ונהרסים איתו."
+      },
+      {
+        "id": "b",
+        "text": "צבירה (Aggregation) — קשר \"יש-לו\" חלש שבו הרכיב יכול להתקיים בנפרד מהמכל."
+      },
+      {
+        "id": "c",
+        "text": "הורשה (Inheritance) — קשר \"הוא-סוג-של\" שבו תת-מחלקה יורשת ממחלקת-אב; מתאים להתמחות, לא להכלה."
+      },
+      {
+        "id": "d",
+        "text": "מימוש (Realization) של ממשק — מחלקה קונקרטית מספקת מימוש למתודות של ממשק, מסומן בקו מקווקו עם חץ משולש חלול."
+      },
+      {
+        "id": "e",
+        "text": "תלות (Dependency) חד-פעמית — קשר חלש וזמני שבו מחלקה משתמשת באובייקט אחר כפרמטר זמני, לא כשדה קבוע."
+      }
     ],
     "correctOptionId": "a",
     "explanation": "קשר שבו חיי הרכיב (Room) תלויים לחלוטין בחיי המכל (House) הוא Composition, המסומן בתרשימי UML ביהלום מלא בצד המכל. זאת בניגוד ל-Aggregation שבה הרכיב יכול להתקיים גם ללא המכל.",
     "optionExplanations": {
       "a": "נכון - תלות מלאה במחזור-חיים (הרכיב נהרס עם המכל) היא בדיוק ההגדרה של Composition.",
       "b": "שגוי - Aggregation מתארת קשר 'יש-לו' חלש יותר, שבו הרכיב יכול להתקיים באופן עצמאי גם ללא המכל - זה ההפך ממה שמתואר בשאלה.",
-      "c": "שגוי - Inheritance מתאר קשר 'הוא-סוג-של' בין מחלקת-אב לתת-מחלקה; House ו-Room אינם קשורים בירושה.",
-      "d": "שגוי - Realization מתאר מימוש ממשק על ידי מחלקה; אין ממשק מעורב כאן.",
-      "e": "שגוי - Dependency מתארת קשר חלש וזמני, לא בעלות מבנית עם תלות מחזור-חיים."
+      "c": "שגוי - Inheritance מתאר קשר 'הוא-סוג-של' בין מחלקת-אב לתת-מחלקה החולקת את מבנהו; House ו-Room אינם קשורים בירושה אלא ביחס הכלה.",
+      "d": "שגוי - Realization מתאר מימוש ממשק על ידי מחלקה קונקרטית; אין שום ממשק מעורב בדוגמת House/Room.",
+      "e": "שגוי - Dependency מתארת שימוש חולף וזמני (כגון פרמטר במתודה), לא בעלות מבנית קבועה עם תלות מחזור-חיים כפי שמתואר בין House ל-Room."
     },
     "difficulty": "medium",
     "questionType": "comparison",
     "source": "adapted",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "שאלה 20" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "שאלה 20"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "unknown_source",
-    "tags": ["uml", "composition", "aggregation"],
+    "tags": [
+      "uml",
+      "composition",
+      "aggregation"
+    ],
     "keyLearningPoint": "כאשר הרכיב אינו יכול להתקיים בלי המכל (נהרס איתו), זהו Composition (יהלום מלא), לא Aggregation.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 4
   },
   {
     "id": "supplemental-practice3-gen001",
-    "topicIds": ["generics-collections-equals-hashcode"],
+    "topicIds": [
+      "generics-collections-equals-hashcode"
+    ],
     "subtopic": "bounded-type-parameter",
     "stemHe": "מה ההבדל בין class Box<T> לבין class NumberBox<T extends Number>?",
     "options": [
-      { "id": "a", "text": "אין הבדל מעשי, שני התחביר זהים לחלוטין." },
-      { "id": "b", "text": "ב-NumberBox<T>, T מוגבל (bounded) - ניתן להשתמש בו רק עם טיפוסים שהם Number או תת-מחלקה שלו, מה שמאפשר לקרוא בבטחון למתודות של Number (כמו doubleValue()) בתוך המחלקה; ב-Box<T> הרגיל, T יכול להיות כל טיפוס, וללא הבטחה כזו." },
-      { "id": "c", "text": "NumberBox יכול להכיל רק טיפוסים פרימיטיביים כמו int ו-double, ולא Integer/Double." },
-      { "id": "d", "text": "Box<T> תומך ב-null ואילו NumberBox<T extends Number> אוסר null לחלוטין." },
-      { "id": "e", "text": "extends Number הוא רק תיעוד (comment) ואינו נאכף על ידי הקומפיילר." }
+      {
+        "id": "a",
+        "text": "אין הבדל מעשי כלל בין השניים - שני התחביר זהים לחלוטין מבחינת הקומפיילר, וה-'extends Number' הוא תוספת קוסמטית בלבד שאינה משפיעה לא על הטיפוסים המותרים כארגומנט גנרי ולא על המתודות הזמינות בתוך המחלקה."
+      },
+      {
+        "id": "b",
+        "text": "ב-NumberBox<T>, T מוגבל (bounded) - ניתן להשתמש בו רק עם טיפוסים שהם Number או תת-מחלקה שלו, מה שמאפשר לקרוא בבטחון למתודות של Number (כמו doubleValue()) בתוך המחלקה; ב-Box<T> הרגיל, T יכול להיות כל טיפוס, וללא הבטחה כזו."
+      },
+      {
+        "id": "c",
+        "text": "NumberBox יכול להכיל רק טיפוסים פרימיטיביים כמו int ו-double, ולא את מחלקות ה-wrapper כמו Integer ו-Double, מכיוון שה-bound 'extends Number' מתייחס לפי שמו במפורש לטיפוסי מספרים בסיסיים בלבד ולא לאובייקטים."
+      },
+      {
+        "id": "d",
+        "text": "Box<T> תומך בהשמת ערך null עבור T כברירת מחדל, ואילו NumberBox<T extends Number> אוסר לחלוטין השמת null למשתנה מטיפוס T, מכיוון שהקומפיילר דורש בכל bounded type parameter ערך מספרי תקף בזמן ריצה."
+      },
+      {
+        "id": "e",
+        "text": "extends Number הוא רק תיעוד (comment) לצורכי קריאות הקוד עבור מתכנתים אחרים, ואינו נאכף בפועל לא בזמן הידור ולא בזמן ריצה על ידי הקומפיילר, בדומה להערת Javadoc רגילה שאינה משפיעה על ההתנהגות."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "התחביר <T extends Number> מגדיר bounded type parameter - הוא מגביל את T להיות Number או תת-מחלקה שלו, ולא כל טיפוס אפשרי. ההגבלה נאכפת בזמן הידור, ומאפשרת לכתוב בתוך המחלקה קוד שקורא בבטחון למתודות המוגדרות ב-Number על משתנה מטיפוס T - דבר שלא ניתן לעשות עם T לא-מוגבל.",
     "optionExplanations": {
-      "a": "שגוי - ה-bound extends Number משנה מהותית את הטיפוסים המותרים ואת המתודות הזמינות בתוך המחלקה.",
+      "a": "שגוי - ה-bound extends Number משנה מהותית הן את הטיפוסים המותרים כארגומנט גנרי (רק Number ותתי-המחלקות שלו) והן את המתודות הזמינות לשימוש בתוך המחלקה על משתנה מטיפוס T.",
       "b": "נכון - זו בדיוק המשמעות של bounded type parameter: הגבלת T לתת-עץ טיפוסים מסוים, המאפשרת גישה בטוחה למתודות שהוגדרו בגבול.",
-      "c": "שגוי - generics ב-Java אינם יכולים לעבוד עם טיפוסים פרימיטיביים כלל; Integer/Double הם בדיוק סוג הטיפוסים המותרים כאן, לא int/double.",
-      "d": "שגוי - שני הטיפוסים הם טיפוסי-רפרנס ומאפשרים null באותה מידה; ה-bound אינו קשור ל-null בכלל.",
-      "e": "שגוי - ה-bound נאכף בהחלט על ידי הקומפיילר; ניסיון להשתמש ב-NumberBox<String> למשל יגרום לשגיאת הידור."
+      "c": "שגוי - generics ב-Java אינם יכולים לעבוד עם טיפוסים פרימיטיביים כלל, גם לא ב-NumberBox; מותר רק עם מחלקות-עטיפה כמו Integer ו-Double שהן תתי-מחלקות של Number.",
+      "d": "שגוי - שני הטיפוסים הם טיפוסי-רפרנס ומאפשרים null באותה מידה בדיוק; ה-bound extends Number אינו קשור בשום צורה לאפשרות השמת null.",
+      "e": "שגוי - ה-bound נאכף בהחלט על ידי הקומפיילר בזמן הידור; ניסיון להשתמש למשל ב-NumberBox<String> יגרום לשגיאת קומפילציה, לא רק להערה שאינה נאכפת."
     },
     "difficulty": "hard",
     "questionType": "definition",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "בהשראת שאלה 1" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "בהשראת שאלה 1"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["generics", "bounded-type-parameter"],
+    "tags": [
+      "generics",
+      "bounded-type-parameter"
+    ],
     "keyLearningPoint": "Bounded type parameter (<T extends X>) מגביל את T לתת-עץ טיפוסים ומאפשר גישה בטוחה למתודות הגבול.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice3-gen002",
-    "topicIds": ["event-driven-javafx-mvc"],
+    "topicIds": [
+      "event-driven-javafx-mvc"
+    ],
     "subtopic": "callback-registration",
     "stemHe": "בתכנות מונחה-אירועים (Event-Driven) ביישום GUI, מה תפקידו של רישום (registration) callback/listener על רכיב כמו כפתור?",
     "options": [
-      { "id": "a", "text": "לגרום לכפתור לבצע polling ולבדוק בעצמו כל הזמן האם הוא נלחץ." },
-      { "id": "b", "text": "לומר למערכת האירועים 'כאשר יתרחש אירוע מסוג X על רכיב זה, קרא למתודה הזו' - כך שהקוד שלנו מגיב רק כשהאירוע קורה בפועל, ולא רץ בלולאה בודקת." },
-      { "id": "c", "text": "לחסום את כל שאר האירועים במערכת עד שהכפתור הזה יילחץ." },
-      { "id": "d", "text": "להריץ את הקוד הרשום מיד עם הרישום, פעם אחת בלבד." },
-      { "id": "e", "text": "רישום callback הוא רק לצורכי תיעוד ואינו משפיע על ההתנהגות בפועל." }
+      {
+        "id": "a",
+        "text": "לגרום לכפתור עצמו לבצע polling פנימי ולבדוק שוב ושוב האם הוא נלחץ - כלומר להטיל על הרכיב הגרפי אחריות לבדיקה יזומה במקום להסתמך על מנגנון ההתראה."
+      },
+      {
+        "id": "b",
+        "text": "לומר למערכת האירועים 'כאשר יתרחש אירוע מסוג X על רכיב זה, קרא למתודה הזו' - כך שהקוד שלנו מגיב רק כשהאירוע קורה בפועל, ולא רץ בלולאה בודקת."
+      },
+      {
+        "id": "c",
+        "text": "לחסום ולמנוע טיפול בכל שאר האירועים הרשומים במערכת (כמו לחיצות על כפתורים אחרים או הקשות מקלדת) עד שהכפתור הספציפי יילחץ בפועל."
+      },
+      {
+        "id": "d",
+        "text": "להריץ מיידית את קוד ה-callback כבר ברגע הרישום עצמו, פעם אחת בלבד וללא קשר לכך אם וכמה פעמים הכפתור יילחץ בפועל לאחר מכן."
+      },
+      {
+        "id": "e",
+        "text": "רישום callback הוא פעולה שמטרתה תיעוד כוונת המתכנת בלבד עבור קוראי הקוד, ואינו משפיע בפועל על ההתנהגות בזמן ריצה - בדומה להערה (comment) רגילה בקוד."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "רישום listener/callback הוא המנגנון המרכזי של תכנות מונחה-אירועים: הקוד שלנו 'נרשם' מראש לקבלת התראה כאשר יתרחש אירוע מסוים, ומערכת האירועים (event loop) היא זו שקוראת לפונקציה הרשומה בפועל ברגע שהאירוע מתרחש - ללא צורך שהקוד שלנו יבצע polling אקטיבי.",
     "optionExplanations": {
-      "a": "שגוי - זהו בדיוק ההפך ממה ש-event-driven מנסה להשיג; המטרה היא להימנע מ-polling יזום.",
+      "a": "שגוי - זהו בדיוק ההפך ממה שתכנות מונחה-אירועים מנסה להשיג; המטרה של רישום listener היא בדיוק להימנע מ-polling יזום ומבדיקה מתמדת.",
       "b": "נכון - זו ההגדרה המדויקת של רישום callback: הודעה ל-push, לא בדיקה יזומה ב-pull/polling.",
-      "c": "שגוי - רישום listener על רכיב אחד אינו חוסם טיפול באירועים אחרים במערכת.",
-      "d": "שגוי - הקוד הרשום מופעל בכל פעם שהאירוע מתרחש בפועל, לא פעם אחת עם הרישום עצמו.",
-      "e": "שגוי - רישום ה-listener הוא בדיוק מה שקובע אילו פונקציות ייקראו כשמתרחש אירוע - השפעה התנהגותית ממשית."
+      "c": "שגוי - רישום listener על רכיב אחד אינו חוסם ואינו משפיע על הטיפול באירועים אחרים במערכת; כל הרכיבים ממשיכים לקבל ולטפל באירועים שלהם במקביל.",
+      "d": "שגוי - הקוד הרשום אינו רץ עם הרישום עצמו; הוא מופעל רק בכל פעם שהאירוע המתאים אכן מתרחש בפועל, אולי אף פעם, אולי פעמים רבות.",
+      "e": "שגוי - רישום ה-listener הוא בדיוק המנגנון שקובע אילו פונקציות ייקראו כשמתרחש אירוע - זו השפעה התנהגותית ממשית וקריטית, לא תיעוד גרידא."
     },
     "difficulty": "medium",
     "questionType": "javafx-mvc",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "בהשראת שאלה 11" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "בהשראת שאלה 11"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["event-driven", "listener", "callback"],
+    "tags": [
+      "event-driven",
+      "listener",
+      "callback"
+    ],
     "keyLearningPoint": "רישום listener/callback הוא מנגנון push - התגובה לאירוע מתבצעת רק כשהוא קורה, ללא polling יזום.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 4
   },
   {
     "id": "supplemental-practice3-gen003",
-    "topicIds": ["thread-safety-synchronization"],
+    "topicIds": [
+      "thread-safety-synchronization"
+    ],
     "subtopic": "blocked-state-monitor",
     "stemHe": "תהליכון t1 מנסה להיכנס לבלוק synchronized שכבר נעול על ידי תהליכון t2 אחר. באיזה מצב (state) יימצא t1 בזמן שהוא ממתין לנעילה?",
     "options": [
-      { "id": "a", "text": "TERMINATED — הוא נחשב כמי שסיים לרוץ." },
-      { "id": "b", "text": "NEW — הוא עדיין לא התחיל לרוץ בפועל." },
-      { "id": "c", "text": "BLOCKED — הוא ממתין לקבל מוניטור (lock) שתפוס כרגע על ידי תהליכון אחר." },
-      { "id": "d", "text": "RUNNABLE — הוא ממשיך לרוץ כרגיל על המעבד תוך כדי ההמתנה." },
-      { "id": "e", "text": "אין מצב מיוחד לכך; ל-Java אין דרך לדעת שתהליכון ממתין לנעילה." }
+      {
+        "id": "a",
+        "text": "TERMINATED — הוא נחשב כמי שסיים לרוץ לחלוטין, מכיוון שממתין לנעילה נחשב מבחינת ה-JVM שקול לסיום מלא ובלתי-הפיך של ריצת התהליכון."
+      },
+      {
+        "id": "b",
+        "text": "NEW — הוא עדיין לא התחיל לרוץ בפועל, מכיוון שממתין לנעילה נחשב מבחינת ה-JVM כמצב זהה לתהליכון שטרם הופעל כלל באמצעות start()."
+      },
+      {
+        "id": "c",
+        "text": "BLOCKED — הוא ממתין לקבל מוניטור (lock) שתפוס כרגע על ידי תהליכון אחר."
+      },
+      {
+        "id": "d",
+        "text": "RUNNABLE — הוא ממשיך לרוץ כרגיל על המעבד תוך כדי ההמתנה."
+      },
+      {
+        "id": "e",
+        "text": "אין מצב מיוחד לכך; ל-Java אין דרך לדעת שתהליכון ממתין לנעילה."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "כאשר תהליכון מנסה להיכנס לבלוק/מתודה synchronized ואינו מצליח להשיג את המוניטור כי תהליכון אחר כבר מחזיק בו, ה-JVM ממקם אותו במצב BLOCKED - זהו אחד ממצבי java.lang.Thread.State הרשמיים, שנועד במפורש לתאר המתנה לנעילת monitor.",
     "optionExplanations": {
-      "a": "שגוי - TERMINATED מתאר תהליכון שסיים לרוץ לחלוטין; t1 עדיין 'בתור' לרוץ, לא סיים.",
-      "b": "שגוי - NEW מתאר תהליכון שטרם החל לרוץ כלל (לפני start()); כאן t1 כבר רץ וניסה להיכנס לבלוק.",
+      "a": "שגוי - TERMINATED מתאר תהליכון שסיים לרוץ לחלוטין ולא יוכל לרוץ שוב; t1 עדיין פעיל וממתין להזדמנות להמשיך, לא סיים.",
+      "b": "שגוי - NEW מתאר תהליכון שטרם החל לרוץ כלל, לפני קריאה ל-start(); כאן t1 כבר החל לרוץ וכבר ניסה להיכנס לבלוק ה-synchronized.",
       "c": "נכון - BLOCKED הוא המצב הרשמי המתאר בדיוק המתנה להשגת מוניטור תפוס.",
       "d": "שגוי - RUNNABLE מתאר תהליכון שרץ בפועל או מוכן לרוץ ומחכה למעבד; תהליכון החוסם על נעילה אינו נחשב RUNNABLE.",
       "e": "שגוי - ל-Thread.State יש בדיוק ערך ייעודי (BLOCKED) למקרה הזה, נגיש דרך thread.getState()."
@@ -276,88 +488,158 @@
     "difficulty": "hard",
     "questionType": "race-condition-sync",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "בהשראת שאלה 15" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "בהשראת שאלה 15"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["threads", "synchronized", "thread-state", "blocked"],
+    "tags": [
+      "threads",
+      "synchronized",
+      "thread-state",
+      "blocked"
+    ],
     "keyLearningPoint": "תהליכון הממתין לנעילת monitor תפוסה נמצא במצב BLOCKED, לא RUNNABLE.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice3-gen004",
-    "topicIds": ["threads-basics-lifecycle"],
+    "topicIds": [
+      "threads-basics-lifecycle"
+    ],
     "subtopic": "anonymous-class-vs-lambda",
     "stemHe": "מה ההבדל המרכזי בין מימוש Runnable באמצעות מחלקה אנונימית לבין מימוש זהה באמצעות lambda expression?",
     "options": [
-      { "id": "a", "text": "אין שום הבדל - הם מובילים לאותו bytecode בדיוק בכל מקרה." },
-      { "id": "b", "text": "Lambda יכולה לשמש רק לממשקים עם שתי מתודות בדיוק, ואילו מחלקה אנונימית מתאימה לכל ממשק." },
-      { "id": "c", "text": "מחלקה אנונימית מתאימה למימוש כל ממשק (כולל כאלה עם כמה מתודות), בעוד lambda מוגבלת לממשקים פונקציונליים (functional interfaces) - כאלה עם מתודה אבסטרקטית אחת בדיוק, כמו Runnable." },
-      { "id": "d", "text": "Lambda תמיד רצה בתהליכון נפרד אוטומטית, ומחלקה אנונימית תמיד רצה בתהליכון הראשי." },
-      { "id": "e", "text": "אין הבדל תחבירי, רק הבדל בשם המחלקה שנוצרת מאחורי הקלעים." }
+      {
+        "id": "a",
+        "text": "אין שום הבדל מהותי ביניהם - שני המימושים מובילים לאותו bytecode בדיוק בכל מקרה, מכיוון שהקומפיילר של Java הופך תמיד ביטויי lambda למחלקה אנונימית מאחורי הקלעים בשלב ההידור."
+      },
+      {
+        "id": "b",
+        "text": "Lambda יכולה לשמש רק למימוש ממשקים בעלי שתי מתודות אבסטרקטיות בדיוק, ואילו מחלקה אנונימית מתאימה למימוש כל ממשק ללא הגבלה על מספר המתודות שהוא מכיל."
+      },
+      {
+        "id": "c",
+        "text": "מחלקה אנונימית מתאימה למימוש כל ממשק (כולל כאלה עם כמה מתודות), בעוד lambda מוגבלת לממשקים פונקציונליים (functional interfaces) - כאלה עם מתודה אבסטרקטית אחת בדיוק, כמו Runnable."
+      },
+      {
+        "id": "d",
+        "text": "Lambda תמיד רצה אוטומטית בתהליכון נפרד ברקע מיד עם הגדרתה, ואילו קוד שנכתב במחלקה אנונימית תמיד ממשיך לרוץ בתהליכון הראשי (main) עד לקריאה מפורשת אחרת."
+      },
+      {
+        "id": "e",
+        "text": "אין הבדל תחבירי מהותי בין השניים, ההבדל היחיד הוא בשם המחלקה הפנימית (inner class) שהקומפיילר מייצר אוטומטית מאחורי הקלעים עבור כל אחת מהצורות."
+      }
     ],
     "correctOptionId": "c",
     "explanation": "Lambda expressions ב-Java מוגבלות למימוש functional interfaces - ממשקים עם מתודה אבסטרקטית יחידה בדיוק. מחלקה אנונימית, לעומת זאת, יכולה לממש כל ממשק, כולל כאלה עם מספר מתודות אבסטרקטיות, ואף יכולה להרחיב מחלקה - יכולת ש-lambda כלל אינה תומכת בה.",
     "optionExplanations": {
-      "a": "שגוי - ברמת המימוש הפנימי הם שונים, וגם ברמה המושגית יש הבדל מהותי ביכולות.",
-      "b": "שגוי - functional interface מוגדר כממשק עם מתודה אבסטרקטית אחת בדיוק, לא שתיים.",
+      "a": "שגוי - ברמת המימוש הפנימי lambda וכן מחלקה אנונימית מתורגמות באופן שונה על ידי הקומפיילר (invokedynamic לעומת מחלקה פנימית נפרדת), וגם ברמה המושגית קיים הבדל מהותי ביכולות.",
+      "b": "שגוי - functional interface, שבו lambda יכולה לשמש, מוגדר כממשק עם מתודה אבסטרקטית אחת בדיוק (לא שתיים); Runnable הוא דוגמה כזו.",
       "c": "נכון - lambda מוגבלת ל-functional interfaces (מתודה אבסטרקטית יחידה); מחלקה אנונימית גמישה יותר.",
-      "d": "שגוי - שאלת התהליכון (main או חדש) נקבעת אך ורק לפי האם קוראים ל-Thread.start() - לא לפי lambda מול anonymous class.",
-      "e": "שגוי - יש הבדל תחבירי משמעותי (תחביר lambda קצר בהרבה), לא רק שם המחלקה הפנימית."
+      "d": "שגוי - שאלת התהליכון (הראשי או חדש) נקבעת אך ורק לפי קריאה מפורשת ל-Thread.start(), ואינה תלויה כלל בכך אם ה-Runnable מומש כ-lambda או כמחלקה אנונימית.",
+      "e": "שגוי - קיים הבדל תחבירי משמעותי (תחביר ה-lambda קצר ותמציתי בהרבה מהתחביר המפורט של מחלקה אנונימית), מעבר לשם המחלקה הפנימית בלבד."
     },
     "difficulty": "hard",
     "questionType": "definition",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "בהשראת שאלה 17" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "בהשראת שאלה 17"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["threads", "anonymous-class", "lambda", "functional-interface"],
+    "tags": [
+      "threads",
+      "anonymous-class",
+      "lambda",
+      "functional-interface"
+    ],
     "keyLearningPoint": "Lambda מוגבלת ל-functional interfaces (מתודה אחת); מחלקה אנונימית תומכת בכל ממשק וגם בהרחבת מחלקות.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 2
   },
   {
     "id": "supplemental-practice3-gen005",
-    "topicIds": ["uml-class-diagrams"],
+    "topicIds": [
+      "uml-class-diagrams"
+    ],
     "subtopic": "aggregation-counter-example",
     "stemHe": "בהמשך לדוגמה של House/Room (יחס Composition), נתונה כעת דוגמה נוספת: מחלקת University מחזיקה אובייקטים מסוג Student, אך אם University נסגרת, ה-Student-ים ממשיכים להתקיים (יכולים לעבור לאוניברסיטה אחרת). איזה סוג קשר UML מתאים כאן, ומדוע הוא שונה מהיחס House/Room?",
     "options": [
-      { "id": "a", "text": "גם כאן Composition, בדיוק כמו House/Room - אין שום הבדל בין שני המקרים." },
-      { "id": "b", "text": "Aggregation — כי Student יכול להתקיים ולפעול באופן עצמאי גם ללא University הספציפית, בניגוד ל-Room שלא יכול להתקיים בלי House." },
-      { "id": "c", "text": "Inheritance — כי Student הוא סוג מיוחד של University." },
-      { "id": "d", "text": "אין קשר UML מתאים למקרה כזה כלל." },
-      { "id": "e", "text": "Realization — כי University מממשת ממשק בשם Student." }
+      {
+        "id": "a",
+        "text": "גם כאן מדובר ב-Composition, בדיוק כמו במקרה של House/Room - אין הבדל מהותי, מכיוון ששתי המחלקות מכילות בתוכן אובייקטים ממחלקה אחרת."
+      },
+      {
+        "id": "b",
+        "text": "Aggregation — כי Student יכול להתקיים ולפעול באופן עצמאי גם ללא University הספציפית שבה למד, בניגוד ל-Room שלא יכול להתקיים בלי House."
+      },
+      {
+        "id": "c",
+        "text": "Inheritance — כי Student הוא סוג מיוחד (תת-מחלקה) של University, היורש ממנה שדות והתנהגות, כפי שתת-מחלקה יורשת ממחלקת-אב במבנה מונחה-עצמים רגיל."
+      },
+      {
+        "id": "d",
+        "text": "אין קשר UML מתאים למקרה כזה כלל, מכיוון שתרשימי UML מתארים רק קשרים עם תלות הדדית מלאה במחזור-החיים בין שתי המחלקות, מה שלא מתקיים כאן בין University ל-Student."
+      },
+      {
+        "id": "e",
+        "text": "Realization — כי University מממשת ממשק בשם Student, כפי שמחלקה קונקרטית מספקת מימוש לחוזה שהוגדר בממשק, ומסומנת בתרשים UML בקו מקווקו עם חץ משולש חלול."
+      }
     ],
     "correctOptionId": "b",
     "explanation": "ההבדל בין שני המקרים הוא בדיוק מחזור-החיים של הרכיב: Room אינו יכול להתקיים ללא ה-House הספציפי שלו (נהרס יחד איתו) - זה Composition. לעומת זאת, Student יכול להתקיים ולתפקד עצמאית גם אם University נסגרת - זהו בדיוק המאפיין המגדיר של Aggregation: קשר 'יש-לו' חלש יותר, שבו החלק בלתי-תלוי במחזור-החיים של השלם.",
     "optionExplanations": {
-      "a": "שגוי - ההבדל המהותי בדיוק הוא ש-Student (בניגוד ל-Room) שורד גם ללא ה'שלם' הספציפי - זה הופך את זה ל-Aggregation, לא Composition.",
+      "a": "שגוי - ההבדל המהותי הוא בדיוק ש-Student (בניגוד ל-Room) ממשיך להתקיים ולתפקד גם ללא University הספציפית - זה הופך את היחס ל-Aggregation ולא ל-Composition.",
       "b": "נכון - עצמאות מחזור-החיים של הרכיב (Student ממשיך להתקיים ללא University) היא בדיוק ההגדרה של Aggregation.",
-      "c": "שגוי - Inheritance מתאר קשר 'הוא-סוג-של' בין מחלקת-אב לתת-מחלקה; Student אינו תת-סוג של University.",
-      "d": "שגוי - Aggregation הוא בדיוק סוג הקשר המתאים ל-'יש-לו' חלש כזה.",
-      "e": "שגוי - Realization מתארת מימוש ממשק על ידי מחלקה קונקרטית; אין ממשק בשם Student ואין קשר מימוש כאן."
+      "c": "שגוי - Inheritance מתאר קשר 'הוא-סוג-של' בין מחלקת-אב לתת-מחלקה החולקת את מבנהו; Student אינו תת-סוג של University אלא אובייקט המוחזק בתוכה.",
+      "d": "שגוי - Aggregation הוא בדיוק סוג הקשר המתאים למקרה של 'יש-לו' חלש כזה, שבו הרכיב עצמאי במחזור-חייו מהמכל.",
+      "e": "שגוי - Realization מתארת מימוש ממשק על ידי מחלקה קונקרטית; אין ממשק בשם Student במקרה זה, ואין קשר מימוש בין University ל-Student."
     },
     "difficulty": "medium",
     "questionType": "comparison",
     "source": "authored",
-    "sourceReferences": [{ "fileId": "atp_practice_test_3", "fileName": "atp_practice_test_3.pdf", "locator": "בהשראת שאלה 20" }],
+    "sourceReferences": [
+      {
+        "fileId": "atp_practice_test_3",
+        "fileName": "atp_practice_test_3.pdf",
+        "locator": "בהשראת שאלה 20"
+      }
+    ],
     "confidence": "medium",
     "basedOnPastExam": false,
     "pastExamYear": null,
     "origin": "supplemental_generated",
-    "tags": ["uml", "aggregation", "composition", "comparison"],
+    "tags": [
+      "uml",
+      "aggregation",
+      "composition",
+      "comparison"
+    ],
     "keyLearningPoint": "Aggregation שונה מ-Composition בכך שהרכיב שורד עצמאית ללא ה'שלם' - זהו הקריטריון המבחין, לא סוג האובייקטים.",
     "points": 5,
     "active": true,
     "needsReview": false,
-    "packId": "supplemental-practice3"
+    "packId": "supplemental-practice3",
+    "contentVersion": 4
   }
 ]

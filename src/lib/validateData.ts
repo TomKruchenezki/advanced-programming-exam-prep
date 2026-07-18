@@ -12,11 +12,16 @@ function normalizeStem(text: string): string {
   return text.trim().toLowerCase().replace(/\s+/g, ' ')
 }
 
-export function validateQuestions(questions: Question[], topics: Topic[]): ValidationIssue[] {
+export function validateQuestions(
+  questions: Question[],
+  topics: Topic[],
+  options?: { pastExamIds?: Set<string> },
+): ValidationIssue[] {
   const issues: ValidationIssue[] = []
   const topicIds = new Set(topics.map((t) => t.id))
   const seenIds = new Set<string>()
   const stemSeen = new Map<string, string>()
+  const pastExamIds = options?.pastExamIds ?? new Set<string>()
 
   for (const q of questions) {
     if (seenIds.has(q.id)) {
@@ -77,6 +82,30 @@ export function validateQuestions(questions: Question[], topics: Topic[]): Valid
         issues.push({ severity: 'warning', message: `Possible duplicate stem with ${existing}`, itemId: q.id })
       } else {
         stemSeen.set(norm, q.id)
+      }
+    }
+
+    // Length-based guessing cue: warn (never error) when the correct option is both the
+    // longest of the five and much longer than the typical distractor - a test-taker could
+    // learn to just pick the longest answer without knowing the material. Authentic Past Exam
+    // questions (by id or by reconstruction/adapted origin) are explicitly exempt: their
+    // wording is real exam evidence and must never be flagged or altered for this reason.
+    const isPastExamProtected = pastExamIds.has(q.id) || q.origin === 'reconstruction' || q.origin === 'adapted'
+    if (q.active && !q.needsReview && !isPastExamProtected && q.options.length === 5) {
+      const correctText = q.options.find((o) => o.id === q.correctOptionId)?.text ?? ''
+      const correctLen = correctText.length
+      const distractorLens = q.options
+        .filter((o) => o.id !== q.correctOptionId)
+        .map((o) => o.text.length)
+        .sort((a, b) => a - b)
+      const median = distractorLens[Math.floor(distractorLens.length / 2)] ?? 0
+      const isLongest = correctLen === Math.max(correctLen, ...distractorLens)
+      if (median > 0 && isLongest && correctLen / median >= 2.5) {
+        issues.push({
+          severity: 'warning',
+          message: `Correct option is the longest by a wide margin (${correctLen} vs median distractor ${median} chars) - possible length-based guessing cue`,
+          itemId: q.id,
+        })
       }
     }
   }

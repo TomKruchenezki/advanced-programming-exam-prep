@@ -1,6 +1,17 @@
 export interface BidiSegment {
   text: string
   isLtr: boolean
+  /** Present when this segment contains Markdown-style `` `backtick` `` inline-code delimiters
+   * that should not be shown to the user - the delimiters are stripped from this text, while
+   * `text` above keeps the exact original source (backticks included) so reconstruction/
+   * accessible-name invariants over `text` are unaffected. */
+  displayText?: string
+  /** True only when the ENTIRE segment is exactly one backtick-delimited span (e.g. "`Person`"),
+   * so the renderer can apply inline-code styling to the whole segment. False (or absent) when
+   * a backtick pair merged into a larger run alongside other punctuation (e.g. "(`placeOrder`)") -
+   * the backticks are still stripped via `displayText`, just without special code styling, since
+   * the run isn't exclusively code. */
+  isInlineCode?: boolean
 }
 
 const HEBREW_CHAR = /[֐-׿]/
@@ -71,6 +82,28 @@ function findLtrWorthyDelimiterPositions(input: string): Set<number> {
 }
 
 /**
+ * Finds the exact indices of backtick characters that form a matched `` `...` `` pair -
+ * regardless of what's inside (unlike quotes, a backtick pair is unambiguously Markdown
+ * inline-code notation in this content, never a Hebrew abbreviation mark), so these positions
+ * are always treated as LTR-worthy and always stripped from display text.
+ */
+function findBacktickPairPositions(input: string): Set<number> {
+  const positions = new Set<number>()
+  let openIndex = -1
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] !== '`') continue
+    if (openIndex === -1) {
+      openIndex = i
+      continue
+    }
+    positions.add(openIndex)
+    positions.add(i)
+    openIndex = -1
+  }
+  return positions
+}
+
+/**
  * Splits a mixed Hebrew/technical string into alternating segments without altering any
  * characters. A segment is LTR only if it is a maximal run of non-Hebrew characters that
  * contains at least one Latin letter or digit (so quotes, dots, angle brackets, parens, and
@@ -88,6 +121,8 @@ export function segmentBidiText(input: string): BidiSegment[] {
   if (!input) return []
 
   const ltrWorthyDelimiters = findLtrWorthyDelimiterPositions(input)
+  const backtickPositions = findBacktickPairPositions(input)
+  for (const pos of backtickPositions) ltrWorthyDelimiters.add(pos)
   const raw: BidiSegment[] = []
   let i = 0
   while (i < input.length) {
@@ -129,5 +164,28 @@ export function segmentBidiText(input: string): BidiSegment[] {
       merged.push({ ...seg })
     }
   }
+
+  // Strip Markdown backtick delimiters from display only - `text` (used for reconstruction,
+  // aria-label, and copy/accessibility) always keeps the exact original source untouched.
+  let cursor = 0
+  for (const seg of merged) {
+    const start = cursor
+    cursor += seg.text.length
+    if (!seg.isLtr) continue // backticks are only ever ltrWorthy, so never appear in a non-LTR segment
+    let hasBacktick = false
+    let displayText = ''
+    for (let k = 0; k < seg.text.length; k++) {
+      if (seg.text[k] === '`' && backtickPositions.has(start + k)) {
+        hasBacktick = true
+        continue
+      }
+      displayText += seg.text[k]
+    }
+    if (!hasBacktick) continue
+    seg.displayText = displayText
+    const lastIdx = seg.text.length - 1
+    seg.isInlineCode = seg.text[0] === '`' && seg.text[lastIdx] === '`' && backtickPositions.has(start) && backtickPositions.has(start + lastIdx)
+  }
+
   return merged
 }

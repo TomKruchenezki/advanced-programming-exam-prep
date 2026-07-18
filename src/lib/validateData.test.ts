@@ -116,6 +116,63 @@ describe('validateQuestions', () => {
     const issues = validateQuestions([q1, q2], topics)
     expect(issues.some((i) => i.severity === 'warning' && i.message.includes('duplicate stem'))).toBe(true)
   })
+
+  it('warns when the correct option is the longest by a wide margin', () => {
+    const q = makeValidQuestion()
+    q.options = [
+      { id: 'a', text: 'This is a much longer and far more detailed correct answer than the rest' },
+      { id: 'b', text: 'short' },
+      { id: 'c', text: 'short' },
+      { id: 'd', text: 'short' },
+      { id: 'e', text: 'short' },
+    ]
+    q.correctOptionId = 'a'
+    const issues = validateQuestions([q], topics)
+    expect(issues.some((i) => i.severity === 'warning' && i.message.includes('length-based guessing cue'))).toBe(true)
+  })
+
+  it('does not warn about length when option lengths are balanced', () => {
+    const q = makeValidQuestion()
+    q.options = [
+      { id: 'a', text: 'A correct answer of reasonable length' },
+      { id: 'b', text: 'A wrong answer of reasonable length' },
+      { id: 'c', text: 'Another wrong answer of similar length' },
+      { id: 'd', text: 'Yet another wrong answer of similar length' },
+      { id: 'e', text: 'One more wrong answer of similar length' },
+    ]
+    q.correctOptionId = 'a'
+    const issues = validateQuestions([q], topics)
+    expect(issues.some((i) => i.message.includes('length-based guessing cue'))).toBe(false)
+  })
+
+  it('exempts questions listed in pastExamIds from the length-based guessing warning', () => {
+    const q = makeValidQuestion('q-pastexam-1')
+    q.options = [
+      { id: 'a', text: 'This is a much longer and far more detailed correct answer than the rest' },
+      { id: 'b', text: 'short' },
+      { id: 'c', text: 'short' },
+      { id: 'd', text: 'short' },
+      { id: 'e', text: 'short' },
+    ]
+    q.correctOptionId = 'a'
+    const issues = validateQuestions([q], topics, { pastExamIds: new Set(['q-pastexam-1']) })
+    expect(issues.some((i) => i.message.includes('length-based guessing cue'))).toBe(false)
+  })
+
+  it('exempts reconstruction/adapted origin questions from the length-based guessing warning', () => {
+    const q = makeValidQuestion()
+    q.origin = 'reconstruction'
+    q.options = [
+      { id: 'a', text: 'This is a much longer and far more detailed correct answer than the rest' },
+      { id: 'b', text: 'short' },
+      { id: 'c', text: 'short' },
+      { id: 'd', text: 'short' },
+      { id: 'e', text: 'short' },
+    ]
+    q.correctOptionId = 'a'
+    const issues = validateQuestions([q], topics)
+    expect(issues.some((i) => i.message.includes('length-based guessing cue'))).toBe(false)
+  })
 })
 
 describe('validateFlashcards', () => {

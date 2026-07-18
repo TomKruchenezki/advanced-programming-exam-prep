@@ -103,6 +103,12 @@ export interface Question {
   needsReview?: boolean
   /** id of the supplemental question pack this question belongs to; absent for the core 293-question bank */
   packId?: string
+  /** Increments when a generated question's stem/options/correctOptionId change materially
+   * (e.g. a distractor-quality rewrite) - absent/undefined is equivalent to version 1. Never
+   * set on authentic/reconstructed Past Exam questions, which are never rewritten. Lets a
+   * future progress-migration step invalidate only the answer record for the changed version,
+   * without touching unrelated progress. */
+  contentVersion?: number
 }
 
 export interface Flashcard {
