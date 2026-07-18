@@ -26,8 +26,18 @@ describe('original question bank regression', () => {
   // in generated core-practice questions (origin: 'new_past_exam_style', not linked to any real
   // Past Exam) - so byte-for-byte identity is now enforced only for every OTHER origin
   // (reconstruction/adapted, i.e. every question actually derived from a real past exam), which
-  // must never be touched. The 73 Past-Exam-linked questions specifically are additionally
-  // covered by the more targeted pastExamQuestions.snapshot.json regression below.
+  // must never be touched SILENTLY. The 73 Past-Exam-linked questions specifically are
+  // additionally covered by the more targeted pastExamQuestions.snapshot.json regression below.
+  //
+  // A one-time, user-authorized, source-verified correction round (2026-07-18) then fixed 23 of
+  // those 73 Past-Exam questions after a full audit against the original exam transcripts in
+  // Sample past exams/ found: (a) 22 questions where the real exam only had 4 options but the
+  // stored data had padded in a fabricated 5th distractor not present in any source, and
+  // (b) q-pastexam-2025-019, whose correctOptionId was flatly wrong (stored "b"; the confirmed
+  // 100/100 graded exam paper shows "c" is correct) in addition to the same 5th-option padding.
+  // Both snapshots below were deliberately regenerated to this corrected, source-verified
+  // baseline - this is the one sanctioned exception to "never touch", made with direct evidence
+  // and explicit user approval, not a silent edit.
   it('every non-generated question (reconstruction/adapted - i.e. derived from a real past exam) is byte-for-byte identical to its frozen snapshot record', () => {
     const currentById = new Map(currentActive.map((q) => [q.id, q]))
     const protectedFrozen = frozenActive.filter((q) => q.origin !== 'new_past_exam_style')

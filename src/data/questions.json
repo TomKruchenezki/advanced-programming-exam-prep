@@ -15036,20 +15036,15 @@
       {
         "id": "d",
         "text": "התכנית תדפיס חמש שורות עם המונה 1 עד 5 עבור כל תהליכון. לא ניתן לצפות מראש את סדר ההדפסות בין שני התהליכונים"
-      },
-      {
-        "id": "e",
-        "text": "כל תהליכון ידפיס בדיוק 5 מספרים משלו במקביל לשני, ובסך הכול יודפסו 10 מספרים ייחודיים מ-1 עד 10 ללא כל חזרה"
       }
     ],
-    "correctOptionId": "b",
-    "explanation": "counter הוא שדה static המשותף לשני מופעי MyThread. הלולאה בכל thread תמיד מתבצעת בדיוק 5 פעמים ולכן תמיד יודפסו בסך הכול 10 שורות. מכיוון שההגדלה (counter++) וההדפסה אינן אטומיות ומבוצעות ללא סנכרון, יתכנו מרוצי-תחרות (race conditions) שגורמים לכפילויות בערכים המודפסים או לדילוג על ערכים - אך תמיד יודפסו בדיוק 10 שורות במספרים עולים (לא בהכרח רצף שלם וייחודי של 1 עד 10).",
+    "correctOptionId": "c",
+    "explanation": "counter הוא שדה static המשותף לשני מופעי MyThread. הלולאה בכל thread מתבצעת בדיוק 5 פעמים ולכן תמיד יודפסו בסך הכול 10 שורות. מכיוון שההגדלה (counter++) וההדפסה אינן אטומיות ומבוצעות ללא סנכרון בין שני ה-threads, הערכים המדויקים וסדר ההדפסות בין שני התהליכונים אינם ניתנים לחיזוי מלא מראש ויתכנו כפילויות בערכים המודפסים - אך מספר השורות הכולל תמיד יהיה 10.",
     "optionExplanations": {
-      "a": "שגוי - counter הוא שדה static משותף, לא נפרד לכל thread; לכן לא כל thread ידפיס עצמאית 1 עד 5.",
-      "b": "נכון - בסך הכול תמיד יודפסו 10 שורות (5 איטרציות לכל אחד משני ה-threads), אך בגלל שיתוף counter ללא סנכרון האינטרלוק ביניהם והערכים המדויקים אינם ניתנים לחיזוי מלא (יתכנו כפילויות עקב מרוץ תחרות).",
-      "c": "שגוי - מספר השורות תמיד יהיה 10 בדיוק (הלולאה קבועה ל-5 איטרציות לכל thread ללא תלות בערך counter), לא 'עלול להשתנות'.",
-      "d": "שגוי - counter משותף (static) ולא נפרד לכל thread, כך שלא כל אחד ידפיס בדיוק 1 עד 5 עצמאית.",
-      "e": "שגוי - counter משותף (static) בין שני ה-threads, כך שאין 'שתי סדרות עצמאיות' של מספרים ייחודיים; יתכנו כפילויות בערכים המודפסים בגלל מרוץ תחרות."
+      "a": "שגוי - counter הוא שדה static משותף לשני ה-threads, ולכן אין שתי סדרות עצמאיות נפרדות של 1 עד 5; שני המופעים חולקים אותו מונה יחיד.",
+      "b": "שגוי - תשובה זו מניחה רצף קבוע וייחודי של 1 עד 10 ללא אפשרות לכפילויות, אך מכיוון ש-counter++ וההדפסה אינן אטומיות וללא סנכרון בין שני ה-threads, יתכנו כפילויות בערכים המודפסים עקב מרוץ תחרות (race condition).",
+      "c": "נכון - counter משותף (static) לשני מופעי MyThread; כל אחד מבצע בדיוק 5 איטרציות ולכן תמיד יודפסו בסך הכול 10 שורות במספרים עולים, אך בשל היעדר סנכרון בין ה-increment להדפסה יתכנו כפילויות בערכים, וסדר ההדפסות המדויק בין שני התהליכונים אינו קבוע מראש.",
+      "d": "שגוי - counter משותף (static) ולא נפרד לכל thread, כך שלא כל thread ידפיס באופן עצמאי בדיוק 1 עד 5; שני התהליכונים חולקים את אותו מונה יחיד."
     },
     "difficulty": "hard",
     "questionType": "threads-scheduling",
@@ -15066,12 +15061,12 @@
     "pastExamYear": 2025,
     "origin": "adapted",
     "tags": [
-      "confirmed-100-percent",
-      "adapted-to-5-options"
+      "confirmed-100-percent"
     ],
     "keyLearningPoint": "שדה static משותף בין threads + הגדלה לא-אטומית = מספר שורות קבוע אך ערכים לא-חזויים במלואם (אפשריות כפילויות).",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2025-020",
@@ -15931,10 +15926,6 @@
       {
         "id": "d",
         "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
-      },
-      {
-        "id": "e",
-        "text": "מנגנון שמעניק ל-thread מסוים עדיפות (priority) קבועה על פני threads אחרים"
       }
     ],
     "correctOptionId": "c",
@@ -15943,8 +15934,7 @@
       "a": "שגוי - זה תיאור של גישה חופשית ללא הגבלה, שזה בדיוק ההפך ממטרת הסנכרון (למנוע גישה חופשית לא-מבוקרת).",
       "b": "שגוי - אין קשר בין 'תוכנית אחת שניגשת לשני threads' לבין המושג synchronization.",
       "c": "נכון - סנכרון אוכף גישה סדרתית (אחד בכל פעם) לקטע קוד קריטי בין מספר threads.",
-      "d": "שגוי - זהו התיאור ההפוך; סנכרון נועד למנוע גישה בו-זמנית, לא לאפשר אותה.",
-      "e": "שגוי - סדר עדיפויות (thread priority) הוא מנגנון תזמון נפרד מה-scheduler, ואינו מה שמכונה synchronization."
+      "d": "שגוי - זהו התיאור ההפוך; סנכרון נועד למנוע גישה בו-זמנית, לא לאפשר אותה."
     },
     "difficulty": "easy",
     "questionType": "definition",
@@ -15962,12 +15952,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "Synchronization אוכף גישה סדרתית (לא בו-זמנית) לקטע קוד קריטי בין threads.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2024-015",
@@ -16423,10 +16413,6 @@
       {
         "id": "d",
         "text": "תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה"
-      },
-      {
-        "id": "e",
-        "text": "אחראי לניהול הזיכרון (Heap/Stack) ופינוי אובייקטים לא בשימוש"
       }
     ],
     "correctOptionId": "d",
@@ -16435,8 +16421,7 @@
       "a": "שגוי - אינטרפרטציה רגילה של bytecode היא תפקיד ה-JVM הבסיסי, לא של ה-JIT; ה-JIT דווקא מחליף אינטרפרטציה בקומפילציה ישירה לקטעים חמים.",
       "b": "שגוי - הפיכת קוד Java ל-Bytecode היא תפקיד javac (בזמן קומפילציה מוקדם), לא ה-JIT (שפועל בזמן ריצה על bytecode שכבר קיים).",
       "c": "שגוי - ל-JIT יש תפקיד מוגדר וממוקד היטב, לא 'פעולות מגוונות ללא הגדרה'.",
-      "d": "נכון - זהו התיאור המדויק: תרגום חלקי, בזמן ריצה, של bytecode חם להוראות מעבד ישירות.",
-      "e": "שגוי - ניהול הזיכרון ופינוי אובייקטים הוא תפקיד ה-Garbage Collector, לא ה-JIT."
+      "d": "נכון - זהו התיאור המדויק: תרגום חלקי, בזמן ריצה, של bytecode חם להוראות מעבד ישירות."
     },
     "difficulty": "medium",
     "questionType": "definition",
@@ -16458,12 +16443,12 @@
     "pastExamYear": 2018,
     "origin": "adapted",
     "tags": [
-      "recurring-topic",
-      "adapted-to-5-options"
+      "recurring-topic"
     ],
     "keyLearningPoint": "JIT מתרגם חלק מה-bytecode (קוד 'חם') להוראות מעבד בזמן ריצה - אינו הופך Java ל-bytecode ואינו אחראי לניהול זיכרון.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-004",
@@ -16740,10 +16725,6 @@
       {
         "id": "d",
         "text": "Properties"
-      },
-      {
-        "id": "e",
-        "text": "Vector"
       }
     ],
     "correctOptionId": "a",
@@ -16752,8 +16733,7 @@
       "a": "נכון - TreeMap אינה מסונכרנת כלל; היא Thread Safe רק אם עוטפים אותה ידנית ב-Collections.synchronizedMap.",
       "b": "שגוי - AtomicInteger תוכנן במיוחד לפעולות אטומיות בטוחות ל-threads.",
       "c": "שגוי - ConcurrentHashMap מתוכננת במפורש לגישה מקבילית יעילה ובטוחה.",
-      "d": "שגוי - Properties יורשת מ-Hashtable, שהיא מסונכרנת (Thread Safe), אף שאיטית יחסית.",
-      "e": "שגוי - Vector הוא מבנה נתונים legacy מסונכרן (כל המתודות שלו synchronized) - Thread Safe אך פחות יעיל מ-ArrayList."
+      "d": "שגוי - Properties יורשת מ-Hashtable, שהיא מסונכרנת (Thread Safe), אף שאיטית יחסית."
     },
     "difficulty": "medium",
     "questionType": "java-api",
@@ -16774,12 +16754,11 @@
     "basedOnPastExam": true,
     "pastExamYear": 2018,
     "origin": "adapted",
-    "tags": [
-      "adapted-to-5-options"
-    ],
+    "tags": [],
     "keyLearningPoint": "TreeMap אינה Thread Safe; ConcurrentHashMap, AtomicInteger, Properties ו-Vector כולן כן.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-009",
@@ -16865,10 +16844,6 @@
       {
         "id": "d",
         "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
-      },
-      {
-        "id": "e",
-        "text": "ניתן לממש את הדפוס כך שה-Observable מעביר את עצמו (this) כפרמטר למתודת update, כדי שה-Observer יוכל לשלוף ממנו מידע נוסף (מודל ה-pull)"
       }
     ],
     "correctOptionId": "d",
@@ -16877,8 +16852,7 @@
       "a": "נכון כטענה (ולכן אינה התשובה) - Observers אכן אינם מודעים זה לזה.",
       "b": "נכון כטענה - Observable אכן מחזיק רשימה ומודע לכל ה-Observers הרשומים (דרך הממשק).",
       "c": "נכון כטענה - זהו תיאור מקרה השימוש הקלאסי ב-Observer.",
-      "d": "זו התשובה הנכונה לשאלה (הטענה השגויה) - Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי, לא דרך המחלקות הקונקרטיות - זה בדיוק מה שמאפשר צימוד רופף.",
-      "e": "נכון כטענה - מודל ה-pull (העברת this כדי שה-Observer ישלוף מידע נוסף) הוא אכן וריאציה תקנית של מימוש Observer."
+      "d": "זו התשובה הנכונה לשאלה (הטענה השגויה) - Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי, לא דרך המחלקות הקונקרטיות - זה בדיוק מה שמאפשר צימוד רופף."
     },
     "difficulty": "medium",
     "questionType": "design-pattern-choice",
@@ -16901,12 +16875,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "ב-Observer, ה-Observable מודע ל-Observers רק דרך טיפוס אבסטרקטי - לא דרך המחלקות הקונקרטיות שלהם.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-011",
@@ -16931,10 +16905,6 @@
       {
         "id": "d",
         "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
-      },
-      {
-        "id": "e",
-        "text": "יוקצה אוטומטית פורט אחר שפנוי לטובת התוכנית"
       }
     ],
     "correctOptionId": "a",
@@ -16943,8 +16913,7 @@
       "a": "נכון - תיזרק BindException (Address already in use) מיידית.",
       "b": "שגוי - אין יציאה מסודרת אוטומטית; נזרקת חריגה שיש לתפוס אותה במפורש.",
       "c": "שגוי - אין מנגנון המתנה אוטומטי לשחרור הפורט.",
-      "d": "שגוי - שני תהליכים לא יכולים לחלוק את אותו פורט להאזנה בו-זמנית.",
-      "e": "שגוי - אין הקצאה אוטומטית של פורט חלופי כשמציינים פורט קבוע שתפוס."
+      "d": "שגוי - שני תהליכים לא יכולים לחלוק את אותו פורט להאזנה בו-זמנית."
     },
     "difficulty": "easy",
     "questionType": "client-server-sockets",
@@ -16967,12 +16936,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "ServerSocket על פורט תפוס זורק BindException מיידית.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-012",
@@ -17058,10 +17027,6 @@
       {
         "id": "d",
         "text": "Data Extraction"
-      },
-      {
-        "id": "e",
-        "text": "Buffering"
       }
     ],
     "correctOptionId": "b",
@@ -17070,8 +17035,7 @@
       "a": "שגוי - Serialization היא כתיבת אובייקט אל תוך ה-stream, לא שליפה ממנו.",
       "b": "נכון - Deserialization קוראת stream של בתים והופכת אותו בחזרה לאובייקט - זו שליפת הנתונים.",
       "c": "שגוי - 'File Filtering' אינו מונח סטנדרטי לתיאור שליפת נתונים מ-stream בהקשר זה.",
-      "d": "שגוי - 'Data Extraction' הוא מונח כללי מדי ואינו המונח הטכני הנכון (Java) לפעולה זו.",
-      "e": "שגוי - Buffering עוסק באגירת נתונים לביצועים טובים יותר, לא בהמרת stream לאובייקט."
+      "d": "שגוי - 'Data Extraction' הוא מונח כללי מדי ואינו המונח הטכני הנכון (Java) לפעולה זו."
     },
     "difficulty": "easy",
     "questionType": "definition",
@@ -17093,12 +17057,12 @@
     "pastExamYear": 2018,
     "origin": "adapted",
     "tags": [
-      "recurring-topic",
-      "adapted-to-5-options"
+      "recurring-topic"
     ],
     "keyLearningPoint": "Deserialization = שליפת אובייקט מ-stream; Serialization = כתיבת אובייקט אל תוך stream.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-014",
@@ -17123,10 +17087,6 @@
       {
         "id": "d",
         "text": "Callable"
-      },
-      {
-        "id": "e",
-        "text": "Cloneable"
       }
     ],
     "correctOptionId": "c",
@@ -17135,8 +17095,7 @@
       "a": "שגוי - Throwable הוא מחלקת האב של שגיאות/חריגות; אין לה קשר ל-Thread.",
       "b": "שגוי - Thread אינה Serializable; לא ניתן לסריאליזציה ישירה של thread חי.",
       "c": "נכון - Thread מממשת את Runnable ב-JDK - זו הבסיס למנגנון run()/start().",
-      "d": "שגוי - Callable הוא ממשק נפרד (מחזיר ערך) המשמש עם ExecutorService; Thread אינה מממשת אותו ישירות.",
-      "e": "שגוי - Thread אינה מממשת Cloneable כברירת מחדל; שיבוט thread אינו פעולה משמעותית."
+      "d": "שגוי - Callable הוא ממשק נפרד (מחזיר ערך) המשמש עם ExecutorService; Thread אינה מממשת אותו ישירות."
     },
     "difficulty": "easy",
     "questionType": "definition",
@@ -17165,12 +17124,12 @@
     "tags": [
       "recurring-topic",
       "recurring-exact-question",
-      "cross-reference-resolved",
-      "adapted-to-5-options"
+      "cross-reference-resolved"
     ],
     "keyLearningPoint": "Thread מממשת את Runnable - שאלה חוזרת כמעט בכל מבחן.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-015",
@@ -17197,10 +17156,6 @@
       {
         "id": "d",
         "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "e",
-        "text": "NullPointerException בזמן ריצה"
       }
     ],
     "correctOptionId": "c",
@@ -17209,8 +17164,7 @@
       "a": "שגוי - הקוד כלל לא מגיע לשלב ההרצה בגלל שגיאת הקומפילציה.",
       "b": "שגוי - גם אם הקוד היה מתקמפל, System.out.println על אובייקט מדפיס תוצאה של toString(), לא את המילה 'this'.",
       "c": "נכון - שם המתודה newthread (n קטנה) אינו תואם לשם המחלקה Newthread (N גדולה); Java רגישה לאותיות גדולות/קטנות, ולכן זו אינה מזוהה כבנאי חוקי - וללא טיפוס החזרה מוצהר, מתקבלת שגיאת קומפילציה.",
-      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה.",
-      "e": "שגוי - אין כאן הפניה null כלשהי; הבעיה היא תחבירית (שם מתודה לא-תקין כבנאי), לא שגיאת ריצה."
+      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה."
     },
     "difficulty": "hard",
     "questionType": "compilation-error",
@@ -17231,12 +17185,11 @@
     "basedOnPastExam": true,
     "pastExamYear": 2018,
     "origin": "adapted",
-    "tags": [
-      "adapted-to-5-options"
-    ],
+    "tags": [],
     "keyLearningPoint": "שם בנאי ב-Java חייב להתאים בדיוק (רגיש לאותיות גדולות/קטנות) לשם המחלקה, אחרת מתקבלת שגיאת קומפילציה.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-016",
@@ -17261,10 +17214,6 @@
       {
         "id": "d",
         "text": "היכולת שכל thread יוכל לגשת לכל קטע קוד שהוא חפץ בו"
-      },
-      {
-        "id": "e",
-        "text": "מנגנון המבטיח ש-thread אחד ירוץ תמיד לפני אחרים לפי סדר עדיפויות (priority)"
       }
     ],
     "correctOptionId": "c",
@@ -17273,8 +17222,7 @@
       "a": "שגוי - אין קשר בין 'תוכנית אחת שניגשת לשני threads' לבין המושג synchronization.",
       "b": "שגוי - זהו התיאור ההפוך; סנכרון נועד למנוע גישה בו-זמנית, לא לאפשר אותה.",
       "c": "נכון - סנכרון אוכף גישה סדרתית (אחד בכל פעם) לקטע קוד קריטי בין מספר threads.",
-      "d": "שגוי - זה תיאור של גישה חופשית ללא הגבלה - בדיוק ההפך ממטרת הסנכרון.",
-      "e": "שגוי - סדר עדיפויות (thread priority) הוא מנגנון תזמון נפרד ולא מה שמכונה synchronization."
+      "d": "שגוי - זה תיאור של גישה חופשית ללא הגבלה - בדיוק ההפך ממטרת הסנכרון."
     },
     "difficulty": "easy",
     "questionType": "definition",
@@ -17297,12 +17245,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "Synchronization אוכף גישה סדרתית (לא בו-זמנית) לקטע קוד קריטי בין threads.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-017",
@@ -17328,10 +17276,6 @@
       {
         "id": "d",
         "text": "אף תשובה אינה נכונה"
-      },
-      {
-        "id": "e",
-        "text": "GFG"
       }
     ],
     "correctOptionId": "b",
@@ -17340,8 +17284,7 @@
       "a": "שגוי - אין חריגת ריצה; שתי הקריאות תקינות ומתבצעות כרגיל.",
       "b": "נכון - obj.run() מדפיס 'GFG ' פעם אחת (סינכרוני), ו-obj.start() מפעיל thread חדש שקורא ל-run() שוב.",
       "c": "שגוי - הקוד תקין קומפילטיבית; מותר גם לרשת מ-Thread וגם לממש Runnable וגם לקרוא ל-run()/start() ישירות.",
-      "d": "שגוי - קיימת תשובה נכונה (ב) המתאימה בדיוק להתנהגות הקוד.",
-      "e": "שגוי - מחסיר את ההדפסה הנוספת שמגיעה מ-obj.start()."
+      "d": "שגוי - קיימת תשובה נכונה (ב) המתאימה בדיוק להתנהגות הקוד."
     },
     "difficulty": "medium",
     "questionType": "code-output",
@@ -17364,12 +17307,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "obj.run() מריץ סינכרונית ללא thread חדש; obj.start() מפעיל thread חדש שקורא ל-run() - קריאה לשתיהן מדפיסה את ההודעה פעמיים.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2018-018",
@@ -17394,10 +17337,6 @@
       {
         "id": "d",
         "text": "מאפשר קבלה אוטומטית של ערכים לפקד גרפי"
-      },
-      {
-        "id": "e",
-        "text": "מאפשר להצפין את הנתונים המוצגים בממשק המשתמש"
       }
     ],
     "correctOptionId": "a",
@@ -17406,8 +17345,7 @@
       "a": "נכון - זהו התיאור המדויק של Data Binding: קשירת ערך פקד גרפי לתכונה של מחלקה/אובייקט אחר.",
       "b": "שגוי - זהו תיאור כללי מדי שאינו מתאר את מנגנון הקשירה הדו-כיווני/חד-כיווני הספציפי של Data Binding.",
       "c": "שגוי - Data Binding אינו עוסק ב'העברת ערכים בין פקדים' כפעולה חד-פעמית, אלא בקשר מתמשך ומעודכן אוטומטית בין property לproperty.",
-      "d": "שגוי - התיאור חלקי ולא מדויק; Data Binding עוסק בקשר דו-צדדי מוגדר בין תכונות, לא סתם 'קבלה אוטומטית'.",
-      "e": "שגוי - Data Binding אינו קשור להצפנה כלל; הוא מנגנון עדכון-אוטומטי בין תכונות."
+      "d": "שגוי - התיאור חלקי ולא מדויק; Data Binding עוסק בקשר דו-צדדי מוגדר בין תכונות, לא סתם 'קבלה אוטומטית'."
     },
     "difficulty": "easy",
     "questionType": "javafx-mvc",
@@ -17430,12 +17368,12 @@
     "origin": "adapted",
     "tags": [
       "recurring-topic",
-      "recurring-exact-question",
-      "adapted-to-5-options"
+      "recurring-exact-question"
     ],
     "keyLearningPoint": "Data Binding ב-JavaFX קושר ערך פקד גרפי לתכונה במחלקה אחרת, עם עדכון אוטומטי הדדי.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-001",
@@ -17461,10 +17399,6 @@
       {
         "id": "d",
         "text": "מממש ממשק בשם 'Threadable'"
-      },
-      {
-        "id": "e",
-        "text": "מקבל מופע מוכן דרך new Thread(runnableObj) ללא הרחבה או מימוש נוסף"
       }
     ],
     "correctOptionId": "b",
@@ -17473,8 +17407,7 @@
       "a": "שגוי - הרחבת Thread היא אחת משתי הדרכים הסטנדרטיות והתקינות ליצירת thread.",
       "b": "נכון - Callable אינו תואם את חתימת הבנאי הרגילה של Thread (המצפה ל-Runnable); יש לעטוף אותו ב-FutureTask כדי שיהיה ניתן להעברה.",
       "c": "שגוי - מימוש Runnable הוא בדיוק אחת משתי הדרכים הסטנדרטיות ליצירת thread (Thread מקבל Runnable בבנאי).",
-      "d": "שגוי - 'Threadable' אינו ממשק קיים ב-Java כלל, כך שהשאלה אינה עוסקת במקרה זה באמת; מדובר באופציית הסחת-דעת.",
-      "e": "שגוי - זוהי בדיוק הדרך התקינה והנפוצה ביותר ליצירת thread מאובייקט Runnable קיים."
+      "d": "שגוי - 'Threadable' אינו ממשק קיים ב-Java כלל, כך שהשאלה אינה עוסקת במקרה זה באמת; מדובר באופציית הסחת-דעת."
     },
     "difficulty": "medium",
     "questionType": "definition",
@@ -17496,12 +17429,12 @@
     "pastExamYear": 2019,
     "origin": "adapted",
     "tags": [
-      "reasoned-not-grader-confirmed",
-      "adapted-to-5-options"
+      "reasoned-not-grader-confirmed"
     ],
     "keyLearningPoint": "Thread מקבל Runnable בבנאי, לא Callable ישירות - Callable דורש עטיפה ב-FutureTask או שימוש דרך ExecutorService.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-002",
@@ -17524,10 +17457,6 @@
         "text": "אף אחת מהשיטות"
       },
       {
-        "id": "d",
-        "text": "sleep"
-      },
-      {
         "id": "e",
         "text": "Start"
       }
@@ -17538,7 +17467,6 @@
       "a": "שגוי - run() היא רק מתודה רגילה; קריאה ישירה אליה רצה על ה-thread הקיים ואינה מבקשת זמן CPU נפרד.",
       "b": "שגוי - wait() גורמת ל-thread להשתחרר מהמוניטור ולהמתין; היא אינה מקבלת זמן CPU אלא מוותרת עליו.",
       "c": "שגוי - קיימת שיטה (start) שאכן עושה זאת.",
-      "d": "שגוי - sleep() גורמת ל-thread הנוכחי להשהות את עצמו; אינה יוצרת thread חדש ואינה מבקשת עבורו זמן CPU.",
       "e": "נכון - start() היא היחידה שיוצרת call stack חדש ומבקשת מה-scheduler להקצות זמן CPU ל-thread החדש."
     },
     "difficulty": "easy",
@@ -17556,12 +17484,12 @@
     "pastExamYear": 2019,
     "origin": "adapted",
     "tags": [
-      "recurring-topic",
-      "adapted-to-5-options"
+      "recurring-topic"
     ],
     "keyLearningPoint": "רק start() (לא run()) יוצרת thread חדש ומבקשת זמן CPU עבורו מה-scheduler.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-003",
@@ -17586,10 +17514,6 @@
       {
         "id": "d",
         "text": "Strategy"
-      },
-      {
-        "id": "e",
-        "text": "Proxy"
       }
     ],
     "correctOptionId": "a",
@@ -17598,8 +17522,7 @@
       "a": "נכון - Decorator עוטף אובייקט קיים ומוסיף לו התנהגות חדשה בזמן ריצה, באופן דינמי ולפי הצורך.",
       "b": "שגוי - Composite עוסק בייצוג היררכיות 'חלק-שלם' (עץ אובייקטים) בממשק אחיד, לא בהוספת פונקציונליות דינמית.",
       "c": "שגוי - Adapter מתאים ממשק לא-תואם לממשק צפוי; אינו מיועד להוספת פונקציונליות חדשה.",
-      "d": "שגוי - Strategy מחליפה אלגוריתם שלם מאחורי ממשק אחיד; אינה מוסיפה שכבת התנהגות נוספת מעל אובייקט קיים.",
-      "e": "שגוי - Proxy שולט בגישה לאובייקט (למשל דחיית טעינה, הרשאות); אינו מיועד להוספת פונקציונליות חדשה."
+      "d": "שגוי - Strategy מחליפה אלגוריתם שלם מאחורי ממשק אחיד; אינה מוסיפה שכבת התנהגות נוספת מעל אובייקט קיים."
     },
     "difficulty": "easy",
     "questionType": "design-pattern-choice",
@@ -17615,12 +17538,11 @@
     "basedOnPastExam": true,
     "pastExamYear": 2019,
     "origin": "adapted",
-    "tags": [
-      "adapted-to-5-options"
-    ],
+    "tags": [],
     "keyLearningPoint": "הוספת פונקציונליות דינמית לאובייקט קיים בלי לשנות את מחלקתו = Decorator.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-004",
@@ -17645,10 +17567,6 @@
       {
         "id": "d",
         "text": "מאפשר באמצעות אותו קטע קוד ליצור מבני נתונים בעלי פרמטרים שונים"
-      },
-      {
-        "id": "e",
-        "text": "מבטל את הצורך בהמרות טיפוסים (casting) לחלוטין בכל מצב אפשרי"
       }
     ],
     "correctOptionId": "d",
@@ -17657,8 +17575,7 @@
       "a": "שגוי - Generics אינם משפרים ביצועי ריצה; בגלל Type Erasure אין הבדל בביצועים בזמן ריצה בין קוד גנרי לקוד לא-גנרי מקביל.",
       "b": "שגוי (כתשובה המדויקת ביותר) - זו תועלת אמיתית אך משנית; ההגדרה המרכזית והמדויקת ביותר היא היכולת ליצור מבני נתונים גנריים לטיפוסים שונים באותו קוד.",
       "c": "שגוי - ההפך הוא הנכון: Generics מיועדים בדיוק למנוע שגיאות טיפוס בזמן ריצה על ידי גילוין מוקדם יותר בזמן קומפילציה.",
-      "d": "נכון - זוהי ההגדרה הבסיסית: אותו קטע קוד (מחלקה/מתודה גנרית) יכול לשמש ליצירת מבני נתונים עם פרמטרים (טיפוסים) שונים.",
-      "e": "שגוי - Generics מצמצמים משמעותית את הצורך בהמרות טיפוסים, אך לא מבטלים אותו 'לחלוטין בכל מצב' (למשל שימוש בטיפוסים גולמיים legacy עדיין עשוי לדרוש casting)."
+      "d": "נכון - זוהי ההגדרה הבסיסית: אותו קטע קוד (מחלקה/מתודה גנרית) יכול לשמש ליצירת מבני נתונים עם פרמטרים (טיפוסים) שונים."
     },
     "difficulty": "medium",
     "questionType": "definition",
@@ -17675,12 +17592,12 @@
     "pastExamYear": 2019,
     "origin": "adapted",
     "tags": [
-      "reasoned-not-grader-confirmed",
-      "adapted-to-5-options"
+      "reasoned-not-grader-confirmed"
     ],
     "keyLearningPoint": "Generics מאפשרים לכתוב קוד גנרי אחד שעובד על טיפוסים שונים בלי לשכפל קוד - זו ההגדרה המרכזית, לא שיפור ביצועים.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-005",
@@ -17705,10 +17622,6 @@
       {
         "id": "d",
         "text": "אובייקט אחד מקבל כפרמטר את האובייקט השני"
-      },
-      {
-        "id": "e",
-        "text": "רק כאשר מחלקה אחת יורשת מהשנייה"
       }
     ],
     "correctOptionId": "b",
@@ -17717,8 +17630,7 @@
       "a": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים ליצירת צימוד.",
       "b": "נכון - קריאת מתודות, החזקת הפניה, וקבלה כפרמטר הן כולן דרכים ליצירת צימוד בין אובייקטים - כל התשובות נכונות יחד.",
       "c": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים.",
-      "d": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים.",
-      "e": "שגוי - צימוד אינו מוגבל רק לירושה; הוא יכול להיווצר גם ללא כל קשר ירושה, למשל דרך שדה/פרמטר/קריאת מתודה."
+      "d": "לבד - נכונה כשלעצמה אך חלקית; אינה כוללת את שאר הדרכים."
     },
     "difficulty": "medium",
     "questionType": "definition",
@@ -17740,7 +17652,8 @@
     ],
     "keyLearningPoint": "Coupling בין אובייקטים נוצר בכל דרך של תלות/הכרות - קריאת מתודות, החזקת הפניה, או קבלה כפרמטר.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-006",
@@ -17936,10 +17849,6 @@
         "text": "אף אחת מהתשובות"
       },
       {
-        "id": "d",
-        "text": "רק את שם השרת ואת סוג הפרוטוקול (TCP/UDP)"
-      },
-      {
         "id": "e",
         "text": "צריך לספק גם כתובת שרת וגם פורט"
       }
@@ -17950,7 +17859,6 @@
       "a": "שגוי - כתובת שרת בלבד אינה מספיקה; יש צורך גם בפורט הספציפי שהשרת מאזין עליו.",
       "b": "שגוי - פורט בלבד אינו מספיק; יש צורך גם בכתובת/שם השרת שאליו מתחברים.",
       "c": "שגוי - קיימת תשובה נכונה (יש צורך בשניהם יחד).",
-      "d": "שגוי - סוג הפרוטוקול אינו נדרש כפרמטר מפורש לבנאי Socket הרגיל (הוא נקבע מראש על ידי בחירת המחלקה, Socket עבור TCP למשל); הפרמטרים הנדרשים בפועל הם כתובת ופורט.",
       "e": "נכון - בנאי Socket הרגיל דורש הן כתובת/שם שרת והן מספר פורט יחד."
     },
     "difficulty": "easy",
@@ -17972,7 +17880,8 @@
     ],
     "keyLearningPoint": "יצירת Socket לקוח דורשת גם כתובת/שם שרת וגם מספר פורט יחד.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-010",
@@ -17998,10 +17907,6 @@
       {
         "id": "d",
         "text": "תהיה שגיאה בזמן ריצה"
-      },
-      {
-        "id": "e",
-        "text": "הקוד מקמפל אך תלוי בסדר האתחול הסטטי של המחלקה"
       }
     ],
     "correctOptionId": "a",
@@ -18010,8 +17915,7 @@
       "a": "נכון - לא ניתן להשתמש ב-this בתוך מתודה static, כי אין מופע קונקרטי שאליו this יכול להתייחס.",
       "b": "שגוי - הקוד כלל לא מתקמפל בגלל השימוש השגוי ב-this בהקשר סטטי; לא מגיעים לשלב ההרצה.",
       "c": "שגוי - הבעיה אינה 'ריצה שקטה' אלא שגיאת קומפילציה מוחלטת שמונעת בנייה.",
-      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה.",
-      "e": "שגוי - אין קשר לסדר אתחול סטטי; הבעיה היא שימוש לא-חוקי ב-this בתוך הקשר סטטי, שגיאה תחבירית ברורה."
+      "d": "שגוי - הבעיה מתגלה כבר בזמן קומפילציה, לא בזמן ריצה."
     },
     "difficulty": "medium",
     "questionType": "compilation-error",
@@ -18028,12 +17932,12 @@
     "pastExamYear": 2019,
     "origin": "adapted",
     "tags": [
-      "reasoned-not-grader-confirmed",
-      "adapted-to-5-options"
+      "reasoned-not-grader-confirmed"
     ],
     "keyLearningPoint": "this אינו יכול לשמש בתוך מתודה/הקשר static - שגיאת קומפילציה מיידית.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-011",
@@ -18052,10 +17956,6 @@
         "text": "מאוחסן בזיכרון ה-cache של כל thread"
       },
       {
-        "id": "c",
-        "text": "המשתנה הופך לבלתי-ניתן-לשינוי (immutable)"
-      },
-      {
         "id": "d",
         "text": "כלל התהליכונים שיפנו אליו יגיעו לאותו משתנה בזיכרון הראשי"
       },
@@ -18069,7 +17969,6 @@
     "optionExplanations": {
       "a": "שגוי - volatile הוא מודיפייר על שדה (field), שממוקם ב-Heap כחלק מהאובייקט, לא ב-Stack.",
       "b": "שגוי - זו בדיוק הטענה ההפוכה מהאמת; volatile מונע דווקא cache מקומי פרטי לכל thread, ומכריח קריאה מהזיכרון הראשי המשותף.",
-      "c": "שגוי - volatile אינו הופך משתנה ל-immutable; ניתן עדיין לשנות את ערכו, רק שכל שינוי מיד גלוי לכל ה-threads.",
       "d": "נכון - volatile מבטיח שכל ה-threads קוראים/כותבים לאותו עותק בזיכרון הראשי, ולא ל-cache מקומי נפרד.",
       "e": "שגוי - קיימת תשובה נכונה (ד)."
     },
@@ -18087,12 +17986,11 @@
     "basedOnPastExam": true,
     "pastExamYear": 2019,
     "origin": "adapted",
-    "tags": [
-      "adapted-to-5-options"
-    ],
+    "tags": [],
     "keyLearningPoint": "volatile מבטיח שכל ה-threads רואים את אותו ערך מהזיכרון הראשי - הוא מונע cache מקומי, לא יוצר אותו.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-012",
@@ -18174,10 +18072,6 @@
         "text": "רק במספר/hash הבלוק הקודם"
       },
       {
-        "id": "d",
-        "text": "אקראית בלבד (nonce) שנבחר על ידי הכורה"
-      },
-      {
         "id": "e",
         "text": "בכולם יחד - גם בנתוני הבלוק (העברות/חתימות), גם ב-hash של הבלוק הקודם וגם בפרטים מזהים נוספים כמו nonce/מספר הבלוק"
       }
@@ -18188,7 +18082,6 @@
       "a": "שגוי - מספר הבלוק לבדו אינו מספיק ליצירת hash ייחודי ובטוח; חסרים נתוני התוכן וה-hash הקודם.",
       "b": "שגוי - תוכן הבלוק לבדו (בלי hash הבלוק הקודם) לא היה יוצר את מנגנון השרשור/האבטחה הייחודי ל-blockchain.",
       "c": "שגוי - hash הבלוק הקודם לבדו אינו משקף את תוכן הבלוק הנוכחי עצמו.",
-      "d": "שגוי - nonce הוא רכיב אחד בתהליך (בעיקר ב-proof-of-work), אך אינו הבסיס היחיד לחישוב ה-hash.",
       "e": "נכון - חישוב ה-hash של בלוק משלב את תוכן הבלוק (העברות/חתימות), את ה-hash של הבלוק הקודם, ולרוב גם nonce/מספר בלוק - זו שרשרת האבטחה של blockchain."
     },
     "difficulty": "medium",
@@ -18207,12 +18100,12 @@
     "origin": "adapted",
     "tags": [
       "reasoned-not-grader-confirmed",
-      "adapted-to-5-options",
       "low-frequency-topic"
     ],
     "keyLearningPoint": "hash של בלוק ב-blockchain משלב תוכן הבלוק + hash הבלוק הקודם (+ nonce) יחד - לא רכיב בודד.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-014",
@@ -18303,10 +18196,6 @@
       {
         "id": "d",
         "text": "נכון, אולם השולח חייב לבצע deserialization"
-      },
-      {
-        "id": "e",
-        "text": "נכון, אך רק אם שני הצדדים משתמשים באותה גרסת Java בדיוק"
       }
     ],
     "correctOptionId": "b",
@@ -18315,8 +18204,7 @@
       "a": "שגוי - הטענה בשאלה נכונה בדיוק כפי שנוסחה.",
       "b": "נכון - המקבל אכן צריך לבצע deserialization על ה-stream שקיבל כדי לשחזר את האובייקט - זהו בדיוק ההפך/המשלים לפעולת serialization שביצע השולח.",
       "c": "שגוי - אין צורך שהמקבל יבצע גם serialization לאובייקט המתקבל; זו הוספה מיותרת ולא נכונה לתהליך.",
-      "d": "שגוי - השולח מבצע serialization (לא deserialization); deserialization היא פעולת המקבל בלבד.",
-      "e": "שגוי - serialization/deserialization סטנדרטיים בג'אווה (java.io.Serializable) אינם דורשים גרסת Java זהה בדיוק בין הצדדים, כל עוד מבנה המחלקה (serialVersionUID) תואם."
+      "d": "שגוי - השולח מבצע serialization (לא deserialization); deserialization היא פעולת המקבל בלבד."
     },
     "difficulty": "easy",
     "questionType": "true-false",
@@ -18332,12 +18220,11 @@
     "basedOnPastExam": true,
     "pastExamYear": 2019,
     "origin": "adapted",
-    "tags": [
-      "adapted-to-5-options"
-    ],
+    "tags": [],
     "keyLearningPoint": "המקבל מבצע deserialization כדי להפוך stream שהתקבל בחזרה לאובייקט - זהו התיאור הבסיסי הנכון של התהליך.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   },
   {
     "id": "q-pastexam-2019-016",
@@ -18360,10 +18247,6 @@
         "text": "נשתמש ב-UDP כאשר נרצה להעביר מידע לרשימת תפוצה ולא יהיה חשוב לנו לדעת האם המידע הגיע ליעד"
       },
       {
-        "id": "d",
-        "text": "UDP מבטיח סדר הגעה של החבילות בעוד TCP אינו מבטיח זאת"
-      },
-      {
         "id": "e",
         "text": "TCP אכן מעביר מידע באופן אמין, ו-UDP משמש כאשר לא חשוב לוודא הגעת המידע (כגון שידור לרשימת תפוצה)"
       }
@@ -18374,7 +18257,6 @@
       "a": "שגוי - יש הבדל מהותי וברור בין השניים באמינות ההעברה.",
       "b": "לבד - נכונה כשלעצמה, אך חלקית; אינה כוללת גם את התכונה המקבילה של UDP.",
       "c": "לבד - נכונה כשלעצמה, אך חלקית; אינה כוללת גם את התכונה המקבילה של TCP.",
-      "d": "שגוי - זו טענה הפוכה מהאמת: TCP, לא UDP, הוא זה שמבטיח סדר הגעה נכון של החבילות (ואילו UDP אינו מבטיח זאת כלל).",
       "e": "נכון - משלב את שתי התכונות הנכונות יחד: TCP אמין, ו-UDP מתאים לשידור שבו הגעה מובטחת אינה קריטית."
     },
     "difficulty": "medium",
@@ -18396,6 +18278,7 @@
     ],
     "keyLearningPoint": "TCP = אמין ומסודר; UDP = מהיר אך ללא הבטחת הגעה - מתאים לשידור לרשימת תפוצה שבו הגעה מלאה אינה קריטית.",
     "points": 5,
-    "active": true
+    "active": true,
+    "contentVersion": 2
   }
 ]

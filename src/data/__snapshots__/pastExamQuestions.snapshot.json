@@ -1,1595 +1,5 @@
 [
   {
-    "id": "q-pastexam-2018-001",
-    "stemHe": "מה מאפשר לג'אווה להיות cross-platform?",
-    "options": [
-      {
-        "id": "a",
-        "text": "JavaFX"
-      },
-      {
-        "id": "b",
-        "text": "Observer"
-      },
-      {
-        "id": "c",
-        "text": "MVVM"
-      },
-      {
-        "id": "d",
-        "text": "ג'אווה אינה cross platform"
-      },
-      {
-        "id": "e",
-        "text": "JVM"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-002",
-    "stemHe": "אתה נדרש לממש מחלקות של ממש מלבן ושל ריבוע (מקרה פרטי של מלבן). הגדרת את הממשק מלבן כדלעיל. החלטת שריבוע יירש את מלבן. איזה עקרון ב-SOLID אתה מפר?",
-    "options": [
-      {
-        "id": "a",
-        "text": "S"
-      },
-      {
-        "id": "b",
-        "text": "O"
-      },
-      {
-        "id": "c",
-        "text": "L"
-      },
-      {
-        "id": "d",
-        "text": "I"
-      },
-      {
-        "id": "e",
-        "text": "D"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-003",
-    "stemHe": "מהו תפקידו של ה-JIT?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אינטרפרטציה של פקודות bytecode"
-      },
-      {
-        "id": "b",
-        "text": "להפוך קוד Java ל-Bytecode"
-      },
-      {
-        "id": "c",
-        "text": "הוא מבצע מספר מגוון של פעולות. אין לו ממש תפקיד מוגדר"
-      },
-      {
-        "id": "d",
-        "text": "תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה"
-      },
-      {
-        "id": "e",
-        "text": "אחראי לניהול הזיכרון (Heap/Stack) ופינוי אובייקטים לא בשימוש"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-004",
-    "stemHe": "איזה עיקרון עיצובי מפר התרשים הבא: מחלקת 'Computational Geometry' וגם מחלקת 'GUI' תלויות במחלקה 'Rectangle' שמכילה את שתי המתודות area():double ו-draw()?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אין עם התרשים שום בעיה"
-      },
-      {
-        "id": "b",
-        "text": "Interface Segregation Principle - עיקרון הפרדת הממשקים"
-      },
-      {
-        "id": "c",
-        "text": "Single Responsibility Principle - עיקרון האחריות היחידה"
-      },
-      {
-        "id": "d",
-        "text": "Liskov Substitution Principle - עיקרון ההחלפה של ליסקוב"
-      },
-      {
-        "id": "e",
-        "text": "תשובות ג + ד"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-005",
-    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אין בו בעיות כלל"
-      },
-      {
-        "id": "b",
-        "text": "Observer Design Pattern"
-      },
-      {
-        "id": "c",
-        "text": "Factory Design Pattern"
-      },
-      {
-        "id": "d",
-        "text": "Bridge Design Pattern"
-      },
-      {
-        "id": "e",
-        "text": "Strategy Design Pattern"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-006",
-    "stemHe": "רוצים לבחור אלגוריתם בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Memento"
-      },
-      {
-        "id": "b",
-        "text": "Observer"
-      },
-      {
-        "id": "c",
-        "text": "Strategy"
-      },
-      {
-        "id": "d",
-        "text": "Adapter או Mediator"
-      },
-      {
-        "id": "e",
-        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-007",
-    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals ומימשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "הכל תקין. אין קשר בין השתיים"
-      },
-      {
-        "id": "b",
-        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
-      },
-      {
-        "id": "c",
-        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
-      },
-      {
-        "id": "d",
-        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
-      },
-      {
-        "id": "e",
-        "text": "לא מומלץ בכלל לממש hashcode, שכן היא ממומשת באופן גנרי ע\"י Java"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-008",
-    "stemHe": "אילו מהמחלקות הבאות אינה Thread Safe?",
-    "options": [
-      {
-        "id": "a",
-        "text": "TreeMap"
-      },
-      {
-        "id": "b",
-        "text": "AtomicInteger"
-      },
-      {
-        "id": "c",
-        "text": "ConcurrentHashMap"
-      },
-      {
-        "id": "d",
-        "text": "Properties"
-      },
-      {
-        "id": "e",
-        "text": "Vector"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-009",
-    "stemHe": "מהו הפלט של התכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "שגיאת הידור"
-      },
-      {
-        "id": "b",
-        "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "c",
-        "text": "2018"
-      },
-      {
-        "id": "d",
-        "text": "Rusia"
-      },
-      {
-        "id": "e",
-        "text": "Rusia 2018"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-010",
-    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
-      },
-      {
-        "id": "b",
-        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
-      },
-      {
-        "id": "c",
-        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
-      },
-      {
-        "id": "d",
-        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
-      },
-      {
-        "id": "e",
-        "text": "ניתן לממש את הדפוס כך שה-Observable מעביר את עצמו (this) כפרמטר למתודת update, כדי שה-Observer יוכל לשלוף ממנו מידע נוסף (מודל ה-pull)"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-011",
-    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
-    "options": [
-      {
-        "id": "a",
-        "text": "תיזרק שגיאה שהפורט תפוס"
-      },
-      {
-        "id": "b",
-        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
-      },
-      {
-        "id": "c",
-        "text": "התוכנית תמתין עד שהפורט יתפנה"
-      },
-      {
-        "id": "d",
-        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
-      },
-      {
-        "id": "e",
-        "text": "יוקצה אוטומטית פורט אחר שפנוי לטובת התוכנית"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-012",
-    "stemHe": "יש לי תוכנית אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אם יצרתי את ה-ServerSocket ראשון לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה של השרת ללקוחות"
-      },
-      {
-        "id": "b",
-        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
-      },
-      {
-        "id": "c",
-        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
-      },
-      {
-        "id": "d",
-        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
-      },
-      {
-        "id": "e",
-        "text": "תשובות א+ד"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2018-013",
-    "stemHe": "מי מהפעולות הבאות היא שליפה של נתונים מה-Stream?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Serialization"
-      },
-      {
-        "id": "b",
-        "text": "Deserialization"
-      },
-      {
-        "id": "c",
-        "text": "File Filtering"
-      },
-      {
-        "id": "d",
-        "text": "Data Extraction"
-      },
-      {
-        "id": "e",
-        "text": "Buffering"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-014",
-    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Throwable"
-      },
-      {
-        "id": "b",
-        "text": "Serializable"
-      },
-      {
-        "id": "c",
-        "text": "Runnable"
-      },
-      {
-        "id": "d",
-        "text": "Callable"
-      },
-      {
-        "id": "e",
-        "text": "Cloneable"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-015",
-    "stemHe": "מה יהיה פלט התוכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "My Thread"
-      },
-      {
-        "id": "b",
-        "text": "this"
-      },
-      {
-        "id": "c",
-        "text": "שגיאה בזמן הידור"
-      },
-      {
-        "id": "d",
-        "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "e",
-        "text": "NullPointerException בזמן ריצה"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-016",
-    "stemHe": "synchronization בהתייחס ל-threads הוא:",
-    "options": [
-      {
-        "id": "a",
-        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
-      },
-      {
-        "id": "b",
-        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
-      },
-      {
-        "id": "c",
-        "text": "היכולת של מספר threads לגשת לקטע קוד בצורה סדרתית"
-      },
-      {
-        "id": "d",
-        "text": "היכולת שכל thread יוכל לגשת לכל קטע קוד שהוא חפץ בו"
-      },
-      {
-        "id": "e",
-        "text": "מנגנון המבטיח ש-thread אחד ירוץ תמיד לפני אחרים לפי סדר עדיפויות (priority)"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-017",
-    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "b",
-        "text": "GFG GFG"
-      },
-      {
-        "id": "c",
-        "text": "שגיאה בזמן הידור"
-      },
-      {
-        "id": "d",
-        "text": "אף תשובה אינה נכונה"
-      },
-      {
-        "id": "e",
-        "text": "GFG"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2018-018",
-    "stemHe": "למה משמש Data Binding בפלטפורמת JavaFX?",
-    "options": [
-      {
-        "id": "a",
-        "text": "מאפשר לקשור בין ערך של שדה גרפי לתכונה של מחלקה אחרת"
-      },
-      {
-        "id": "b",
-        "text": "מתוך מחלקה קיימת, מאפשר להתחבר למידע הקיים במחלקות אחרות"
-      },
-      {
-        "id": "c",
-        "text": "מאפשר לעשות העברה של ערכים בין פקדים גרפיים שונים"
-      },
-      {
-        "id": "d",
-        "text": "מאפשר קבלה אוטומטית של ערכים לפקד גרפי"
-      },
-      {
-        "id": "e",
-        "text": "מאפשר להצפין את הנתונים המוצגים בממשק המשתמש"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2018,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-001",
-    "stemHe": "Thread אינו יכול להיווצר במידה והוא -",
-    "options": [
-      {
-        "id": "a",
-        "text": "מרחיב מחלקה קיימת של Thread"
-      },
-      {
-        "id": "b",
-        "text": "מממש רק את ממשק Callable (ללא עטיפה ב-Future/FutureTask)"
-      },
-      {
-        "id": "c",
-        "text": "מממש את ממשק Runnable"
-      },
-      {
-        "id": "d",
-        "text": "מממש ממשק בשם 'Threadable'"
-      },
-      {
-        "id": "e",
-        "text": "מקבל מופע מוכן דרך new Thread(runnableObj) ללא הרחבה או מימוש נוסף"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-002",
-    "stemHe": "לאיזו פעולה צריך לקרוא בכדי שתהליך (thread) יקבל זמן ב-CPU?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Run"
-      },
-      {
-        "id": "b",
-        "text": "Wait"
-      },
-      {
-        "id": "c",
-        "text": "אף אחת מהשיטות"
-      },
-      {
-        "id": "d",
-        "text": "sleep"
-      },
-      {
-        "id": "e",
-        "text": "Start"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-003",
-    "stemHe": "אם ארצה להוסיף פונקציונליות בצורה דינמית באיזה דיזיין אשתמש?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Decorator"
-      },
-      {
-        "id": "b",
-        "text": "Composite"
-      },
-      {
-        "id": "c",
-        "text": "Adapter"
-      },
-      {
-        "id": "d",
-        "text": "Strategy"
-      },
-      {
-        "id": "e",
-        "text": "Proxy"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-004",
-    "stemHe": "מה נכון בנוגע ל-java generics?",
-    "options": [
-      {
-        "id": "a",
-        "text": "גורם לקוד לרוץ מהר יותר"
-      },
-      {
-        "id": "b",
-        "text": "מקל בזיהוי באגים בזמן קומפילציה"
-      },
-      {
-        "id": "c",
-        "text": "מקל בזיהוי שגיאות בזמן ריצה"
-      },
-      {
-        "id": "d",
-        "text": "מאפשר באמצעות אותו קטע קוד ליצור מבני נתונים בעלי פרמטרים שונים"
-      },
-      {
-        "id": "e",
-        "text": "מבטל את הצורך בהמרות טיפוסים (casting) לחלוטין בכל מצב אפשרי"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-005",
-    "stemHe": "ב-java, צימוד (coupling) בין 2 אובייקטים מבוצע כאשר -",
-    "options": [
-      {
-        "id": "a",
-        "text": "אובייקט אחד קורא לפונקציות של האובייקט השני"
-      },
-      {
-        "id": "b",
-        "text": "כל התשובות הנ\"ל נכונות - צימוד (coupling) יכול להתבצע בכל אחת מהדרכים הללו"
-      },
-      {
-        "id": "c",
-        "text": "אובייקט אחד מצביע על האובייקט השני"
-      },
-      {
-        "id": "d",
-        "text": "אובייקט אחד מקבל כפרמטר את האובייקט השני"
-      },
-      {
-        "id": "e",
-        "text": "רק כאשר מחלקה אחת יורשת מהשנייה"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-006",
-    "stemHe": "במידה ואנחנו מעוניינים להרחיב אובייקט מבלי לפגוע באובייקט קיים, באיזה תבנית עיצוב נרצה להשתמש?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Façade design pattern"
-      },
-      {
-        "id": "b",
-        "text": "Observer design pattern"
-      },
-      {
-        "id": "c",
-        "text": "Factory design pattern"
-      },
-      {
-        "id": "d",
-        "text": "אף תשובה אינה נכונה"
-      },
-      {
-        "id": "e",
-        "text": "Decorator design pattern"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2019-007",
-    "stemHe": "מערכת להזמנת חופשות, המקושרת למערכות מפורטות יותר של הזמנת מלון, הזמנת טיסה והזמנת שירותי העברות. רוצים למנוע מהמשתמשים להגיע למערכות המפורטות. באיזו תבנית עיצוב נשתמש?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Façade design pattern"
-      },
-      {
-        "id": "b",
-        "text": "Observer design pattern"
-      },
-      {
-        "id": "c",
-        "text": "Decorator design pattern"
-      },
-      {
-        "id": "d",
-        "text": "Factory design pattern"
-      },
-      {
-        "id": "e",
-        "text": "אף תשובה אינה נכונה"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2019-008",
-    "stemHe": "כאשר נרצה שאובייקט יתעדכן באופן אוטומטי לאחר שינוי של אובייקט אחר נשתמש בתבנית העיצוב -",
-    "options": [
-      {
-        "id": "a",
-        "text": "Façade design pattern"
-      },
-      {
-        "id": "b",
-        "text": "Observer design pattern"
-      },
-      {
-        "id": "c",
-        "text": "Decorator design pattern"
-      },
-      {
-        "id": "d",
-        "text": "Factory design pattern"
-      },
-      {
-        "id": "e",
-        "text": "אף תשובה אינה נכונה"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2019-009",
-    "stemHe": "בסוקט לקוח, מה עלי לספק כדי ליצור את החיבור?",
-    "options": [
-      {
-        "id": "a",
-        "text": "כתובת שרת בלבד"
-      },
-      {
-        "id": "b",
-        "text": "פורט בלבד"
-      },
-      {
-        "id": "c",
-        "text": "אף אחת מהתשובות"
-      },
-      {
-        "id": "d",
-        "text": "רק את שם השרת ואת סוג הפרוטוקול (TCP/UDP)"
-      },
-      {
-        "id": "e",
-        "text": "צריך לספק גם כתובת שרת וגם פורט"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-010",
-    "stemHe": "מה הפלט של קטע הקוד הבא?",
-    "options": [
-      {
-        "id": "a",
-        "text": "תהיה שגיאת קומפילציה כי לא יכול להיות this בשיטה סטאטית"
-      },
-      {
-        "id": "b",
-        "text": "הקוד ירוץ באופן תקין ותודפס המילה test"
-      },
-      {
-        "id": "c",
-        "text": "הקוד ירוץ באופן תקין אך לא יודפס כלום"
-      },
-      {
-        "id": "d",
-        "text": "תהיה שגיאה בזמן ריצה"
-      },
-      {
-        "id": "e",
-        "text": "הקוד מקמפל אך תלוי בסדר האתחול הסטטי של המחלקה"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-011",
-    "stemHe": "כאשר משתנה מוגדר volatile ב-java -",
-    "options": [
-      {
-        "id": "a",
-        "text": "המשתנה תמיד יהיה ב-stack"
-      },
-      {
-        "id": "b",
-        "text": "מאוחסן בזיכרון ה-cache של כל thread"
-      },
-      {
-        "id": "c",
-        "text": "המשתנה הופך לבלתי-ניתן-לשינוי (immutable)"
-      },
-      {
-        "id": "d",
-        "text": "כלל התהליכונים שיפנו אליו יגיעו לאותו משתנה בזיכרון הראשי"
-      },
-      {
-        "id": "e",
-        "text": "אף תשובה אינה נכונה"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-012",
-    "stemHe": "שאלה על מיונים שצריכים להיבחר בזמן ריצה: מחלקה שמטרתה למיין דברים, ואז מתבקשים להוסיף גם פונקציונליות של תיעדוף משימות המיון. איזה תבנית עיצוב הכי תתאים למימוש?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Adapter design pattern"
-      },
-      {
-        "id": "b",
-        "text": "Strategy design pattern"
-      },
-      {
-        "id": "c",
-        "text": "Observer design pattern"
-      },
-      {
-        "id": "d",
-        "text": "Factory design pattern"
-      },
-      {
-        "id": "e",
-        "text": "אף תשובה אינה נכונה"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2019-013",
-    "stemHe": "ב-blockchain, על מה מתבסס ה-hashCode של כל בלוק?",
-    "options": [
-      {
-        "id": "a",
-        "text": "רק במספר הבלוק"
-      },
-      {
-        "id": "b",
-        "text": "רק בהעברות ובחתימות של כלל המשתמשים המרכיבים את הבלוק"
-      },
-      {
-        "id": "c",
-        "text": "רק במספר/hash הבלוק הקודם"
-      },
-      {
-        "id": "d",
-        "text": "אקראית בלבד (nonce) שנבחר על ידי הכורה"
-      },
-      {
-        "id": "e",
-        "text": "בכולם יחד - גם בנתוני הבלוק (העברות/חתימות), גם ב-hash של הבלוק הקודם וגם בפרטים מזהים נוספים כמו nonce/מספר הבלוק"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-014",
-    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש כדי להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - מדיניות תזמון (Preemptive/TimeSliced) כפול מערכת הפעלה (Unix/Windows)?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Bridge Design Pattern"
-      },
-      {
-        "id": "b",
-        "text": "אין בו בעיות בכלל"
-      },
-      {
-        "id": "c",
-        "text": "Observer Design Pattern"
-      },
-      {
-        "id": "d",
-        "text": "Factory Design Pattern"
-      },
-      {
-        "id": "e",
-        "text": "Strategy Design Pattern"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2019-015",
-    "stemHe": "במידה ושלחתי מידע תוך שימוש ב-serialization, המקבל יצטרך לבצע deserialization ל-stream שהתקבל בשביל להפוך אותו לאובייקט.",
-    "options": [
-      {
-        "id": "a",
-        "text": "לא נכון"
-      },
-      {
-        "id": "b",
-        "text": "נכון"
-      },
-      {
-        "id": "c",
-        "text": "נכון, אולם המקבל חייב לבצע גם serialization לאובייקט המתקבל"
-      },
-      {
-        "id": "d",
-        "text": "נכון, אולם השולח חייב לבצע deserialization"
-      },
-      {
-        "id": "e",
-        "text": "נכון, אך רק אם שני הצדדים משתמשים באותה גרסת Java בדיוק"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2019-016",
-    "stemHe": "מה ההבדל בין TCP ל-UDP?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אין ביניהם הבדל"
-      },
-      {
-        "id": "b",
-        "text": "TCP מעביר את המידע באופן אמין בין שני מחשבים או יותר"
-      },
-      {
-        "id": "c",
-        "text": "נשתמש ב-UDP כאשר נרצה להעביר מידע לרשימת תפוצה ולא יהיה חשוב לנו לדעת האם המידע הגיע ליעד"
-      },
-      {
-        "id": "d",
-        "text": "UDP מבטיח סדר הגעה של החבילות בעוד TCP אינו מבטיח זאת"
-      },
-      {
-        "id": "e",
-        "text": "TCP אכן מעביר מידע באופן אמין, ו-UDP משמש כאשר לא חשוב לוודא הגעת המידע (כגון שידור לרשימת תפוצה)"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2019,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2024-001",
-    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Thread 1\\nThread 2"
-      },
-      {
-        "id": "b",
-        "text": "Thread 2\\nThread 1"
-      },
-      {
-        "id": "c",
-        "text": "ההדפסה תהיה אקראית פעם כמו תשובה א ופעם כמו תשובה ב"
-      },
-      {
-        "id": "d",
-        "text": "לתכנית יש שגיאת קומפילציה. לא תהיה הדפסה"
-      },
-      {
-        "id": "e",
-        "text": "יודפס Thread1 וזהו"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-002",
-    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
-    "options": [
-      {
-        "id": "a",
-        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
-      },
-      {
-        "id": "b",
-        "text": "התוכנית תמתין עד שהפורט יתפנה"
-      },
-      {
-        "id": "c",
-        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
-      },
-      {
-        "id": "d",
-        "text": "תיזרק שגיאה שהפורט תפוס"
-      },
-      {
-        "id": "e",
-        "text": "במצב שכזה יוקצה פורט אחר שפנוי לטובת התוכנית באופן אוטומטי"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-003",
-    "stemHe": "יש לי תכנית main אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אם יצרתי את ה-ServerSocket ראשון וקראתי ל-accept לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה במתנה בהמתנה ללקוחות"
-      },
-      {
-        "id": "b",
-        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
-      },
-      {
-        "id": "c",
-        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
-      },
-      {
-        "id": "d",
-        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
-      },
-      {
-        "id": "e",
-        "text": "תשובות א + ב"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-004",
-    "stemHe": "איזה רכיב אחראי להמרת הקוד מקור בקבצי java ל-bytecode?",
-    "options": [
-      {
-        "id": "a",
-        "text": "javac"
-      },
-      {
-        "id": "b",
-        "text": "JRE"
-      },
-      {
-        "id": "c",
-        "text": "JVM"
-      },
-      {
-        "id": "d",
-        "text": "JIT"
-      },
-      {
-        "id": "e",
-        "text": "profiler"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-005",
-    "stemHe": "מה מאפשר לג'אווה FX להיות cross-platform?",
-    "options": [
-      {
-        "id": "a",
-        "text": "JavaFX"
-      },
-      {
-        "id": "b",
-        "text": "JVM"
-      },
-      {
-        "id": "c",
-        "text": "Observer"
-      },
-      {
-        "id": "d",
-        "text": "MVVM"
-      },
-      {
-        "id": "e",
-        "text": "ג'אווה FX אינה cross platform"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-006",
-    "stemHe": "יונתן השתבח לדוד בזה שהוא כתב ממשק ב-Java שהוא ממש בו כמו מקצוען. דוד הסתכל על הממשק של יונתן וראה שיונתן מימש ממשק בו יש פונקציות שונות בתכלית כגון: בדיקת מבחן, חישוב זמן בישול, נגינה ועוד. דוד אמר ליונתן שלדעתו הוא מפר עקרון חשוב מאוד בעקרונות SOLID. לאיזה מהעקרונות הבאים התכוון דוד?",
-    "options": [
-      {
-        "id": "a",
-        "text": "L"
-      },
-      {
-        "id": "b",
-        "text": "S"
-      },
-      {
-        "id": "c",
-        "text": "D"
-      },
-      {
-        "id": "d",
-        "text": "O"
-      },
-      {
-        "id": "e",
-        "text": "I"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-007",
-    "stemHe": "שורות הקוד הבאות לקוחות מתוכנית גדולה. איזה תהליך מתבצע בשורות אלו?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Unboxing"
-      },
-      {
-        "id": "b",
-        "text": "AutoBoxing"
-      },
-      {
-        "id": "c",
-        "text": "א + ב"
-      },
-      {
-        "id": "d",
-        "text": "אחת משורות אלו יצרו שגיאת קומפילציה"
-      },
-      {
-        "id": "e",
-        "text": "כל התשובות שגויות"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-008",
-    "stemHe": "מה ההבדל בין המתודות submit ו-execute ב-ExecutorService?",
-    "options": [
-      {
-        "id": "a",
-        "text": "execute מחזירה Future ו-submit אינה מחזירה ערך"
-      },
-      {
-        "id": "b",
-        "text": "execute אינה מחזירה ערך ו-submit מחזירה Future"
-      },
-      {
-        "id": "c",
-        "text": "execute מאפשרת הרצת runnable ו-submit מאפשרת הרצת callable"
-      },
-      {
-        "id": "d",
-        "text": "execute מאפשרת הגדרת זמן ריצת תהליכון ו-submit לא מאפשרת"
-      },
-      {
-        "id": "e",
-        "text": "אלו שני מימושים להגשת משימות לבריכת התהליכונים. הבחירה ביניהן שרירותית"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-009",
-    "stemHe": "רוצים לבחור אלגוריתם מסוים מתוך מספר אלגוריתמים בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Memento"
-      },
-      {
-        "id": "b",
-        "text": "Observer"
-      },
-      {
-        "id": "c",
-        "text": "Adapter או Mediator"
-      },
-      {
-        "id": "d",
-        "text": "Strategy"
-      },
-      {
-        "id": "e",
-        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-010",
-    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals וממשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
-      },
-      {
-        "id": "b",
-        "text": "הכל תקין. אין קשר בין השתיים"
-      },
-      {
-        "id": "c",
-        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
-      },
-      {
-        "id": "d",
-        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
-      },
-      {
-        "id": "e",
-        "text": "לא מומלץ לממש hashcode בעצמנו, שכן היא ממומשת באופן גנרי ע\"י Java"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-011",
-    "stemHe": "מהו הפלט של התכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "b",
-        "text": "שגיאת הידור"
-      },
-      {
-        "id": "c",
-        "text": "Germany 2024"
-      },
-      {
-        "id": "d",
-        "text": "2024"
-      },
-      {
-        "id": "e",
-        "text": "Germany"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-012",
-    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
-      },
-      {
-        "id": "b",
-        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
-      },
-      {
-        "id": "c",
-        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
-      },
-      {
-        "id": "d",
-        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
-      },
-      {
-        "id": "e",
-        "text": "זו תבנית עיצוב שניתן לראות מימוש שלה במספר רב של אפליקציות כגון פייסבוק, צאט ועוד"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-013",
-    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Callable"
-      },
-      {
-        "id": "b",
-        "text": "Runnable"
-      },
-      {
-        "id": "c",
-        "text": "Throwable"
-      },
-      {
-        "id": "d",
-        "text": "Serializable"
-      },
-      {
-        "id": "e",
-        "text": "כל התשובות שגויות"
-      }
-    ],
-    "correctOptionId": "b",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-014",
-    "stemHe": "מהו synchronization בהתייחסות ל-threads?",
-    "options": [
-      {
-        "id": "a",
-        "text": "היכולת של כל thread לגשת לכל קטע קוד כשהוא צריך"
-      },
-      {
-        "id": "b",
-        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
-      },
-      {
-        "id": "c",
-        "text": "אילוץ שגורם למספר threads לגשת לקטע קוד בצורה סדרתית"
-      },
-      {
-        "id": "d",
-        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
-      },
-      {
-        "id": "e",
-        "text": "מנגנון שמעניק ל-thread מסוים עדיפות (priority) קבועה על פני threads אחרים"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "adapted"
-  },
-  {
-    "id": "q-pastexam-2024-015",
-    "stemHe": "התבנית עיצוב MVC:",
-    "options": [
-      {
-        "id": "a",
-        "text": "עוסקת בהפרדה בין המודל לאספקטים הקשורים בתקשורת עם המשתמש"
-      },
-      {
-        "id": "b",
-        "text": "ממומשת גם בתבנית עיצוב bridge"
-      },
-      {
-        "id": "c",
-        "text": "ממומשת כשיוצרים פרויקט של JavaFX"
-      },
-      {
-        "id": "d",
-        "text": "תשובות א+ב+ג"
-      },
-      {
-        "id": "e",
-        "text": "תשובות א+ג"
-      }
-    ],
-    "correctOptionId": "e",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-016",
-    "stemHe": "מה יהיה פלט התוכנית הבאה אם השרת יקבל מספר רב של חיבורים מלקוחות?",
-    "options": [
-      {
-        "id": "a",
-        "text": "כל הלקוחות יתחברו בהצלחה"
-      },
-      {
-        "id": "b",
-        "text": "לא ניתן לדעת בוודאות מה תהיה תוצאת התוכנית"
-      },
-      {
-        "id": "c",
-        "text": "רק הלקוח הראשון יתחבר בהצלחה"
-      },
-      {
-        "id": "d",
-        "text": "רק הלקוח האחרון יתחבר בהצלחה"
-      },
-      {
-        "id": "e",
-        "text": "השרת יזרוק שגיאה אחרי החיבור של הלקוח הראשון"
-      }
-    ],
-    "correctOptionId": "a",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-017",
-    "stemHe": "מה יהיה פלט התכנית הבאה אם הפעלתי קודם את השרת ואחר כך את הלקוח?",
-    "options": [
-      {
-        "id": "a",
-        "text": "Client: Hello Server :בצד השרת יודפס"
-      },
-      {
-        "id": "b",
-        "text": "Hello Server :בצד השרת יודפס"
-      },
-      {
-        "id": "c",
-        "text": "Server: Hello Server : בצד הלקוח יודפס"
-      },
-      {
-        "id": "d",
-        "text": "Hello Server :בצד הלקוח יודפס"
-      },
-      {
-        "id": "e",
-        "text": "כל התשובות שגויות"
-      }
-    ],
-    "correctOptionId": "c",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-018",
-    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
-    "options": [
-      {
-        "id": "a",
-        "text": "שגיאה בזמן ריצה"
-      },
-      {
-        "id": "b",
-        "text": "שגיאה בזמן הידור"
-      },
-      {
-        "id": "c",
-        "text": "GFG"
-      },
-      {
-        "id": "d",
-        "text": "GFG GFG"
-      },
-      {
-        "id": "e",
-        "text": "אף תשובה אינה נכונה"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
-    "id": "q-pastexam-2024-020",
-    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
-    "options": [
-      {
-        "id": "a",
-        "text": "אין בו בעיות כלל"
-      },
-      {
-        "id": "b",
-        "text": "Observer Design Pattern"
-      },
-      {
-        "id": "c",
-        "text": "Factory Design Pattern"
-      },
-      {
-        "id": "d",
-        "text": "Bridge Design Pattern"
-      },
-      {
-        "id": "e",
-        "text": "Strategy Design Pattern"
-      }
-    ],
-    "correctOptionId": "d",
-    "pastExamYear": 2024,
-    "active": true,
-    "origin": "reconstruction"
-  },
-  {
     "id": "q-pastexam-2025-001",
     "stemHe": "איזו פקודה מבצעת המרה של הקוד מקור מקבצי java ל-bytecode?",
     "options": [
@@ -2148,13 +558,9 @@
       {
         "id": "d",
         "text": "התכנית תדפיס חמש שורות עם המונה 1 עד 5 עבור כל תהליכון. לא ניתן לצפות מראש את סדר ההדפסות בין שני התהליכונים"
-      },
-      {
-        "id": "e",
-        "text": "כל תהליכון ידפיס בדיוק 5 מספרים משלו במקביל לשני, ובסך הכול יודפסו 10 מספרים ייחודיים מ-1 עד 10 ללא כל חזרה"
       }
     ],
-    "correctOptionId": "b",
+    "correctOptionId": "c",
     "pastExamYear": 2025,
     "active": true,
     "origin": "adapted"
@@ -2188,5 +594,1507 @@
     "pastExamYear": 2025,
     "active": true,
     "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-001",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Thread 1\\nThread 2"
+      },
+      {
+        "id": "b",
+        "text": "Thread 2\\nThread 1"
+      },
+      {
+        "id": "c",
+        "text": "ההדפסה תהיה אקראית פעם כמו תשובה א ופעם כמו תשובה ב"
+      },
+      {
+        "id": "d",
+        "text": "לתכנית יש שגיאת קומפילציה. לא תהיה הדפסה"
+      },
+      {
+        "id": "e",
+        "text": "יודפס Thread1 וזהו"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-002",
+    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
+      },
+      {
+        "id": "b",
+        "text": "התוכנית תמתין עד שהפורט יתפנה"
+      },
+      {
+        "id": "c",
+        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
+      },
+      {
+        "id": "d",
+        "text": "תיזרק שגיאה שהפורט תפוס"
+      },
+      {
+        "id": "e",
+        "text": "במצב שכזה יוקצה פורט אחר שפנוי לטובת התוכנית באופן אוטומטי"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-003",
+    "stemHe": "יש לי תכנית main אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אם יצרתי את ה-ServerSocket ראשון וקראתי ל-accept לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה במתנה בהמתנה ללקוחות"
+      },
+      {
+        "id": "b",
+        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
+      },
+      {
+        "id": "c",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
+      },
+      {
+        "id": "d",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א + ב"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-004",
+    "stemHe": "איזה רכיב אחראי להמרת הקוד מקור בקבצי java ל-bytecode?",
+    "options": [
+      {
+        "id": "a",
+        "text": "javac"
+      },
+      {
+        "id": "b",
+        "text": "JRE"
+      },
+      {
+        "id": "c",
+        "text": "JVM"
+      },
+      {
+        "id": "d",
+        "text": "JIT"
+      },
+      {
+        "id": "e",
+        "text": "profiler"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-005",
+    "stemHe": "מה מאפשר לג'אווה FX להיות cross-platform?",
+    "options": [
+      {
+        "id": "a",
+        "text": "JavaFX"
+      },
+      {
+        "id": "b",
+        "text": "JVM"
+      },
+      {
+        "id": "c",
+        "text": "Observer"
+      },
+      {
+        "id": "d",
+        "text": "MVVM"
+      },
+      {
+        "id": "e",
+        "text": "ג'אווה FX אינה cross platform"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-006",
+    "stemHe": "יונתן השתבח לדוד בזה שהוא כתב ממשק ב-Java שהוא ממש בו כמו מקצוען. דוד הסתכל על הממשק של יונתן וראה שיונתן מימש ממשק בו יש פונקציות שונות בתכלית כגון: בדיקת מבחן, חישוב זמן בישול, נגינה ועוד. דוד אמר ליונתן שלדעתו הוא מפר עקרון חשוב מאוד בעקרונות SOLID. לאיזה מהעקרונות הבאים התכוון דוד?",
+    "options": [
+      {
+        "id": "a",
+        "text": "L"
+      },
+      {
+        "id": "b",
+        "text": "S"
+      },
+      {
+        "id": "c",
+        "text": "D"
+      },
+      {
+        "id": "d",
+        "text": "O"
+      },
+      {
+        "id": "e",
+        "text": "I"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-007",
+    "stemHe": "שורות הקוד הבאות לקוחות מתוכנית גדולה. איזה תהליך מתבצע בשורות אלו?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Unboxing"
+      },
+      {
+        "id": "b",
+        "text": "AutoBoxing"
+      },
+      {
+        "id": "c",
+        "text": "א + ב"
+      },
+      {
+        "id": "d",
+        "text": "אחת משורות אלו יצרו שגיאת קומפילציה"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-008",
+    "stemHe": "מה ההבדל בין המתודות submit ו-execute ב-ExecutorService?",
+    "options": [
+      {
+        "id": "a",
+        "text": "execute מחזירה Future ו-submit אינה מחזירה ערך"
+      },
+      {
+        "id": "b",
+        "text": "execute אינה מחזירה ערך ו-submit מחזירה Future"
+      },
+      {
+        "id": "c",
+        "text": "execute מאפשרת הרצת runnable ו-submit מאפשרת הרצת callable"
+      },
+      {
+        "id": "d",
+        "text": "execute מאפשרת הגדרת זמן ריצת תהליכון ו-submit לא מאפשרת"
+      },
+      {
+        "id": "e",
+        "text": "אלו שני מימושים להגשת משימות לבריכת התהליכונים. הבחירה ביניהן שרירותית"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-009",
+    "stemHe": "רוצים לבחור אלגוריתם מסוים מתוך מספר אלגוריתמים בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Memento"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "Adapter או Mediator"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      },
+      {
+        "id": "e",
+        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-010",
+    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals וממשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
+      },
+      {
+        "id": "b",
+        "text": "הכל תקין. אין קשר בין השתיים"
+      },
+      {
+        "id": "c",
+        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
+      },
+      {
+        "id": "d",
+        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
+      },
+      {
+        "id": "e",
+        "text": "לא מומלץ לממש hashcode בעצמנו, שכן היא ממומשת באופן גנרי ע\"י Java"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-011",
+    "stemHe": "מהו הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "שגיאת הידור"
+      },
+      {
+        "id": "c",
+        "text": "Germany 2024"
+      },
+      {
+        "id": "d",
+        "text": "2024"
+      },
+      {
+        "id": "e",
+        "text": "Germany"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-012",
+    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
+      },
+      {
+        "id": "b",
+        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
+      },
+      {
+        "id": "c",
+        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
+      },
+      {
+        "id": "d",
+        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
+      },
+      {
+        "id": "e",
+        "text": "זו תבנית עיצוב שניתן לראות מימוש שלה במספר רב של אפליקציות כגון פייסבוק, צאט ועוד"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-013",
+    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Callable"
+      },
+      {
+        "id": "b",
+        "text": "Runnable"
+      },
+      {
+        "id": "c",
+        "text": "Throwable"
+      },
+      {
+        "id": "d",
+        "text": "Serializable"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-014",
+    "stemHe": "מהו synchronization בהתייחסות ל-threads?",
+    "options": [
+      {
+        "id": "a",
+        "text": "היכולת של כל thread לגשת לכל קטע קוד כשהוא צריך"
+      },
+      {
+        "id": "b",
+        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
+      },
+      {
+        "id": "c",
+        "text": "אילוץ שגורם למספר threads לגשת לקטע קוד בצורה סדרתית"
+      },
+      {
+        "id": "d",
+        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2024-015",
+    "stemHe": "התבנית עיצוב MVC:",
+    "options": [
+      {
+        "id": "a",
+        "text": "עוסקת בהפרדה בין המודל לאספקטים הקשורים בתקשורת עם המשתמש"
+      },
+      {
+        "id": "b",
+        "text": "ממומשת גם בתבנית עיצוב bridge"
+      },
+      {
+        "id": "c",
+        "text": "ממומשת כשיוצרים פרויקט של JavaFX"
+      },
+      {
+        "id": "d",
+        "text": "תשובות א+ב+ג"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א+ג"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-016",
+    "stemHe": "מה יהיה פלט התוכנית הבאה אם השרת יקבל מספר רב של חיבורים מלקוחות?",
+    "options": [
+      {
+        "id": "a",
+        "text": "כל הלקוחות יתחברו בהצלחה"
+      },
+      {
+        "id": "b",
+        "text": "לא ניתן לדעת בוודאות מה תהיה תוצאת התוכנית"
+      },
+      {
+        "id": "c",
+        "text": "רק הלקוח הראשון יתחבר בהצלחה"
+      },
+      {
+        "id": "d",
+        "text": "רק הלקוח האחרון יתחבר בהצלחה"
+      },
+      {
+        "id": "e",
+        "text": "השרת יזרוק שגיאה אחרי החיבור של הלקוח הראשון"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-017",
+    "stemHe": "מה יהיה פלט התכנית הבאה אם הפעלתי קודם את השרת ואחר כך את הלקוח?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Client: Hello Server :בצד השרת יודפס"
+      },
+      {
+        "id": "b",
+        "text": "Hello Server :בצד השרת יודפס"
+      },
+      {
+        "id": "c",
+        "text": "Server: Hello Server : בצד הלקוח יודפס"
+      },
+      {
+        "id": "d",
+        "text": "Hello Server :בצד הלקוח יודפס"
+      },
+      {
+        "id": "e",
+        "text": "כל התשובות שגויות"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-018",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "c",
+        "text": "GFG"
+      },
+      {
+        "id": "d",
+        "text": "GFG GFG"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2024-020",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין בו בעיות כלל"
+      },
+      {
+        "id": "b",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2024,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-001",
+    "stemHe": "מה מאפשר לג'אווה להיות cross-platform?",
+    "options": [
+      {
+        "id": "a",
+        "text": "JavaFX"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "MVVM"
+      },
+      {
+        "id": "d",
+        "text": "ג'אווה אינה cross platform"
+      },
+      {
+        "id": "e",
+        "text": "JVM"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-002",
+    "stemHe": "אתה נדרש לממש מחלקות של ממש מלבן ושל ריבוע (מקרה פרטי של מלבן). הגדרת את הממשק מלבן כדלעיל. החלטת שריבוע יירש את מלבן. איזה עקרון ב-SOLID אתה מפר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "S"
+      },
+      {
+        "id": "b",
+        "text": "O"
+      },
+      {
+        "id": "c",
+        "text": "L"
+      },
+      {
+        "id": "d",
+        "text": "I"
+      },
+      {
+        "id": "e",
+        "text": "D"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-003",
+    "stemHe": "מהו תפקידו של ה-JIT?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אינטרפרטציה של פקודות bytecode"
+      },
+      {
+        "id": "b",
+        "text": "להפוך קוד Java ל-Bytecode"
+      },
+      {
+        "id": "c",
+        "text": "הוא מבצע מספר מגוון של פעולות. אין לו ממש תפקיד מוגדר"
+      },
+      {
+        "id": "d",
+        "text": "תרגום בזמן ריצה של חלק מה-bytecode להוראות מעבד בשפת מכונה"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-004",
+    "stemHe": "איזה עיקרון עיצובי מפר התרשים הבא: מחלקת 'Computational Geometry' וגם מחלקת 'GUI' תלויות במחלקה 'Rectangle' שמכילה את שתי המתודות area():double ו-draw()?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין עם התרשים שום בעיה"
+      },
+      {
+        "id": "b",
+        "text": "Interface Segregation Principle - עיקרון הפרדת הממשקים"
+      },
+      {
+        "id": "c",
+        "text": "Single Responsibility Principle - עיקרון האחריות היחידה"
+      },
+      {
+        "id": "d",
+        "text": "Liskov Substitution Principle - עיקרון ההחלפה של ליסקוב"
+      },
+      {
+        "id": "e",
+        "text": "תשובות ג + ד"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-005",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש על מנת להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - PreemptiveThreadScheduler/TimeSlicedThreadScheduler (מדיניות תזמון) כפול UnixPTS/WindowsPTS/UnixTSTS/WindowsTSTS (מערכת הפעלה)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין בו בעיות כלל"
+      },
+      {
+        "id": "b",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-006",
+    "stemHe": "רוצים לבחור אלגוריתם בזמן ריצה. איזו תבנית עיצוב תיישם עבורנו רעיון זה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Memento"
+      },
+      {
+        "id": "b",
+        "text": "Observer"
+      },
+      {
+        "id": "c",
+        "text": "Strategy"
+      },
+      {
+        "id": "d",
+        "text": "Adapter או Mediator"
+      },
+      {
+        "id": "e",
+        "text": "צריך יותר פרטים בשביל להבין איזו תבנית מתאימה"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-007",
+    "stemHe": "כתבתי מחלקה ובה עשיתי override לשיטה equals ומימשתי אותה מחדש. את השיטה hashcode לא דרסתי והשארתי אותה כמו שהיא. מה נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "הכל תקין. אין קשר בין השתיים"
+      },
+      {
+        "id": "b",
+        "text": "באוספים שמסתמכים על hashcode כגון HashMap יתכן ויהיו לי כניסות שונות לאובייקטים שהם זהים מבחינתי"
+      },
+      {
+        "id": "c",
+        "text": "זה בכלל לא אפשרי. כאשר דורסים ומממשים אחת, חובה לדרוס ולממש גם את השנייה, אחרת מתקבלת שגיאת הידור"
+      },
+      {
+        "id": "d",
+        "text": "לא מומלץ לדרוס כלל את השיטות הללו. מגיעות מ-Object"
+      },
+      {
+        "id": "e",
+        "text": "לא מומלץ בכלל לממש hashcode, שכן היא ממומשת באופן גנרי ע\"י Java"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-008",
+    "stemHe": "אילו מהמחלקות הבאות אינה Thread Safe?",
+    "options": [
+      {
+        "id": "a",
+        "text": "TreeMap"
+      },
+      {
+        "id": "b",
+        "text": "AtomicInteger"
+      },
+      {
+        "id": "c",
+        "text": "ConcurrentHashMap"
+      },
+      {
+        "id": "d",
+        "text": "Properties"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-009",
+    "stemHe": "מהו הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאת הידור"
+      },
+      {
+        "id": "b",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "c",
+        "text": "2018"
+      },
+      {
+        "id": "d",
+        "text": "Rusia"
+      },
+      {
+        "id": "e",
+        "text": "Rusia 2018"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-010",
+    "stemHe": "בתבנית עיצוב Observer - מה מהבאים אינו נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Observers השונים אינם מודעים לקיומם של Observers אחרים ב-Observable"
+      },
+      {
+        "id": "b",
+        "text": "Observable מחזיק ברשימה ומודע לכל ה-Observers"
+      },
+      {
+        "id": "c",
+        "text": "תשתמש בתבנית עיצוב זו כאשר Observers נדרשים לעקוב אחר מצבו של אובייקט אחר - Observable"
+      },
+      {
+        "id": "d",
+        "text": "Observable חייב להיות מודע למחלקות הקונקרטיות של ה-Observers השונים ולפיכך היחסים בינו ל-Observers השונים אינם אבסטרקטיים"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-011",
+    "stemHe": "מה קורה אם ServerSocket קיבל פורט להאזנה שכבר בשימוש אצל תהליך אחר?",
+    "options": [
+      {
+        "id": "a",
+        "text": "תיזרק שגיאה שהפורט תפוס"
+      },
+      {
+        "id": "b",
+        "text": "התוכנית יוצאת בצורה מסודרת עם הודעה יפה"
+      },
+      {
+        "id": "c",
+        "text": "התוכנית תמתין עד שהפורט יתפנה"
+      },
+      {
+        "id": "d",
+        "text": "שתי התוכניות יעבדו יחד בהרמוניה עם פורט אחד"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-012",
+    "stemHe": "יש לי תוכנית אחת בתוכה יצרתי ServerSocket וגם Socket רגיל כלקוח. ניסיתי שהם יתקשרו ביניהם. לא עשיתי שימוש ב-Threads כלל. מה מהבאים נכון?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אם יצרתי את ה-ServerSocket ראשון לעולם לא אגיע ל-Socket לקוח מכיוון שהתכנית תיעצר בהמתנה של השרת ללקוחות"
+      },
+      {
+        "id": "b",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את השרת ראשון"
+      },
+      {
+        "id": "c",
+        "text": "התכנית תעבוד נהדר בתנאי שאייצר את הלקוח ראשון"
+      },
+      {
+        "id": "d",
+        "text": "אם יצרתי את ה-Socket - לקוח ראשון, תהיה שגיאה"
+      },
+      {
+        "id": "e",
+        "text": "תשובות א+ד"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2018-013",
+    "stemHe": "מי מהפעולות הבאות היא שליפה של נתונים מה-Stream?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Serialization"
+      },
+      {
+        "id": "b",
+        "text": "Deserialization"
+      },
+      {
+        "id": "c",
+        "text": "File Filtering"
+      },
+      {
+        "id": "d",
+        "text": "Data Extraction"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-014",
+    "stemHe": "מי מהממשקים הבאים ממומש על ידי המחלקה Thread?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Throwable"
+      },
+      {
+        "id": "b",
+        "text": "Serializable"
+      },
+      {
+        "id": "c",
+        "text": "Runnable"
+      },
+      {
+        "id": "d",
+        "text": "Callable"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-015",
+    "stemHe": "מה יהיה פלט התוכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "My Thread"
+      },
+      {
+        "id": "b",
+        "text": "this"
+      },
+      {
+        "id": "c",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "d",
+        "text": "שגיאה בזמן ריצה"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-016",
+    "stemHe": "synchronization בהתייחס ל-threads הוא:",
+    "options": [
+      {
+        "id": "a",
+        "text": "היכולת של תוכנית אחת לגשת לשני threads במקביל"
+      },
+      {
+        "id": "b",
+        "text": "היכולת של מספר threads לגשת בו זמנית לקטע קוד אחד"
+      },
+      {
+        "id": "c",
+        "text": "היכולת של מספר threads לגשת לקטע קוד בצורה סדרתית"
+      },
+      {
+        "id": "d",
+        "text": "היכולת שכל thread יוכל לגשת לכל קטע קוד שהוא חפץ בו"
+      }
+    ],
+    "correctOptionId": "c",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-017",
+    "stemHe": "מה יהיה הפלט של התכנית הבאה?",
+    "options": [
+      {
+        "id": "a",
+        "text": "שגיאה בזמן ריצה"
+      },
+      {
+        "id": "b",
+        "text": "GFG GFG"
+      },
+      {
+        "id": "c",
+        "text": "שגיאה בזמן הידור"
+      },
+      {
+        "id": "d",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2018-018",
+    "stemHe": "למה משמש Data Binding בפלטפורמת JavaFX?",
+    "options": [
+      {
+        "id": "a",
+        "text": "מאפשר לקשור בין ערך של שדה גרפי לתכונה של מחלקה אחרת"
+      },
+      {
+        "id": "b",
+        "text": "מתוך מחלקה קיימת, מאפשר להתחבר למידע הקיים במחלקות אחרות"
+      },
+      {
+        "id": "c",
+        "text": "מאפשר לעשות העברה של ערכים בין פקדים גרפיים שונים"
+      },
+      {
+        "id": "d",
+        "text": "מאפשר קבלה אוטומטית של ערכים לפקד גרפי"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2018,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-001",
+    "stemHe": "Thread אינו יכול להיווצר במידה והוא -",
+    "options": [
+      {
+        "id": "a",
+        "text": "מרחיב מחלקה קיימת של Thread"
+      },
+      {
+        "id": "b",
+        "text": "מממש רק את ממשק Callable (ללא עטיפה ב-Future/FutureTask)"
+      },
+      {
+        "id": "c",
+        "text": "מממש את ממשק Runnable"
+      },
+      {
+        "id": "d",
+        "text": "מממש ממשק בשם 'Threadable'"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-002",
+    "stemHe": "לאיזו פעולה צריך לקרוא בכדי שתהליך (thread) יקבל זמן ב-CPU?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Run"
+      },
+      {
+        "id": "b",
+        "text": "Wait"
+      },
+      {
+        "id": "c",
+        "text": "אף אחת מהשיטות"
+      },
+      {
+        "id": "e",
+        "text": "Start"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-003",
+    "stemHe": "אם ארצה להוסיף פונקציונליות בצורה דינמית באיזה דיזיין אשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Decorator"
+      },
+      {
+        "id": "b",
+        "text": "Composite"
+      },
+      {
+        "id": "c",
+        "text": "Adapter"
+      },
+      {
+        "id": "d",
+        "text": "Strategy"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-004",
+    "stemHe": "מה נכון בנוגע ל-java generics?",
+    "options": [
+      {
+        "id": "a",
+        "text": "גורם לקוד לרוץ מהר יותר"
+      },
+      {
+        "id": "b",
+        "text": "מקל בזיהוי באגים בזמן קומפילציה"
+      },
+      {
+        "id": "c",
+        "text": "מקל בזיהוי שגיאות בזמן ריצה"
+      },
+      {
+        "id": "d",
+        "text": "מאפשר באמצעות אותו קטע קוד ליצור מבני נתונים בעלי פרמטרים שונים"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-005",
+    "stemHe": "ב-java, צימוד (coupling) בין 2 אובייקטים מבוצע כאשר -",
+    "options": [
+      {
+        "id": "a",
+        "text": "אובייקט אחד קורא לפונקציות של האובייקט השני"
+      },
+      {
+        "id": "b",
+        "text": "כל התשובות הנ\"ל נכונות - צימוד (coupling) יכול להתבצע בכל אחת מהדרכים הללו"
+      },
+      {
+        "id": "c",
+        "text": "אובייקט אחד מצביע על האובייקט השני"
+      },
+      {
+        "id": "d",
+        "text": "אובייקט אחד מקבל כפרמטר את האובייקט השני"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-006",
+    "stemHe": "במידה ואנחנו מעוניינים להרחיב אובייקט מבלי לפגוע באובייקט קיים, באיזה תבנית עיצוב נרצה להשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "d",
+        "text": "אף תשובה אינה נכונה"
+      },
+      {
+        "id": "e",
+        "text": "Decorator design pattern"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2019-007",
+    "stemHe": "מערכת להזמנת חופשות, המקושרת למערכות מפורטות יותר של הזמנת מלון, הזמנת טיסה והזמנת שירותי העברות. רוצים למנוע מהמשתמשים להגיע למערכות המפורטות. באיזו תבנית עיצוב נשתמש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Decorator design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2019-008",
+    "stemHe": "כאשר נרצה שאובייקט יתעדכן באופן אוטומטי לאחר שינוי של אובייקט אחר נשתמש בתבנית העיצוב -",
+    "options": [
+      {
+        "id": "a",
+        "text": "Façade design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Decorator design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2019-009",
+    "stemHe": "בסוקט לקוח, מה עלי לספק כדי ליצור את החיבור?",
+    "options": [
+      {
+        "id": "a",
+        "text": "כתובת שרת בלבד"
+      },
+      {
+        "id": "b",
+        "text": "פורט בלבד"
+      },
+      {
+        "id": "c",
+        "text": "אף אחת מהתשובות"
+      },
+      {
+        "id": "e",
+        "text": "צריך לספק גם כתובת שרת וגם פורט"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-010",
+    "stemHe": "מה הפלט של קטע הקוד הבא?",
+    "options": [
+      {
+        "id": "a",
+        "text": "תהיה שגיאת קומפילציה כי לא יכול להיות this בשיטה סטאטית"
+      },
+      {
+        "id": "b",
+        "text": "הקוד ירוץ באופן תקין ותודפס המילה test"
+      },
+      {
+        "id": "c",
+        "text": "הקוד ירוץ באופן תקין אך לא יודפס כלום"
+      },
+      {
+        "id": "d",
+        "text": "תהיה שגיאה בזמן ריצה"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-011",
+    "stemHe": "כאשר משתנה מוגדר volatile ב-java -",
+    "options": [
+      {
+        "id": "a",
+        "text": "המשתנה תמיד יהיה ב-stack"
+      },
+      {
+        "id": "b",
+        "text": "מאוחסן בזיכרון ה-cache של כל thread"
+      },
+      {
+        "id": "d",
+        "text": "כלל התהליכונים שיפנו אליו יגיעו לאותו משתנה בזיכרון הראשי"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "d",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-012",
+    "stemHe": "שאלה על מיונים שצריכים להיבחר בזמן ריצה: מחלקה שמטרתה למיין דברים, ואז מתבקשים להוסיף גם פונקציונליות של תיעדוף משימות המיון. איזה תבנית עיצוב הכי תתאים למימוש?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Adapter design pattern"
+      },
+      {
+        "id": "b",
+        "text": "Strategy design pattern"
+      },
+      {
+        "id": "c",
+        "text": "Observer design pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory design pattern"
+      },
+      {
+        "id": "e",
+        "text": "אף תשובה אינה נכונה"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2019-013",
+    "stemHe": "ב-blockchain, על מה מתבסס ה-hashCode של כל בלוק?",
+    "options": [
+      {
+        "id": "a",
+        "text": "רק במספר הבלוק"
+      },
+      {
+        "id": "b",
+        "text": "רק בהעברות ובחתימות של כלל המשתמשים המרכיבים את הבלוק"
+      },
+      {
+        "id": "c",
+        "text": "רק במספר/hash הבלוק הקודם"
+      },
+      {
+        "id": "e",
+        "text": "בכולם יחד - גם בנתוני הבלוק (העברות/חתימות), גם ב-hash של הבלוק הקודם וגם בפרטים מזהים נוספים כמו nonce/מספר הבלוק"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-014",
+    "stemHe": "באיזו תבנית עיצוב היית עושה שימוש כדי להתמודד עם הבעיות הטמונות בתרשים המחלקות הבא: ThreadScheduler עם שתי היררכיות עצמאיות - מדיניות תזמון (Preemptive/TimeSliced) כפול מערכת הפעלה (Unix/Windows)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Bridge Design Pattern"
+      },
+      {
+        "id": "b",
+        "text": "אין בו בעיות בכלל"
+      },
+      {
+        "id": "c",
+        "text": "Observer Design Pattern"
+      },
+      {
+        "id": "d",
+        "text": "Factory Design Pattern"
+      },
+      {
+        "id": "e",
+        "text": "Strategy Design Pattern"
+      }
+    ],
+    "correctOptionId": "a",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "reconstruction"
+  },
+  {
+    "id": "q-pastexam-2019-015",
+    "stemHe": "במידה ושלחתי מידע תוך שימוש ב-serialization, המקבל יצטרך לבצע deserialization ל-stream שהתקבל בשביל להפוך אותו לאובייקט.",
+    "options": [
+      {
+        "id": "a",
+        "text": "לא נכון"
+      },
+      {
+        "id": "b",
+        "text": "נכון"
+      },
+      {
+        "id": "c",
+        "text": "נכון, אולם המקבל חייב לבצע גם serialization לאובייקט המתקבל"
+      },
+      {
+        "id": "d",
+        "text": "נכון, אולם השולח חייב לבצע deserialization"
+      }
+    ],
+    "correctOptionId": "b",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
+  },
+  {
+    "id": "q-pastexam-2019-016",
+    "stemHe": "מה ההבדל בין TCP ל-UDP?",
+    "options": [
+      {
+        "id": "a",
+        "text": "אין ביניהם הבדל"
+      },
+      {
+        "id": "b",
+        "text": "TCP מעביר את המידע באופן אמין בין שני מחשבים או יותר"
+      },
+      {
+        "id": "c",
+        "text": "נשתמש ב-UDP כאשר נרצה להעביר מידע לרשימת תפוצה ולא יהיה חשוב לנו לדעת האם המידע הגיע ליעד"
+      },
+      {
+        "id": "e",
+        "text": "TCP אכן מעביר מידע באופן אמין, ו-UDP משמש כאשר לא חשוב לוודא הגעת המידע (כגון שידור לרשימת תפוצה)"
+      }
+    ],
+    "correctOptionId": "e",
+    "pastExamYear": 2019,
+    "active": true,
+    "origin": "adapted"
   }
 ]

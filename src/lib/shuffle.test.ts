@@ -171,12 +171,29 @@ describe('stableShuffleQuestionOptions', () => {
     }
   })
 
+  it('shuffles a genuine 4-option question (authentic Past Exam format) without error', () => {
+    const q = makeQuestion({
+      options: [
+        { id: 'a', text: 'Option A' },
+        { id: 'b', text: 'Option B' },
+        { id: 'c', text: 'Option C' },
+        { id: 'd', text: 'Option D' },
+      ],
+      correctOptionId: 'b',
+    })
+    const shuffled = stableShuffleQuestionOptions(q, q.id)
+    expect(shuffled.options).toHaveLength(4)
+    expect(shuffled.displayToOriginal[shuffled.correctOptionId]).toBe('b')
+  })
+
   it('holds the scoring invariant across every real active question in the bank (core + supplemental)', () => {
     expect(combinedActiveQuestions.length).toBeGreaterThan(0)
     for (const q of combinedActiveQuestions) {
       const shuffled = stableShuffleQuestionOptions(q, q.id)
-      expect(shuffled.options).toHaveLength(5)
-      expect(new Set(shuffled.options.map((o) => o.id)).size).toBe(5)
+      // Almost every question has 5 options, but a handful of authentic Past Exam questions
+      // genuinely only had 4 on the real paper - shuffling must preserve whatever count it started with.
+      expect(shuffled.options).toHaveLength(q.options.length)
+      expect(new Set(shuffled.options.map((o) => o.id)).size).toBe(q.options.length)
       expect(shuffled.displayToOriginal[shuffled.correctOptionId]).toBe(q.correctOptionId)
       // Every displayed id must map back to a real original option id.
       for (const opt of shuffled.options) {

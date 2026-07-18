@@ -48,9 +48,31 @@ describe('validateQuestions', () => {
 
   it('flags wrong option count', () => {
     const q = makeValidQuestion()
-    q.options = q.options.slice(0, 4)
+    q.options = q.options.slice(0, 3)
     const issues = validateQuestions([q], topics)
-    expect(issues.some((i) => i.message.includes('Expected exactly 5 options'))).toBe(true)
+    expect(issues.some((i) => i.message.includes('Expected 4 or 5 options'))).toBe(true)
+  })
+
+  it('accepts a genuine 4-option question without error', () => {
+    const q = makeValidQuestion()
+    q.options = q.options.slice(0, 4)
+    q.correctOptionId = 'a'
+    q.optionExplanations = { a: 'נכון', b: 'שגוי', c: 'שגוי', d: 'שגוי' }
+    const issues = validateQuestions([q], topics)
+    expect(issues.filter((i) => i.severity === 'error')).toHaveLength(0)
+  })
+
+  it('flags a duplicate option id within a question', () => {
+    const q = makeValidQuestion()
+    q.options = [
+      { id: 'a', text: 'A' },
+      { id: 'a', text: 'A2' },
+      { id: 'c', text: 'C' },
+      { id: 'd', text: 'D' },
+      { id: 'e', text: 'E' },
+    ]
+    const issues = validateQuestions([q], topics)
+    expect(issues.some((i) => i.severity === 'error' && i.message.includes('Duplicate option id'))).toBe(true)
   })
 
   it('flags correctOptionId not among options', () => {

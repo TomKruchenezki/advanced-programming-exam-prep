@@ -33,13 +33,20 @@ export function validateQuestions(
       issues.push({ severity: 'error', message: 'Empty question stem', itemId: q.id })
     }
 
-    if (q.options.length !== 5) {
-      issues.push({ severity: 'error', message: `Expected exactly 5 options, got ${q.options.length}`, itemId: q.id })
+    // Most questions have 5 options, but a small number of authentic Past Exam questions
+    // genuinely only had 4 options on the real paper (verified against source transcripts) -
+    // padding those to 5 with an invented distractor would misrepresent the real exam, so 4 is
+    // accepted too. What must never happen is a duplicate or out-of-range option id.
+    if (q.options.length !== 5 && q.options.length !== 4) {
+      issues.push({ severity: 'error', message: `Expected 4 or 5 options, got ${q.options.length}`, itemId: q.id })
     }
     const optionIdsPresent = q.options.map((o) => o.id)
-    for (const expected of OPTION_IDS) {
-      if (!optionIdsPresent.includes(expected as Question['options'][number]['id'])) {
-        issues.push({ severity: 'error', message: `Missing option id "${expected}"`, itemId: q.id })
+    if (new Set(optionIdsPresent).size !== optionIdsPresent.length) {
+      issues.push({ severity: 'error', message: 'Duplicate option id within question', itemId: q.id })
+    }
+    for (const id of optionIdsPresent) {
+      if (!OPTION_IDS.includes(id)) {
+        issues.push({ severity: 'error', message: `Invalid option id "${id}"`, itemId: q.id })
       }
     }
     const optionTexts = q.options.map((o) => o.text.trim().toLowerCase())
